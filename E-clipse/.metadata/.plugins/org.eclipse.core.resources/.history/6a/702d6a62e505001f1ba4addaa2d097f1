@@ -1,0 +1,71 @@
+/**
+ * 
+ */
+package vn.com.namcat.cautruclaptrinh;
+
+import java.util.Scanner;
+
+/**
+ * 
+ */
+public class BaiTapCauTrucLapTrinhJava02 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		//Declare an object that allows for retrieving information from the keyboard.
+		
+		Scanner sc = new Scanner(System.in);
+		
+		//Bài tập 11:
+		
+		//Khai báo biến
+		
+		double r = 0, canhDCN = 0, canhRCN = 0, canhV = 0, dientichT = 0, chuviT = 0, dientichCN = 0, chuviCN = 0, dientichV = 0, chuviV = 0;
+		
+		//Khai báo hằng số PI
+		
+		final double PI = 3.14;
+		
+		//Nhập thông số bán kính, cạnh
+		
+		System.out.println("Nhập độ dài bán kính hình tròn: ");
+		
+		r = sc.nextDouble();
+		
+		System.out.println("Nhập chiều dài hình chữ nhật: ");
+		
+		canhDCN = sc.nextDouble();
+		
+		System.out.println("Nhập chiều rộng hình chữ nhật: ");
+		
+		canhRCN = sc.nextDouble();
+		
+		System.out.println("Nhập độ dài cạnh hình vuông: ");
+		
+		canhV = sc.nextDouble();
+
+		//Tính toán
+		
+		dientichT = PI*Math.pow(r, 2);	dientichCN = canhDCN * canhRCN;	dientichV = Math.pow(canhV, 2);
+		
+		chuviT = 2*PI*r;	chuviCN = (canhDCN + canhRCN)*2;	chuviV = 4*canhV;
+		
+		System.out.println("Diện tích hình tròn là: " + dientichT);
+		
+		System.out.println("Diện tích hình chữ nhật là: " + dientichCN);
+		
+		System.out.println("Diện tích hình vuông là: " + dientichV);
+		
+		System.out.println("Chu vi hình tròn là: " + chuviT);
+		
+		System.out.println("Chu vi hình chữ nhật là: " + chuviCN);
+		
+		System.out.println("Chu vi hình vuông là: " + chuviV);
+		
+	}
+
+}

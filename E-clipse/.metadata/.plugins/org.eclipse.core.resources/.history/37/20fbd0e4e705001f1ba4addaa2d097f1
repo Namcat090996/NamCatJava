@@ -1,0 +1,105 @@
+/**
+ * 
+ */
+package vn.com.namcat.cautruclaptrinh;
+
+import java.util.Scanner;
+
+/**
+ * 
+ */
+public class BaiTapCauTrucLapTrinhJava02 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		//Declare an object that allows for retrieving information from the keyboard.
+		
+		Scanner sc = new Scanner(System.in);
+		
+		/*
+		
+		//Bài tập 11:
+		
+		//Khai báo biến
+		
+		double r = 0, canhDCN = 0, canhRCN = 0, canhV = 0, dientichT = 0, chuviT = 0, dientichCN = 0, chuviCN = 0, dientichV = 0, chuviV = 0;
+		
+		//Khai báo hằng số PI
+		
+		final double PI = 3.14;
+		
+		//Nhập thông số bán kính, cạnh
+		
+		System.out.print("Nhập độ dài bán kính hình tròn: ");
+		
+		r = sc.nextDouble();
+		
+		System.out.print("Nhập chiều dài hình chữ nhật: ");
+		
+		canhDCN = sc.nextDouble();
+		
+		System.out.print("Nhập chiều rộng hình chữ nhật: ");
+		
+		canhRCN = sc.nextDouble();
+		
+		System.out.print("Nhập độ dài cạnh hình vuông: ");
+		
+		canhV = sc.nextDouble();
+
+		//Tính toán
+		
+		dientichT = PI*Math.pow(r, 2);	dientichCN = canhDCN * canhRCN;	dientichV = Math.pow(canhV, 2);
+		
+		chuviT = 2*PI*r;	chuviCN = (canhDCN + canhRCN)*2;	chuviV = 4*canhV;
+		
+		System.out.printf("Diện tích hình tròn là: %.2f\n", dientichT);
+		
+		System.out.printf("Diện tích hình chữ nhật là: %.2f\n", dientichCN);
+		
+		System.out.printf("Diện tích hình vuông là: %.2f\n", dientichV);
+		
+		System.out.printf("Chu vi hình tròn là: %.2f\n", chuviT);
+		
+		System.out.printf("Chu vi hình chữ nhật là: %.2f\n", chuviCN);
+		
+		System.out.printf("Chu vi hình vuông là: %.2f\n", chuviV);
+		
+		*/
+		
+		//Bài tập 14:
+		
+		//Khai báo biến
+		
+		double so1 = 0, so2 = 0, so3 = 0, so4 = 0, tongSo = 0, hangChuc = 0, hangDonVi = 0;
+		
+		System.out.println("Nhập số thứ 1: ");
+		
+		so1 = sc.nextDouble();
+		
+		System.out.println("Nhập số thứ 2: ");
+		
+		so2 = sc.nextDouble();
+		
+		System.out.println("Nhập số thứ 3: ");
+		
+		so3 = sc.nextDouble();
+		
+		System.out.println("Nhập số thứ 4: ");
+		
+		so4 = sc.nextDouble();
+		
+		tongSo = so1 + so2 + so3 + so4;
+		
+		hangChuc = (tongSo/10)%10;
+		
+		hangDonVi = tongSo%10;
+		
+		System.out.println("Chữ số hàng chục là: " + hangChuc);
+		
+	}
+
+}

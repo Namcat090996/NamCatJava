@@ -1,0 +1,524 @@
+/**
+ * 
+ */
+package vn.com.namcat.cautruclaptrinh;
+
+//Khai báo thư viện để sử dụng Scanner
+import java.util.Scanner;
+
+/**
+ * 
+ */
+public class BaiTapCauTrucLapTrinhJava {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		//Khai báo 01 đối tượng để hỗ trợ lấy thông tin từ bàn phím
+		Scanner sc = new Scanner (System.in);
+		
+		/*
+		
+		//Bài tập 1:
+		// − Tuổi của một người 
+		int tuoiNguoi = 30;
+		// − Độ dài cạnh một tam giác 
+		float canhTamGiac = 12.45f;
+		// − Một chữ số 
+		char chuSo = '6';
+		// − Một chữ cái 
+		char chuCai = 'A';
+		// − Số lượng cây trong thành phố
+		int soLuongCay = 1000;
+		// − Khoảng cách giữa các hành tinh
+		double khoangCach = 1235.454;
+		// − Nghiệm x của phương trình bậc 1
+		float x = 25.5f;
+		// − Biệt thức Δ của phương trình bậc 2
+		float delta = 35.456f;
+		
+		System.out.printf("Tuổi người: %d\n" + "Độ dài cạnh tam giác: %f\n" + "Một chữ số: %s\n" + "Một chữ cái: %s\n" + "Số lượng cây trong thành phố: %d\n" + "Khoảng cách giữa các hành tinh: %f\n" + "Nghiệm x của phương trình bậc 1: %f\n" + "Biệt thức Δ của phương trình bậc 2: %f\n", tuoiNguoi, canhTamGiac, chuSo, chuCai, soLuongCay, khoangCach, x, delta);
+			
+		//Bài tập 2:
+		
+		//Khai báo biến
+		 
+		float soThuc = 0;
+		
+		int soNguyen = 0;
+		
+		long soNguyenDai = 0;
+		
+		char kiTu = 0;
+		
+		System.out.print("Nhập số thực = ");
+		
+		soThuc = sc.nextFloat();
+		
+		System.out.print("Nhập số nguyên = ");
+		
+		soNguyen = sc.nextInt();		
+		
+		System.out.print("Nhập số nguyên dài = ");
+		
+		soNguyenDai = sc.nextLong();		
+		
+		System.out.print("Nhập kí tự = ");
+		
+		kiTu = sc.next().charAt(0);	
+		
+		System.out.printf("Số thực là: %f\n" + "Số nguyên là: %d\n" + "Số nguyên dài là: %d\n" + "Kí tự là: %s\n", soThuc, soNguyen, soNguyenDai, kiTu);
+		
+		//Bài tập 3:
+		
+		//Khai chuỗi
+		
+		//- 1: Bộ Giáo dục
+		
+		String a = "Bộ Giáo dục";
+		
+		//- 2: Đào tạo Cộng hoà xã hội chủ nghĩa Việt Nam
+		
+		String b = "Đào tạo Cộng hoà xã hội chủ nghĩa Việt Nam";
+		
+		//- 3: Sở Giáo dục Hà Nội Độc lập - Tự do - Hạnh phúc
+				
+		String c = "Sở Giáo dục Hà Nội Độc lập - Tự do - Hạnh phúc";
+		
+		System.out.printf("1: %s\n" + "2: %s\n" + "3: %s\n", a, b, c);
+					
+		//Bài tập 4:
+		
+		//Khai báo biến
+		
+		char kiTu = 0;
+		
+		System.out.print("Nhập kí tự = ");
+		
+		kiTu = sc.next().charAt(0);
+		
+		System.out.printf("Kí tự %s có mã ASCII là: %d\n", kiTu, (int)kiTu);
+		
+		//Bài tập 5:
+		
+		//Khai báo biến
+		
+		float soThuc1 = 0, soThuc2 = 0;
+		
+		System.out.print("Nhập số thực 1: ");
+		
+		soThuc1 = sc.nextFloat();
+		
+		System.out.print("Nhập số thực 2: ");
+		
+		soThuc2 = sc.nextFloat();
+		
+		System.out.printf("Số thực 1 = %f/tSố thực 2 = %f\n", soThuc1, soThuc2);
+		
+		//Bài tập 6:
+		
+		//Khai báo biến
+		
+		float a = 5.141f, b = -2f, c = 0.8f;
+		
+		System.out.printf("Phương trình có dạng là: %.2fx^2 + %.2fx + %.2f = 0", a, b, c);
+		
+		//Bài tập 7:
+		
+		//Khai báo biến
+		
+		double cau7a = 0, cau7b = 0;
+		
+		cau7a = Math.sqrt(3.0+Math.sqrt(3.0+Math.sqrt(3.0)));
+		
+		cau7b = 1/(2.0+(1/(2.0+1/2.0)));
+				
+		System.out.printf("Đáp án câu 7a: %.2f\n" + "Đáp án câu 7b: %.2f\n", cau7a, cau7b);
+				
+		//Bài tập 8:
+		
+		//Khai báo biến:
+		
+		double a = 0, b = 0, c = 0, cau8a = 0, cau8b = 0, cau8c = 0, cau8d = 0;
+		
+		System.out.print("Nhập số a: ");
+		
+		a = sc.nextDouble();
+		
+		System.out.print("Nhập số b: ");
+		
+		b = sc.nextDouble();
+		
+		System.out.print("Nhập số c: ");
+		
+		c = sc.nextDouble();
+		
+		cau8a = Math.pow(a, 2) - 2*b + (a*b/c);
+		
+		cau8b = (Math.pow(b,2)-4*a*c)/(2*a);
+		
+		cau8c = 3*a - Math.pow(b, 3) - 2*Math.sqrt(c);
+		
+		cau8d = (a*a)/b-4*a/(b*c)+1;
+		
+		cau8d = Math.sqrt(cau8d);
+		
+		System.out.printf("Câu 8a: %.2f\n Câu 8b: %.2f\n Câu 8c: %.2f\n Câu 8d: %.2f\n", cau8a, cau8b, cau8c, cau8d);
+		
+		//Bài tập 9: 
+		
+		//Khai báo biến
+		
+		double a = 0, b = 0, tong = 0, tich = 0, hieu = 0, thuong = 0;
+		
+		System.out.println("Nhập số a: ");
+		
+		a = sc.nextDouble();
+		
+		System.out.println("Nhập số b: ");
+		
+		b = sc.nextDouble();
+		
+		tong = a+b; tich = a*b; hieu = a-b; 
+		
+		System.out.printf("Tổng của %.2f và %.2f là: %.2f\n", a, b, tong);
+		
+		System.out.printf("Tích của %.2f và %.2f là: %.2f\n", a, b, tich);
+		
+		System.out.printf("Hiệu của %.2f và %.2f là: %.2f\n", a, b, hieu);
+		
+		if(b != 0)
+		{
+			thuong = a/b;
+			
+			System.out.printf("Thương của %.2f và %.2f là: %.2f\n", a, b, thuong);
+		}
+		else
+		{
+			System.out.printf("Division of %.2f & %.2f is: Please enter a non-zero b number", a, b);
+		}
+			
+		//Bài tập 10:
+		
+		//Khai báo biến:
+		
+		double a = 0, b = 0, c = 0, trungBinhCong = 0, trungBinhNhan = 0;
+		
+		System.out.println("Nhập số a:");
+		
+		a = sc.nextDouble();
+		
+		System.out.println("Nhập số b:");
+		
+		b = sc.nextDouble();
+		
+		System.out.println("Nhập số c:");
+		
+		c = sc.nextDouble();
+		
+		trungBinhCong = (a+b+c)/3;
+		
+		trungBinhNhan = Math.cbrt(a+b+c);
+		
+		System.out.printf("Trung bình cộng của %.2f, %.2f và %.2f là: %.2f\n", a, b, c, trungBinhCong);
+		
+		System.out.printf("Trung bình nhân của %.2f, %.2f và %.2f là: %.2f\n", a, b, c, trungBinhNhan);
+		
+		*/
+		
+		//Bài tập 11:
+		
+		//Khai báo biến
+		
+		double canhVuong = 0 , chieuDaiChuNhat = 0, chieuRongChuNhat = 0, banKinh = 0, chuViVuong = 0, chuViChuNhat = 0, chuViTron = 0, dienTichVuong = 0, dienTichChuNhat = 0, dienTichTron = 0;
+				
+		System.out.print("Nhập chiều dài cạnh hình vuông: ");
+		
+		canhVuong = sc.nextDouble();
+		
+		System.out.print("Nhập chiều dài hình chữ nhật: ");
+		
+		chieuDaiChuNhat = sc.nextDouble();
+		
+		System.out.print("Nhập chiều rộng hình chữ nhật: ");
+		
+		chieuRongChuNhat = sc.nextDouble();
+		
+		System.out.print("Nhập chiều dài bán kính: ");
+		
+		banKinh = sc.nextDouble();
+		
+		chuViVuong = 4*canhVuong;
+		
+		chuViChuNhat = 2*(chieuDaiChuNhat+chieuRongChuNhat);
+		
+		chuViTron = 2*Math.PI*banKinh;
+		
+		dienTichVuong = Math.pow(canhVuong, 2);
+				
+		dienTichChuNhat = chieuDaiChuNhat*chieuRongChuNhat;
+		
+		dienTichTron = Math.PI*Math.pow(banKinh, 2);
+		
+		System.out.printf("Chu vi hình vuông là: %.2f\n", chuViVuong);
+		
+		System.out.printf("Chu vi hình chữ nhật là: %.2f\n", chuViChuNhat);
+		
+		System.out.printf("Chu vi hình tròn là: %.2f\n", chuViTron);
+		
+		System.out.printf("Diện tích hình vuông là: %.2f\n", dienTichVuong);
+		
+		System.out.printf("Diện tích hình chữ nhật là: %.2f\n", dienTichChuNhat);
+		
+		System.out.printf("Diện tích hình tròn là: %.2f\n", dienTichTron);
+		
+		/*
+				
+		//Bài tập 12:
+		
+		//Khai báo biến
+		
+		double a = 0, b = 0, c = 0, p = 0, chuVi = 0, dienTich = 0, ha = 0, hb = 0, hc = 0, ma = 0, mb = 0, mc = 0, ga = 0, gb = 0, gc = 0, banKinhNoiTiep = 0, banKinhNgoaiTiep = 0;
+		
+		System.out.print("Nhập chiều dài cạnh a: ");
+		
+		a = sc.nextDouble();
+		
+		System.out.print("Nhập chiều dài cạnh b: ");
+		
+		b = sc.nextDouble();
+		
+		System.out.print("Nhập chiều dài cạnh c: ");
+		
+		c = sc.nextDouble();
+		
+		if(a+b>c && a+c>b && b+c>a)
+		{
+			p = (a+b+c)/2;
+			
+			chuVi = 2*p;
+			
+			dienTich = p*(p-a)*(p-b)*(p-c);
+			
+			dienTich = Math.sqrt(dienTich);
+			
+			ha = (2*dienTich)/a; hb = (2*dienTich)/b; hc = (2*dienTich)/c;
+			
+			ma = 2*Math.pow(b, 2) + 2*Math.pow(c, 2) - Math.pow(a, 2); ma = 0.5*Math.sqrt(ma);
+			
+			mb = 2*Math.pow(a, 2) + 2*Math.pow(c, 2) - Math.pow(b, 2); mb = 0.5*Math.sqrt(mb);
+			
+			mc = 2*Math.pow(a, 2) + 2*Math.pow(b, 2) - Math.pow(c, 2); mc = 0.5*Math.sqrt(mc);
+			
+			ga = b*c*p*(p-a); ga = (2/(b+c))*Math.sqrt(ga);
+			
+			gb = a*c*p*(p-b); gb = (2/(a+c))*Math.sqrt(gb);
+			
+			gc = b*a*p*(p-c); gc = (2/(b+a))*Math.sqrt(gc);
+			
+			banKinhNoiTiep = dienTich/p;
+			
+			banKinhNgoaiTiep = (a*b*c)/(4*dienTich);
+			
+			System.out.printf("Chu vi hình tam giác C = %.2f\n", chuVi);
+			
+			System.out.printf("Diện tích hình tam giác S = %.2f\n", dienTich);
+			
+			System.out.printf("Độ dài đường cao ha = %.2f\n", ha);	System.out.printf("Độ dài đường cao hb = %.2f\n", hb);	System.out.printf("Độ dài đường cao hc = %.2f\n", hc);
+			
+			System.out.printf("Độ dài đường trung tuyến ma = %.2f\n", ma);	System.out.printf("Độ dài đường trung tuyến mb = %.2f\n", mb);	System.out.printf("Độ dài đường trung tuyến mc = %.2f\n", mc);
+			
+			System.out.printf("Độ dài đường phân giác ga = %.2f\n", ga);	System.out.printf("Độ dài đường phân giác gb = %.2f\n", gb);	System.out.printf("Độ dài đường phân giác gc = %.2f\n", gc);	
+			
+			System.out.printf("Bán kính đường tròn nội tiếp r = %.2f\n", banKinhNoiTiep);
+			
+			System.out.printf("Bán kính đường tròn ngoại tiếp R = %.2f\n", banKinhNgoaiTiep);			
+		}
+		else
+		{
+			System.out.println("Bạn cần phải nhập lại độ dài 3 cạnh của tam giác đảm bảo điều kiện: Tổng 2 cạnh phải lớn hơn cạnh còn lại");
+		}
+		
+		//Bài tập 13:
+		
+		//Khai báo biến
+		
+		double banKinh = 0, dienTich = 0, theTich = 0;
+		
+		System.out.println("Nhập bán kính R = ");
+		
+		banKinh = sc.nextDouble();
+		
+		if (banKinh>0)
+		{
+			dienTich = 4*Math.PI*Math.pow(banKinh, 2);
+					
+			theTich = (banKinh*dienTich)/3;
+			
+			System.out.printf("Diện tích của hình cầu là: %.2f\n", dienTich);
+			
+			System.out.printf("Thể tích của hình cầu là: %.2f\n", theTich);
+		}
+		else
+		{
+			System.out.println("Bạn cần nhập lại bán kính R phù hợp với điều kiện: R > 0");
+		}
+		
+		//Bài tập 14:
+		
+		//Khai báo biến
+		
+		double a = 0, b = 0, c = 0, d = 0;
+		
+		int tongSo = 0, soHangChuc = 0, soHangDonVi = 0;
+		
+		System.out.print("Nhập số a: ");	
+		
+		a = sc.nextDouble();
+		
+		System.out.print("Nhập số b: ");
+		
+		b = sc.nextDouble();
+		
+		System.out.print("Nhập số c: ");
+		
+		c = sc.nextDouble();
+		
+		System.out.print("Nhập số d: ");
+		
+		d = sc.nextDouble();
+		
+		tongSo = (int)(a+b+c+d);
+		
+		soHangChuc = (tongSo/10)%10;
+		
+		soHangDonVi = tongSo%10;
+		
+		System.out.println("Tổng số là: "+ (int)tongSo);
+		
+		System.out.println("Chữ số hàng chục là: "+ soHangChuc);
+		
+		System.out.println("Chữ số hàng đơn vị là: "+ soHangDonVi);
+		
+		//Bài tập 15:
+		
+		//Cách 1
+		
+		//Khai báo biến
+		
+		int a = 3185;
+				
+		int chuSoDau = (a/1000)%10;
+		
+		int chuSoThuHai = (a/100)%10;
+		
+		int chuSoThuBa = (a/10)%10;
+		
+		int chuSoCuoi = a%10;
+		
+		int tongSo = chuSoDau + chuSoThuHai + chuSoThuBa + chuSoCuoi;
+		
+		System.out.println("Tổng số là: " + tongSo);
+		
+		System.out.println("Chữ số đầu là: " + chuSoDau);
+		
+		System.out.println("Chữ số cuối là: " + chuSoCuoi);
+		
+		//Cách 2
+		
+		int num = 3185;
+
+		String numString = String.valueOf(num); 
+		
+		char chuSoHangNghin = numString.charAt(0); 
+		
+		char chuSoDonVi = numString.charAt(3); 
+		
+		System.out.println("Chữ số đầu là: " + chuSoDonVi);
+		
+		System.out.println("Chữ số cuối là: " + chuSoHangNghin);
+		
+		//Bài tập 16:
+		
+		//Khai báo biến
+		
+		int a = 30, b = 50;
+		
+		//Dùng biến phụ
+		
+		int t = a; 
+				
+		a = b;
+		
+		b = t;
+		
+		System.out.printf("Giá trị sau khi đổi:\n- a = %d\n- b = %d\n", a, b);
+		
+		//Không dùng biến phụ
+		
+		a = a + b;
+		
+		b = a - b;
+		
+		a = a - b;
+		
+		System.out.printf("Giá trị sau khi đổi:\n- a = %d\n- b = %d\n", a, b);
+		
+		//Bài tập 17:
+		
+		//Khai báo biến
+		
+		String hoTen1 = "Huỳnh Nam Cát", hoTen2 = "Huỳnh Nam Đài";
+		
+		int tuoi1 = 27, tuoi2 = 31;
+		
+		double diemToan1 = 6.5, diemToan2 = 7.5, diemTin1 = 7.5, diemTin2 = 8.5;
+		
+		System.out.printf("Tên của sinh viên thứ nhất: %s\n", hoTen1);	System.out.printf("Tên của sinh viên thứ hai: %s\n", hoTen2);
+		
+		System.out.printf("Tuổi của sinh viên thứ nhất: %d\n", tuoi1);	System.out.printf("Tuổi của sinh viên thứ hai: %d\n", tuoi2);
+		
+		System.out.printf("Điểm toán của sinh viên thứ nhất: %.2f\n", diemToan1);	System.out.printf("Điểm toán của sinh viên thứ hai: %.2f\n", diemToan2);
+		
+		System.out.printf("Điểm tin của sinh viên thứ nhất: %.2f\n", diemTin1);		System.out.printf("Điểm tin của sinh viên thứ hai: %.2f\n", diemTin2);
+		
+		System.out.printf("Điểm trung bình của sinh viên thứ nhất: %.2f\n", ((diemToan1*2)+diemTin1)/2);	System.out.printf("Điểm trung bình của sinh viên thứ hai: %.2f\n", ((diemToan2*2)+diemTin2)/2);
+
+		//Bài tập 1:
+				
+		//Khai báo biến
+		
+		double a = 0, b = 0, c = 0;
+		
+		System.out.print("Nhập số thực a (cm): ");
+		
+		a = sc.nextDouble();
+		
+		b = a/2.54;
+		
+		c = b/12;
+		
+		System.out.printf("Số tương đương đơn vị inch là: %.2f (inch)\n", b);
+		
+		System.out.printf("Số tương đương đơn vị foot là: %.2f (foot)\n", c);
+		
+		//Bài tập 2:
+		 		 
+		 */
+		
+		
+	
+
+				
+				
+				
+		
+		
+		
+		
+			
+	}
+}

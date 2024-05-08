@@ -1,0 +1,229 @@
+/**
+ * 
+ */
+package vn.com.namcat.cautruclaptrinh;
+
+import java.util.Scanner;
+
+/**
+ * 
+ */
+public class BaiTapCauTrucLapTrinhJava02 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		//Declare an object that allows for retrieving information from the keyboard.
+		
+		Scanner sc = new Scanner(System.in);
+		
+		/*
+		
+		//Bài tập 11:
+		
+		//Khai báo biến
+		
+		double r = 0, canhDCN = 0, canhRCN = 0, canhV = 0, dientichT = 0, chuviT = 0, dientichCN = 0, chuviCN = 0, dientichV = 0, chuviV = 0;
+		
+		//Khai báo hằng số PI
+		
+		final double PI = 3.14;
+		
+		//Nhập thông số bán kính, cạnh
+		
+		System.out.print("Nhập độ dài bán kính hình tròn: ");
+		
+		r = sc.nextDouble();
+		
+		System.out.print("Nhập chiều dài hình chữ nhật: ");
+		
+		canhDCN = sc.nextDouble();
+		
+		System.out.print("Nhập chiều rộng hình chữ nhật: ");
+		
+		canhRCN = sc.nextDouble();
+		
+		System.out.print("Nhập độ dài cạnh hình vuông: ");
+		
+		canhV = sc.nextDouble();
+
+		//Tính toán
+		
+		dientichT = PI*Math.pow(r, 2);	dientichCN = canhDCN * canhRCN;	dientichV = Math.pow(canhV, 2);
+		
+		chuviT = 2*PI*r;	chuviCN = (canhDCN + canhRCN)*2;	chuviV = 4*canhV;
+		
+		System.out.printf("Diện tích hình tròn là: %.2f\n", dientichT);
+		
+		System.out.printf("Diện tích hình chữ nhật là: %.2f\n", dientichCN);
+		
+		System.out.printf("Diện tích hình vuông là: %.2f\n", dientichV);
+		
+		System.out.printf("Chu vi hình tròn là: %.2f\n", chuviT);
+		
+		System.out.printf("Chu vi hình chữ nhật là: %.2f\n", chuviCN);
+		
+		System.out.printf("Chu vi hình vuông là: %.2f\n", chuviV);
+		
+		//Bài tập 12:
+		
+		//Declare variables
+		
+		double a = 0, b = 0, c = 0, p = 0, perimeter = 0, area = 0, ha = 0, hb = 0, hc = 0, ma = 0, mb = 0, mc = 0, ga = 0, gb = 0, gc = 0, r = 0, R = 0;
+		
+		System.out.print("Please enter the length of side a: ");
+		
+		a = sc.nextDouble();
+		
+		System.out.print("Please enter the length of side b: ");
+		
+		b = sc.nextDouble();
+		
+		System.out.print("Please enter the length of side c: ");
+		
+		c = sc.nextDouble();
+		
+		p = (a+b+c)/2;
+		
+		perimeter = 2*p;
+		
+		area = p*(p-a)*(p-b)*(p-c);
+				
+		area = Math.sqrt(area);
+		
+		ha = 2*area/a;	hb = 2*area/b;	hc = 2*area/c;
+		
+		ma = 2*Math.pow(b, 2) + 2*Math.pow(c, 2) - Math.pow(a, 2);	mb = 2*Math.pow(a, 2) + 2*Math.pow(c, 2) - Math.pow(b, 2);	mc = 2*Math.pow(a, 2) + 2*Math.pow(b, 2) - Math.pow(c, 2);
+		
+		ma = 0.5*Math.sqrt(ma);	mb = 0.5*Math.sqrt(mb);	mc = 0.5*Math.sqrt(mc);
+		
+		ga = b*c*p*(p-a); ga = (2*Math.sqrt(ga))/(b+c);
+		
+		gb = a*c*p*(p-b); gb = (2*Math.sqrt(gb))/(a+c);
+		
+		gc = b*a*p*(p-c); ga = (2*Math.sqrt(gc))/(b+a);
+		
+		r = area/p; R = (a*b*c)/(4*area);
+		
+		if(a<b+c && b<a+c && c<a+b)
+		{
+			System.out.printf("The perimeter of the triangle is: %.2f\n", perimeter);
+			
+			System.out.printf("The area of the triangle is: %.2f\n", area);
+			
+			System.out.printf("The length of the altitude ha is: %.2f\n", ha);
+			
+			System.out.printf("The length of the altitude hb is: %.2f\n", hb);
+			
+			System.out.printf("The length of the altitude hc is: %.2f\n", hc);
+			
+			System.out.printf("The length of the median ma is: %.2f\n", ma);
+			
+			System.out.printf("The length of the median mb is: %.2f\n", mb);
+			
+			System.out.printf("The length of the median mc is: %.2f\n", mc);
+	
+			System.out.printf("The length of the bisector ga is: %.2f\n", ga);
+			
+			System.out.printf("The length of the bisector gb is: %.2f\n", gb);
+			
+			System.out.printf("The length of the bisector gc is: %.2f\n", gc);
+			
+			System.out.printf("The length of the radius of the inscribed circle is: %.2f\n", r);
+			
+			System.out.printf("The length of the radius of the circumcircle is: %.2f\n", R);
+			
+		}
+		else
+		{
+			System.out.println("You need to re-enter the length of the 3 sides of the triangle with the condition: The sum of any 2 sides is greater than the remaining side.");
+		}
+		
+		//Bài tập 13:
+		
+		//Declare variables
+		
+		double R = 0, area = 0, volume = 0;
+		
+		System.out.print("Please enter the length of the radius R: ");
+		
+		R = sc.nextDouble();
+		
+		//Declare the constant PI
+		
+		final double PI = 3.14;
+					
+		area = 4*PI*Math.pow(R, 2);
+		
+		volume = (R*area)/3;
+		
+		System.out.printf("The area of the SPHERE is: %.2f\n", area);
+		
+		System.out.printf("The volume of the SPHERE is: %.2f\n", volume);
+		
+		//Bài tập 14:
+		
+		//Khai báo biến
+		
+		int so1 = 0, so2 = 0, so3 = 0, so4 = 0, tongSo = 0, hangChuc = 0, hangDonVi = 0;
+		
+		System.out.print("Nhập số thứ 1: ");
+		
+		so1 = sc.nextInt();
+		
+		System.out.print("Nhập số thứ 2: ");
+		
+		so2 = sc.nextInt();
+		
+		System.out.print("Nhập số thứ 3: ");
+		
+		so3 = sc.nextInt();
+		
+		System.out.print("Nhập số thứ 4: ");
+		
+		so4 = sc.nextInt();
+		
+		tongSo = (so1 + so2 + so3 + so4);
+		
+		hangChuc = (tongSo/10)%10;
+		
+		hangDonVi = tongSo%10;
+		
+		System.out.printf("Tổng số là: %d\n" + "Chữ số hàng chục là: %d\n" + "Chữ số hàng đơn vị là: %d\n", tongSo, hangChuc, hangDonVi);
+		
+		*/
+			
+		//Bài tập 15:
+		
+		int so4ChuSo = 0, temp = 0, nghin = 0, tram = 0, chuc = 0, donVi = 0, tong = 0;
+		
+		System.out.print("Nhập số 4 chữ số: ");
+		
+		so4ChuSo = sc.nextInt();
+		
+		if(so4ChuSo >= 1000 && so4ChuSo <= 9999)
+		{
+			nghin = so4ChuSo/1000;
+			temp = so4ChuSo%1000;
+			tram = temp/100;
+			temp = tram%100;
+			chuc = temp/10;
+			donVi = temp%10;
+			
+			tong = nghin + tram + chuc + donVi;
+			
+			System.out.println("Tổng các số là: " + tong);
+			System.out.println("Hàng nghìn: " + nghin);
+			
+		}
+		else
+		{
+			System.out.println("Bạn cần phải nhập số gồm 4 chữ số!");
+		}
+		
+	}
+
+}

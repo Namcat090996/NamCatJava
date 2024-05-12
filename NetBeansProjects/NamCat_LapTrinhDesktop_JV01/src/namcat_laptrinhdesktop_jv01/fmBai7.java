@@ -8,14 +8,14 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ADMIN
+ * @author Dell Precision 7550
  */
-public class fmVongLapWhile extends javax.swing.JFrame {
+public class fmBai7 extends javax.swing.JFrame {
 
     /**
-     * Creates new form fmVongLapWhile
+     * Creates new form fmBai7
      */
-    public fmVongLapWhile() {
+    public fmBai7() {
         initComponents();
     }
 
@@ -37,6 +37,8 @@ public class fmVongLapWhile extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtKetQua = new javax.swing.JTextArea();
         cboKieu = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        lblSoLan = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +63,11 @@ public class fmVongLapWhile extends javax.swing.JFrame {
 
         cboKieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chẵn", "Lẻ" }));
 
+        jLabel4.setText("Số lần:");
+
+        lblSoLan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblSoLan.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -79,9 +86,15 @@ public class fmVongLapWhile extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnXem))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblSoLan, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -100,7 +113,11 @@ public class fmVongLapWhile extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSoLan)
+                    .addComponent(jLabel4))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -110,14 +127,14 @@ public class fmVongLapWhile extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,12 +144,12 @@ public class fmVongLapWhile extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Declare variables
         String strGiaTri = "", strKetQua = "", strKieu = "";
-        int giaTri = 0;
-        
+        int giaTri = 0, soLan = 0;
+
         //Take user information entered from the keyboard
         strGiaTri = txtGiaTri.getText();
         strKieu = "" + cboKieu.getSelectedItem();
-                
+
         //Convert String to int
         try
         {
@@ -145,31 +162,37 @@ public class fmVongLapWhile extends javax.swing.JFrame {
             txtGiaTri.requestFocus();
             return;
         }
-        
-        //Computational processing
-        int i = 0;
-        while (i <= giaTri) {
-            if (giaTri % 2 == 0) {
-                if (strKieu.equals("Chẵn")) {
-                    if (i % 2 == 0) {
-                        strKetQua += i + "-";
-                    } else {
-                        if (strKieu.equals("Lẻ")) {
-                            if (i % 2 != 0) {
-                                strKetQua += i + "-";
-                            }
 
-                        }
+        //Computational processing
+        for(int i = 0; i <= giaTri; i++)
+        {
+            if(strKieu.equals("Chẵn"))
+            {
+                if(i%2 == 0)
+                {
+                    strKetQua += i + "-";
+                    soLan++;
+                }
+            }
+            else
+            {
+                if(strKieu.equals("Lẻ"))
+                {
+                    if(i%2 !=0)
+                    {
+                        strKetQua += i + "-";
+                        soLan++;
                     }
                 }
-                i++;
             }
         }
+ 
         //Handle the "-" in final line
         strKetQua = strKetQua.substring(0, strKetQua.length() - 1);
         //Show results
         txtKetQua.setText(strKetQua);
-                    
+        lblSoLan.setText("" + soLan);
+
     }//GEN-LAST:event_btnXemActionPerformed
 
     /**
@@ -189,20 +212,20 @@ public class fmVongLapWhile extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fmVongLapWhile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fmBai7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fmVongLapWhile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fmBai7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fmVongLapWhile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fmBai7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fmVongLapWhile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fmBai7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fmVongLapWhile().setVisible(true);
+                new fmBai7().setVisible(true);
             }
         });
     }
@@ -213,8 +236,10 @@ public class fmVongLapWhile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblSoLan;
     private javax.swing.JTextField txtGiaTri;
     private javax.swing.JTextArea txtKetQua;
     // End of variables declaration//GEN-END:variables

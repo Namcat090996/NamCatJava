@@ -20,7 +20,7 @@ public class NamCat_BaiTapCauTruc_JV01 {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        //Declare an object
+        //Declare an object to enter information from keyboard
         Scanner sc = new Scanner(System.in);
         
         /*
@@ -150,7 +150,63 @@ public class NamCat_BaiTapCauTruc_JV01 {
         System.out.printf("Số lớn nhất là: %d\n", max);
         System.out.printf("Số nhỏ nhất là: %d\n", min);
         
-        */
+        //Bài tập 5:
+        //Declare variables
+        double a = 0, b = 0, hieu = 0;
+        
+        //Take user information entered from the keyboard
+        System.out.print("Nhập số tự nhiên a = ");
+        a = sc.nextDouble();
+        System.out.print("Nhập số tự nhiên b = ");
+        b = sc.nextDouble();
+        
+        //Computational processing
+        hieu = a - b;
+        System.out.println("Hiệu của a và b là = " + hieu);
+
+        if(hieu < 0)
+        {
+            System.out.println("Số thứ nhất bé hơn số thứ hai");
+        }
+        else
+        {
+            System.out.println("Số thứ nhất lớn hơn số thứ hai");
+        }
+        
+        //Bài tập 6:
+        //Declare variables
+        double a = 0, b = 0, thuong = 0;
+        
+        //Take user information entered from the keyboard
+        System.out.print("Nhập số tự nhiên a = ");
+        a = sc.nextDouble();
+        System.out.print("Nhập số tự nhiên b = ");
+        b = sc.nextDouble();
+        
+        //Computational processing
+        thuong = a / b;
+        System.out.println("Thương của a và b là = " + thuong); 
+        
+        if(thuong %2 == 0)
+        {
+            System.out.println("Số tự nhiên a chia hết cho b");
+        }
+        else
+        {
+            System.out.println("Số tự nhiên a không chia hết cho b");
+        }
+        
+        //Bài tập 7:
+        //Declare variables
+        double diemToan = 0, diemLy = 0, diemHoa = 0, diemTrungBinh = 0;
+        
+        //Take user information entered from the keyboard
+        System.out.print("Nhập điểm Toán = ");
+        diemToan = sc.nextDouble();
+        System.out.print("Nhập điểm Lý = ");
+        diemLy = sc.nextDouble();
+        System.out.print("Nhập điểm Hóa = ");
+        diemHoa = sc.nextDouble();
       
         /*Thầy chữa
         //Bài tập 2:
@@ -221,7 +277,7 @@ public class NamCat_BaiTapCauTruc_JV01 {
         {
             System.out.println("Bạn cần nhập số giây phù hợp");
         }
-        /*
+        
         //Bài tập 4:
         //Declare variables
         int so1 = 0, so2 = 0, so3 = 0, so4 = 0, max = 0, min = 0;
@@ -279,54 +335,108 @@ public class NamCat_BaiTapCauTruc_JV01 {
         System.out.printf("Số lớn nhất là: %d\n", max);
         System.out.printf("Số nhỏ nhất là: %d\n", min);
         
-        //Bài tập 5:
-        //Declare variables
-        double a = 0, b = 0, hieu = 0;
+        //Bài tập 4 - Part 4:
         
-        //Take user information entered from the keyboard
-        System.out.print("Nhập số tự nhiên a = ");
-        a = sc.nextDouble();
-        System.out.print("Nhập số tự nhiên b = ");
-        b = sc.nextDouble();
+        //Declare variables
+        int N = 0;
+        double S1 = 0, S2 = 0;
+        
+        System.out.print("Nhập giá trị N = ");
+        
+        N = sc.nextInt();
+        
+        //Use loop use compute
+        for(int i = 1; i <= N; i++)
+        {
+            S1 += i;
+            S2 += Math.pow(i,2);
+        }
+        
+        S1 = S1/N;
+        S2 = Math.sqrt(S2);
+        
+        System.out.printf("Giá trị của S1 = %.3f\n", S1);
+        System.out.printf("Giá trị của S2 = %.3f\n", S2);
+
+        
+        //Bài tập 5 - Part 4:
+        //Declare variables
+        int chuc = 0, donVi = 0, tich = 0, tong = 0;
+        
+        System.out.println("Các số có 2 chữ số thỏa mãn tích bằng 2 lần tổng của 2 chữ số đó là: ");
         
         //Computational processing
-        hieu = a - b;
-        System.out.println("Hiệu của a và b là = " + hieu);
-
-        if(hieu < 0)
+        for(int i = 10; i <= 99; i++)
         {
-            System.out.println("Số thứ nhất bé hơn số thứ hai");
-        }
-        else
-        {
-            System.out.println("Số thứ nhất lớn hơn số thứ hai");
+            chuc = i/10;
+            donVi = i%10;
+            tich = chuc*donVi;
+            tong = chuc + donVi;
+            if(tich == 2*tong)
+            {
+                System.out.println(i);
+            }
         }
         
         */
         
-        //Bài tập 6:
+        //Bài tập 3 - Part 4:
         //Declare variables
-        double a = 0, b = 0, thuong = 0;
+        int tuoiCha = 0, tuoiCon = 0, soNam = 0;
         
-        //Take user information entered from the keyboard
-        System.out.print("Nhập số tự nhiên a = ");
-        a = sc.nextDouble();
-        System.out.print("Nhập số tự nhiên b = ");
-        b = sc.nextDouble();
+        //Use to catch the satisfied condition
         
-        //Computational processing
-        thuong = a / b;
-        System.out.println("Thương của a và b là = " + thuong); 
-        
-        if(thuong %2 == 0)
+        do
         {
-            System.out.println("Số tự nhiên a chia hết cho b");
+            System.out.print("Nhập tuổi cha = ");
+            
+            tuoiCha = sc.nextInt();
+            
+            System.out.print("Nhập tuổi con = ");
+            
+            tuoiCon = sc.nextInt();
         }
-        else
+        while(tuoiCha <= 2*tuoiCon);
+        
+        soNam = tuoiCha - 2*tuoiCon;
+        
+        tuoiCha += soNam;//tuoiCha = tuoiCha + soNam
+        tuoiCon += soNam;
+        
+        System.out.println("Số năm mà tuổi cha gấp 2 lần tuổi con là = " + soNam);
+        System.out.printf("Tuổi cha = %d\n", tuoiCha);
+        System.out.printf("Tuổi con = %d\n", tuoiCon);
+        
+        /*
+        
+        //Bài tập 6 - Part 4:
+        
+        //Declare variables
+        int N = 0;
+        
+        double S1 = 0, S2 = 0;
+        
+        //Find N
+        do
         {
-            System.out.println("Số tự nhiên a không chia hết cho b");
+            N++;
+            S1 += 1/(2.0*N - 1);
         }
+        while(S1 < 2.101999);
         
+        System.out.printf("Giá trị N thỏa mãn là N = %d\n", N-1);
         
-   } 
+        N = 0;
+        
+        do
+        {
+            N++;
+            S2 = Math.exp(N) - 1999*Math.log10(N);
+        }
+        while(S2 < 2000);
+                
+        System.out.printf("6B. Giá trị N thỏa mãn là N = %d\n", N-1); 
+        
+        */
+    }
 }

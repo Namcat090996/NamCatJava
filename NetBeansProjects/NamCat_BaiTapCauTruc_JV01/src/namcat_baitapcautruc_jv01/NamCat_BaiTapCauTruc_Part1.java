@@ -411,6 +411,8 @@ public class NamCat_BaiTapCauTruc_Part1 {
     {
         System.err.println("Bạn cần phải nhập lại số nguyên có 04 chữ số");
     }
+    
+    */
             
     //Bài tập 16: Hãy nhập 2 số a và b. Viết chương trình đổi giá trị của a và b theo 2 cách:
     //Declare variables
@@ -429,23 +431,47 @@ public class NamCat_BaiTapCauTruc_Part1 {
     c = c - d;
     System.out.printf("Giá trị sau khi đổi:\n c = %d\n d = %d\n", c, d);  
     
-    */
+    /*
     
     //Bài tập 17: Một sinh viên gồm có các thông tin: họ tên, tuổi, điểm toán (hệ số 2), điểm tin (hệ số 1). Hãy nhập các thông tin trên cho 2 sinh viên. In ra bảng điểm gồm các chi tiết nêu trên và điểm trung bình của mỗi sinh viên:
     
     //Declare variables	
     String hoTen1 = "Huỳnh Nam Cát", hoTen2 = "Huỳnh Nam Đài";	
     int tuoi1 = 27, tuoi2 = 31;	
-    double diemToan1 = 6.5, diemToan2 = 7.5, diemTin1 = 7.5, diemTin2 = 8.5;
-
-    //Print results
-    System.out.printf("Tên của sinh viên thứ nhất: %s\n", hoTen1);		
-    System.out.printf("Tuổi của sinh viên thứ nhất: %d\n", tuoi1);		
-    System.out.printf("Điểm toán của sinh viên thứ nhất: %.2f\n", diemToan1);		
-    System.out.printf("Điểm tin của sinh viên thứ nhất: %.2f\n", diemTin1);		
-    System.out.printf("Điểm trung bình của sinh viên thứ nhất: %.2f\n", ((diemToan1*2)+diemTin1)/2);
+    double diemToan1 = 0, diemToan2 = 0, diemTin1 = 0, diemTin2 = 0;
     
-    //Bài tập 18: Một nhân viên gồm có các thông tin: họ tên, hệ số lương, phần trăm phụ cấp (theo lưong) và phần trăm phải đóng BHXH. Hãy nhập các thông tin trên cho 2 nhân viên. In ra bảng lương gồm các chi tiết nêu trên và tổng số tiền cuối cùng mỗi nhân viên được nhận.:
+    //Take user information entered from the keyboard
+    System.out.print("Nhập điểm toán của sinh viên thứ nhất = ");	
+    diemToan1 = sc.nextDouble();
+    System.out.print("Nhập điểm toán của sinh viên thứ hai = ");
+    diemToan2 = sc.nextDouble();
+    System.out.print("Nhập điểm tin của sinh viên thứ nhất = ");
+    diemTin1 = sc.nextDouble();
+    System.out.print("Nhập điểm tin của sinh viên thứ hai = ");
+    diemTin2 = sc.nextDouble();;      
+
+    //Computational processing and Print results
+    if(diemToan1 >= 0 && diemToan2 >= 0 && diemTin1 >= 0 && diemTin2 >= 0)
+    {
+    System.out.printf("Tên của sinh viên thứ nhất: %s\n", hoTen1);		
+    System.out.printf("Tuổi của sinh viên thứ nhất = %d\n", tuoi1);		
+    System.out.printf("Điểm toán của sinh viên thứ nhất = %.2f\n", diemToan1);		
+    System.out.printf("Điểm tin của sinh viên thứ nhất = %.2f\n", diemTin1);		
+    System.out.printf("Điểm trung bình của sinh viên thứ nhất = %.2f\n", ((diemToan1*2)+diemTin1)/2);
+    
+    System.out.printf("Tên của sinh viên thứ hai = %s\n", hoTen2);		
+    System.out.printf("Tuổi của sinh viên thứ hai = %d\n", tuoi2);		
+    System.out.printf("Điểm toán của sinh viên thứ hai = %.2f\n", diemToan2);		
+    System.out.printf("Điểm tin của sinh viên thứ hai = %.2f\n", diemTin2);		
+    System.out.printf("Điểm trung bình của sinh viên thứ hai = %.2f\n", ((diemToan2*2)+diemTin2)/2);        
+    }
+    else
+    {
+        System.err.println("Bạn cần nhập lại điểm toán và điểm tin phù hợp với điều kiện >= 0");
+    }
+    
+    */
+
 
     
   }  

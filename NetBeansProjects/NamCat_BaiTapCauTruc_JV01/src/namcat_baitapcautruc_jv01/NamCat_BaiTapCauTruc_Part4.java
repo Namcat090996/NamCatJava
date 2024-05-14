@@ -178,26 +178,67 @@ public class NamCat_BaiTapCauTruc_Part4 {
 	}
     }
     
-    */
-    
     //Bài tập 6: Tìm số nguyên dương n lớn nhất thoả mãn điều kiện:
+    //Method 1
     //Declare variables
     double S1 = 0, S2 = 0;
     
-    //Computational processing   
+    //Use For 
+    //Computational processing and Print results
     for(int i = 1; i > 0; i++)
     {
 	S1 += 1/(2.0*i-1);
 	if(S1 < 2.101999)
 	{
-	    System.out.printf("Giá trị N thỏa mãn điều kiện là = %d\n", i);
+	    System.out.printf("Giá trị N1 thỏa mãn điều kiện là = %d\n", i);
 	}
 	else
 	{
 	    break;
 	}
     }
-  
+    System.out.println("\n");
+    
+    for (int x = 1; x > 0; x++)
+    {
+	S2 = Math.exp(x) - (1999*Math.log10(x));
+	if(S2 < 2000)
+	{
+	    System.out.printf("Giá trị N2 thỏa mãn điều kiện là = %d\n", x);
+	}
+	else
+	{
+	    break;
+	}
+    }
+    
+    */
+    
+    //Use do ... while
+    //Declare variables
+    int N = 0;
+    double S1 = 0, S2 = 0;
+    
+    //Computational processing and Print results (6a)
+    do
+    {
+	N++;
+	S1 += 1/(2.0*N-1);
+    }
+    while(S1 < 2.1099999);
+    
+    System.out.printf("Giá trị N thỏa mãn điều kiện là = %d\n", N-1);
+    
+    //Computational processing and Print results (6b)
+    N = 0;
+    do
+    {
+	N++;
+	S2 = Math.pow(Math.E, N) - 1999*Math.log10(N);
+    }
+    while(S2 < 2000);
+    
+    System.out.printf("Giá trị N thỏa mãn điều kiện là = %d\n", N-1);
     
   }  
 }

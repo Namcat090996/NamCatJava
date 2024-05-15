@@ -71,6 +71,9 @@ public class NamCat_LamViecVoiDanhSachJava {
 		{
 			System.out.println(ten);
 		}
+		
+		
+		
 	}
 
 }

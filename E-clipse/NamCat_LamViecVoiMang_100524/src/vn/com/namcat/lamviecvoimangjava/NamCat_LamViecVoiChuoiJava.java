@@ -6,7 +6,7 @@ public class NamCat_LamViecVoiChuoiJava {
 		// TODO Auto-generated method stub
 		
 		String strChuoiA = "Stanforf";
-		String strChuoiB = "Stanford";
+		String strChuoiB = "Stanrford";
 		
 		//So sánh chuỗi
 
@@ -32,11 +32,11 @@ public class NamCat_LamViecVoiChuoiJava {
 		
 		int idx1 = strChuoiA.indexOf('r');
 		
-		System.out.println("Vị trí đầu tiên của kí tự t là = " + idx1);
+		System.out.println("Vị trí đầu tiên của kí tự r là = " + idx1);
 		
 		int ldx = strChuoiA.lastIndexOf('r');
 		
-		System.out.println("Vị trí cuối cùng của kí tự t là = " + ldx);
+		System.out.println("Vị trí cuối cùng của kí tự r là = " + ldx);
 		
 		String strData = "10;50;60;80";
 		

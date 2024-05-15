@@ -17,7 +17,7 @@ public class NamCat_LamViecVoiMangJava2 {
 		 * a20	a21
 		 */
 		
-		/*
+		
 		
 		//Declare an array
 		int arr[][] = new int[3][2];
@@ -54,7 +54,7 @@ public class NamCat_LamViecVoiMangJava2 {
 			System.out.println("");
 		}
 		
-		*/
+		/*
 		
 		//Ví dụ 4: Khai báo mảng 2 chiều kiểu số thực gồm m dòng và n cột nhập từ bàn phím sau đó in thông tin ra màn hình
 		int m = 0, n = 0;
@@ -91,7 +91,9 @@ public class NamCat_LamViecVoiMangJava2 {
 			//Next
 			System.out.println("");
 		}
-
+	
+		*/
+		
 	}
 
 }

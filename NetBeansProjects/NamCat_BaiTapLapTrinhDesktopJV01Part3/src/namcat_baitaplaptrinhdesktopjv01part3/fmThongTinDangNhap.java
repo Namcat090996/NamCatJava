@@ -130,41 +130,48 @@ public class fmThongTinDangNhap extends javax.swing.JFrame {
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
         // TODO add your handling code here:
-        if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thoát không?", "Cảnh báo thoát", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
-                {
-                    System.exit(0);
-                }
+	if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thoát không ?", "Thông báo thoát hộp thoại đăng nhập", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+	{
+	    System.exit(0);
+	}
+	else
+	{
+	    txtTenDangNhap.requestFocus();
+	    return;
+	}
+
     }//GEN-LAST:event_btnDongActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         // TODO add your handling code here:
-        //Declare varibles
-        String tenDangNhap = "", matKhau = "";
-
-        //Take user information entered on the interface
-        tenDangNhap = txtTenDangNhap.getText();
-        matKhau = new String(txtMatKhau.getPassword());
-        
-        if(tenDangNhap.length() == 0)
-        {
-            JOptionPane.showMessageDialog(rootPane, "Bạn cần phải nhập tên đăng nhập");
-            txtTenDangNhap.requestFocus();
-            return;
-        }
-        if(matKhau.length() == 0)
-        {
-            JOptionPane.showMessageDialog(rootPane, "Bạn cần phải nhập mật khẩu đăng nhập");
-            txtMatKhau.requestFocus();
-            return;
-        }
-        if(tenDangNhap.equals("admin") && matKhau.equals("123"))
-        {
-            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại");
-        }
+	//Declare variables
+	String tenDangNhap = "", matKhau = "";
+	
+	//Take user information entered on the interface
+	tenDangNhap = txtTenDangNhap.getText();
+	matKhau = new String (txtMatKhau.getPassword());
+	
+	//Check user information entered on the interface
+	if(tenDangNhap.length() == 0)
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tên đăng nhập");
+	    txtTenDangNhap.requestFocus();
+	    return;
+	}
+	if(matKhau.length() == 0)
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập mật khẩu đăng nhập");
+	    txtMatKhau.requestFocus();
+	    return;
+	}
+	if(tenDangNhap.equals("Nam Cát") && matKhau.equals("Thảo Ly"))
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
+	}
+	else
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Đăng nhập thất bại");
+	}
         
     }//GEN-LAST:event_btnDangNhapActionPerformed
 

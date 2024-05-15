@@ -148,23 +148,27 @@ public class fmVongLapWhile extends javax.swing.JFrame {
         
         //Computational processing
         int i = 0;
-        while (i <= giaTri) {
-            if (giaTri % 2 == 0) {
-                if (strKieu.equals("Chẵn")) {
-                    if (i % 2 == 0) {
-                        strKetQua += i + "-";
-                    } else {
-                        if (strKieu.equals("Lẻ")) {
-                            if (i % 2 != 0) {
-                                strKetQua += i + "-";
-                            }
-
-                        }
-                    }
-                }
-                i++;
-            }
-        }
+	while(i <= giaTri)
+	{
+	    if(strKieu.equals("Chẵn"))
+	    {
+		if(i%2 ==0)
+		{
+		    strKetQua += i + "-";
+		}
+	    }
+	    else
+	    {
+		if(strKieu.equals("Lẻ"))
+		{
+		    if(i%2 != 0)
+		    {
+			strKetQua += i + "-";
+		    }
+		}
+	    }
+	    i++;
+	}
         //Handle the "-" in final line
         strKetQua = strKetQua.substring(0, strKetQua.length() - 1);
         //Show results

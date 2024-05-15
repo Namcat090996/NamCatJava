@@ -40,8 +40,6 @@ public class NamCat_LamViecVoiDanhSachJava {
 			System.out.println(giaTri);
 		}
 		
-		*/
-		
 		//Khai báo danh sách để chứa tên sinh viên
 		List<String> lstSinhVien = new ArrayList<String>();
 		
@@ -72,6 +70,13 @@ public class NamCat_LamViecVoiDanhSachJava {
 			System.out.println(ten);
 		}
 		
+		*/
+		
+		String strTuoi = "EF";
+		
+		int tuoi = Integer.parseInt(strTuoi, 16);
+		
+		System.out.println(tuoi);
 		
 		
 	}

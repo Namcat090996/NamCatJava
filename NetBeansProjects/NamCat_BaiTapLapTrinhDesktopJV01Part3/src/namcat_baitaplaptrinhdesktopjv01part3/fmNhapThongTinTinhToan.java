@@ -133,6 +133,62 @@ public class fmNhapThongTinTinhToan extends javax.swing.JFrame {
 
     private void btnTinhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTinhToanActionPerformed
         // TODO add your handling code here:
+	//Declare variables
+	String strSoa = "", strSob = "", phepTinh = "";
+	int soa = 0, sob = 0, ketQua = 0;
+	
+	//Take user information entered on the interface
+	strSoa = txtSoa.getText();
+	strSob = txtSob.getText();
+	phepTinh = "" + cboPhepTinh.getSelectedItem();
+	
+	//Convert String to Int & Try - Catch
+	try
+	{
+	    soa = Integer.parseInt(strSob);
+	}
+	catch(NumberFormatException ex)
+	{
+	    
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
         //Declare variables
         String strSoa = "", strSob = "", phepTinh = "";
         double soa = 0, sob = 0, ketQua = 0;
@@ -202,6 +258,8 @@ public class fmNhapThongTinTinhToan extends javax.swing.JFrame {
         
         //Print results
         txtKetQua.setText("" + ketQua);
+	
+	*/
     }//GEN-LAST:event_btnTinhToanActionPerformed
 
     /**

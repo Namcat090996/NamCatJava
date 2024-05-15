@@ -155,22 +155,35 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
         tinhTrang = "" + cboTinhTrang.getSelectedItem();
         gioiTinh = cboGioiTinh.getSelectedIndex();
         
-        //Try - Catch 1
+        //Use for if to catch the error
+	if(tenCuaBan.length() == 0)
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập đầy đủ họ tên");
+	    txtTenCuaBan.requestFocus();
+	    return;
+	}
         char arr[] = tenCuaBan.toCharArray();
         for(int i = 0; i < arr.length; i++)
         {
-            if(Character.isAlphabetic(arr[i]))
-            {
-                
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(rootPane, "Bạn cần phải nhập tên là kí tự");
-                txtTenCuaBan.requestFocus();
-                return;                
-            }
+		if(Character.isAlphabetic(arr[i]) || Character.isSpaceChar(arr[i]))
+		{
+
+		}
+		else
+		{
+		    System.err.println("Bạn cần phải nhập tên là kí tự chữ cái");
+		    JOptionPane.showMessageDialog(rootPane, "Bạn cần phải nhập tên là kí tự chữ cái");
+		    txtTenCuaBan.requestFocus();
+		    return;                
+		}
         }        
-        //Try - Catch 2
+	if(strTuoi.length() ==0)
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập số tuổi");
+	    txtTuoi.requestFocus();
+	    return;
+	}
+        //Try - Catch 
         try
         {
             tuoi = Integer.parseInt(strTuoi);
@@ -182,8 +195,38 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
             txtTuoi.requestFocus();
             return;
         }
+	if(tuoi < 19)
+	{
+	    ketQua = "Bạn không được phép tham gia chương trình";
+	}
+	else
+	{
+	    if(tinhTrang.equals("Chưa có gia đình") || tinhTrang.equals("Đã ly hôn"))
+	    {
+		if(gioiTinh == 0 && tuoi >= 22)
+		{
+		    ketQua = "Bạn được phép tham gia chương trình";
+		}
+		else
+		{
+		    if(gioiTinh == 1 && tuoi >= 19)
+		    {
+			ketQua = "Bạn được phép tham gia chương trình";
+		    }
+		    else
+		    {
+			ketQua = "Bạn không được phép tham gia chương trình";
+		    }
+		}
+	    }
+	    else
+	    {
+		ketQua = "Bạn không được phép tham gia chương trình";
+	    }
+	}
         
-
+        //Show results
+        txtKetQua.setText("" + ketQua);
 
     }//GEN-LAST:event_btnDangKiActionPerformed
 

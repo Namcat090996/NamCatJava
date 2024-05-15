@@ -45,8 +45,6 @@ public class NamCat_BaiTapCauTruc_Part5 {
         }
         System.out.println("");
     }
-
-    */
     
     //1c
     String khoangTrang = "", kq = "", chuoi = "#########";
@@ -61,9 +59,24 @@ public class NamCat_BaiTapCauTruc_Part5 {
         }
         System.out.println("");
     }   
+
+    //1d
+    String khoangTrang = "         ", kq = "", chuoi = "";
+    for (int i = 9; i > 1; i--)
+    {
+        for (int j = khoangTrang.length(); j >= i; j--)
+        {
+            khoangTrang = khoangTrang.substring(0, j-1);   
+            chuoi = chuoi + "#";
+            kq = khoangTrang + chuoi;
+            System.out.print(kq);
+        }
+        System.out.println("");
+    }    
     
+    */
 
-
+    //Bài tập 2: Làm bài tập giải phương trình bậc 2: aX*X + bX + c = 0 (Dạng giao diện đồ hoạ java Swing)
 
     
 

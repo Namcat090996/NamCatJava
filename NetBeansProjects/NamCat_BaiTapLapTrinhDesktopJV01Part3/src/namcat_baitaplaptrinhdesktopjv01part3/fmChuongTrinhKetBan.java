@@ -145,6 +145,80 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
 
     private void btnDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKiActionPerformed
         // TODO add your handling code here:
+	//Declare variables
+	String tenCuaBan = "", strTuoi = "", tinhTrang = "", ketQua = "";
+	int tuoi = 0, gioiTinh = 0;
+	
+	//Take user information entered on the interface
+	tenCuaBan = txtTenCuaBan.getText();
+	
+
+	
+	char arr[] = tenCuaBan.toCharArray();
+	for(int i = 0; i < arr.length; i++)
+	{
+	    if(Character.isAlphabetic(arr[i]) || Character.isSpaceChar(arr[i]))
+	    {
+		
+	    }
+	    else
+	    {
+		JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập tên hợp lệ");
+		txtTenCuaBan.requestFocus();
+		return;
+	    }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
         //Declare variables
         String tenCuaBan = "", strTuoi = "", tinhTrang = "", ketQua = "";
         int tuoi = 0, gioiTinh = 0;
@@ -227,6 +301,8 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
         
         //Show results
         txtKetQua.setText("" + ketQua);
+	
+	*/
 
     }//GEN-LAST:event_btnDangKiActionPerformed
 

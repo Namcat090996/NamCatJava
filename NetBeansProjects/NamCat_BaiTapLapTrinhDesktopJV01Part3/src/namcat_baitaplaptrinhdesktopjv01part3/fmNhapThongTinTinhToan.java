@@ -135,131 +135,78 @@ public class fmNhapThongTinTinhToan extends javax.swing.JFrame {
         // TODO add your handling code here:
 	//Declare variables
 	String strSoa = "", strSob = "", phepTinh = "";
-	int soa = 0, sob = 0, ketQua = 0;
+	double soa = 0, sob = 0, ketQua = 0;
 	
 	//Take user information entered on the interface
 	strSoa = txtSoa.getText();
 	strSob = txtSob.getText();
 	phepTinh = "" + cboPhepTinh.getSelectedItem();
 	
-	//Convert String to Int & Try - Catch
+	//Convert String to Int & use Try - Catch to catch the error
 	try
 	{
-	    soa = Integer.parseInt(strSob);
+	    soa = Double.parseDouble(strSoa);
 	}
 	catch(NumberFormatException ex)
 	{
-	    
+	    System.err.println("Bạn cần phải nhập giá trị a là kiểu số nguyên. Chi tiết lỗi: "+ ex.getMessage());
+	    JOptionPane.showMessageDialog(rootPane, "Bạn cần phải nhập giá trị a là kiểu số nguyên");
+	    txtSoa.requestFocus();
+	    return;
 	}
 	
+	try
+	{
+	    sob = Double.parseDouble(strSob);
+	}
+	catch(NumberFormatException ex)
+	{
+	    System.err.println("Bạn cần phải nhập giá trị b là kiểu số nguyên. Chi tiết lỗi: "+ ex.getMessage());
+	    JOptionPane.showMessageDialog(rootPane, "Bạn cần phải nhập giá trị b là kiểu số nguyên");
+	    txtSob.requestFocus();
+	    return;
+	}	
 	
+	//Computational processing with If-Else
+	//Unknown
+	if(phepTinh.equals("Unknown"))
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn phép tính");
+	    cboPhepTinh.requestFocus();
+	    return;
+	}	
+	//Cộng
+	if(phepTinh.equals("Cộng"))
+	{
+	    ketQua = soa + sob;
+	}
+	//Trừ
+	if(phepTinh.equals("Trừ"))
+	{
+	    ketQua = soa - sob;
+	}	
+	//Nhân
+	if(phepTinh.equals("Nhân"))
+	{
+	    ketQua = soa * sob;
+	}	
+	//Chia(b#0)
+	if(phepTinh.equals("Chia"))
+	{
+	    if(sob != 0)
+	    {
+		ketQua = soa / sob;
+	    }
+	    else
+	    {
+		JOptionPane.showMessageDialog(rootPane, "Bạn cần phải nhập giá trị b khác không");
+		txtSob.requestFocus();
+		return;
+	    }
+	}   	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-        //Declare variables
-        String strSoa = "", strSob = "", phepTinh = "";
-        double soa = 0, sob = 0, ketQua = 0;
-        
-        //Take user information entered on the interface
-        strSoa = txtSoa.getText();
-        strSob = txtSob.getText();
-        phepTinh = "" + cboPhepTinh.getSelectedItem();
-        
-        //Try - Catch
-        try
-        {
-            soa = Double.parseDouble(strSoa);
-        }
-        catch(NumberFormatException ex)
-        {
-            System.err.println("Bạn cần phải nhập giá trị là số thực. Chi tiết lỗi: " + ex.getMessage());
-            JOptionPane.showMessageDialog(rootPane, "Bạn cần phải nhập giá trị là số thực");
-            txtSoa.requestFocus();
-            return;
-        }
-        
-        try
-        {
-            sob = Double.parseDouble(strSob);
-        }
-        catch(NumberFormatException ex)
-        {
-            System.err.println("Bạn cần phải nhập giá trị là số thực. Chi tiết lỗi: " + ex.getMessage());
-            JOptionPane.showMessageDialog(rootPane, "Bạn cần phải nhập giá trị là số thực");
-            txtSoa.requestFocus();
-            return;
-        }
-        
-        //Computational processing
-        if(phepTinh.equals("Unknown"))
-        {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn phép tính");
-            cboPhepTinh.requestFocus();
-            return;
-        }
-        if(phepTinh.equals("Cộng"))
-        {
-            ketQua = soa + sob;
-        }
-        if(phepTinh.equals("Trừ"))
-        {
-            ketQua = soa - sob;
-        }
-        if(phepTinh.equals("Nhân"))
-        {
-            ketQua = soa * sob;
-        }
-        if(phepTinh.equals("Chia"))
-        {
-            if(sob != 0)
-            {
-                ketQua = soa / sob;
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(rootPane, "Bạn cần nhập số b khác không");
-                txtSob.requestFocus();
-                return;
-            }
-        }
-        
-        //Print results
-        txtKetQua.setText("" + ketQua);
-	
-	*/
+	//Print results
+	txtKetQua.setText("" + ketQua);
     }//GEN-LAST:event_btnTinhToanActionPerformed
 
     /**

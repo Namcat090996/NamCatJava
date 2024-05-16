@@ -72,12 +72,6 @@ public class NamCat_LamViecVoiDanhSachJava {
 		
 		*/
 		
-		String strTuoi = "EF";
-		
-		int tuoi = Integer.parseInt(strTuoi, 16);
-		
-		System.out.println(tuoi);
-		
 		
 	}
 

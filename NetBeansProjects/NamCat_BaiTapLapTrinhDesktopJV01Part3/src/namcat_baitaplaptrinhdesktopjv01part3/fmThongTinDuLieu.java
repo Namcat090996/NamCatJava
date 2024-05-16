@@ -47,6 +47,11 @@ public class fmThongTinDuLieu extends javax.swing.JFrame {
         jLabel1.setText("Chọn kiểu dữ liệu:");
 
         cboKieuDuLieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "unknown", "byte", "char", "bool", "sbyte", "short", "ushort", "int" }));
+        cboKieuDuLieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboKieuDuLieuActionPerformed(evt);
+            }
+        });
 
         btnXemThongTin.setText("Xem thông tin");
         btnXemThongTin.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +84,7 @@ public class fmThongTinDuLieu extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin kiểu dữ liệu"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin kiểu dữ liệu Java"));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("+ Kích thước (Byte):");
@@ -160,57 +165,63 @@ public class fmThongTinDuLieu extends javax.swing.JFrame {
 
     private void btnXemThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemThongTinActionPerformed
         // TODO add your handling code here:
-        //Declare variables
-        String kieuDuLieu = "", kichThuoc = "", kieu = "", moTa = "";
-
-        //Take user information entered on the interface
-        kieuDuLieu = "" + cboKieuDuLieu.getSelectedItem();
-
-        //Computational processing
-        switch(kieuDuLieu){
-            case "byte":
-            kichThuoc = "1 Byte";
-            kieu = "Byte";
-            moTa = "Không dấu (0...255) ký tự";
-            break;
-            case "char":
-            kichThuoc = "2 Byte";
-            kieu = "Char";
-            moTa = "Có dấu (0...65536) ký tự";
-            break;
-            case "bool":
-            kichThuoc = "1 Byte";
-            kieu = "Bool";
-            moTa = "Không dấu (0...255) ký tự";
-            break;
-            case "sbyte":
-            kichThuoc = "1 Byte";
-            kieu = "Sbyte";
-            moTa = "Có dấu (0...255) ký tự";
-            break;
-            case "short":
-            kichThuoc = "2 Byte";
-            kieu = "Short";
-            moTa = "Có dấu (0...65536) ký tự";
-            break;
-            case "ushort":
-            kichThuoc = "2 Byte";
-            kieu = "Ushort";
-            moTa = "Có dấu (0...65536) ký tự";
-            break;
-            case "int":
-            kichThuoc = "4 Byte";
-            kieu = "Int";
-            moTa = "Không dấu (0...4294967296) ký tự";
-            break;
-            default:JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn kiểu dữ liệu cần xem");
-        }
-
-        //Show results
-        lblKichThuoc.setText("" + kichThuoc);
-        lblKieu.setText("" + kieu);
-        lblMoTa.setText("" + moTa);
+	//Declare variables
+	String kieuDuLieu = "", kichThuoc = "", kieu = "", moTa = "";
+	
+	//Take user information entered on the interface
+	kieuDuLieu = "" + cboKieuDuLieu.getSelectedItem();
+	
+	//Computational processing
+	switch (kieuDuLieu) {
+	    case "byte":
+		kichThuoc = "1 Byte";
+		kieu = "Byte";
+		moTa = "Không dấu (0...255) ký tự";
+		break;
+	    case "char":
+		kichThuoc = "2 Byte";
+		kieu = "Char";
+		moTa = "Có dấu (0...65536) ký tự";
+		break;
+	    case "bool":
+		kichThuoc = "1 Byte";
+		kieu = "Bool";
+		moTa = "Không dấu (0...255) ký tự";
+		break;
+	    case "sbyte":
+		kichThuoc = "1 Byte";
+		kieu = "Sbyte";
+		moTa = "Có dấu (0...255) ký tự";
+		break;
+	    case "short":
+		kichThuoc = "2 Byte";
+		kieu = "Short";
+		moTa = "Có dấu (0...65536) ký tự";
+		break;
+	    case "ushort":
+		kichThuoc = "2 Byte";
+		kieu = "Ushort";
+		moTa = "Có dấu (0...65536) ký tự";
+		break;
+	    case "int":
+		kichThuoc = "4 Byte";
+		kieu = "Int";
+		moTa = "Không dấu (0...4294967296) ký tự";
+		break;
+	    default:
+		JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn kiểu dữ liệu cần xem");
+	}
+	
+	//Print results
+	lblKichThuoc.setText(kichThuoc);
+	lblKieu.setText(kieu);
+	lblMoTa.setText(moTa);
+	
     }//GEN-LAST:event_btnXemThongTinActionPerformed
+
+    private void cboKieuDuLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboKieuDuLieuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboKieuDuLieuActionPerformed
 
     /**
      * @param args the command line arguments

@@ -28,6 +28,7 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -41,6 +42,9 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtKetQua = new javax.swing.JTextArea();
         btnDangKi = new javax.swing.JButton();
+        btnThoat = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +75,13 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
             }
         });
 
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -78,7 +89,10 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnDangKi)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnDangKi)
+                        .addGap(46, 46, 46)
+                        .addComponent(btnThoat))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -119,7 +133,9 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnDangKi)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDangKi)
+                    .addComponent(btnThoat))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -144,16 +160,26 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKiActionPerformed
-        // TODO add your handling code here:
+        
 	//Declare variables
 	String tenCuaBan = "", strTuoi = "", tinhTrang = "", ketQua = "";
 	int tuoi = 0, gioiTinh = 0;
 	
 	//Take user information entered on the interface
 	tenCuaBan = txtTenCuaBan.getText();
+	tinhTrang = "" + cboTinhTrang.getSelectedItem();
+	gioiTinh = cboGioiTinh.getSelectedIndex();
+	strTuoi = txtTuoi.getText();
 	
-
+	//Convert String to Int and use Catch - Try, For - If to catch the error
 	
+	//Cacth the tenCuaBan error
+	if(tenCuaBan.length() == 0)
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập đầy đủ họ tên");
+	    txtTenCuaBan.requestFocus();
+	    return;	    
+	}
 	char arr[] = tenCuaBan.toCharArray();
 	for(int i = 0; i < arr.length; i++)
 	{
@@ -163,55 +189,59 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
 	    }
 	    else
 	    {
-		JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập tên hợp lệ");
+		JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập tên là kí tự chữ cái");
 		txtTenCuaBan.requestFocus();
 		return;
 	    }
 	}
 	
+	//Catch the tuoi error
+	if(strTuoi.length() == 0)
+	{
+		JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập số tuổi");
+		txtTuoi.requestFocus();
+		return;	    
+	}
+	try
+	{
+	    tuoi = Integer.parseInt(strTuoi);
+	}
+	catch(NumberFormatException ex)
+	{
+	    System.err.println("Bạn phải nhập tuổi là giá trị số nguyên. Chi tiết lỗi: " + ex.getMessage());
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập tuổi là giá trị số nguyên");
+	    txtTuoi.requestFocus();
+	    return;
+	}
 	
+	//Computational processing
+	if(tuoi < 19)
+	{
+	    ketQua = "Bạn không được phép tham gia chương trình";
+	}
+	else
+	{
+	    if(tinhTrang.equals("Chưa có gia đình") || tinhTrang.equals("Đã ly hôn"))
+	    {
+		if(gioiTinh == 0 && tuoi >= 22)
+		{
+		    ketQua = "Bạn được phép tham gia chương trình";
+		}
+		if(gioiTinh == 1 && tuoi >= 19)
+		{
+		    ketQua = "Bạn được phép tham gia chương trình";
+		}
+	    }
+	    else
+	    {
+		ketQua = "Bạn không được phép tham gia chương trình";
+	    }
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//Print results
+	txtKetQua.setText(ketQua);
 	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -306,6 +336,19 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnDangKiActionPerformed
 
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        // TODO add your handling code here:
+	if (JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thoát không ?", "Cảnh báo thoát chương trình", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+	{
+	    System.exit(0);
+	}
+	else
+	{
+	    txtTenCuaBan.requestFocus();
+	}
+	
+    }//GEN-LAST:event_btnThoatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -343,8 +386,10 @@ public class fmChuongTrinhKetBan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangKi;
+    private javax.swing.JButton btnThoat;
     private javax.swing.JComboBox<String> cboGioiTinh;
     private javax.swing.JComboBox<String> cboTinhTrang;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

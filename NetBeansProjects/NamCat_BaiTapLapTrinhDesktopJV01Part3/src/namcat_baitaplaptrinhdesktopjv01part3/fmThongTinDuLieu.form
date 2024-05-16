@@ -104,6 +104,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboKieuDuLieuActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -122,7 +125,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Th&#xf4;ng tin ki&#x1ec3;u d&#x1eef; li&#x1ec7;u"/>
+            <TitledBorder title="Th&#xf4;ng tin ki&#x1ec3;u d&#x1eef; li&#x1ec7;u Java"/>
           </Border>
         </Property>
       </Properties>

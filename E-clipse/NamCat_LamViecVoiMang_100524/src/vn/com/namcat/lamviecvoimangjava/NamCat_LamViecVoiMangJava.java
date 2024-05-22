@@ -65,8 +65,7 @@ public class NamCat_LamViecVoiMangJava {
 		{
 			System.out.print(arr2[i] + "\t");
 		}
-		
-		System.out.println("");
+
 
 	}
 

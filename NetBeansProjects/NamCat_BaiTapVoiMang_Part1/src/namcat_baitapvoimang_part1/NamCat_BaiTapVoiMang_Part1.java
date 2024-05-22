@@ -298,6 +298,7 @@ public class NamCat_BaiTapVoiMang_Part1 {
 	
 	System.out.printf("Tổng các số dương là = %.2f\n", tongSoDuong);
 	System.out.printf("Tổng các số âm là = %.2f\n", tongSoAm);
+	System.out.println("");
 	
 
 

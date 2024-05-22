@@ -240,5 +240,7 @@ public class NamCat_BaiTapCauTruc_Part4 {
     
     System.out.printf("Giá trị N thỏa mãn điều kiện là = %d\n", N-1);
     
+    System.out.println("");
+    
   }  
 }

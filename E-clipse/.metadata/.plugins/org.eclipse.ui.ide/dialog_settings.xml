@@ -6,6 +6,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="D:\GitHub\NamCatJava\E-clipse\Project của thầy"/>
 			<item value="D:\GitHub\NamCatJava\E-clipse"/>
 			<item value="D:\GitHub\NamCatJava\E-clipse\NamCat_LamViecVoiMang_100524"/>
 			<item value="D:\GitHub\J042401CB\J042401CB\HocVien\cathn\Eclipse Projects\NamCat_BaiTapVoiMangJava"/>

@@ -20,6 +20,8 @@ public class NamCat_BaiTapVoiMang_Part1 {
 	//Declare an object to enter information from the keyboard
 	Scanner sc = new Scanner(System.in);
 	
+	/*
+	
 	//Declare number of elements in the array
 	int n = 0;
 	System.out.print("Nhập mảng gồm n phần tử với n = ");
@@ -41,8 +43,6 @@ public class NamCat_BaiTapVoiMang_Part1 {
 	    System.out.printf("%.1f \t", arr[i]);
 	}
 	System.out.println("");
-	
-	/*
 	
 	//Bài tập 1: Nhập vào dãy n số thực. Tính tổng dãy, trung bình dãy, tổng các số âm, dương và tổng các số ở vị trí chẵn, vị trí lẻ trong dãy.
 	
@@ -171,13 +171,168 @@ public class NamCat_BaiTapVoiMang_Part1 {
 	    System.out.printf("%.1f \t", arr[i]);
 	}
 
-	*/
-
 	//Bài tập 5: Hãy nhập vào 16 số nguyên. In ra thành 4 dòng, 4 cột.
+	//Declara number of elements in the array
+	int r = 0, c = 0;
+	System.out.print("Nhập số dòng của mảng = ");//Rows
+	r = sc.nextInt();
+	System.out.print("Nhập số cột của mảng = ");//Colums
+	c = sc.nextInt();
 	
-
+	//Declare array
+	int arr[][] = new int[r][c];
 	
+	//Enter the value for elements in the array
+	System.out.println("Nhập giá trị cho các phần tử của mảng: ");
+	for(int i = 0; i < r; i++)
+	{
+	    for(int j = 0; j < c; j++)
+	    {
+		System.out.printf("arr[%d][%d] = ", i,j);
+		arr[i][j] = sc.nextInt();
+	    }
+	}
+	System.out.println("");
 	
+	//Print results
+	System.out.printf("Các phần tử của mảng %dx%d là: \n", r, c);
+	for(int i = 0; i < r; i++)
+	{
+	    for(int j = 0; j < c; j++)
+	    {
+		System.out.printf("arr[%d][%d] = %d\t", i , j, arr[i][j]);
+	    }
+	    System.out.println("");
+	}
 	
+	//Bài tập 6: Cho một chuỗi ký tự như sau: “Cong ty Stanford – Dao tao va phat trien cong nghe”. Hãy chuyển chuỗi này thành một mảng, trong đó mỗi phần tử là một từ. Ví dụ a[0] = Cong, a[1] = ty, a[2] = Stanford,…Sau đó in kết quả ra màn hình.
+	
+	//Declare String
+	String strData = "Cong ty Stanford – Dao tao va phat trien cong nghe";
+	
+	//Convert String to Array
+	String arr[] = strData.split(" ");
+	
+	//Print results
+	System.out.println("Các từ lấy được từ chuỗi đã chia là: ");
+	for(String gt: arr)
+	{
+	    System.out.println(gt);		    
+	}
+	
+	//Bài tập 8: Nhập ma trận 4x4, báo ra: Số các phần tử lớn hơn 0, liệt kê các phần tử lớn hơn 0 đó, tính tổng của chúng.- Số các phần tử nhỏ hơn 0, liệt kê các phần tử nhỏ hơn 0 đó, tính tổng của chúng.
+	//Declare number of elements in the array
+	int r = 0, c = 0;
+	System.out.print("Nhập số dòng của mảng = ");
+	r = sc.nextInt();
+	System.out.print("Nhập số cột của mảng = ");
+	c = sc.nextInt();
+	
+	//Declare array
+	int arr[][] = new int[r][c];
+	
+	//Enter the value for elements in the array
+	System.out.println("Nhập giá trị cho các phần tử của mảng: ");
+	for(int i = 0; i < r; i++)
+	{
+	    for(int j = 0; j < c; j++)
+	    {
+		System.out.printf("arr[%d][%d] = ",i,j);
+		arr[i][j] = sc.nextInt();
+	    }
+	}
+	
+	//Print array
+	System.out.printf("Các giá trị của mảng %dx%d là: \n",r,c);
+	for(int i = 0; i < r; i++)
+	{
+	    for(int j = 0; j < c; j++)
+	    {
+		System.out.printf("arr[%d][%d] = %d\t",i,j,arr[i][j]);
+	    }
+	    System.out.println("");
+	}	
+	
+	//Computational processing
+	int duong = 0, am = 0, tongDuong = 0, tongAm = 0;
+	int arrDuong[] = new int[16];
+	int arrAm[] = new int[16];
+	
+	//Use loop to find positive and negative elements
+	for(int i = 0; i < r; i++)
+	{
+	    for(int j = 0; j < c; j++)
+	    {
+		if(arr[i][j] >= 0)
+		{
+		    arrDuong[duong] = arr[i][j];
+		    duong++;
+		}
+		else
+		{
+		    arrAm[am] = arr[i][j];
+		    am++;		    
+		}
+	    }
+	}	
+	
+	//Print results
+	System.out.println("Các phần tử dương là: ");
+	for(int i = 0; i < duong; i++)
+	{
+	    System.out.printf("arr[%d] = %d\t", i, arrDuong[i]);
+	    tongDuong += arrDuong[i];
+	}
+	System.out.println("");
+	
+	System.out.println("Các phần tử âm là: ");
+	for(int i = 0; i < am; i++)
+	{
+	    System.out.printf("arr[%d] = %d\t", i, arrAm[i]);
+	    tongAm += arrAm[i];
+	}	
+	System.out.println("");
+	
+	System.out.printf("Tổng giá trị của các phần tử dương = %d\n", tongDuong);
+	System.out.printf("Tổng giá trị của các phần tử âm = %d\n", tongAm);
+	
+	*/
+	
+	//Bài tập 11:  Hãy nhập một xâu kí tự. In ra màn hình đảo ngược của xâu đó.
+	//Declare String
+	String strData = "";
+	System.out.print("Nhập vào 1 chuỗi: ");
+	strData = sc.nextLine();
+	
+	//Convert String to Char[] and reverse the Char[]
+	char arr[] = strData.toCharArray();
+	System.out.print("Chuỗi đảo ngược là: ");
+	for(int i = arr.length-1; i >= 0; i--)
+	{
+	    System.out.print(arr[i]);
+	}
+	System.out.println("");
+	
+	//Bài tập 13: Nhập xâu. In ra tất các các vị trí của chữ ‘a’ trong xâu và tổng số lần xuất hiện của nó.
+	//Declare variables
+	char a;
+	System.out.print("Nhập kí tự cần tìm trong xâu: ");
+	a = sc.next().charAt(0);
+	int soLan = 0;
+	
+	//Use for to find number of occurrences
+	System.out.printf("Vị trí của kí tự %s trong xâu là: \n",a);
+	for(int i = 0; i < arr.length; i++)
+	{
+	    if(arr[i] == 'a')
+	    {
+		soLan++;
+		System.out.print(i + "\t");
+	    }
+	}
+	System.out.println("");
+	
+	//Print results
+	System.out.printf("Số lần xuất hiện của kí tự %s trong xâu là: %d\n", a,soLan);
     } 
 }

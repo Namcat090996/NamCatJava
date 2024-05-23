@@ -219,8 +219,6 @@ public class NamCat_BaiTapVoiMang_Part1 {
 	{
 	    System.out.println(gt);		    
 	}
-
-	*/
 	
 	//Bài tập 8: Nhập ma trận 4x4, báo ra: Số các phần tử lớn hơn 0, liệt kê các phần tử lớn hơn 0 đó, tính tổng của chúng.- Số các phần tử nhỏ hơn 0, liệt kê các phần tử nhỏ hơn 0 đó, tính tổng của chúng.
 	
@@ -298,14 +296,136 @@ public class NamCat_BaiTapVoiMang_Part1 {
 	
 	System.out.printf("Tổng các số dương là = %.2f\n", tongSoDuong);
 	System.out.printf("Tổng các số âm là = %.2f\n", tongSoAm);
+	
+	*/
+	
+	//Bài tập 11: Hãy nhập một xâu kí tự. In ra màn hình đảo ngược của xâu đó.
+	//Declare variables
+	String strData = "", strDaoNguoc = "";
+	System.out.print("Nhập xâu: ");
+	strData = sc.nextLine();
+	
+	//Convert String to Array
+	char arr[] = strData.toCharArray();
+	
+	/*
+	
+	//Reverse the charater array
+	System.out.print("Đảo ngược của xâu là: ");
+	for(int i = arr.length-1; i >= 0; i--)
+	{
+	    System.out.print(arr[i]);
+	}
 	System.out.println("");
 	
-
-
+	//Bài tập 12: Nhập xâu. Thống kê số các chữ số ‘0’, số chữ số ‘1’, …, số chữ số ‘9’ trong xâu.
+	//Declare Array
+	int tk[] = new int[]{0,0,0,0,0,0,0,0,0,0};
+	for(int i = 0; i < arr.length; i++)
+	{
+	    if(arr[i] == '0')
+	    {
+		tk[0]++;
+	    }
+	    if(arr[i] == '1')
+	    {
+		tk[1]++;
+	    }
+	    if(arr[i] == '2')
+	    {
+		tk[2]++;
+	    }
+	    if(arr[i] == '3')
+	    {
+		tk[3]++;
+	    }
+	    if(arr[i] == '4')
+	    {
+		tk[4]++;
+	    }
+	    if(arr[i] == '5')
+	    {
+		tk[5]++;
+	    }
+	    if(arr[i] == '6')
+	    {
+		tk[6]++;
+	    }
+	    if(arr[i] == '7')
+	    {
+		tk[7]++;
+	    }
+	    if(arr[i] == '8')
+	    {
+		tk[8]++;
+	    }
+	    if(arr[i] == '9')
+	    {
+		tk[9]++;
+	    }	    
+	}
 	
+	System.out.println("Kết quả thống kê: ");
+	for(int i = 0; i < tk.length; i++)
+	{
+	    System.out.printf("Số các chữ số %d = %d\n", i, tk[i]);
+	}
 	
+	//Bài tập 13: Nhập xâu. In ra tất các các vị trí của chữ ‘a’ trong xâu và tổng số lần xuất hiện của nó.
+	//Declare variables
+	char kiTu; int soLan = 0;
+	System.out.print("Nhập kí tự cần tìm trong xâu: ");
+	kiTu = sc.next().charAt(0);
+	
+	//Print results
+	System.out.printf("Vị trí xuất hiện của kí tự %s trong xâu là: \n", kiTu);
+	for(int i = 0; i < arr.length; i++)
+	{
+	    if(arr[i] == kiTu)
+	    {
+		soLan++;
+		System.out.print((i+1) + "\t");
+	    }
+	}
+	System.out.println("");
+		
+	System.out.printf("Số lần xuất hiện của kí tự %s trong xâu là = %d\n", kiTu, soLan);
+	
+	//Bài tập 14: Thay kí tự x trong xâu s bởi kí tự y (s, x, y được đọc vào từ bàn phím).
+	//Declare variables
+	char kiTuDuocThay, kiTuThayThe;
+	System.out.print("Nhập kí tự được thay: ");
+	kiTuDuocThay = sc.next().charAt(0);
+	System.out.print("Nhập kí tự thay thế: ");
+	kiTuThayThe = sc.next().charAt(0);
+	
+	//Replace charater
+	System.out.println("Chuỗi sau khi thay là: " + strData.replace(kiTuDuocThay, kiTuThayThe));
+	
+	//Bài tập 15: Bài tập 15: Cho một chuỗi có tên như sau: “Cong ty Stanford – Dao tao va phat trien cong nghe” - ✓ Hãy lấy chữ Stanford từ chuỗi trên. - ✓ Hiển thị vị trí đầu tiên của chữ “t”. - ✓ Hiển thị vị trí cuối cùng của chữ “t”
 
-
-
+	String strData1 = "Cong ty Stanford – Dao tao va phat trien cong nghe";
+	int tdau = 0, tcuoi = 0;
+	
+	//Hãy lấy chữ Stanford từ chuỗi trên.
+	System.out.println(strData1.substring(8, 16));
+	String arr2[] = strData1.split(" ");
+	for(int i = 0; i < arr2.length; i++)
+	{
+	    if(arr2[i].equals("Stanford"))
+	    {
+		System.out.println(arr2[i]);
+	    }
+	}
+	
+	//Hiển thị vị trí đầu tiên và cuối cùng của chữ “t”.
+	tdau = strData1.indexOf('t');
+	tcuoi = strData1.lastIndexOf('t');
+	
+	//Print results
+	System.out.printf("Vị trí đầu và cuối của 't' là: %d, %d\n", tdau, tcuoi);
+	
+	*/
+	
     } 
 }

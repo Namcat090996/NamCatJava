@@ -137,20 +137,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	}
 	
 	//Bài 6: Cho mảng 1 chiều các số thực, hãy tìm giá trị âm cuối cùng lớn hơn giá trị -1. Nếu mảng không có giá trị thỏa điều kiện trên thì trả về -1.
-	double giaTri = -1;
-	
-	for(int i = 0; i < arr.length-1; i++)
-	{
-	    for(int j = i+1; j < arr.length; j++)
-	    {
-		if(arr[i] > arr[j])
-		{
-		    temp = arr[i];
-		    arr[i] = arr[j];
-		    arr[j] = temp;
-		}		
-	    }
-	}	
+	double giaTri = -1;	
 	
 	for(int i = 0; i < arr.length; i++)
 	{
@@ -251,32 +238,158 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	for(int i = 0; i < arr.length; i++)
 	{
-	    for(int j = 1; j >= 1; j++)
+	    for(int j = 1; j <= arr[i]; j++)
 	    {
 		if(arr[i] == j*j)
 		{
 		    soChinhPhuong = arr[i];
-		    System.out.println(soChinhPhuong);
 		    break;
 		}
 	    }
-	    if(soChinhPhuong > 0)
+	}
+	
+	if(soChinhPhuong > 0)
+	{
+	    System.out.println("Số chính phương đầu tiên trong mảng là = " + soChinhPhuong);
+	}
+	else
+	{
+	    System.out.println("Không có giá trị nào thỏa mãn điều kiện");
+	}	
+	
+	//Bài 10: Cho mảng 1 chiều các số nguyên. Hãy tìm giá trị đầu tiên thỏa mãn tính chất số gánh.
+	int dn = 0, dv = 0, temp = 0;
+	for(int i = 0; i < arr.length-1; i++)
+	{
+	    dn = 0; dv = 0; temp = arr[i];
+	    while(temp != 0)
+	    {
+		dv = temp%10;
+		dn = dn*10 + dv;
+		temp = temp/10;
+	    }
+	    if(dn == arr[i+1])
+	    {
+		System.out.printf("Giá trị đầu tiên trong mảng thỏa mãn tính chất số gánh là arr[%d] = %d\n", i, arr[i]);
+		break;
+	    }
+	    
+	}
+	
+	if(dn != arr[arr.length-1])
+	{
+	    System.out.println("Không có giá trị nào trong mảng thỏa mãn điều kiện");
+	}
+	
+	//Bài 11: Cho mảng 1 chiều các số nguyên. Hãy tìm giá trị đầu tiên có chữ số đầu tiên là chữ số lẻ.
+	
+	String strTemp = "", strChuSoDauTien = "";
+	
+	int chuSoDauTien = 0;
+	
+	for (int i = 0; i < arr.length; i++) {
+	    strTemp = "" + arr[i];
+	    if (strTemp.startsWith("-")) {
+		strChuSoDauTien = strTemp.substring(1, 2);
+		chuSoDauTien = Integer.parseInt(strChuSoDauTien);
+		if (chuSoDauTien % 2 != 0) {
+		    giaTri = arr[i];
+		    break;
+
+		}
+	    }
+	    else
+	    {
+		strChuSoDauTien = strTemp.substring(0, 1);
+		chuSoDauTien = Integer.parseInt(strChuSoDauTien);
+		if(chuSoDauTien % 2 != 0)
+		{
+		    giaTri = arr[i];
+		    break;		    
+		}
+	    }
+	}
+	
+	if(giaTri != -1)
+	{
+	    System.out.printf("Giá trị đầu tiên trong mảng có chữ số đầu tiên là số lẻ là = %d\n", giaTri);
+	}
+	else
+	{
+	    System.out.println("Không có giá trị nào trong mảng thỏa mãn");
+	}
+	
+	//Bài 12: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm giá trị đầu tiên trong mảng có dạng 2^k. Nếu mảng không có giá trị dạng 2k thì hàm sẽ trả về 0.
+	
+	int soMu = 0;
+	for(int i = 0; i < arr.length; i++)
+	{
+	    for(int j = 0; j < arr[i]; j++)
+	    {
+		if(arr[i] == Math.pow(2, j))
+		{
+		    giaTri = arr[i];
+		    soMu = j;
+		    break;
+		}
+	    }
+	    if(giaTri != -1)
 	    {
 		break;
 	    }
 	}
 	
-	*/
-	int t = 5124, dv = 0, dn = 0;
-	
-	while (t != 0) {
-	    dv = t % 10;
-	    dn = dn * 10 + dv;
-	    t = t / 10;
+	if(giaTri != -1)
+	{
+	    System.out.println("Giá trị đầu tiên trong mảng có dạng 2^k là = " + giaTri);
+	}
+	else
+	{
+	    System.out.println("Không có giá trị nào trong mảng thỏa mãn điều kiện");
 	}
 	
-	System.out.printf("%d,%d",dn,t);
+	//Bài 13: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm giá trị lớn nhất trong mảng có dạng 5^k. Nếu mảng khong tồn tại giá trị 5^k thì hàm sẽ trả về 0
 	
+	int temp = 0;
+	
+	for(int i = 0; i < arr.length-1; i++)
+	{
+	    for(int j = i+1; j < arr.length; j++)
+	    {
+		if(arr[i] > arr[j])
+		{
+		    temp = arr[i];
+		    arr[i] = arr[j];
+		    arr[j] = temp;
+		}
+	    }     
+	}
+	
+	for(int i = 0; i < arr.length; i++)
+	{
+	    for(int j = 0; j < arr[i]; j++)
+	    {
+		if(arr[i] == Math.pow(5, j))
+		{
+		    giaTri = arr[i];
+		}
+	    }
+	}
+	
+	if(giaTri != -1)
+	{
+	    System.out.println("Giá trị lớn nhất trong mảng có dạng 5^k là = " + giaTri);
+	}
+	else
+	{
+	    System.out.println("Không có giá trị thỏa mãn");
+	}
+	
+	*/
+	
+	double a = Math.log(25);
+	
+	System.out.println("" + a);
 	
 	
     }

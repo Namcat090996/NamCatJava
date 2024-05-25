@@ -385,12 +385,73 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    System.out.println("Không có giá trị thỏa mãn");
 	}
 	
+	//Bài 14: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm số chẵn nhỏ nhất lớn hơn mọi giá trị có trong mảng.
+	int giaTriLonNhat = 0;
+	
+	giaTriLonNhat = arr[0];
+	
+	for(int i = 1; i < arr.length; i++)
+	{
+	    if(arr[i] > giaTriLonNhat)
+	    {
+		giaTriLonNhat = arr[i];
+	    }
+	}
+	
+	if(giaTriLonNhat%2 != 0)
+	{
+	    giaTriLonNhat++;
+	}
+	else
+	{
+	    giaTriLonNhat += 2;
+	}
+	
+	System.out.println("Số chẵn nhỏ nhất lớn hơn mọi giá trị có trong mảng là = " + giaTriLonNhat);
+	
 	*/
 	
-	double a = Math.log(25);
+	//Bài tập 15: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm số nguyên tố nhỏ nhất lớn hơn mọi giá trị có trong mảng.
 	
-	System.out.println("" + a);
+	int soNguyenToLonNhat = 0, giaTriCanTim = 0, count = 0;
 	
+	soNguyenToLonNhat = arr[0];
+	
+	for(int i = 0; i < arr.length; i++)
+	{
+	    if(arr[i] > soNguyenToLonNhat)
+	    {
+		soNguyenToLonNhat = arr[i];
+	    }
+	}
+	
+	do
+	{
+	    soNguyenToLonNhat++;
+	    for(int i = 1; i <= soNguyenToLonNhat; i++)
+	    {
+		if(soNguyenToLonNhat%i == 0)
+		{
+		    count++;
+		    if(count > 2)
+		    {
+			break;
+		    }
+		}
+	    }
+	    if(soNguyenToLonNhat > 1 && count == 2)
+	    {
+		giaTriCanTim = soNguyenToLonNhat;
+		break;
+	    }
+	    count = 0;	    
+	}
+	while(soNguyenToLonNhat < 0 || soNguyenToLonNhat >= 0);
+
+	
+	System.out.println("Số nguyên tố nhỏ nhất lớn hơn mọi giá trị có trong mảng là = " + giaTriCanTim);
+	
+
 	
     }
 }

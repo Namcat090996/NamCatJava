@@ -409,8 +409,6 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	System.out.println("Số chẵn nhỏ nhất lớn hơn mọi giá trị có trong mảng là = " + giaTriLonNhat);
 	
-	*/
-	
 	//Bài tập 15: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm số nguyên tố nhỏ nhất lớn hơn mọi giá trị có trong mảng.
 	
 	int soNguyenToLonNhat = 0, giaTriCanTim = 0, count = 0;
@@ -451,7 +449,42 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	System.out.println("Số nguyên tố nhỏ nhất lớn hơn mọi giá trị có trong mảng là = " + giaTriCanTim);
 	
+	*/
+	
+	//Bài tập 16: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm ước chung lớn nhất của tất cả các phần tử trong mảng.
+	
+	int uocChungLonNhat = 0, n = 0, k = 0, v = 0;
+	
+	int temp[] = new int[arr.length];
+	
+	for(int i = arr[arr.length-1]; i >= 1; i--)
+	{
+	    for(int j = 0; j < arr.length; j++)
+	    {
+		temp[n] = arr[j]%i;
+		k += temp[n];
+		n++;
+	    }
+	    if(k == 0)
+	    {
+		uocChungLonNhat = i;
+		break;
+	    } 
+	    else
+	    {
+		n = 0;
+		k = 0;
+	    }
+	}
+	
+	System.out.println("Ước chung lớn nhất là = " + uocChungLonNhat);
 
 	
+
+	
+
+    
+    
+    
     }
 }

@@ -33,7 +33,6 @@ public class AppKT_240524_CatHN {
 	strb = sc.next();
 	
 	//So sánh độ dài 2 chuỗi để làm cho cân bằng
-	
 	if(stra.length() > strb.length())
 	{
 	    chenhLech = stra.length() - strb.length();
@@ -56,13 +55,13 @@ public class AppKT_240524_CatHN {
 	//Khai báo mảng
 	String arra[] = stra.split("");
 	String arrb[] = strb.split("");
-	String ketQuaCuoi[] = new String[stra.length()];
+	int ketQuaCuoi[] = new int[stra.length()];
 	
 	int ketQua[] = new int[stra.length()+1];
 	int soa[] = new int[arra.length];
 	int sob[] = new int[arrb.length];
 	
-	//Chuyển mảng về dạng Double
+	//Chuyển mảng String về dạng Double
 	for(int i = arra.length-1; i >= 0; i--)
 	{
 	    soa[i] = Integer.parseInt(arra[i]);
@@ -77,19 +76,36 @@ public class AppKT_240524_CatHN {
 	{
 	    ketQua[x] = soNho;
 	}
-	
-	for(String giaTri: ketQuaCuoi)
-	{
-	    giaTri = 
-	}
-	    
 	System.out.print("Tổng của 2 chuỗi là = ");
 	
-	for(int i = ketQua.length-1; i >= 0; i--)
+	if(ketQua[ketQua.length-1] == 0)
 	{
-	    System.out.print(ketQua[i]);
+	    for(int i = 0; i < stra.length(); i++)
+	    {
+		ketQuaCuoi[i] = ketQua[i];
+	    }
+	
+	    for(int i = ketQuaCuoi.length-1; i >= 0; i--)
+	    {
+		System.out.print(ketQuaCuoi[i]);
+	    }
+	    
+	    System.out.println("");	    
 	}
-	System.out.println("");
+	else
+	{
+	    for(int i = ketQua.length-1; i >= 0; i--)
+	    {
+	    System.out.print(ketQua[i]);
+	    }
+	    
+	    System.out.println("");	    
+	}
+	    
+
+
+	
+
 	
     }
     

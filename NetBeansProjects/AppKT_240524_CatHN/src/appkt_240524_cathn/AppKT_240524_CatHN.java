@@ -22,7 +22,7 @@ public class AppKT_240524_CatHN {
 	Scanner sc = new Scanner(System.in);
 	
 	//Khai báo biến
-	int tongSo = 0, soNho = 0;
+	int tongSo = 0, soNho = 0, chenhLech = 0, n = 0;
 	int x = 0;
 	
 	//Khai báo chuỗi
@@ -31,31 +31,58 @@ public class AppKT_240524_CatHN {
 	stra = sc.next();
 	System.out.print("Nhập chuỗi b = ");
 	strb = sc.next();
+	
+	//So sánh độ dài 2 chuỗi để làm cho cân bằng
+	
+	if(stra.length() > strb.length())
+	{
+	    chenhLech = stra.length() - strb.length();
+	    for(int i = 1; i <= chenhLech; i++)
+	    {
+		strb = "0" + strb;
+	    }	    
+	}
+	
+	if(strb.length() > stra.length())
+	{
+	    int ketQua[] = new int[strb.length()+1];
+	    chenhLech = strb.length() - stra.length();
+	    for(int i = 1; i <= chenhLech; i++)
+	    {
+		stra = "0" + stra;
+	    }	    
+	}	
 
 	//Khai báo mảng
 	String arra[] = stra.split("");
 	String arrb[] = strb.split("");
+	String ketQuaCuoi[] = new String[stra.length()];
 	
-	int ketQua[] = new int[arra.length];
+	int ketQua[] = new int[stra.length()+1];
 	int soa[] = new int[arra.length];
 	int sob[] = new int[arrb.length];
 	
 	//Chuyển mảng về dạng Double
 	for(int i = arra.length-1; i >= 0; i--)
 	{
-	    int j = arrb.length-1;
-	    if(j >= 0)
-	    {
-	    sob[j] = Integer.parseInt(arrb[j]);		
-	    }
 	    soa[i] = Integer.parseInt(arra[i]);
-	    tongSo = soa[i] + sob[j] + soNho;
+	    sob[i] = Integer.parseInt(arrb[i]);
+	    tongSo = soa[i] + sob[i] + soNho;
 	    soNho = tongSo/10;
 	    ketQua[x] = (tongSo%10);
-	    x++;
-	    j--;
+	    x++;	    
 	}
 	
+	if(soNho != 0)
+	{
+	    ketQua[x] = soNho;
+	}
+	
+	for(String giaTri: ketQuaCuoi)
+	{
+	    giaTri = 
+	}
+	    
 	System.out.print("Tổng của 2 chuỗi là = ");
 	
 	for(int i = ketQua.length-1; i >= 0; i--)
@@ -63,9 +90,6 @@ public class AppKT_240524_CatHN {
 	    System.out.print(ketQua[i]);
 	}
 	System.out.println("");
-	
-	
-	
 	
     }
     

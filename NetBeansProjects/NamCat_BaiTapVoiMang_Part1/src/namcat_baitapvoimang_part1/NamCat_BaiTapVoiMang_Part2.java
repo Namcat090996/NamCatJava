@@ -472,46 +472,164 @@ public class NamCat_BaiTapVoiMang_Part2 {
 
 	//Print results
 	System.out.println("Số nguyên tố nhỏ nhất lớn hơn mọi giá trị có trong mảng là = " + giaTriCanTim);
-	
-	*/
 		
 	//Bài tập 16: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm ước chung lớn nhất của tất cả các phần tử trong mảng.
 	
 	//Declare variables
-	int uocChungLonNhat = 0, temp = 0;
+	int uocChungLonNhat = 0, temp = 0, soNho = 0;
 	
-	//Use loop for computing
+	//Use loop for sorting the array in ascending order
 	for(int i = 0; i < arr.length-1; i++)
 	{
-	    for(int j = i+1; i < arr.length; j++)
+	    for(int j = i+1; j < arr.length; j++)
 	    {
-		
+		if(arr[i] > arr[j])
+		{
+		    temp = arr[i];
+		    arr[i] = arr[j];
+		    arr[j] = temp;
+		}
 	    }
 	}
-	for(int i = ; i >= 1; i--)
+	
+	//Use loop for computing greatest common divisor
+	for(int i = arr[0]; i >= 1; i--)
 	{
 	    for(int j = 0; j < arr.length; j++)
 	    {
-		temp += arr[j]%i;
+		soNho += arr[j]%i;
 	    }
-	    if(temp == 0)
+	    if(soNho == 0)
 	    {
 		uocChungLonNhat = i;
 		break;
 	    } 
 	    else
 	    {
-		temp = 0;
+		soNho = 0;
 	    }
 	}
 	
 	//Print results
-	System.out.println("Ước chung lớn nhất là = " + uocChungLonNhat);
+	System.out.println("Ước chung lớn nhất của dãy là = " + uocChungLonNhat);
 
+	//Bài tập 17: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm bội chung nhỏ nhất của tất cả các phần tử trong mảng.
 	
-
+	//Declare variables
+	int boiChungNhoNhat = 0, max = 0, soNho = 0, temp = 0;
+	
+	//Default
+	max = arr[0];
+	
+	//Use loop for sorting the array in descending order
+	for(int i = 0; i < arr.length-1; i++)
+	{
+	    for(int j = i+1; j < arr.length; j++)
+	    {
+		if(arr[i] < arr[j])
+		{
+		    temp = arr[i];
+		    arr[i] = arr[j];
+		    arr[j] = temp;
+		}
+	    }
+	}
+	
+	//Use loop for computing the least common multiple
+	
+	for (int i = 1; i >= 1; i++) {
+	    for (int j = 1; j < arr.length; j++) {
+		soNho += (arr[0] * i) % arr[j];
+	    }
+	    if (soNho == 0) {
+		boiChungNhoNhat = arr[0]*i;
+		break;
+	    } else {
+		soNho = 0;
+	    }
+	}
+	
+	//Print results
+	System.out.println("Bội chung nhỏ nhất của dãy là = " + boiChungNhoNhat);
+	
+	*/
     
-    
-    
+	//Bài 18: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm chữ số xuất hiện ít nhất trong mảng.
+	
+	//Declare variables
+	String strNhap = "";
+	
+	//Declare array
+	int ketQua[] = new int[10];
+	
+	//Convert Integer[] to String
+	for(int i = 0; i < arr.length; i++)
+	{
+	    strNhap += "" + arr[i];
+	}
+	
+	//Convert String to Char[]
+	char chuoiNhap[] = strNhap.toCharArray();
+	
+	//Use for to count the characters
+	for(int i = 0; i < chuoiNhap.length; i++)
+	{
+	    if(chuoiNhap[i] == '0')
+	    {
+		ketQua[0]++;
+	    }
+	    if(chuoiNhap[i] == '1')
+	    {
+		ketQua[1]++;
+	    }
+	    if(chuoiNhap[i] == '2')
+	    {
+		ketQua[2]++;
+	    }
+	    if(chuoiNhap[i] == '3')
+	    {
+		ketQua[3]++;
+	    }
+	    if(chuoiNhap[i] == '4')
+	    {
+		ketQua[4]++;
+	    }
+	    if(chuoiNhap[i] == '5')
+	    {
+		ketQua[5]++;
+	    }
+	    if(chuoiNhap[i] == '6')
+	    {
+		ketQua[6]++;
+	    }
+	    if(chuoiNhap[i] == '7')
+	    {
+		ketQua[7]++;
+	    }
+	    if(chuoiNhap[i] == '8')
+	    {
+		ketQua[8]++;
+	    }
+	    if(chuoiNhap[i] == '9')
+	    {
+		ketQua[9]++;
+	    }	    
+	}
+	
+	//Set default value
+	int min = ketQua[0];
+	
+	//Use for to find the lowest value
+	for(int i = 1; i < ketQua.length; i++)
+	{
+	    if(ketQua[i] < min && ketQua[i] != 0)
+	    {
+		min = i;
+	    }
+	}
+	
+	//Print results
+	System.out.println("Chữ số xuất hiện ít nhất trong mảng là: " + min);
+	
     }
 }

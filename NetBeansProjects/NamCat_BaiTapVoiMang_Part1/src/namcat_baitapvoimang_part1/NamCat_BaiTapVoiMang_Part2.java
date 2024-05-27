@@ -204,6 +204,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    }
 	}
 	
+	//Prin results
 	if(giaTri != 1)
 	{
 	    System.out.printf("Giá trị đầu tiên nằm trong khoảng [%d,%d] là = %d\n", x, y, giaTri);
@@ -215,6 +216,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	//Bài 8: Cho mảng 1 chiều các số thực. Hãy viết hàm tìm một vị trí trong mảng thỏa 2 điều kiện: có 2 giá trị lân cận và giá trị tại đó bằng tích 2 giá trị lân cận. Nếu mảng không tồn tại giá trị như vậy thì trả về giá trị -1
 	
+	//Use loop for computing 
 	for(int i = 1; i < arr.length-1; i++)
 	{
 	    if(arr[i] == (arr[i-1]*arr[i+1]))
@@ -225,7 +227,8 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    }
 	}
 	
-	if(giaTri != 1)
+	//Print result
+	if(giaTri != -1)
 	{
 	    System.out.printf("Vị trí trong mảng có tích bằng 2 giá trị lân cận (%d*%d) là = %d\n", x, y, giaTri);
 	}
@@ -234,8 +237,11 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    System.out.println("Không có giá trị nào thỏa mãn điều kiện");
 	}
 	
+	/*
+	
 	//Bài 9: Tìm số chính phương đầu tiên trong mảng 1 chiều các số nguyên.
 	
+	//Use loop for computing
 	for(int i = 0; i < arr.length; i++)
 	{
 	    for(int j = 1; j <= arr[i]; j++)
@@ -248,6 +254,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    }
 	}
 	
+	//Print results
 	if(soChinhPhuong > 0)
 	{
 	    System.out.println("Số chính phương đầu tiên trong mảng là = " + soChinhPhuong);
@@ -258,7 +265,10 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	}	
 	
 	//Bài 10: Cho mảng 1 chiều các số nguyên. Hãy tìm giá trị đầu tiên thỏa mãn tính chất số gánh.
+	//Declare variables needed to find
 	int dn = 0, dv = 0, temp = 0;
+	
+	//Usee loop to reverse the value
 	for(int i = 0; i < arr.length-1; i++)
 	{
 	    dn = 0; dv = 0; temp = arr[i];
@@ -283,13 +293,14 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	//Bài 11: Cho mảng 1 chiều các số nguyên. Hãy tìm giá trị đầu tiên có chữ số đầu tiên là chữ số lẻ.
 	
+	//Declare varibles needed to find
 	String strTemp = "", strChuSoDauTien = "";
-	
 	int chuSoDauTien = 0;
 	
+	//Use loop for computing
 	for (int i = 0; i < arr.length; i++) {
-	    strTemp = "" + arr[i];
-	    if (strTemp.startsWith("-")) {
+	    strTemp = "" + arr[i];//Conver Interger to String
+	    if (strTemp.startsWith("-")) {//In case of negative values
 		strChuSoDauTien = strTemp.substring(1, 2);
 		chuSoDauTien = Integer.parseInt(strChuSoDauTien);
 		if (chuSoDauTien % 2 != 0) {
@@ -298,7 +309,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 
 		}
 	    }
-	    else
+	    else//In case of positive values
 	    {
 		strChuSoDauTien = strTemp.substring(0, 1);
 		chuSoDauTien = Integer.parseInt(strChuSoDauTien);
@@ -310,6 +321,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    }
 	}
 	
+	//Print results
 	if(giaTri != -1)
 	{
 	    System.out.printf("Giá trị đầu tiên trong mảng có chữ số đầu tiên là số lẻ là = %d\n", giaTri);
@@ -320,8 +332,10 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	}
 	
 	//Bài 12: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm giá trị đầu tiên trong mảng có dạng 2^k. Nếu mảng không có giá trị dạng 2k thì hàm sẽ trả về 0.
-	
+	//Declare varibles needed to find
 	int soMu = 0;
+	
+	//Use loop for computing
 	for(int i = 0; i < arr.length; i++)
 	{
 	    for(int j = 0; j < arr[i]; j++)
@@ -339,6 +353,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    }
 	}
 	
+	//Print results
 	if(giaTri != -1)
 	{
 	    System.out.println("Giá trị đầu tiên trong mảng có dạng 2^k là = " + giaTri);
@@ -350,9 +365,11 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	//Bài 13: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm giá trị lớn nhất trong mảng có dạng 5^k. Nếu mảng khong tồn tại giá trị 5^k thì hàm sẽ trả về 0
 	
+	//Declare varibles needed to find
 	int temp = 0;
 	
-	for(int i = 0; i < arr.length-1; i++)
+	//Use loop for computing
+	for(int i = 0; i < arr.length-1; i++)//Sort the array in ascending order
 	{
 	    for(int j = i+1; j < arr.length; j++)
 	    {
@@ -376,6 +393,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    }
 	}
 	
+	//Print results
 	if(giaTri != -1)
 	{
 	    System.out.println("Giá trị lớn nhất trong mảng có dạng 5^k là = " + giaTri);
@@ -388,8 +406,10 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	//Bài 14: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm số chẵn nhỏ nhất lớn hơn mọi giá trị có trong mảng.
 	int giaTriLonNhat = 0;
 	
+	//Declare varibles needed to find
 	giaTriLonNhat = arr[0];
 	
+	//Use loop for computing
 	for(int i = 1; i < arr.length; i++)
 	{
 	    if(arr[i] > giaTriLonNhat)
@@ -407,12 +427,15 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    giaTriLonNhat += 2;
 	}
 	
+	//Print results
 	System.out.println("Số chẵn nhỏ nhất lớn hơn mọi giá trị có trong mảng là = " + giaTriLonNhat);
 	
 	//Bài tập 15: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm số nguyên tố nhỏ nhất lớn hơn mọi giá trị có trong mảng.
 	
+	//Declare varibles needed to find
 	int soNguyenToLonNhat = 0, giaTriCanTim = 0, count = 0;
 	
+	//Set default value
 	soNguyenToLonNhat = arr[0];
 	
 	for(int i = 0; i < arr.length; i++)
@@ -423,6 +446,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    }
 	}
 	
+	//Use loop for computing
 	do
 	{
 	    soNguyenToLonNhat++;
@@ -446,40 +470,43 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	}
 	while(soNguyenToLonNhat < 0 || soNguyenToLonNhat >= 0);
 
-	
+	//Print results
 	System.out.println("Số nguyên tố nhỏ nhất lớn hơn mọi giá trị có trong mảng là = " + giaTriCanTim);
 	
 	*/
-	
+		
 	//Bài tập 16: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm ước chung lớn nhất của tất cả các phần tử trong mảng.
 	
-	int uocChungLonNhat = 0, n = 0, k = 0, v = 0;
+	//Declare variables
+	int uocChungLonNhat = 0, temp = 0;
 	
-	int temp[] = new int[arr.length];
-	
-	for(int i = arr[arr.length-1]; i >= 1; i--)
+	//Use loop for computing
+	for(int i = 0; i < arr.length-1; i++)
+	{
+	    for(int j = i+1; i < arr.length; j++)
+	    {
+		
+	    }
+	}
+	for(int i = ; i >= 1; i--)
 	{
 	    for(int j = 0; j < arr.length; j++)
 	    {
-		temp[n] = arr[j]%i;
-		k += temp[n];
-		n++;
+		temp += arr[j]%i;
 	    }
-	    if(k == 0)
+	    if(temp == 0)
 	    {
 		uocChungLonNhat = i;
 		break;
 	    } 
 	    else
 	    {
-		n = 0;
-		k = 0;
+		temp = 0;
 	    }
 	}
 	
+	//Print results
 	System.out.println("Ước chung lớn nhất là = " + uocChungLonNhat);
-
-	
 
 	
 

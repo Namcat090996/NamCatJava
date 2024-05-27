@@ -551,8 +551,6 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	//Print results
 	System.out.println("Bội chung nhỏ nhất của dãy là = " + boiChungNhoNhat);
-	
-	*/
     
 	//Bài 18: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm chữ số xuất hiện ít nhất trong mảng.
 	
@@ -561,6 +559,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	//Declare array
 	int ketQua[] = new int[10];
+	List<Integer> lstKetQua = new ArrayList<>();
 	
 	//Convert Integer[] to String
 	for(int i = 0; i < arr.length; i++)
@@ -617,19 +616,192 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	}
 	
 	//Set default value
-	int min = ketQua[0];
+	int min = 0;
 	
 	//Use for to find the lowest value
-	for(int i = 1; i < ketQua.length; i++)
+	for(int i = 0; i < ketQua.length; i++)
 	{
-	    if(ketQua[i] < min && ketQua[i] != 0)
+	    if(ketQua[i] != 0)
 	    {
-		min = i;
+		min = ketQua[i];
+		break;
 	    }
 	}
 	
+	for(int i = 0; i < ketQua.length; i++)
+	{
+	    if(ketQua[i] != 0)
+	    {
+		if(ketQua[i] < min)
+		{
+		    min = ketQua[i];
+		}
+	    }
+	}
+
+	for(int i = 0; i < ketQua.length; i++)
+	{
+	    if(ketQua[i] == min)
+	    {
+		lstKetQua.add(i);
+	    }
+	    
+	}
+	
 	//Print results
-	System.out.println("Chữ số xuất hiện ít nhất trong mảng là: " + min);
+	System.out.println("Các chữ số xuất hiện ít nhất trong dãy là = ");
+	for(int i = 0; i < lstKetQua.size(); i++)
+	{
+	    System.out.print(lstKetQua.get(i) + "\t");    
+	}
+	System.out.println("");
+	
+	System.out.printf("Với số lần xuất hiện là = %d (lần)\n", min);
+	
+	//Bài 19: Cho mảng số thực có nhiều hơn 2 giá trị và các giá trị trong mảng khác nhau từng đôi một. Hãy viết hàm liệt kê tất cả các cặp giá trị (a, b) trong mảng thỏa điều kiện a <= b.
+	
+	//Declare variables
+	int temp = 0;
+	
+	//Declare array list
+	List<Integer> lstChuoiMoi = new ArrayList<Integer>();	
+	
+	//Use loop for sorting the array in ascending order
+	for(int i = 0; i < arr.length-1; i++)
+	{
+	    for(int j = i+1; j < arr.length; j++)
+	    {
+		if(arr[i] > arr[j])
+		{
+		    temp = arr[i];
+		    arr[i] = arr[j];
+		    arr[j] = temp;
+		}
+	    }
+	}
+	
+	//Assign the value to the arrray list
+	for(int gt: arr)
+	{
+	    lstChuoiMoi.add(gt);
+	}	
+	
+	//Use loop to remove the equal values in the array
+	for(int i = 0; i < lstChuoiMoi.size()-1; i++)
+	{
+	    for(int j = i+1; j < lstChuoiMoi.size(); j++)
+	    {
+		if(lstChuoiMoi.get(i) == lstChuoiMoi.get(j))
+		{
+		    lstChuoiMoi.remove(j);
+		    j = i;
+		}
+	    }
+	}	
+	
+	//Declare array list
+	List<String> lstCapSo = new ArrayList<>();
+	
+	//Use loop to find pairs of values that satisfy the condition in the array
+	for(int i = 0; i < lstChuoiMoi.size()-1; i++)
+	{
+	    for(int j = i+1; j < lstChuoiMoi.size(); j++)
+	    {
+		if(lstChuoiMoi.get(i) != lstChuoiMoi.get(j))
+		{
+		    lstCapSo.add(lstChuoiMoi.get(i) + "," + lstChuoiMoi.get(j));
+		}
+	    }
+	}
+	System.out.println("Tất cả các cặp giá trị (a, b) trong mảng thỏa điều kiện a <= b là: ");
+	for(String gt: lstCapSo)
+	{
+	    System.out.print("" + gt + "\t");
+	}
+	System.out.println("");
+	
+	*/
+	
+	//Bài 20: Cho mảng số thực có nhiều hơn 2 giá trị và các giá trị trong mảng khác nhau từng đôi một. Hãy viết hàm tìm 2 giá trị gần nhau nhất trong mảng (Lưu ý: Mảng có các giá trị khác nhau từng đôi một còn có tên là mảng phân biệt).
+
+	//Declare variables
+	int temp = 0;
+	
+	//Declare array list
+	List<Integer> lstChuoiMoi = new ArrayList<Integer>();	
+	
+	//Use loop for sorting the array in ascending order
+	for(int i = 0; i < arr.length-1; i++)
+	{
+	    for(int j = i+1; j < arr.length; j++)
+	    {
+		if(arr[i] > arr[j])
+		{
+		    temp = arr[i];
+		    arr[i] = arr[j];
+		    arr[j] = temp;
+		}
+	    }
+	}
+	
+	//Assign the value to the arrray list
+	for(int gt: arr)
+	{
+	    lstChuoiMoi.add(gt);
+	}	
+	
+	//Use loop to remove the equal values in the array
+	for(int i = 0; i < lstChuoiMoi.size()-1; i++)
+	{
+	    for(int j = i+1; j < lstChuoiMoi.size(); j++)
+	    {
+		if(lstChuoiMoi.get(i) == lstChuoiMoi.get(j))
+		{
+		    lstChuoiMoi.remove(j);
+		    j = i;
+		}
+	    }
+	}	
+	
+	//Declare array list
+	List<Integer> lstCapSo = new ArrayList<Integer>();
+	List<String> lstCapSo2 = new ArrayList<String>();
+	
+	//Use loop to find pairs of numbers that satisfy the condition in the array
+	for(int i = 0; i < lstChuoiMoi.size()-1; i++)
+	{
+	    for(int j = i+1; j < lstChuoiMoi.size(); j++)
+	    {
+		lstCapSo.add(lstChuoiMoi.get(j) - lstChuoiMoi.get(i));
+		lstCapSo2.add(lstChuoiMoi.get(i) + "," + lstChuoiMoi.get(j));
+	    }
+	}
+	
+	//Set default value
+	int min = lstCapSo.get(0);
+
+	//Use loop to find the lowest values
+	for(int i = 0; i < lstCapSo.size(); i++)
+	{
+	    if(lstCapSo.get(0) < min)
+	    {
+		min = lstCapSo.get(i);
+	    }
+	}
+	
+	//Use loop to find pair of values that satisfy the condition in the array
+	System.out.println("Các cặp giá trị gần nhau nhất trong mảng là: ");
+	for(int i = 0; i < lstCapSo.size(); i++)
+	{
+	    if(lstCapSo.get(i) == min)
+	    {
+		System.out.print(lstCapSo2.get(i) + "\t");
+	    }
+	}
+	System.out.println("");
+	
+	
+	
 	
     }
 }

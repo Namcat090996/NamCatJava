@@ -237,8 +237,6 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	    System.out.println("Không có giá trị nào thỏa mãn điều kiện");
 	}
 	
-	/*
-	
 	//Bài 9: Tìm số chính phương đầu tiên trong mảng 1 chiều các số nguyên.
 	
 	//Use loop for computing
@@ -268,15 +266,17 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	//Declare variables needed to find
 	int dn = 0, dv = 0, temp = 0;
 	
+	int arr2[] = new int[arr.length];
+	
 	//Usee loop to reverse the value
 	for(int i = 0; i < arr.length-1; i++)
 	{
 	    dn = 0; dv = 0; temp = arr[i];
 	    while(temp != 0)
 	    {
-		dv = temp%10;
-		dn = dn*10 + dv;
-		temp = temp/10;
+		arr2[i] = temp%10;
+		temp /= 10;
+		i++;
 	    }
 	    if(dn == arr[i+1])
 	    {
@@ -295,8 +295,29 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	//Declare varibles needed to find
 	String strTemp = "", strChuSoDauTien = "";
-	int chuSoDauTien = 0;
+	int chuSoDauTien = 0, temp = 0;
 	
+	//Computational processing
+	for(int i = 0; i < arr.length; i++)
+	{
+	    temp = arr[i];
+	    if(arr[i] > 9 || arr[i] < -9)
+	    {
+		do
+		{
+		    chuSoDauTien = temp;
+		    temp /= 10;
+		}
+		while(temp != 0);
+	    }
+	    if(chuSoDauTien%2 != 0)
+	    {
+		giaTri = arr[i];
+		break;
+	    }
+	}
+	
+	/*
 	//Use loop for computing
 	for (int i = 0; i < arr.length; i++) {
 	    strTemp = "" + arr[i];//Conver Interger to String
@@ -720,8 +741,6 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	}
 	System.out.println("");
 	
-	*/
-	
 	//Bài 20: Cho mảng số thực có nhiều hơn 2 giá trị và các giá trị trong mảng khác nhau từng đôi một. Hãy viết hàm tìm 2 giá trị gần nhau nhất trong mảng (Lưu ý: Mảng có các giá trị khác nhau từng đôi một còn có tên là mảng phân biệt).
 
 	//Declare variables
@@ -800,7 +819,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	}
 	System.out.println("");
 	
-	
+	*/
 	
 	
     }

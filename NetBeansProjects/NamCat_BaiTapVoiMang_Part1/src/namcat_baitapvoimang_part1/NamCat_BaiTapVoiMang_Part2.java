@@ -493,6 +493,8 @@ public class NamCat_BaiTapVoiMang_Part2 {
 
 	//Print results
 	System.out.println("Số nguyên tố nhỏ nhất lớn hơn mọi giá trị có trong mảng là = " + giaTriCanTim);
+	
+	*/
 		
 	//Bài tập 16: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm ước chung lớn nhất của tất cả các phần tử trong mảng.
 	
@@ -514,7 +516,7 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	}
 	
 	//Use loop for computing greatest common divisor
-	for(int i = arr[0]; i >= 1; i--)
+	for(int i = arr[0]; i <= arr[arr.length-1]; i--)
 	{
 	    for(int j = 0; j < arr.length; j++)
 	    {
@@ -533,6 +535,8 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	//Print results
 	System.out.println("Ước chung lớn nhất của dãy là = " + uocChungLonNhat);
+	
+	/*
 
 	//Bài tập 17: Cho mảng 1 chiều các số nguyên. Hãy viết hàm tìm bội chung nhỏ nhất của tất cả các phần tử trong mảng.
 	

@@ -6,6 +6,9 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="D:\GitHub\AppKT_240524_PhuongND"/>
+			<item value="D:\GitHub\AppKT_240524_PhuongND\src\appkt_240524_phuongnd"/>
+			<item value="D:\GitHub\AppKT_240524_PhuongND\ProjectKiemTra\src\Bai2"/>
 			<item value="E:\OneDrive - EVNPECC3\Nam Cát\GitHub\AppKT_240524_PhuongND\ProjectKiemTra\src\Bai2"/>
 			<item value="E:\OneDrive - EVNPECC3\Nam Cát\GitHub\J042401CB\HocVien\phuongnd\AppKT_240524_PhuongND\ProjectKiemTra\src\Bai2"/>
 			<item value="D:\GitHub\NamCatJava\E-clipse\Project của thầy"/>

@@ -37,6 +37,7 @@ public class fmChuyenDoiDuLieu extends javax.swing.JFrame {
         txtDuLieu2 = new javax.swing.JTextField();
         btnChuyenDoi = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
+        btnHoanDoi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,26 +61,35 @@ public class fmChuyenDoiDuLieu extends javax.swing.JFrame {
             }
         });
 
+        btnHoanDoi.setText("Hoán đổi");
+        btnHoanDoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHoanDoiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btnHoanDoi)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnThoat)
                         .addGap(18, 18, 18)
                         .addComponent(btnChuyenDoi))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(cboDuLieu2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtDuLieu2))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(cboDuLieu1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtDuLieu1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(cboDuLieu2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDuLieu2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(cboDuLieu1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDuLieu1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -96,7 +106,8 @@ public class fmChuyenDoiDuLieu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnChuyenDoi)
-                    .addComponent(btnThoat))
+                    .addComponent(btnThoat)
+                    .addComponent(btnHoanDoi))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -262,6 +273,19 @@ public class fmChuyenDoiDuLieu extends javax.swing.JFrame {
 	}
     }//GEN-LAST:event_btnThoatActionPerformed
 
+    private void btnHoanDoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoanDoiActionPerformed
+        // TODO add your handling code here:
+	int iSoCan = 0, iSoDa = 0;
+        
+        iSoCan = cboDuLieu1.getSelectedIndex();
+        iSoDa = cboDuLieu2.getSelectedIndex();
+        
+        cboDuLieu1.setSelectedIndex(iSoDa);
+        cboDuLieu2.setSelectedIndex(iSoCan);
+        txtDuLieu1.setText("");
+        txtDuLieu2.setText("");
+    }//GEN-LAST:event_btnHoanDoiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -299,6 +323,7 @@ public class fmChuyenDoiDuLieu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChuyenDoi;
+    private javax.swing.JButton btnHoanDoi;
     private javax.swing.JButton btnThoat;
     private javax.swing.JComboBox<String> cboDuLieu1;
     private javax.swing.JComboBox<String> cboDuLieu2;

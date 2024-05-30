@@ -535,6 +535,13 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	
 	//Print results
 	System.out.println("Ước chung lớn nhất của dãy là = " + uocChungLonNhat);
+	int detA1[] = new int[arr.length];
+	int n = 0;
+	for(int gt: arr)
+	{
+	    detA1[n] = arr[n];
+	    n++;
+	}	
 	
 	/*
 

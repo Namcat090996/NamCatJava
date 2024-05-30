@@ -1,5 +1,2 @@
 INDEX VERSION 1.134+D:\GitHub\NamCatJava\E-clipse\.metadata\.plugins\org.eclipse.jdt.core
-3472619709.index
-1059153176.index
-3163027950.index
 1865797976.index

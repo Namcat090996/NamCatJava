@@ -4,6 +4,9 @@
  */
 package namcat_lopvadoituong;
 
+import java.util.List;
+import java.util.Scanner;
+
 /**
  *
  * @author Dell Precision 7550
@@ -39,9 +42,44 @@ public class NamCat_LopVaDoiTuong {
     
     tong = tt.tongHaiSo(x, y);
     
-    System.out.printf("Tổng 2 số %.1f và %.1f là = %.1f", x, y, tong);
+    System.out.printf("Tổng 2 số %.1f và %.1f là = %.1f\n", x, y, tong);
 	    
+    //Khai báo 1 đối tượng thuộc lớp HinhTron
+    HinhTron ht = new HinhTron(3);
     
+    ht.inThongTin();
+    
+    //Khai báo biến
+    Scanner sc = new Scanner(System.in);
+    
+    double r = 0, chuVi = 0, dienTich = 0;
+    
+    System.out.print("Nhập bán kính hình tròn là r = ");
+    
+    r = sc.nextDouble();
+    
+    HinhTron ht2 = new HinhTron(r);
+    
+    //Gọi hàm tính toán
+    chuVi = ht.chuVi();
+    
+    dienTich = ht.dienTich();
+    
+    System.out.println("Chu vi là = " + chuVi);
+    System.out.println("Diện tích là = " + dienTich);
+    ht2.inThongTin();
+    
+    //Khai báo đối tượng
+    SinhVienBusiness bus = new SinhVienBusiness();
+    
+    List<SinhVien> lstSV = bus.layDanhSach();
+    
+    System.out.println("Danh sách sinh viên là: ");
+    
+    for(SinhVien sv: lstSV)
+    {
+	System.out.println(sv.getMaSV() + "\t" + sv.getHoTen());
+    }
     
     
     

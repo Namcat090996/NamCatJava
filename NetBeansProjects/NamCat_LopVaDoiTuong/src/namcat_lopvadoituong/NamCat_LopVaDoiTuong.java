@@ -78,7 +78,7 @@ public class NamCat_LopVaDoiTuong {
     
     for(SinhVien sv: lstSV)
     {
-	System.out.println(sv.getMaSV() + "\t" + sv.getHoTen());
+	System.out.println(sv.getMaSV() + "\t" + sv.getDiaChi());
     }
     
     

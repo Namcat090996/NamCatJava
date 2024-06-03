@@ -46,7 +46,8 @@ public class SinhVienBusiness {
 	objTruc.setMaSV("SF002");
 	objTruc.setHoTen("Bạch Văn Trúc");
 	objTruc.setDienThoai("0123456789");	
-	objTruc.setEmail("vantruc@gmail.com");	
+	objTruc.setEmail("vantruc@gmail.com");
+	objTruc.setDiaChi("Lô lô");
 	
 	//Thêm vào danh sách
 	lstSinhVien.add(objTruc);

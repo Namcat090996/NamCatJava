@@ -66,8 +66,45 @@ public class SinhVienBusiness {
 	
 	//Thêm vào danh sách
 	lstSinhVien.add(objDuyen);
-
 	
     }
+        /**
+	 * Hàm lấy thông tin chi tiết sinh viên
+	 * @param maSV
+	 * @return Đối tượng sv chứa tất cả thông tin sv cần lấy được theo mã sv
+	 */
+	public SinhVien layChiTiet(String maSV)
+	{
+	    SinhVien objSV = null;
+	    for(int i = 0; i < lstSinhVien.size(); i++)
+	    {
+		//Duyệt từng phần tử trong list để tìm sinh viên trùng mã
+		if(lstSinhVien.get(i).getMaSV().equals(maSV))
+		{
+		    objSV = lstSinhVien.get(i);
+		}
+	    }
+	    return objSV;
+	}
+	
+	/**
+	 * Hàm thực hiện thêm thông tin sinh viên vào hệ thống
+	 * @param objSV
+	 * @return 
+	 */
+	public boolean themMoi(SinhVien objSV)
+	{
+	    if(objSV != null)
+	    {
+		//Thêm vào danh sách
+		lstSinhVien.add(objSV);
+		
+		return true;
+	    }
+	    return false;
+	}
+
+	
+   
     
 }

@@ -81,7 +81,7 @@ public class NamCat_LopVaDoiTuong {
 	System.out.println(sv.getMaSV() + "\t" + sv.getDiaChi());
     }
     
-    
+    SinhVien objSV = bus.layChiTiet("SF001");
     
 	    
     }   

@@ -21,15 +21,14 @@ public class SinhVien {
     private String diaChi;
     
     /**
-     * Hàm khởi tạo không có tham số truyền vào
+     * 
      */
     public SinhVien()
     {
-	this.diaChi = "Hà Nội";
+	this.diaChi = "";
     }
-    
     /**
-     * Hàm khởi tạo có 1 tham số truyền vào
+     * 
      * @param diaChi 
      */
     public SinhVien(String diaChi)
@@ -37,38 +36,20 @@ public class SinhVien {
 	this.diaChi = diaChi;
     }
     
-    /**
-     * Hàm khởi tạo có 5 tham số truyền vào
-     * @param maSV
-     * @param hoTen
-     * @param dienThoai
-     * @param email
-     * @param diaChi 
-     */
     public SinhVien(String maSV, String hoTen, String dienThoai, String email, String diaChi)
     {
 	this.maSV = maSV;
-	this.hoTen = hoTen;
-	this.dienThoai = dienThoai;
-	this.email = email;
-	this.diaChi = diaChi;
+        this.hoTen = hoTen;
+        this.dienThoai = dienThoai;
+        this.email = email;
+        this.diaChi = diaChi;	
     }
     
-    /**
-     * Hàm lấy thông tin mã sinh viên
-     * @return 
-     */
-    public String getMaSV()
-    {
+    public String getMaSV() {
 	return maSV;
     }
-    
-    /**
-     * Hàm ghi thông tin mã sinh viên 
-     * @param maSV 
-     */
-    public void setMaSV(String maSV)
-    {
+
+    public void setMaSV(String maSV) {
 	this.maSV = maSV;
     }
 
@@ -102,7 +83,8 @@ public class SinhVien {
 
     public void setDiaChi(String diaChi) {
 	this.diaChi = diaChi;
-    }  
+    }    
+    
     
     
 }

@@ -80,18 +80,10 @@ public class Stanford_LopVaDoiTuong_J0424 {
         System.out.println("Danh sách sinh viên là: ");
         
         System.out.println("Mã SV\t Họ tên");
-	
         for(SinhVien sv : lstSV)
         {
-            if(sv.getMaSV().equals("SF001"))
-	    {
-		System.out.println("11");
-	    }
+            System.out.println(sv.getMaSV() + "\t" + sv.getHoTen());
         }
-	
-
-
-	
     }
     
 }

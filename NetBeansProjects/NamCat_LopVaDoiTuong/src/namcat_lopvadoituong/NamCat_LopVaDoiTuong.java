@@ -69,19 +69,23 @@ public class NamCat_LopVaDoiTuong {
     System.out.println("Diện tích là = " + dienTich);
     ht2.inThongTin();
     
-    //Khai báo đối tượng
-    SinhVienBusiness bus = new SinhVienBusiness();
+    SinhVienBusiness sv = new SinhVienBusiness();
     
-    List<SinhVien> lstSV = bus.layDanhSach();
+    List<SinhVien> sv1 = sv.layDanhSach();
     
-    System.out.println("Danh sách sinh viên là: ");
+    SinhVien sv2 = sv.layChiTiet("SF001");
     
-    for(SinhVien sv: lstSV)
+    List<SinhVien> objSV1 = DataProvider.getSinhVienBus().layDanhSach();
+    
+    SinhVien objSV = DataProvider.getSinhVienBus().layChiTiet("SF007");
+    
+    if(objSV == null)
     {
-	System.out.println(sv.getMaSV() + "\t" + sv.getDiaChi());
+	System.out.println("11");
     }
+
     
-    SinhVien objSV = bus.layChiTiet("SF001");
+
     
 	    
     }   

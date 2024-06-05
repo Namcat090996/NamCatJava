@@ -6,22 +6,20 @@ package namcat_lopvadoituong;
 
 /**
  *
- * @author dangquang16
+ * @author Dell Precision 7550
  */
 public class DataProvider {
     
-    /**
-     * Khai báo 1 thuộc tính tạo đối tượng thuộc lớp SinhVienBusiness để có thể truy cập từ nhiều nơi
-     */
-    private static SinhVienBusiness sinhVienBus = null;
+    private static SinhVienBusiness SinhVienBus = null;
     
     public static SinhVienBusiness getSinhVienBus()
     {
-        if(sinhVienBus == null)
-        {
-            sinhVienBus = new SinhVienBusiness();
-        }
-        
-        return sinhVienBus;
+	if(SinhVienBus == null)
+	{
+	    SinhVienBus = new SinhVienBusiness();
+	}
+	return SinhVienBus;
     }
+    
+    
 }

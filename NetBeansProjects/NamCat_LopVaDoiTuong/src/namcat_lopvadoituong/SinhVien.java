@@ -10,25 +10,28 @@ package namcat_lopvadoituong;
  */
 public class SinhVien {
     
-    private String maSV;
+    //Declare variables
     
-    private String hoTen;
+    private String maSV = "";
     
-    private String dienThoai;
+    private String hoTen = "";
     
-    private String email;
+    private String dienThoai = "";
     
-    private String diaChi;
+    private String email = "";
+    
+    private String diaChi = "";
     
     /**
-     * 
+     * Initialization function has no parameter
      */
     public SinhVien()
     {
-	this.diaChi = "";
+	
     }
+    
     /**
-     * 
+     * Initialization function has 1 parameter
      * @param diaChi 
      */
     public SinhVien(String diaChi)
@@ -36,23 +39,39 @@ public class SinhVien {
 	this.diaChi = diaChi;
     }
     
+    /**
+     * Initialization function has 5 parameter
+     * @param maSV
+     * @param hoTen
+     * @param dienThoai
+     * @param email
+     * @param diaChi 
+     */
     public SinhVien(String maSV, String hoTen, String dienThoai, String email, String diaChi)
     {
 	this.maSV = maSV;
-        this.hoTen = hoTen;
-        this.dienThoai = dienThoai;
-        this.email = email;
-        this.diaChi = diaChi;	
+	this.hoTen = hoTen;
+	this.dienThoai = dienThoai;
+	this.email = email;
+	this.diaChi = diaChi;
     }
     
+    /**
+     * Object's property
+     * @return 
+     */
     public String getMaSV() {
 	return maSV;
     }
-
+    
+    /**
+     * Object's property
+     * @param maSV 
+     */
     public void setMaSV(String maSV) {
 	this.maSV = maSV;
     }
-
+     
     public String getHoTen() {
 	return hoTen;
     }
@@ -83,8 +102,14 @@ public class SinhVien {
 
     public void setDiaChi(String diaChi) {
 	this.diaChi = diaChi;
-    }    
-    
-    
-    
+    }     
+     
+     
+     
+     
+     
+     
+     
+     
+     
 }

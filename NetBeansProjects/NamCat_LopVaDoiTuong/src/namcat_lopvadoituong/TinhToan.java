@@ -12,18 +12,16 @@ public class TinhToan {
     
     private int a = 10;
     
-    public int b = 15;
+    public int  b = 15;
     
-    int c = 20;
+    int c = 5;
     
     /**
      * Dạng 1: Hàm không có giá trị trả về và không có tham số truyền vào
      */
     public void inThongTin()
     {
-	System.out.println("Hôm nay trời đẹp quá !");
-	
-	System.out.println("Giá trị của a = " + a);
+	System.out.println("Hôm nay trời đẹp quá");
     }
     
     /**
@@ -32,9 +30,9 @@ public class TinhToan {
      */
     public void inThongTin(int n)
     {
-	for(int i = 1; i <= n; i++)
+	for(int i = 0; i < n; i++)
 	{
-	    System.out.println("I love you - " + i);
+	    System.out.println("I Love U" + i);
 	}
     }
     
@@ -44,7 +42,7 @@ public class TinhToan {
      */
     public String layTenCongTy()
     {
-	return "Stanford - Đào tạo và phát triển";
+	return "Stanford";
     }
     
     /**
@@ -53,21 +51,12 @@ public class TinhToan {
      * @param b
      * @return 
      */
-    public double tongHaiSo(double a, double b)
+    public int tongSo(int a, int b)
     {
-	return a+b;
-    }
-    
-    /**
-     * Dạng 4: Hàm có giá trị trả về và có tham số truyền vào
-     * @param a, số thứ 1
-     * @param b, số thứ 2
-     * @return Tổng hai số thực
-     */
-    public double tongHaiSo1(double a, double b)
-    {
-	double tongSo = 0;
+	int tongSo = 0;
+	
 	tongSo = a + b;
+	
 	return tongSo;
     }
     

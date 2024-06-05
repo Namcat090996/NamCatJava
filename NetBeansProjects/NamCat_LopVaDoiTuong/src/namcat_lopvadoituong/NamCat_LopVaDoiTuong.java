@@ -1,92 +1,40 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package namcat_lopvadoituong;
 
 import java.util.List;
-import java.util.Scanner;
 
 /**
  *
  * @author Dell Precision 7550
  */
 public class NamCat_LopVaDoiTuong {
-    
+
     /**
-     *@param arg the command line argument
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
-    //Khai báo 1 đối tượng thuộc lớp TinhToan
-    TinhToan tt = new TinhToan();
-    
-    //Gọi các thành phần để sử dụng
-    //System.out.println("Giá trị a = " + tt.a);	
-    
-    System.out.println("Giá trị b = " + tt.b);
-    
-    System.out.println("Giá trị c = " + tt.c);
-    
-    //Gọi các hàm để sử dụng
-    tt.inThongTin();
-    
-    //Gọi lần 2
-    tt.inThongTin();
-    
-    //In 10 câu I Love You
-    tt.inThongTin(10);
-    
-    System.out.println("Tên công ty là: " + tt.layTenCongTy());
-    
-    double x = 10, y = 5, tong = 0;
-    
-    tong = tt.tongHaiSo(x, y);
-    
-    System.out.printf("Tổng 2 số %.1f và %.1f là = %.1f\n", x, y, tong);
-	    
-    //Khai báo 1 đối tượng thuộc lớp HinhTron
-    HinhTron ht = new HinhTron(3);
-    
-    ht.inThongTin();
-    
-    //Khai báo biến
-    Scanner sc = new Scanner(System.in);
-    
-    double r = 0, chuVi = 0, dienTich = 0;
-    
-    System.out.print("Nhập bán kính hình tròn là r = ");
-    
-    r = sc.nextDouble();
-    
-    HinhTron ht2 = new HinhTron(r);
-    
-    //Gọi hàm tính toán
-    chuVi = ht.chuVi();
-    
-    dienTich = ht.dienTich();
-    
-    System.out.println("Chu vi là = " + chuVi);
-    System.out.println("Diện tích là = " + dienTich);
-    ht2.inThongTin();
-    
-    SinhVienBusiness sv = new SinhVienBusiness();
-    
-    List<SinhVien> sv1 = sv.layDanhSach();
-    
-    SinhVien sv2 = sv.layChiTiet("SF001");
-    
-    List<SinhVien> objSV1 = DataProvider.getSinhVienBus().layDanhSach();
-    
-    SinhVien objSV = DataProvider.getSinhVienBus().layChiTiet("SF007");
-    
-    if(objSV == null)
-    {
-	System.out.println("11");
-    }
+	// TODO code application logic here
+	
+	TinhToan tt = new TinhToan();
+	
+	System.out.println("" + tt.b);
+	
+	System.out.println("" + tt.c);
+	
+	tt.inThongTin();
+	
+	tt.inThongTin(3);
+	
+	System.out.println("" + tt.layTenCongTy());
+	
+	System.out.println("" + tt.tongSo(3, 5));
+	
+	SinhVienBusiness sv = new SinhVienBusiness();
+	
+	List<SinhVien> lstSV = sv.layDanhSach();
 
-    
-
-    
-	    
-    }   
+    }  
 }

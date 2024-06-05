@@ -13,7 +13,8 @@ import java.util.List;
  */
 public class SinhVienBusiness {
     
-    private List<SinhVien> lstSinhVien = new ArrayList<SinhVien>();
+    //Declare list to contain objects
+    List<SinhVien> lstSinhVien = new ArrayList<SinhVien>();
     
     public List<SinhVien> layDanhSach()
     {
@@ -24,26 +25,25 @@ public class SinhVienBusiness {
 	return lstSinhVien;
     }
     
-    public void taoDuLieuBanDau()
+    /**
+     * The function has no return value and no parameters
+     */
+    private void taoDuLieuBanDau()
     {
-	SinhVien objManh = new SinhVien("Hà Nam");
-
+	//Declare object
+	SinhVien objManh = new SinhVien("Hà Nội");
+	SinhVien objTruc = new SinhVien("SF002", "Hư Trúc", "0703039947", "vantruc@gmail.com", "Hà Nam");
+	SinhVien objHoan = new SinhVien("SF003", "Hoạn Văn Hoan", "0703039946", "vanhoan@gmail.com", "Hà Nam");
+	SinhVien objPhuong = new SinhVien("SF004", "Vedette Vũ Thu Phương", "0703039945", "thuphuong@gmail.com", "Biên Hòa");
+	SinhVien objDuyen = new SinhVien("SF005", "Nguyễn Thị Nam Duyên", "0703039944", "namduyen@gmail.com", "Sài Gòn");
 	
-        objManh.setMaSV("SF001");
-        objManh.setHoTen("Nguyễn Thế Mạnh");
-        objManh.setDienThoai("0988333568");
-        objManh.setEmail("themanh@gmail.com");
+	//Assgin values for objects
+	objManh.setMaSV("SF001");
+	objManh.setHoTen("Mạnh lỏ");
+	objManh.setDienThoai("0703039940");
+	objManh.setEmail("vanmanh@gmail.com");
 	
-	SinhVien objTruc = new SinhVien("Hà Nam");
-        objTruc.setMaSV("SF002");
-        objTruc.setHoTen("Bạch Văn Trúc");
-        objTruc.setDienThoai("0936548925");
-        objTruc.setEmail("trucbv@gmail.com");
-	
-	SinhVien objHoan = new SinhVien("SF003", "Hoàng Văn Hoan", "0988333556", "hoanghv@outlook.com", "Hà Nam");
-	SinhVien objPhuong = new SinhVien("SF004", "Nguyễn Duy Phương", "0988331258", "duyphuong@outlook.com", "Hồ Chí Minh");
-	SinhVien objDuyen = new SinhVien("SF005", "Trần Mỹ Duyên", "0986531258", "myduyen@gmail.com", "Hà Nội");
-	
+	//Assign object values to list
 	lstSinhVien.add(objManh);
 	lstSinhVien.add(objTruc);
 	lstSinhVien.add(objHoan);
@@ -51,22 +51,26 @@ public class SinhVienBusiness {
 	lstSinhVien.add(objDuyen);
     }
     
-    public SinhVien layChiTiet(String maSV)
+    public List<SinhVien> themMoi(SinhVien objSV)
     {
-	SinhVien objSV = new SinhVien();
-	
+	if(objSV != null)
+	{
+	    lstSinhVien.add(objSV);
+	}
+	return lstSinhVien;
+    }
+    
+    public boolean kiemTraTrung(String maSV)
+    {
 	for(SinhVien sv: lstSinhVien)
 	{
-	    if(sv.getMaSV().equals(maSV))
+	    if(sv.getMaSV() != maSV)
 	    {
-		objSV = sv;
-		break;
+		return true;
 	    }
 	}
-	return objSV;
+	return false;
     }
-	    
-    
     
     
 }

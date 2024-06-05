@@ -251,12 +251,8 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
             //Thêm vào model
             model.addRow(row);
         }
+	
         //Thiết lập độ rộng của cột
-        jTableSinhVien.getColumnModel().getColumn(0).setWidth(20);
-        jTableSinhVien.getColumnModel().getColumn(1).setWidth(150);
-        jTableSinhVien.getColumnModel().getColumn(2).setWidth(100);
-        jTableSinhVien.getColumnModel().getColumn(3).setWidth(250);
-        
         jTableSinhVien.setModel(model);
     }
     

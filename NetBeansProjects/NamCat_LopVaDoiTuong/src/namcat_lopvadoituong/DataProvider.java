@@ -10,15 +10,20 @@ package namcat_lopvadoituong;
  */
 public class DataProvider {
     
-    private static SinhVienBusiness SinhVienBus = null;
+    private static SinhVienBusiness sinhVienBus = null;
     
+    /**
+     * Declare the property creating object in SinhVienBusiness class to use in everywhere
+     * @return 
+     */
     public static SinhVienBusiness getSinhVienBus()
     {
-	if(SinhVienBus == null)
+	if(sinhVienBus == null)
 	{
-	    SinhVienBus = new SinhVienBusiness();
+	    sinhVienBus = new SinhVienBusiness();
 	}
-	return SinhVienBus;
+	
+	return sinhVienBus;	
     }
     
     

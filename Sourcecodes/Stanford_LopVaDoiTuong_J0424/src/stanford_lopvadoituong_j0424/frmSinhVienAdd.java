@@ -38,7 +38,7 @@ public class frmSinhVienAdd extends javax.swing.JFrame {
     private void hienThiChiTietSinhVien()
     {
         //Lấy thông tin chi tiết
-        SinhVien objSV = DataProvider.getSinhVienBus().layChiTiet(maSinhVien);
+	SinhVien objSV = DataProvider.getSinhVienBus().layChiTiet(maSinhVien);
         
         if(objSV != null)
         {
@@ -266,6 +266,8 @@ public class frmSinhVienAdd extends javax.swing.JFrame {
         
         boolean ketQua;
         
+	maSinhVien = "";
+	
         //TH sửa
         if(!maSinhVien.isEmpty())
         {

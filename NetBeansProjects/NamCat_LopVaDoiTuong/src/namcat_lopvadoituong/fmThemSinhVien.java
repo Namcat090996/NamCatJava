@@ -229,18 +229,9 @@ public class fmThemSinhVien extends javax.swing.JFrame {
 	objSV.setDiaChi(diaChi);
 	
 	boolean ketQua = DataProvider.getSinhVienBus().kiemTraTrung(objSV.getMaSV());
-	
-	if(ketQua = true)
-	{
-	    List<SinhVien> lstSV = DataProvider.getSinhVienBus().themMoi(objSV);
-	}
-	else
-	{
-	    JOptionPane.showMessageDialog(rootPane, "Mã sinh viên này đã tồn tại");
-	}
-	
-	
-	
+
+	List<SinhVien> lstSV = DataProvider.getSinhVienBus().themMoi(objSV);
+
 	fmDanhSachSinhVien.hienThiDanhSachSinhVien();
 	
     }//GEN-LAST:event_btnCapNhatActionPerformed

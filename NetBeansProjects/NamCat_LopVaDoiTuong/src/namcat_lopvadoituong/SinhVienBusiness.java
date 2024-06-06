@@ -64,12 +64,12 @@ public class SinhVienBusiness {
     {
 	for(SinhVien sv: lstSinhVien)
 	{
-	    if(sv.getMaSV() != maSV)
+	    if(sv.getMaSV().equals(maSV))
 	    {
-		return true;
+		return false;
 	    }
 	}
-	return false;
+	return true;
     }
     
     

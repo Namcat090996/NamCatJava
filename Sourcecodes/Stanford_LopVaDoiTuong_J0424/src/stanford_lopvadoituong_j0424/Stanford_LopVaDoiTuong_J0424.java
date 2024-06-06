@@ -74,16 +74,31 @@ public class Stanford_LopVaDoiTuong_J0424 {
         
         //Khai báo đối tượng
         SinhVienBusiness bus = new SinhVienBusiness();
+	
+	List<SinhVien> lstSV = DataProvider.getSinhVienBus().layDanhSach();
+	
+	SinhVien objSV1 = new SinhVien();
+	
+	objSV1.setMaSV("SF001");
+	
+	objSV1.setHoTen("Huỳnh Nam Cát");
+	
+	boolean ketQua = DataProvider.getSinhVienBus().capNhat(objSV1);
         
-        List<SinhVien> lstSV = bus.layDanhSach();
-        
-        System.out.println("Danh sách sinh viên là: ");
-        
-        System.out.println("Mã SV\t Họ tên");
-        for(SinhVien sv : lstSV)
-        {
-            System.out.println(sv.getMaSV() + "\t" + sv.getHoTen());
-        }
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     }
-    
 }

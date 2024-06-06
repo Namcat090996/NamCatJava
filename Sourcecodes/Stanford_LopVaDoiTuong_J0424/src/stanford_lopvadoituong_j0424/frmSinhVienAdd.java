@@ -265,8 +265,6 @@ public class frmSinhVienAdd extends javax.swing.JFrame {
         objSV.setDiaChi(diaChi);
         
         boolean ketQua;
-        
-	maSinhVien = "";
 	
         //TH sửa
         if(!maSinhVien.isEmpty())

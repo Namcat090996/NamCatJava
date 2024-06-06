@@ -72,5 +72,29 @@ public class SinhVienBusiness {
 	return true;
     }
     
+    public List<SinhVien> kiemTraTrung(SinhVien objSV)
+    {
+	for(int i = 0; i < lstSinhVien.size(); i++)
+	{
+	    if(lstSinhVien.get(i).getMaSV().equals(objSV.getMaSV()))
+	    {
+		lstSinhVien.set(i, objSV);
+	    }
+	}
+	return lstSinhVien;
+    } 
+    
+    public List<SinhVien> xoa(SinhVien objSV)
+    {
+	for(int i = 0; i < lstSinhVien.size(); i++)
+	{
+	    if(lstSinhVien.get(i).getMaSV().equals(objSV.getMaSV()))
+	    {
+		lstSinhVien.remove(objSV);
+	    }
+	}
+	return lstSinhVien;
+    } 
+    
     
 }

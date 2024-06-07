@@ -4,6 +4,7 @@
  */
 package namcat_lopvadoituong;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -13,6 +14,30 @@ import javax.swing.JOptionPane;
  */
 public class fmThemSinhVien extends javax.swing.JFrame {
 
+    private String maSinhVien = "";
+    
+    public String getMaSinhVien() {
+	return maSinhVien;
+    }
+
+    public void setMaSinhVien(String maSinhVien) {
+	this.maSinhVien = maSinhVien;
+    }
+
+    public void hienThiChiTietSinhVien()
+    {
+	SinhVien objSV = DataProvider.getSinhVienBus().layChiTiet(maSinhVien);
+	
+	if(objSV != null)
+	{
+	    txtMaSinhVien.setText(objSV.getMaSV());
+	    txtHoTen.setText(objSV.getHoTen());
+	    txtDienThoai.setText(objSV.getDienThoai());
+	    txtEmail.setText(objSV.getEmail());
+	    txtDiaChi.setText(objSV.getDiaChi());
+	}
+    }
+    
     /**
      * Creates new form fmThemSinhVien
      */
@@ -192,6 +217,16 @@ public class fmThemSinhVien extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        if(!maSinhVien.isEmpty())//TH sửa
+        {
+            //Gọi hàm hiển thị chi tiết
+            hienThiChiTietSinhVien();
+            this.setTitle("Sửa thông tin sinh viên");
+        }
+        else
+        {
+            this.setTitle("Thêm mới thông tin sinh viên");
+        }	
     }//GEN-LAST:event_formWindowOpened
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
@@ -206,6 +241,7 @@ public class fmThemSinhVien extends javax.swing.JFrame {
 	email = txtEmail.getText();
 	diaChi = txtDiaChi.getText();
 	
+	//Use If to catch the errors when users don't enter full information
 	if(maSV.length() == 0)
 	{
 	    JOptionPane.showMessageDialog(rootPane,"Bạn phải nhập mã sinh viên");
@@ -219,7 +255,7 @@ public class fmThemSinhVien extends javax.swing.JFrame {
 	    txtHoTen.requestFocus();
 	    return;
 	}
-	
+		
 	SinhVien objSV = new SinhVien();
 	
 	objSV.setMaSV(maSV);
@@ -228,23 +264,39 @@ public class fmThemSinhVien extends javax.swing.JFrame {
 	objSV.setEmail(email);
 	objSV.setDiaChi(diaChi);
 	
-	boolean ketQua = DataProvider.getSinhVienBus().kiemTraTrung(objSV.getMaSV());
+	List<SinhVien> lstSV = new ArrayList<>();
+	boolean kiemTraTrungMaSV = DataProvider.getSinhVienBus().kiemTraTrung(maSV);
+	if(!maSinhVien.isEmpty())
+	{
+	    //In case of editing the object
+	    lstSV = DataProvider.getSinhVienBus().capNhat(objSV);
+	    JOptionPane.showMessageDialog(rootPane, "Sửa thông tin sinh viên thành công");		
+	}
+	else
+	{
+	    //In case of adding the object
+	    if(kiemTraTrungMaSV == true)
+	    {
+		lstSV = DataProvider.getSinhVienBus().themMoi(objSV);
+		JOptionPane.showMessageDialog(rootPane, "Thêm mới thông tin sinh viên thành công");		
+	    }
+	    else
+	    {
+		JOptionPane.showMessageDialog(rootPane, "Bạn đã nhập trùng mã sinh viên");
+		txtMaSinhVien.requestFocus();
+		return;		
+	    }
 
-	List<SinhVien> lstSV = DataProvider.getSinhVienBus().themMoi(objSV);
-
-	fmDanhSachSinhVien.hienThiDanhSachSinhVien();
+	}
 	
+	//Reload the DanhSachSinhVien form
+	fmDanhSachSinhVien.hienThiDanhSachSinhVien();
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
         // TODO add your handling code here:
 	this.setVisible(false);
     }//GEN-LAST:event_btnDongActionPerformed
-
-    public void hienThiChiTietSinhVien()
-    {
-	
-    }
     
     /**
      * @param args the command line arguments

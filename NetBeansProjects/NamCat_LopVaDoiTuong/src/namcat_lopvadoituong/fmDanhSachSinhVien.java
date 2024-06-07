@@ -110,6 +110,11 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
         });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnDong.setText("Đóng");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
@@ -178,16 +183,28 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-        // TODO add your handling code here:
+        //Declare object
 	fmThemSinhVien fmThemMoi = new fmThemSinhVien();
 	
+	//Set visible for object
 	fmThemMoi.setVisible(true);
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+       
+	int dong = 0; String maSV = "";
+	
+	dong = jTableSinhVien.getSelectedRow();
+	
+	maSV = "" + jTableSinhVien.getValueAt(dong, 0);
+	
+	//Declare object
 	fmThemSinhVien fmSua = new fmThemSinhVien();
 	
+	//Assign value maSV to fmSua object
+	fmSua.setMaSinhVien(maSV);
+	
+	//Set visible for object
 	fmSua.setVisible(true);	
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -198,6 +215,20 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
 	    System.exit(0);
 	}
     }//GEN-LAST:event_btnDongActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+	int dong = 0; String maSV = "";
+	
+	dong = jTableSinhVien.getSelectedRow();
+	
+	maSV = "" + jTableSinhVien.getValueAt(dong, 0);
+	
+	List<SinhVien> lstSV = DataProvider.getSinhVienBus().xoa(maSV);
+	
+	hienThiDanhSachSinhVien();
+	
+    }//GEN-LAST:event_btnXoaActionPerformed
 
     public static void hienThiDanhSachSinhVien()
     {
@@ -229,7 +260,7 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
 	jTableSinhVien.setModel(model);
     }
     
-    /**
+    /** 
      * @param args the command line arguments
      */
     public static void main(String args[]) {

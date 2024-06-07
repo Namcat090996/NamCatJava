@@ -14,7 +14,9 @@ import java.util.List;
 public class SinhVienBusiness {
     
     //Declare list to contain objects
-    List<SinhVien> lstSinhVien = new ArrayList<SinhVien>();
+    private List<SinhVien> lstSinhVien = new ArrayList<SinhVien>();
+    
+    private SinhVien objSV = new SinhVien();
     
     public List<SinhVien> layDanhSach()
     {
@@ -51,6 +53,29 @@ public class SinhVienBusiness {
 	lstSinhVien.add(objDuyen);
     }
     
+    /**
+     * Function to get MaSV and show it to interface
+     * @param maSV
+     * @return 
+     */
+    public SinhVien layChiTiet(String maSV)
+    {
+	for(SinhVien sv: lstSinhVien)
+	{
+	    if(sv.getMaSV().equals(maSV))
+	    {
+		objSV = sv;
+		break;
+	    }
+	}
+	return objSV;
+    }  
+    
+    /**
+     * Function to add SinhVien object 
+     * @param objSV
+     * @return 
+     */
     public List<SinhVien> themMoi(SinhVien objSV)
     {
 	if(objSV != null)
@@ -60,6 +85,11 @@ public class SinhVienBusiness {
 	return lstSinhVien;
     }
     
+    /**
+     * Function to check the MaSinhVien value which is duplicated
+     * @param maSV
+     * @return 
+     */
     public boolean kiemTraTrung(String maSV)
     {
 	for(SinhVien sv: lstSinhVien)
@@ -72,7 +102,12 @@ public class SinhVienBusiness {
 	return true;
     }
     
-    public List<SinhVien> kiemTraTrung(SinhVien objSV)
+    /**
+     * Function to update the lstSinhVien
+     * @param objSV
+     * @return 
+     */
+    public List<SinhVien> capNhat(SinhVien objSV)
     {
 	for(int i = 0; i < lstSinhVien.size(); i++)
 	{
@@ -84,17 +119,31 @@ public class SinhVienBusiness {
 	return lstSinhVien;
     } 
     
-    public List<SinhVien> xoa(SinhVien objSV)
+    /**
+     * Function to remove SinhVien object
+     * @param objSV
+     * @return 
+     */
+    public List<SinhVien> xoa(String maSV)
     {
+	SinhVien objSV1 = layChiTiet(maSV);
 	for(int i = 0; i < lstSinhVien.size(); i++)
 	{
-	    if(lstSinhVien.get(i).getMaSV().equals(objSV.getMaSV()))
+	    if(lstSinhVien.get(i).getMaSV().equals(maSV))
 	    {
-		lstSinhVien.remove(objSV);
+		lstSinhVien.remove(objSV1);
 	    }
 	}
 	return lstSinhVien;
-    } 
+    }
+    
+
+    
+    
+    
+
+    
+    
     
     
 }

@@ -2,29 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package namcat_lopvadoituong;
+package danhsachsinhvien;
 
 /**
  *
- * @author Dell Precision 7550
+ * @author ADMIN
  */
 public class DataProvider {
     
-    private static SinhVienBusiness sinhVienBus;
+    private static SinhVienBusiness SinhVienBus;
     
-    /**
-     * Declare the property creating object in SinhVienBusiness class to use in everywhere
-     * @return 
-     */
     public static SinhVienBusiness getSinhVienBus()
     {
-	if(sinhVienBus == null)
+	if(SinhVienBus == null)
 	{
-	    sinhVienBus = new SinhVienBusiness();
+	    SinhVienBus = new SinhVienBusiness();
 	}
-	
-	return sinhVienBus;	
+	return SinhVienBus;
     }
+    
+    
     
     
 }

@@ -38,7 +38,7 @@ public class frmSinhVienAdd extends javax.swing.JFrame {
     private void hienThiChiTietSinhVien()
     {
         //Lấy thông tin chi tiết
-	SinhVien objSV = DataProvider.getSinhVienBus().layChiTiet(maSinhVien);
+        SinhVien objSV = DataProvider.getSinhVienBus().layChiTiet(maSinhVien);
         
         if(objSV != null)
         {
@@ -189,7 +189,7 @@ public class frmSinhVienAdd extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCapNhat)
                     .addComponent(btnDong))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -265,7 +265,7 @@ public class frmSinhVienAdd extends javax.swing.JFrame {
         objSV.setDiaChi(diaChi);
         
         boolean ketQua;
-	
+        
         //TH sửa
         if(!maSinhVien.isEmpty())
         {

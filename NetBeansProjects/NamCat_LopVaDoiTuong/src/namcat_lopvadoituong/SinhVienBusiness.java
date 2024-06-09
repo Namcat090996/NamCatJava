@@ -16,7 +16,11 @@ public class SinhVienBusiness {
     //Declare list to contain objects
     private List<SinhVien> lstSinhVien = new ArrayList<SinhVien>();
     
-    private SinhVien objSV = new SinhVien();
+    private List<SinhVien> lstTimKiem = new ArrayList<SinhVien>();
+    
+    private SinhVien objSV;
+    
+    private SinhVien objTimKiem = new SinhVien();
     
     public List<SinhVien> layDanhSach()
     {
@@ -135,6 +139,19 @@ public class SinhVienBusiness {
 	    }
 	}
 	return lstSinhVien;
+    }
+    
+    public boolean timKiemThongTinSinhVien(String ttSV)
+    {
+	for(SinhVien sv: lstSinhVien)
+	{
+	    if(sv.getMaSV().contains(ttSV) || sv.getHoTen().contains(ttSV) || sv.getDienThoai().contains(ttSV) || sv.getEmail().contains(ttSV) || sv.getDiaChi().contains(ttSV))
+	    {
+		return true;
+	    }
+   
+	}
+	return false;
     }
     
 

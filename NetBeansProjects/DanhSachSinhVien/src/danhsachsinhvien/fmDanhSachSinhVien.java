@@ -2,18 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package namcat_lopvadoituong;
+package danhsachsinhvien;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Dell Precision 7550
+ * @author ADMIN
  */
 public class fmDanhSachSinhVien extends javax.swing.JFrame {
-       
+
     /**
      * Creates new form fmDanhSachSinhVien
      */
@@ -30,10 +31,9 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtTuKhoa = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtThongTin = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSinhVien = new javax.swing.JTable();
@@ -43,8 +43,6 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         btnDong = new javax.swing.JButton();
 
-        jLabel1.setText("jLabel1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -52,39 +50,34 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhập thông tin tìm kiếm ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhập thông tin tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        jLabel2.setText("Từ khóa:");
+        jLabel1.setText("Nhập từ khóa tìm kiếm:");
 
         btnTimKiem.setText("Tìm kiếm");
-        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimKiemActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel2)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txtTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTimKiem)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiem))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jTableSinhVien.setModel(new javax.swing.table.DefaultTableModel(
@@ -107,19 +100,14 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
             }
         });
 
-        btnSua.setText("Sửa");
+        btnSua.setText("Sửa thông tin");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
             }
         });
 
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
+        btnXoa.setText("Xóa thông tin");
 
         btnDong.setText("Đóng");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
@@ -141,18 +129,18 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
                 .addComponent(btnXoa)
                 .addGap(18, 18, 18)
                 .addComponent(btnDong)
-                .addGap(17, 17, 17))
+                .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemMoi)
                     .addComponent(btnSua)
                     .addComponent(btnXoa)
                     .addComponent(btnDong))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,12 +148,12 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1009, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,127 +161,99 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
+        //Declare object
+	fmAddSinhVien fmThemMoi = new fmAddSinhVien();
+	
+	//Display object on interface
+	fmThemMoi.setVisible(true);
+    }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
 	hienThiDanhSachSinhVien();
     }//GEN-LAST:event_formWindowOpened
 
-    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-        //Declare object
-	fmThemSinhVien fmThemMoi = new fmThemSinhVien();
-	
-	//Set visible for object
-	fmThemMoi.setVisible(true);
-    }//GEN-LAST:event_btnThemMoiActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-       
-	int dong = 0; String maSV = "";
-	
-	dong = jTableSinhVien.getSelectedRow();
-	
-	maSV = "" + jTableSinhVien.getValueAt(dong, 0);
-	
-	//Declare object
-	fmThemSinhVien fmSua = new fmThemSinhVien();
-	
-	//Assign value maSV to fmSua object
-	fmSua.setMaSinhVien(maSV);
-	
-	//Set visible for object
-	fmSua.setVisible(true);	
-    }//GEN-LAST:event_btnSuaActionPerformed
-
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
         // TODO add your handling code here:
-	if(JOptionPane.showConfirmDialog(rootPane, "Bạn chắc chắn muốn đóng không ?", "Đóng chương trình", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+	if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn thoát không ?", "Xác nhận thoát chương trình", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
 	{
 	    System.exit(0);
 	}
     }//GEN-LAST:event_btnDongActionPerformed
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-	int dong = 0; String maSV = "";
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        
+	//Declare selected row
+	int dong = jTableSinhVien.getSelectedRow();
 	
-	dong = jTableSinhVien.getSelectedRow();
+	//Declare selected value
+	String maSV = "";
 	
-	maSV = "" + jTableSinhVien.getValueAt(dong, 0);
+	//Method to choose row
+	if(dong != -1)
+	{
+	    //Method to choose value
+	    maSV = "" + jTableSinhVien.getValueAt(dong, 0);
+	}
+	else
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn sinh viên cần sửa thông tin");
+	    return;
+	}
 	
-	List<SinhVien> lstSV = DataProvider.getSinhVienBus().xoa(maSV);
+	//Declare object
+	fmAddSinhVien fmSua = new fmAddSinhVien();
 	
-	hienThiDanhSachSinhVien();
-    }//GEN-LAST:event_btnXoaActionPerformed
-
-    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+	//Assign value to fmSua object
+	fmSua.setMaSV(maSV);
 	
-
-    }//GEN-LAST:event_btnTimKiemActionPerformed
+	//Display object on interface
+	fmSua.setVisible(true);
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     public static void hienThiDanhSachSinhVien()
     {
-	//Declare title
-	String tieuDe[] = new String[]{"Mã sinh viên", "Họ tên", "Điện thoại", "Email", "Địa chỉ"};
+	//Declare String: Title 
+	String tieuDe[] = new String[]{"Mã sinh viên", "Họ tên", "Điện thoại", "Giới tính", "Email", "Địa chỉ"};
 	
 	//Declare object to show data on the table
 	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);
 	
-	//Declare list to get SinhVien list
+	//Create list to contain data
 	List<SinhVien> lstSinhVien = DataProvider.getSinhVienBus().layDanhSach();
 	
-	//Declare array to show SinhVien list on the table
-	Object row[] = new Object[5];
+	//Declare array to show data on the table
+	Object row[] = new Object[6];
 	
-	//Assign values to array row[]
+	//Assign value to arrray
 	for(SinhVien sv: lstSinhVien)
 	{
 	    row[0] = sv.getMaSV();
 	    row[1] = sv.getHoTen();
 	    row[2] = sv.getDienThoai();
-	    row[3] = sv.getEmail();
-	    row[4] = sv.getDiaChi(); 
+	    row[3] = sv.getGioiTinh();
+	    row[4] = sv.getEmail();
+	    row[5] = sv.getDiaChi();
 	    
-	    //Add elements to model
-	    model.addRow(row);		    
+	    //Add array to model
+	    model.addRow(row);
 	}
 	
+	//Show data on the table
 	jTableSinhVien.setModel(model);
     }
     
-    public void hienThiDanhSachTimKien()
-    {
-	//Declare title
-	String tieuDe[] = new String[]{"Mã sinh viên", "Họ tên", "Điện thoại", "Email", "Địa chỉ"};
-	
-	//Declare key word String
-	String tuKhoa = "";
-	
-	//Take user information entered from the keyboard
-	tuKhoa = txtTuKhoa.getText();
-	
-	//Declare object to show data on the table
-	DefaultTableModel model = new DefaultTableModel(tieuDe,0);
-	
-	//Declare list to get Sinh Vien list which is searching
-	boolean ketQua = DataProvider.getSinhVienBus().timKiemThongTinSinhVien(tuKhoa);
-	
-	//Declare array to show SinhVien list on the table
-	Object row[] = new Object[5];
-	
-
-	jTableSinhVien.setModel(model);	
-    }
-    
-    /** 
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -335,11 +295,10 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTableSinhVien;
-    private javax.swing.JTextField txtTuKhoa;
+    private javax.swing.JTextField txtThongTin;
     // End of variables declaration//GEN-END:variables
 }

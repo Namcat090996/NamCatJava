@@ -35,6 +35,9 @@ public class NamCat_LopVaDoiTuong {
 	SinhVienBusiness sv = new SinhVienBusiness();
 	
 	List<SinhVien> lstSV = sv.layDanhSach();
+	
+	SinhVien objSV = DataProvider.getSinhVienBus().layChiTiet("SF001");
+	
 
     }  
 }

@@ -115,7 +115,7 @@ public class SinhVienBusiness {
     {
 	for(int i = 0; i < lstSinhVien.size(); i++)
 	{
-	    if(lstSinhVien.get(i).getMaSV().equals(objSV))
+	    if(lstSinhVien.get(i).getMaSV().equals(objSV.getMaSV()))
 	    {
 		lstSinhVien.set(i, objSV);
 	    }
@@ -149,8 +149,7 @@ public class SinhVienBusiness {
     public List<SinhVien> sapXepMaTangDan()
     {
 	List<Integer> lstSV = new ArrayList<Integer>();
-	
-	List<SinhVien> lstSinhVienAscending = new ArrayList<SinhVien>();
+	List<SinhVien> lstSinhVienAscending = new ArrayList<SinhVien>();  
 	
 	for(int i = 0; i < lstSinhVien.size(); i++)
 	{
@@ -182,16 +181,38 @@ public class SinhVienBusiness {
     public List<SinhVien> timKiem(String giaTri)
     {
 	List<SinhVien> lstTimKiem = new ArrayList<SinhVien>();
+	List<Integer> lstSV = new ArrayList<Integer>();
+	List<SinhVien> lstSinhVienAscending = new ArrayList<SinhVien>(); 
 	
 	for(int i = 0; i < lstSinhVien.size(); i++)
 	{
-	    if(!lstSinhVien.get(i).getMaSV().contains(giaTri) && !lstSinhVien.get(i).getHoTen().contains(giaTri) && !lstSinhVien.get(i).getDienThoai().contains(giaTri) && !lstSinhVien.get(i).getGioiTinh().contains(giaTri) && !lstSinhVien.get(i).getEmail().contains(giaTri) && !lstSinhVien.get(i).getDiaChi().contains(giaTri))
+	    if(lstSinhVien.get(i).getMaSV().contains(giaTri) || lstSinhVien.get(i).getHoTen().contains(giaTri) || lstSinhVien.get(i).getDienThoai().contains(giaTri) || lstSinhVien.get(i).getGioiTinh().contains(giaTri) || lstSinhVien.get(i).getEmail().contains(giaTri) || lstSinhVien.get(i).getDiaChi().contains(giaTri))
 	    {
-		lstTimKiem.add(lstSinhVien.get(i));
+		lstTimKiem.add(lstSinhVien.get(i));		
 	    }
 	}
-	return lstTimKiem;
+	
+	//Sort the list in ascending order
+	for(int i = 0; i < lstTimKiem.size(); i++)
+	{
+	    int n = Integer.parseInt(lstTimKiem.get(i).getMaSV().substring(4)); 
+	    lstSV.add(n);
+	}
+
+	Collections.sort(lstSV);
+	
+ 	for(int i = 0; i < lstTimKiem.size(); i++)
+	{
+	    for(int j = 0; j < lstTimKiem.size(); j++)
+	    {
+		if(Integer.parseInt(lstTimKiem.get(j).getMaSV().substring(4)) == lstSV.get(i))
+		{
+		    lstSinhVienAscending.add(lstTimKiem.get(j));
+		    break;
+		}		
+	    }	
+	}
+	return lstSinhVienAscending;
     }
-    
-    
+     
 }

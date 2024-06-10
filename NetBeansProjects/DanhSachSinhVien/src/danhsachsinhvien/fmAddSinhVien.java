@@ -210,8 +210,9 @@ public class fmAddSinhVien extends javax.swing.JFrame {
 	maSV = txtMaSinhVien.getText().trim();
 	hoTen = txtHoTen.getText().trim();
 	dienThoai = txtDienThoai.getText().trim();
-	email = txtEmail.getText();
-	diaChi = txtDiaChi.getText();
+	email = txtEmail.getText().trim();
+	diaChi = txtDiaChi.getText().trim(
+	);
 	
 	//Use If-Else to catch the error when users don't enter the value on the interface
 	//Mã sinh viên
@@ -348,24 +349,24 @@ public class fmAddSinhVien extends javax.swing.JFrame {
 	//Declare object to check the duplicate value
 	boolean kiemTraTrung = DataProvider.getSinhVienBus().kiemTraTrungMaSV(maSV);
 		
-	if(kiemTraTrung == true)
+	if(!this.maSV.isEmpty())
 	{
-	    if(!this.maSV.isEmpty())
-	    {
-		List<SinhVien> lstSV = DataProvider.getSinhVienBus().capNhat(objSV);
-		JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin sinh viên thành công");
-	    }
-	    else
-	    {
-		List<SinhVien> lstSV = DataProvider.getSinhVienBus().themMoi(objSV);
-		JOptionPane.showMessageDialog(rootPane, "Thêm mới thông tin sinh viên thành công");
-	    }	    
+	    List<SinhVien> lstSV = DataProvider.getSinhVienBus().capNhat(objSV);
+	    JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin sinh viên thành công");	    
 	}
 	else
 	{
-	    JOptionPane.showMessageDialog(rootPane, "Mã sinh viên này đã tồn tại. Vui lòng nhập lại mã sinh viên");
-	    txtMaSinhVien.requestFocus();
-	    return;
+	    if(kiemTraTrung == true)
+	    {
+		List<SinhVien> lstSV = DataProvider.getSinhVienBus().themMoi(objSV);
+		JOptionPane.showMessageDialog(rootPane, "Thêm mới thông tin sinh viên thành công");
+	    }
+	    else
+	    {
+		JOptionPane.showMessageDialog(rootPane, "Mã sinh viên này đã tồn tại. Vui lòng nhập lại mã sinh viên");
+		txtMaSinhVien.requestFocus();
+		return;
+	    }	    
 	}
 
 	//Reload the form
@@ -403,7 +404,7 @@ public class fmAddSinhVien extends javax.swing.JFrame {
 	    //Show object on the interface
 	    txtMaSinhVien.setText(maSV);
 	    txtHoTen.setText(objSV.getHoTen());
-	    txtDienThoai.setText(objSV.getHoTen());
+	    txtDienThoai.setText(objSV.getDienThoai());
 	    if(objSV.getGioiTinh().equals("Nam"))
 	    {
 		rb1.setSelected(true);

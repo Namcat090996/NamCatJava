@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ADMIN
  */
 public class fmDanhSachSinhVien extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form fmDanhSachSinhVien
      */
@@ -254,17 +254,8 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        // TODO add your handling code here:
-	int dong = 0;
-	
-	String giaTriTimKiem = "";
-	
-	giaTriTimKiem = txtTuKhoa.getText();
-	
-	List<SinhVien> lstSV = DataProvider.getSinhVienBus().timKiem(giaTriTimKiem);
-	
-	hienThiDanhSachSinhVien();
-	
+        // TODO add your handling code here:	
+	hienThiDanhSachTimKiem();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     public static void hienThiDanhSachSinhVien()
@@ -301,7 +292,38 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
 	//Show data on the table
 	jTableSinhVien.setModel(model);
     }
-    
+
+    public void hienThiDanhSachTimKiem()
+    {
+	//Declare String: Title 
+	String tieuDe[] = new String[]{"Mã sinh viên", "Họ tên", "Điện thoại", "Giới tính", "Email", "Địa chỉ"};
+	
+	//Declare object to show data on the table
+	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);
+	
+	//Create list to sort lstSinhVien in ascending order
+	List<SinhVien> lstSinhVienTimKiem = DataProvider.getSinhVienBus().timKiem(txtTuKhoa.getText());
+	
+	//Declare array to show data on the table
+	Object row[] = new Object[6];
+	
+	//Assign value to arrray
+	for(SinhVien sv: lstSinhVienTimKiem)
+	{
+	    row[0] = sv.getMaSV();
+	    row[1] = sv.getHoTen();
+	    row[2] = sv.getDienThoai();
+	    row[3] = sv.getGioiTinh();
+	    row[4] = sv.getEmail();
+	    row[5] = sv.getDiaChi();
+	    
+	    //Add array to model
+	    model.addRow(row);
+	}
+	
+	//Show data on the table
+	jTableSinhVien.setModel(model);
+    }    
     /**
      * @param args the command line arguments
      */

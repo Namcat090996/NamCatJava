@@ -37,7 +37,6 @@ public class NamCat_LopVaDoiTuong {
 	List<SinhVien> lstSV = sv.layDanhSach();
 	
 	SinhVien objSV = DataProvider.getSinhVienBus().layChiTiet("SF001");
-	
 
     }  
 }

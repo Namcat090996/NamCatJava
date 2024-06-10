@@ -5,6 +5,7 @@
 package danhsachsinhvien;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ public class SinhVienBusiness {
     
     //Declare variables
     private List<SinhVien> lstSinhVien = new ArrayList<SinhVien>();
+    
     private SinhVien objSV = new SinhVien();
     
     public List<SinhVien> layDanhSach()
@@ -34,17 +36,17 @@ public class SinhVienBusiness {
     {
 	//Declare object to get data information
 	SinhVien objManh = new SinhVien();
-	SinhVien objHoan = new SinhVien("SF002", "Hoạn Văn Hoan", "0708085058", "Nam", "hoanvanhoan@gmail.com", "Hà Nam");
-	SinhVien objTruc = new SinhVien("SF003", "Hư Trúc", "0708095059", "Nam", "hutruc@gmail.com", "Hà Nam");
-	SinhVien objPhuong = new SinhVien("SF004", "Veddete Vũ Thu Phương", "0703039948", "Nữ", "cavienchien@gmail.com", "Biên Hòa");
-	SinhVien objDuyen = new SinhVien("SF005", "Buồi Thị Duyên", "0909034056", "Nữ", "duyenbuoi@gmail.com", "Sài Gòn");	
+	SinhVien objHoan = new SinhVien("SF003", "Hoàng Văn Hoan", "0708085058", "Nam", "vanhoan@gmail.com", "Hà Nam");
+	SinhVien objTruc = new SinhVien("SF002", "Hư Trúc", "0708095059", "Nam", "hutruc@gmail.com", "Hà Nam");
+	SinhVien objPhuong = new SinhVien("SF001", "Nguyễn Phương", "0703039948", "Nam", "nguyenphuong@gmail.com", "Biên Hòa");
+	SinhVien objDuyen = new SinhVien("SF004", "Nguyễn Thị Duyên", "0909034056", "Nữ", "thiduyen@gmail.com", "Sài Gòn");	
 	
 	//Assign value to object
-	objManh.setMaSV("SF001");
-	objManh.setHoTen("Mạnh Thật");
+	objManh.setMaSV("SF005");
+	objManh.setHoTen("Nguyễn Văn Mạnh");
 	objManh.setDienThoai("0123455678");
 	objManh.setGioiTinh("Nam");
-	objManh.setEmail("yanghomanh@gmail.com");
+	objManh.setEmail("vanmanh@gmail.com");
 	objManh.setDiaChi("Hà Nội");
 	
 	//Assign object values to list
@@ -78,7 +80,7 @@ public class SinhVienBusiness {
      * @param maSV
      * @return 
      */
-    public boolean kiemTraTrung(String maSV)
+    public boolean kiemTraTrungMaSV(String maSV)
     {
 	for(SinhVien sv: lstSinhVien)
 	{
@@ -138,6 +140,57 @@ public class SinhVienBusiness {
 	    }
 	}
 	return lstSinhVien;	
+    }
+    
+    /**
+     * Function to sort the list in ascending order
+     * @return 
+     */
+    public List<SinhVien> sapXepMaTangDan()
+    {
+	List<Integer> lstSV = new ArrayList<Integer>();
+	
+	List<SinhVien> lstSinhVienAscending = new ArrayList<SinhVien>();
+	
+	for(int i = 0; i < lstSinhVien.size(); i++)
+	{
+	    int n = Integer.parseInt(lstSinhVien.get(i).getMaSV().substring(4)); 
+	    lstSV.add(n);
+	}
+
+	Collections.sort(lstSV);
+	
+ 	for(int i = 0; i < lstSinhVien.size(); i++)
+	{
+	    for(int j = 0; j < lstSinhVien.size(); j++)
+	    {
+		if(Integer.parseInt(lstSinhVien.get(j).getMaSV().substring(4)) == lstSV.get(i))
+		{
+		    lstSinhVienAscending.add(lstSinhVien.get(j));
+		    break;
+		}		
+	    }	
+	}
+	return lstSinhVienAscending;
+    }
+    
+    /**
+     * Function to search values
+     * @param giaTri
+     * @return 
+     */
+    public List<SinhVien> timKiem(String giaTri)
+    {
+	List<SinhVien> lstTimKiem = new ArrayList<SinhVien>();
+	
+	for(int i = 0; i < lstSinhVien.size(); i++)
+	{
+	    if(!lstSinhVien.get(i).getMaSV().contains(giaTri) && !lstSinhVien.get(i).getHoTen().contains(giaTri) && !lstSinhVien.get(i).getDienThoai().contains(giaTri) && !lstSinhVien.get(i).getGioiTinh().contains(giaTri) && !lstSinhVien.get(i).getEmail().contains(giaTri) && !lstSinhVien.get(i).getDiaChi().contains(giaTri))
+	    {
+		lstTimKiem.add(lstSinhVien.get(i));
+	    }
+	}
+	return lstTimKiem;
     }
     
     

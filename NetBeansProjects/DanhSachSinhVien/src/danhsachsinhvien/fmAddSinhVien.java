@@ -202,7 +202,8 @@ public class fmAddSinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDiaChiActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-        //Declare new value to add/update in the list
+        
+	//Declare new value to add/update in the list
 	String maSV = "", hoTen = "", dienThoai = "", gioiTinh = "", email = "", diaChi = "";
 	
 	//Take user information entered from the keyboard
@@ -213,8 +214,30 @@ public class fmAddSinhVien extends javax.swing.JFrame {
 	diaChi = txtDiaChi.getText();
 	
 	//Use If-Else to catch the error when users don't enter the value on the interface
-	
 	//Mã sinh viên
+	int x = 0;
+	
+	//"Mã sinh viên" must be no less than 5 characters and x must be an integer
+	try 
+	{  
+	    x = Integer.parseInt(maSV.substring(4));
+	} 
+	catch (Exception e) 
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Mã sinh viên không hợp lệ");
+	    txtMaSinhVien.requestFocus();
+	    return;	
+	}
+	
+	//"Mã sinh viên" must be in the correct format
+	if(!maSV.equals("SF00" + Integer.toString(x)))
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Mã sinh viên không hợp lệ");
+	    txtMaSinhVien.requestFocus();
+	    return;
+    
+	}
+	
 	if(maSV.length() == 0)
 	{
 	    JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập mã sinh viên");
@@ -230,12 +253,51 @@ public class fmAddSinhVien extends javax.swing.JFrame {
 	    return;
 	}
 	
+	if(hoTen.contains("  "))
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Tên không hợp lệ");
+	    txtHoTen.requestFocus();
+	    return;	    
+	}
+	
+	//Check if "Họ tên" contains digit
+	char hoTenCheck[] = hoTen.toCharArray();
+	
+	for(char giaTri: hoTenCheck)
+	{
+	    if(Character.isDigit(giaTri))
+	    {
+		JOptionPane.showMessageDialog(rootPane, "Tên không hợp lệ");
+		txtHoTen.requestFocus();
+		return;
+	    }	    
+	}
+	
 	//Điện thoại
 	if(dienThoai.length() == 0)
 	{
 	    JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập số điện thoại sinh viên");
 	    txtDiaChi.requestFocus();
 	    return;
+	}
+
+	if(dienThoai.contains(" "))
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ");
+	    txtDienThoai.requestFocus();
+	    return;	    
+	}
+	//Check if "Điện thoại" contains letter
+	char dienThoaiCheck[] = dienThoai.toCharArray();
+	
+	for(char giaTri: dienThoaiCheck)
+	{
+	    if(Character.isLetter(giaTri))
+	    {
+		JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ");
+		txtDienThoai.requestFocus();
+		return;
+	    }	    
 	}
 	
 	//Giới tính
@@ -284,19 +346,19 @@ public class fmAddSinhVien extends javax.swing.JFrame {
 	objSV.setDiaChi(diaChi);
 	
 	//Declare object to check the duplicate value
-	boolean kiemTraTrung = DataProvider.getSinhVienBus().kiemTraTrung(maSV);
+	boolean kiemTraTrung = DataProvider.getSinhVienBus().kiemTraTrungMaSV(maSV);
 		
-	if(kiemTraTrung = true)
+	if(kiemTraTrung == true)
 	{
 	    if(!this.maSV.isEmpty())
 	    {
 		List<SinhVien> lstSV = DataProvider.getSinhVienBus().capNhat(objSV);
-		JOptionPane.showMessageDialog(rootPane, "Thêm mới thông tin sinh viên thành công");
+		JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin sinh viên thành công");
 	    }
 	    else
 	    {
 		List<SinhVien> lstSV = DataProvider.getSinhVienBus().themMoi(objSV);
-		JOptionPane.showMessageDialog(rootPane, "Sửa thông tin sinh viên thành công");
+		JOptionPane.showMessageDialog(rootPane, "Thêm mới thông tin sinh viên thành công");
 	    }	    
 	}
 	else
@@ -326,6 +388,7 @@ public class fmAddSinhVien extends javax.swing.JFrame {
 	}
 	else
 	{
+	    txtMaSinhVien.setText("SF00");
 	    this.setTitle("Thêm mới thông tin sinh viên");
 	}
     }//GEN-LAST:event_formWindowOpened

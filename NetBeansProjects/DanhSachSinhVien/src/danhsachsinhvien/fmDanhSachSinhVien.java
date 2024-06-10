@@ -33,7 +33,7 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtThongTin = new javax.swing.JTextField();
+        txtTuKhoa = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSinhVien = new javax.swing.JTable();
@@ -55,6 +55,11 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
         jLabel1.setText("Nhập từ khóa tìm kiếm:");
 
         btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -64,7 +69,7 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txtThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTimKiem)
                 .addContainerGap(154, Short.MAX_VALUE))
@@ -75,7 +80,7 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiem))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -108,6 +113,11 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
         });
 
         btnXoa.setText("Xóa thông tin");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnDong.setText("Đóng");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
@@ -221,6 +231,42 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
 	fmSua.setVisible(true);
     }//GEN-LAST:event_btnSuaActionPerformed
 
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        //Declare selected row
+	int dong = jTableSinhVien.getSelectedRow();
+	
+	//Declare selected value
+	String maSV = "";
+	
+	if(dong != -1)
+	{
+	    maSV = "" + jTableSinhVien.getValueAt(dong, 0);
+	}
+	else
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn sinh viên cần xóa thông tin");
+	    return;	    
+	}
+	
+	List<SinhVien> xoaMaSV = DataProvider.getSinhVienBus().xoa(maSV);
+	
+	hienThiDanhSachSinhVien();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+	int dong = 0;
+	
+	String giaTriTimKiem = "";
+	
+	giaTriTimKiem = txtTuKhoa.getText();
+	
+	List<SinhVien> lstSV = DataProvider.getSinhVienBus().timKiem(giaTriTimKiem);
+	
+	hienThiDanhSachSinhVien();
+	
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
     public static void hienThiDanhSachSinhVien()
     {
 	//Declare String: Title 
@@ -232,11 +278,14 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
 	//Create list to contain data
 	List<SinhVien> lstSinhVien = DataProvider.getSinhVienBus().layDanhSach();
 	
+	//Create list to sort lstSinhVien in ascending order
+	List<SinhVien> lstSinhVienAscending = DataProvider.getSinhVienBus().sapXepMaTangDan();	
+	
 	//Declare array to show data on the table
 	Object row[] = new Object[6];
 	
 	//Assign value to arrray
-	for(SinhVien sv: lstSinhVien)
+	for(SinhVien sv: lstSinhVienAscending)
 	{
 	    row[0] = sv.getMaSV();
 	    row[1] = sv.getHoTen();
@@ -299,6 +348,6 @@ public class fmDanhSachSinhVien extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTableSinhVien;
-    private javax.swing.JTextField txtThongTin;
+    private javax.swing.JTextField txtTuKhoa;
     // End of variables declaration//GEN-END:variables
 }

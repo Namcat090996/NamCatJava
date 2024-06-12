@@ -11,4 +11,5 @@
     <fullyQualifiedTypeName name="double"/>
     <fullyQualifiedTypeName name="int"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
 </qualifiedTypeNameHistroy>

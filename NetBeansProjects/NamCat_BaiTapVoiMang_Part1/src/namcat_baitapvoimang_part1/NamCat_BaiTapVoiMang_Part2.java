@@ -80,8 +80,6 @@ public class NamCat_BaiTapVoiMang_Part2 {
 	}	
 	
 	System.out.printf("Giá trị trong mảng gần %.1f nhất là = %.1f\n",x,arr[idx2]);
-
-
 	
 	//Bài 3: Cho mảng 1 chiều các số thực, hãy tìm đoạn [a, b] sao cho đoạn này chứa tất cả các giá trị trong mảng
 	//Default

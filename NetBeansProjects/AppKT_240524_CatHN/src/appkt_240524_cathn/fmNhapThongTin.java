@@ -178,35 +178,16 @@ public class fmNhapThongTin extends javax.swing.JFrame {
 	    return;
 	}
 	
-	//Chuyển thông tin từ chuỗi nhập về dạng mảng
-	String giaTriNhap[] = strGiaTriNhap.split(",");
-	
 	//Khai báo mảng số nguyên
-	int arr[] = new int[giaTriNhap.length];
+	int arr[] = nhapThongTin.chuyenTuChuoiVeMangSoNguyen(strGiaTriNhap);
 	
-	//Chuyển String về Int
-	for(int i = 0; i < arr.length; i++)
-	{
-	    arr[i] = Integer.parseInt(giaTriNhap[i]);
-	}
 	
 	//Sắp xếp giảm dần
-	for(int i = 0; i < arr.length-1; i++)
-	{
-	    for(int j = i+1; j < arr.length; j++)
-	    {
-		if(arr[i] < arr[j])
-		{
-		    temp = arr[i];
-		    arr[i] = arr[j];
-		    arr[j] = temp;
-		}
-	    }
-	}
+	int strArr[] = nhapThongTin.sapXepGiamDan(arr);
 	
 	for(int i = 0; i < arr.length; i++)
 	{
-	    strGiamDan += arr[i] + "-";
+	    strGiamDan += strArr[i] + "-";
 	}
 	
 	//Hiển thị và tính tổng các số lẻ

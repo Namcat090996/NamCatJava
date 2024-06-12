@@ -70,6 +70,4 @@ public class nhapThongTin {
 	return tongSo;
     }
     
-    public static
-    
 }

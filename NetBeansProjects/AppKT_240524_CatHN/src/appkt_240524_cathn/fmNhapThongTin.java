@@ -216,15 +216,12 @@ public class fmNhapThongTin extends javax.swing.JFrame {
 	    strTop3 += arr[i] + "-";
 	}
 	
-	
 	//In kết quả 
 	txtGiamDan.setText(strGiamDan.substring(0, strGiamDan.length()-1));
 	txtCacSoLe.setText(strCacSoLe.substring(0, strCacSoLe.length()-1));
 	lblTongSoLe.setText("" + tongCacSoLe);
 	txtSoLuongSo5.setText("" + soLuongSo5);
 	txtTop3GiaTri.setText(strTop3.substring(0, strTop3.length()-1));
-	
-	
 	
     }//GEN-LAST:event_jButton2ActionPerformed
 

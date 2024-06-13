@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package NamCat_TinhToanLib;
+package NamCat_TinhToanLib2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Dell Precision 7550
  */
-public class TinhToanCongChuoiSo {
+public class TinhToan {
     
     /**
      * Equalize the length of two sequences
@@ -59,6 +59,5 @@ public class TinhToanCongChuoiSo {
 	
 	return ketQua;
 	
-    }
-    
+    }         
 }

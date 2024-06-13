@@ -4,6 +4,8 @@
  */
 package namcat_baitaplopvadoituong;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Dell Precision 7550
@@ -13,8 +15,7 @@ public class NamCat_BaiTapLopVaDoiTuong {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-	// TODO code application logic here
-    }
-    
+    public static void main(String[] args) {	
+	
+    } 
 }

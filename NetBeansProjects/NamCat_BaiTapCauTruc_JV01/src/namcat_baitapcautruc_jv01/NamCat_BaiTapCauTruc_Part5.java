@@ -5,6 +5,7 @@
 package namcat_baitapcautruc_jv01;
 
 import java.awt.im.InputContext;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -225,8 +226,7 @@ public class NamCat_BaiTapCauTruc_Part5 {
     }	
     
     */
-    
-
+  
    
   }
 }

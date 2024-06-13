@@ -6,7 +6,7 @@ package appkt_240524_cathn;
 
 import javax.swing.JOptionPane;
 import java.util.Arrays;
-import NamCat_TinhToanLib.NhapThongTin;
+import NamCat_TinhToanLib2.NhapThongTin;
 
 /**
  *
@@ -85,28 +85,26 @@ public class fmNhapThongTin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblTongSoLe)
-                            .addComponent(txtGiaTriNhap)
-                            .addComponent(txtGiamDan)
-                            .addComponent(txtCacSoLe)
-                            .addComponent(txtSoLuongSo5)
-                            .addComponent(txtTop3GiaTri, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblTongSoLe, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSoLuongSo5, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                    .addComponent(txtCacSoLe)
+                    .addComponent(txtGiamDan)
+                    .addComponent(txtGiaTriNhap)
+                    .addComponent(txtTop3GiaTri))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,11 +112,13 @@ public class fmNhapThongTin extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtGiaTriNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGiaTriNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtGiamDan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGiamDan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -135,11 +135,7 @@ public class fmNhapThongTin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtTop3GiaTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(24, 24, 24))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,27 +145,25 @@ public class fmNhapThongTin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-	
-	//Khai báo biến
+	//Declare variables
 	String strGiaTriNhap = "", strGiamDan = "", strCacSoLe = "", strTop3 = "";
 	int tongCacSoLe = 0, soLuongSo5 = 0, temp = 0;
 	
-	//Lấy thông tin từ giao diện người dùng
+	//Take user information entered from the keyboard
 	strGiaTriNhap = txtGiaTriNhap.getText();
 	
 	if(strGiaTriNhap.length() == 0)
@@ -179,11 +173,11 @@ public class fmNhapThongTin extends javax.swing.JFrame {
 	    return;
 	}
 	
-	//Khai báo mảng số nguyên
+	//Declare Integer array
 	int arr[] = NhapThongTin.chuyenTuChuoiVeMangSoNguyen(strGiaTriNhap);
 	
 	
-	//Sắp xếp giảm dần
+	//Sort the list in ascending order
 	int strArr[] = NhapThongTin.sapXepGiamDan(arr);
 	
 	for(int i = 0; i < arr.length; i++)
@@ -191,20 +185,20 @@ public class fmNhapThongTin extends javax.swing.JFrame {
 	    strGiamDan += strArr[i] + "-";
 	}
 	
-	//Hiển thị số lẻ
+	//Show the odd numbers
 	strCacSoLe = NhapThongTin.hienThiSoLe(arr);
 	tongCacSoLe = NhapThongTin.tongCacSoLe(arr);
 	
-	//Thống kế số lượng số 5
+	//Quantity statistics number 5
 	soLuongSo5 = NhapThongTin.thongKeSoLuongChuSoXuatHien(strGiaTriNhap, '5');
 	
-	//Lấy 3 thông tin có giá trị cao nhất
+	//Get 3 numbers with highest value
 	for(int i = 0; i < 3; i++)
 	{
 	    strTop3 += arr[i] + "-";
 	}
 	
-	//In kết quả 
+	//Print result
 	txtGiamDan.setText(strGiamDan.substring(0, strGiamDan.length()-1));
 	txtCacSoLe.setText(strCacSoLe.substring(0, strCacSoLe.length()-1));
 	lblTongSoLe.setText("" + tongCacSoLe);

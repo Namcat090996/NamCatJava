@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package appkt_240524_cathn;
+package PackageTemp;
 
 /**
  *
  * @author Dell Precision 7550
  */
-public class nhapThongTin {
-    
+public class NhapThongTin {
+   
     public static int[] chuyenTuChuoiVeMangSoNguyen(String strData)
     {
 	String strArr[] = strData.split(",");
@@ -70,4 +70,21 @@ public class nhapThongTin {
 	return tongSo;
     }
     
+    public static int thongKeSoLuongChuSoXuatHien(String strChuoiNhap, char giaTri)
+    {
+	char strArr[] = strChuoiNhap.toCharArray();
+	
+	int soLuongXuatHien = 0;
+	
+	for(int i = 0; i < strArr.length; i++)
+	{
+	    if(strArr[i] == giaTri)
+	    {
+		soLuongXuatHien++;
+	    }
+	}
+	
+	return soLuongXuatHien;
+    }
+             
 }

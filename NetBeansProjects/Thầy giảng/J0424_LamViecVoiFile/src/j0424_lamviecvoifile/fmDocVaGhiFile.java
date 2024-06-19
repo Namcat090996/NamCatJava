@@ -2,23 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package stanford_lamviecvoifile_j0424;
+package j0424_lamviecvoifile;
 
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author dangquang16
+ * @author Dell Precision 7550
  */
-public class frmDocVaGhiFile extends javax.swing.JFrame {
+public class fmDocVaGhiFile extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmDocVaGhiFile
+     * Creates new form fmDocVaGhiFile
      */
-    public frmDocVaGhiFile() {
-        initComponents();
+    public fmDocVaGhiFile() {
+	initComponents();
     }
 
     /**
@@ -42,7 +41,7 @@ public class frmDocVaGhiFile extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Đọc và ghi dữ liệu ra file"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đọc và ghi dữ liệu ra file", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jLabel1.setText("Chọn file:");
 
@@ -124,14 +123,14 @@ public class frmDocVaGhiFile extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,69 +152,69 @@ public class frmDocVaGhiFile extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChonFileActionPerformed
 
     private void btnDocFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocFileActionPerformed
-        String noiDung = "", duongDan = "";
-        
-        duongDan = txtDuongDanFile.getText();
-        
-        //Lấy dữ liệu từ file
-        noiDung = FileHelper.docNoiDungFile(duongDan);
-        
-        //Hiển thị kết quả
-        txtNoiDung.setText(noiDung);
+	String noiDung = "", duongDan = "";
+	
+	duongDan = txtDuongDanFile.getText();
+	
+	//Lấy dữ liệu từ file
+	noiDung = FileHelper.docNoiDungFile(duongDan);
+	
+	//Hiển thị kết quả
+	txtNoiDung.setText(noiDung);
     }//GEN-LAST:event_btnDocFileActionPerformed
 
     private void btnGhiFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGhiFileActionPerformed
-        String noiDung = "", duongDan = "";
-        
-        noiDung = txtNoiDung.getText();
-        
-        JFileChooser chooser = new JFileChooser();
-        
-        if(chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
-        {
-            duongDan = chooser.getSelectedFile().getAbsolutePath();
-            
-            //Gọi hàm ghi file
-            FileHelper.ghiDuLieuRaFile(noiDung, duongDan);
-            
-            JOptionPane.showMessageDialog(rootPane, "Ghi dữ liệu ra file thành công !");
-        }
-        
+	String noiDung = "", duongDan = "";
+	
+	noiDung = txtNoiDung.getText();
+	
+	JFileChooser chooser = new JFileChooser();
+	
+	if(chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
+	{
+	    duongDan = chooser.getSelectedFile().getAbsolutePath();
+	    
+	    //Gọi hàm ghi file
+	    FileHelper.ghiDuLieuRaFile(noiDung, duongDan);
+	    
+	    JOptionPane.showMessageDialog(rootPane, "Ghi dữ liệu ra file thành công!");
+	}
+
     }//GEN-LAST:event_btnGhiFileActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+	/* Set the Nimbus look and feel */
+	//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+	/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmDocVaGhiFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmDocVaGhiFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmDocVaGhiFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmDocVaGhiFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+	 */
+	try {
+	    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+		if ("Nimbus".equals(info.getName())) {
+		    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+		    break;
+		}
+	    }
+	} catch (ClassNotFoundException ex) {
+	    java.util.logging.Logger.getLogger(fmDocVaGhiFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	} catch (InstantiationException ex) {
+	    java.util.logging.Logger.getLogger(fmDocVaGhiFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	} catch (IllegalAccessException ex) {
+	    java.util.logging.Logger.getLogger(fmDocVaGhiFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+	    java.util.logging.Logger.getLogger(fmDocVaGhiFile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+	}
+	//</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmDocVaGhiFile().setVisible(true);
-            }
-        });
+	/* Create and display the form */
+	java.awt.EventQueue.invokeLater(new Runnable() {
+	    public void run() {
+		new fmDocVaGhiFile().setVisible(true);
+	    }
+	});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

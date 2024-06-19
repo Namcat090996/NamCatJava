@@ -33,17 +33,9 @@ public class ThiSinh {
 	
     }
     
-    public ThiSinh(String soBaoDanh, String hoTen, String gioiTinh, String ngaySinh, String queQuan, double tongDiem, double diemToan, double diemLy, double diemHoa)
+    public ThiSinh(double tongDiem)
     {
-	this.soBaoDanh = soBaoDanh;
-	this.hoTen = hoTen;
-	this.gioiTinh = gioiTinh;
-	this.ngaySinh = ngaySinh;
-	this.queQuan = queQuan;
 	this.tongDiem = tongDiem;
-	this.diemToan = diemToan;
-	this.diemLy = diemLy;
-	this.diemHoa = diemHoa;
     }
     
     public String getSoBaoDanh() {

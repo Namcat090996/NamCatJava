@@ -37,7 +37,7 @@ public class FileHelper {
                 
                 while((dong = buffer.readLine()) != null)
                 {
-                    builder.append(dong + "\n");
+                    builder.append(dong + " ");
                 }
                 
                 //Đóng bộ đệm

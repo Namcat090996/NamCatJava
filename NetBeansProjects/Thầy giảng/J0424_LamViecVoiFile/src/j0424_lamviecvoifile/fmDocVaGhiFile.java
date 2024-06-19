@@ -159,6 +159,8 @@ public class fmDocVaGhiFile extends javax.swing.JFrame {
 	//Lấy dữ liệu từ file
 	noiDung = FileHelper.docNoiDungFile(duongDan);
 	
+	String noiDungDoc[] = noiDung.split(";");
+	
 	//Hiển thị kết quả
 	txtNoiDung.setText(noiDung);
     }//GEN-LAST:event_btnDocFileActionPerformed

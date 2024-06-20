@@ -27,7 +27,7 @@ public class ThiSinh {
     
     private double diemLy = 0;
     
-    private double diemHoa = 0;   
+    private double diemHoa = 0;  
     
     public String getSoBaoDanh() {
 	return soBaoDanh;

@@ -21,6 +21,16 @@ public class ThiSinhBusiness {
     
     //Khai báo List chứa dữ liệu thí sinh
     private List<ThiSinh> lstThiSinh = new ArrayList<ThiSinh>();
+   
+    public ThiSinh layThiSinh(String soBaoDanh, String hoTen)
+    {
+	ThiSinh objTS = new ThiSinh();
+	
+	objTS.setSoBaoDanh(soBaoDanh);
+	objTS.setHoTen(hoTen);
+	
+	return objTS;
+    }    
     
     /**
      * Hàm lấy danh sách thí sinh
@@ -56,25 +66,8 @@ public class ThiSinhBusiness {
 	    {
 		String objTemp[] = dong.split(";");
 		
-		double diemToan = Double.parseDouble(objTemp[5]);
-		double diemLy = Double.parseDouble(objTemp[6]);
-		double diemHoa = Double.parseDouble(objTemp[7]);
-		double tongDiem = diemToan + diemLy + diemHoa;
-
-		objDS[i].setSoBaoDanh(objTemp[0]);
-		objTS.setHoTen(objTemp[1]);
-		objTS.setGioiTinh(objTemp[2]);
-		objTS.setNgaySinh(objTemp[3]);
-		objTS.setQueQuan(objTemp[4]);
-		objTS.setTongDiem(tongDiem);
-		objTS.setDiemToan(diemToan);
-		objTS.setDiemLy(diemLy);
-		objTS.setDiemHoa(diemHoa);
-	
-		lstThiSinh.add(objTS);
-		lstThiSinh.set(0, objTS);
-
-		i++;		
+		lstThiSinh.add(layThiSinh(objTemp[0], objTemp[1]));
+		
 	    }
 	    
 	    //Đóng bộ đệm

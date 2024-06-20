@@ -4,6 +4,10 @@
  */
 package namcat_baithuchanh_150624;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,98 +19,83 @@ import java.util.List;
  */
 public class ThiSinhBusiness {
     
+    //Khai báo List chứa dữ liệu thí sinh
     private List<ThiSinh> lstThiSinh = new ArrayList<ThiSinh>();
     
-    public List<ThiSinh> layDanhSach()
+    /**
+     * Hàm lấy danh sách thí sinh
+     * @return 
+     */
+    public List<ThiSinh> layDanhSach(String duongDan)
     {
 	if(lstThiSinh.isEmpty())
 	{
-	    taoDuLieuBanDau();
+	    layDuLieuFile(duongDan);
 	}
 	
 	return lstThiSinh;
     }
     
-    public void taoDuLieuBanDau()
-    {
-	ThiSinh objQuangHai = new ThiSinh(21.0);
+    public List<ThiSinh> layDuLieuFile(String duongDan)
+    {	
+	ThiSinh objTS = new ThiSinh();
 	
-	ThiSinh objThiAnh = new ThiSinh(19.0);
+	ThiSinh objDS[] = new ThiSinh[10];
 	
-	ThiSinh objVanAnh = new ThiSinh(15.0);
+	FileReader fileReader = null;
 	
-	ThiSinh objThaiHoa = new ThiSinh(19.0);
+	try {
+	    fileReader = new FileReader(duongDan);
+	    BufferedReader buffer = new BufferedReader(fileReader);
+	    
+	    String dong = "";
+	    
+	    int i = 0;
+	    
+	    while((dong = buffer.readLine()) != null)
+	    {
+		String objTemp[] = dong.split(";");
+		
+		double diemToan = Double.parseDouble(objTemp[5]);
+		double diemLy = Double.parseDouble(objTemp[6]);
+		double diemHoa = Double.parseDouble(objTemp[7]);
+		double tongDiem = diemToan + diemLy + diemHoa;
+
+		objDS[i].setSoBaoDanh(objTemp[0]);
+		objTS.setHoTen(objTemp[1]);
+		objTS.setGioiTinh(objTemp[2]);
+		objTS.setNgaySinh(objTemp[3]);
+		objTS.setQueQuan(objTemp[4]);
+		objTS.setTongDiem(tongDiem);
+		objTS.setDiemToan(diemToan);
+		objTS.setDiemLy(diemLy);
+		objTS.setDiemHoa(diemHoa);
 	
-	ThiSinh objHaiHa = new ThiSinh(15.0);
+		lstThiSinh.add(objTS);
+		lstThiSinh.set(0, objTS);
+
+		i++;		
+	    }
+	    
+	    //Đóng bộ đệm
+	    buffer.close();
+	    fileReader.close();
+	    
+	} catch (FileNotFoundException ex) {
+	    System.out.println("Không tìm thấy file. Chi tiết lỗi: " + ex.getMessage());
+	} catch (IOException ex) {
+	    System.out.println("Lỗi quá trình đọc file. Chi tiết lỗi: " + ex.getMessage());
+	} 
 	
-	ThiSinh objDangThuc = new ThiSinh(14.0);
-	
-	ThiSinh objLanAnh = new ThiSinh(21.0);
-	
-	ThiSinh objMinhHai = new ThiSinh(18.0);
-	
-	ThiSinh objNguyenTheNam = new ThiSinh(20.0);
-	
-	ThiSinh objAnhTuan = new ThiSinh(15.0);
-	
-	ThiSinh objThuHuyen = new ThiSinh(11.0);
-	
-	ThiSinh objBuiHaiNam = new ThiSinh(16.0);
-	
-	ThiSinh objThanhAn = new ThiSinh(24.0);
-	
-	ThiSinh objThiTham = new ThiSinh(25.0);
-	
-	ThiSinh objHaiAnh = new ThiSinh(17.0);
-	
-	ThiSinh objAnhQuang = new ThiSinh(24.0);
-	
-	ThiSinh objMinhDuc = new ThiSinh(28.0);
-	
-	ThiSinh objLaiTheNam = new ThiSinh(15.0);
-	
-	ThiSinh objThiTuoi = new ThiSinh(15.0);
-	
-	ThiSinh objThanhTam = new ThiSinh(17.0);
-	
-	ThiSinh objAnhHung = new ThiSinh(24.0);
-	
-	ThiSinh objMinhAnh = new ThiSinh(15.0);
-	
-	ThiSinh objLaiHaiNam = new ThiSinh(16.0);
-	
-	ThiSinh objThiThanh = new ThiSinh(15.0);
-	
-	ThiSinh objThanhHai = new ThiSinh(12.0);
-	
-	lstThiSinh.add(objQuangHai);
-	lstThiSinh.add(objThiAnh);
-	lstThiSinh.add(objVanAnh);
-	lstThiSinh.add(objThaiHoa);
-	lstThiSinh.add(objHaiHa);
-	lstThiSinh.add(objDangThuc);
-	lstThiSinh.add(objLanAnh);
-	lstThiSinh.add(objMinhHai);
-	lstThiSinh.add(objNguyenTheNam);
-	lstThiSinh.add(objAnhTuan);
-	lstThiSinh.add(objThuHuyen);
-	lstThiSinh.add(objBuiHaiNam);
-	lstThiSinh.add(objThanhAn);
-	lstThiSinh.add(objThiTham);
-	lstThiSinh.add(objHaiAnh);
-	lstThiSinh.add(objAnhQuang);
-	lstThiSinh.add(objMinhDuc);
-	lstThiSinh.add(objLaiTheNam);
-	lstThiSinh.add(objThiTuoi);
-	lstThiSinh.add(objThanhTam);
-	lstThiSinh.add(objAnhHung);
-	lstThiSinh.add(objMinhAnh);
-	lstThiSinh.add(objMinhAnh);
-	lstThiSinh.add(objLaiHaiNam);
-	lstThiSinh.add(objThiThanh);
-	lstThiSinh.add(objThanhHai);		
-    }
+	return lstThiSinh;
+    }    
+
     
+    /**
+     * Hàm kiểm tra trùng số báo danh
+     * @param soBaoDanh
+     * @return 
+     */
     public boolean kiemTraTrungSoBD(String soBaoDanh)
     {
 	for(ThiSinh ts: lstThiSinh)
@@ -120,6 +109,11 @@ public class ThiSinhBusiness {
 	return true;
     }
     
+    /**
+     * Hàm thêm mới thí sinh
+     * @param objTS
+     * @return 
+     */
     public List<ThiSinh> themMoi(ThiSinh objTS)
     {
 	if(objTS != null)
@@ -130,6 +124,11 @@ public class ThiSinhBusiness {
 	return lstThiSinh;
     }
     
+    /**
+     * Hàm sửa thông tin thí sinh
+     * @param objTS
+     * @return 
+     */
     public List<ThiSinh> sua(ThiSinh objTS)
     {
 	for(int i = 0; i < lstThiSinh.size(); i++)
@@ -143,6 +142,11 @@ public class ThiSinhBusiness {
 	return lstThiSinh;
     }
     
+    /**
+     * Hàm hiển thị chi tiết thông tin thí sinh
+     * @param soBaoDanh
+     * @return 
+     */
     public ThiSinh layChiTiet(String soBaoDanh)
     {
 	ThiSinh objTS = null;
@@ -159,6 +163,11 @@ public class ThiSinhBusiness {
 	return objTS;
     }
     
+    /**
+     * Hàm xóa thông tin thí sinh
+     * @param soBaoDanh
+     * @return 
+     */
     public List<ThiSinh> xoa(String soBaoDanh)
     {
 	ThiSinh objTS = layChiTiet(soBaoDanh);
@@ -174,7 +183,11 @@ public class ThiSinhBusiness {
 	return lstThiSinh;
     }
     
-    public List<ThiSinh> sapXepGiamDan()
+    /**
+     * Hàm sắp xếp số báo danh tăng dần
+     * @return 
+     */
+    public List<ThiSinh> sapXepSBDTangDan()
     {
 	List<Integer> lstSoBD = new ArrayList<Integer>();
 	List<ThiSinh> lstThiSinhAscending = new ArrayList<ThiSinh>();

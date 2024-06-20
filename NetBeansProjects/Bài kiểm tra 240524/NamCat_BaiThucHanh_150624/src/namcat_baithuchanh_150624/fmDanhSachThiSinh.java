@@ -4,7 +4,9 @@
  */
 package namcat_baithuchanh_150624;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,15 +31,16 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupHienThi = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtDuongDanFile = new javax.swing.JTextField();
         btnChonFile = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        rdTatCa = new javax.swing.JRadioButton();
+        rdTop5 = new javax.swing.JRadioButton();
+        rdDiemSan = new javax.swing.JRadioButton();
+        rdDiemLiet = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableThiSinh = new javax.swing.JTable();
@@ -61,16 +64,30 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
         jLabel1.setText("Tên file");
 
         btnChonFile.setText("Chọn file");
+        btnChonFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonFileActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Danh sách thí sinh");
 
-        jRadioButton1.setText("Tất cả");
+        btnGroupHienThi.add(rdTatCa);
+        rdTatCa.setText("Tất cả");
+        rdTatCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdTatCaActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("Top 5 điểm cao nhất");
+        btnGroupHienThi.add(rdTop5);
+        rdTop5.setText("Top 5 điểm cao nhất");
 
-        jRadioButton3.setText("Đạt điểm sàn");
+        btnGroupHienThi.add(rdDiemSan);
+        rdDiemSan.setText("Đạt điểm sàn");
 
-        jRadioButton4.setText("Thí sinh có điểm liệt");
+        btnGroupHienThi.add(rdDiemLiet);
+        rdDiemLiet.setText("Thí sinh có điểm liệt");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,13 +103,13 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton1)
+                .addComponent(rdTatCa)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton2)
+                .addComponent(rdTop5)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton3)
+                .addComponent(rdDiemSan)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton4)
+                .addComponent(rdDiemLiet)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,10 +121,10 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
                     .addComponent(txtDuongDanFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnChonFile)
                     .addComponent(jLabel2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4))
+                    .addComponent(rdTatCa)
+                    .addComponent(rdTop5)
+                    .addComponent(rdDiemSan)
+                    .addComponent(rdDiemLiet))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -224,22 +241,66 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        hienThiDanhSachThiSinh();
+
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnChonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFileActionPerformed
+        JFileChooser chooser = new JFileChooser();
+	
+	if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+	{
+	    //Lấy đường dẫn file
+	    String duongDan = chooser.getSelectedFile().getAbsolutePath();
+	    
+	    txtDuongDanFile.setText(duongDan);
+	    txtDuongDanFile.setEditable(false);
+	}	
+    }//GEN-LAST:event_btnChonFileActionPerformed
+
+    private void rdTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTatCaActionPerformed
+        hienThiDanhSachThiSinh();
+    }//GEN-LAST:event_rdTatCaActionPerformed
 
     public void hienThiDanhSachThiSinh()
     {
+	//Khai báo tiêu đề danh sách
 	String tieuDe[] = new String[]{"Số báo danh","Họ tên","Giới tính","Ngày sinh","Quê quán","Tổng","Toán","Lý","Hóa"};
 	
-	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);
+	//Khai báo đối tượng để hiển thị dữ liệu lên bảng
+	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);	
 	
-	List<ThiSinh> lstThiSinh = DataProvider.getThiSinhBus().layDanhSach();
+	//Khai báo đường dẫn file
+	String duongDan = "";
 	
-	Object row[] = new Object[9];
+	//Lấy đường dẫn từ file 
+	duongDan = txtDuongDanFile.getText();
 	
+	//Khai báo list để chứa dữ liệu thí sinh
+	List<ThiSinh> lstThiSinh = DataProvider.getThiSinhBus().layDuLieuFile(duongDan);
+	
+	//Khai báo mảng để hiển thị dữ liệu lên bảng
+	Object row[] = new Object[9];	
+	
+	//Gán dữ liệu cho mảng
 	for(ThiSinh ts: lstThiSinh)
 	{
+	    row[0] = ts.getSoBaoDanh();
+	    row[1] = ts.getHoTen();
+	    if(ts.getGioiTinh().equals("0"))
+	    {
+		row[2] = "Nam";
+	    }
+	    if(ts.getGioiTinh().equals("1"))
+	    {
+		row[2] = "Nữ";
+	    }
+	    row[3] = ts.getNgaySinh();
+	    row[4] = ts.getQueQuan();
 	    row[5] = ts.getTongDiem();
+	    row[6] = ts.getDiemToan();
+	    row[7] = ts.getDiemLy();
+	    row[8] = ts.getDiemHoa();	
+	    
 	    model.addRow(row);
 	}
 	
@@ -286,6 +347,7 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonFile;
     private javax.swing.JButton btnDong;
+    private javax.swing.ButtonGroup btnGroupHienThi;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnXoa;
@@ -295,13 +357,13 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableThiSinh;
     private javax.swing.JLabel lblTongSo;
+    private javax.swing.JRadioButton rdDiemLiet;
+    private javax.swing.JRadioButton rdDiemSan;
+    private javax.swing.JRadioButton rdTatCa;
+    private javax.swing.JRadioButton rdTop5;
     private javax.swing.JTextField txtDuongDanFile;
     // End of variables declaration//GEN-END:variables
 }

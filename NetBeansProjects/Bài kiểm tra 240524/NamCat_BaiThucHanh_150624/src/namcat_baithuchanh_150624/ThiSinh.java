@@ -10,6 +10,7 @@ package namcat_baithuchanh_150624;
  */
 public class ThiSinh {
     
+    //Khai báo biến
     private String soBaoDanh = "";
     
     private String hoTen = "";
@@ -26,17 +27,7 @@ public class ThiSinh {
     
     private double diemLy = 0;
     
-    private double diemHoa = 0;
-    
-    public ThiSinh()
-    {
-	
-    }
-    
-    public ThiSinh(double tongDiem)
-    {
-	this.tongDiem = tongDiem;
-    }
+    private double diemHoa = 0;   
     
     public String getSoBaoDanh() {
 	return soBaoDanh;
@@ -109,6 +100,5 @@ public class ThiSinh {
     public void setDiemHoa(double diemHoa) {
 	this.diemHoa = diemHoa;
     }
-
-    
+   
 }

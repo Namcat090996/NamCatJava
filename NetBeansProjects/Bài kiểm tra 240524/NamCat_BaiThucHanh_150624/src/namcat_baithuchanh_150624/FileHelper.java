@@ -8,8 +8,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +15,11 @@ import java.util.logging.Logger;
  */
 public class FileHelper {
     
+    /**
+     * Hàm lấy nội dung từ 1 file đọc được
+     * @param duongDan
+     * @return 
+     */
     public static String docNoiDungFile(String duongDan)
     {
 	StringBuilder builder = new StringBuilder();
@@ -27,10 +30,23 @@ public class FileHelper {
 	    fileReader = new FileReader(duongDan);
 	    BufferedReader buffer = new BufferedReader(fileReader);
 	    
+	    String dong = "";
+	    
+	    while((dong = buffer.readLine()) != null)
+	    {
+		builder.append(dong + ";");
+	    }
+	    
+	    //Đóng bộ đệm
+	    buffer.close();
+	    fileReader.close();
+	    
 	} catch (FileNotFoundException ex) {
-	    Logger.getLogger(FileHelper.class.getName()).log(Level.SEVERE, null, ex);
+	    System.out.println("Không tìm thấy file. Chi tiết lỗi: " + ex.getMessage());
+	} catch (IOException ex) {
+	    System.out.println("Lỗi quá trình đọc file. Chi tiết lỗi: " + ex.getMessage());
 	} 
 	
-	
+	return builder.toString();
     }
 }

@@ -370,6 +370,8 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
         //Khai báo nội dung, đường dẫn
 	String noiDung = "", duongDan = "";
 	
+	noiDung = "" + jTableThiSinh.getModel();
+	
 	//Khai báo đối tượng chọn file
 	JFileChooser chooser = new JFileChooser();
 	

@@ -211,8 +211,7 @@ public class fmAddSinhVien extends javax.swing.JFrame {
 	hoTen = txtHoTen.getText().trim();
 	dienThoai = txtDienThoai.getText().trim();
 	email = txtEmail.getText().trim();
-	diaChi = txtDiaChi.getText().trim(
-	);
+	diaChi = txtDiaChi.getText().trim();
 	
 	//Use If-Else to catch the error when users don't enter the value on the interface
 	//Mã sinh viên

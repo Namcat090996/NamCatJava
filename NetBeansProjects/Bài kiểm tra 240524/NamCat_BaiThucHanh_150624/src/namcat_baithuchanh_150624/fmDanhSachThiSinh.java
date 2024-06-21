@@ -7,6 +7,7 @@ package namcat_baithuchanh_150624;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -51,6 +52,7 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnThemMoi = new javax.swing.JButton();
+        btnLuu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -82,6 +84,11 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
 
         btnGroupHienThi.add(rdTop5);
         rdTop5.setText("Top 5 điểm cao nhất");
+        rdTop5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdTop5ActionPerformed(evt);
+            }
+        });
 
         btnGroupHienThi.add(rdDiemSan);
         rdDiemSan.setText("Đạt điểm sàn");
@@ -149,19 +156,48 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
         lblTongSo.setText("0");
 
         btnDong.setText("Đóng");
+        btnDong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDongActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnThemMoi.setText("Thêm mới");
+        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemMoiActionPerformed(evt);
+            }
+        });
+
+        btnLuu.setText("Lưu");
+        btnLuu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(479, Short.MAX_VALUE)
+                .addContainerGap(386, Short.MAX_VALUE)
+                .addComponent(btnLuu)
+                .addGap(18, 18, 18)
                 .addComponent(btnThemMoi)
                 .addGap(18, 18, 18)
                 .addComponent(btnSua)
@@ -179,7 +215,8 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
                     .addComponent(btnDong)
                     .addComponent(btnXoa)
                     .addComponent(btnSua)
-                    .addComponent(btnThemMoi))
+                    .addComponent(btnThemMoi)
+                    .addComponent(btnLuu))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -245,12 +282,17 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnChonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFileActionPerformed
-        JFileChooser chooser = new JFileChooser();
+	//Khai báo đường dẫn file
+	String duongDan = "";
 	
+	//Khai báo đối tượng chọn file
+	JFileChooser chooser = new JFileChooser();
+	
+	//Mở hộp thoại chọn file
 	if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
 	{
 	    //Lấy đường dẫn file
-	    String duongDan = chooser.getSelectedFile().getAbsolutePath();
+	    duongDan = chooser.getSelectedFile().getAbsolutePath();
 	    
 	    txtDuongDanFile.setText(duongDan);
 	    txtDuongDanFile.setEditable(false);
@@ -258,10 +300,123 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChonFileActionPerformed
 
     private void rdTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTatCaActionPerformed
-        hienThiDanhSachThiSinh();
+	//Bắt lỗi khi chưa chọn file để xem
+	if(txtDuongDanFile.getText().length() == 0)
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn file cần xem");
+	    btnChonFile.requestFocus();
+	    return;
+	}
+	else
+	{
+	    hienThiDanhSachThiSinh();
+	}
     }//GEN-LAST:event_rdTatCaActionPerformed
 
-    public void hienThiDanhSachThiSinh()
+    private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
+        //Hộp thoại đóng chương trình
+	if(JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không ?", "Thoát chương trình", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+	{
+	    System.exit(0);
+	}
+    }//GEN-LAST:event_btnDongActionPerformed
+
+    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
+	//Bắt lỗi khi table rỗng
+	if(jTableThiSinh.getValueAt(1, 0) == null)
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Không tìm thấy danh sách thí sinh để thêm thông tin");
+	    btnChonFile.requestFocus();
+	    return;	    
+	}
+
+	//Khai báo đối tượng hiển thị
+	fmThiSinhRev fmThemMoi = new fmThiSinhRev();
+	
+	//Hiển thị form thêm mới
+	fmThemMoi.setVisible(true);
+    }//GEN-LAST:event_btnThemMoiActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        //Khai báo dòng được chọn
+	int dong = jTableThiSinh.getSelectedRow();
+	
+	//Khai báo biến để chọn số báo danh
+	String soBaoDanh = "";
+	
+	//Bắt lỗi khi chưa chọn dòng
+	if(dong != -1)
+	{
+	    //Phương thức để chọn số báo danh
+	    soBaoDanh = "" + jTableThiSinh.getValueAt(dong, 0);
+	}
+	else
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn thí sinh cần sửa thông tin");
+	    return;
+	}
+	
+	//Khai báo đối tượng hiển thị
+	fmThiSinhRev fmSua = new fmThiSinhRev();
+	
+	//Gán giá trị số báo danh
+	fmSua.setSoBaoDanh(soBaoDanh);
+	
+	//Hiển thị form sửa
+	fmSua.setVisible(true);	
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        //Khai báo nội dung, đường dẫn
+	String noiDung = "", duongDan = "";
+	
+	//Khai báo đối tượng chọn file
+	JFileChooser chooser = new JFileChooser();
+	
+	//Mở hộp thoại ghi file
+	if(chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
+	{
+	    duongDan = chooser.getSelectedFile().getAbsolutePath();
+	    
+	    //Gọi hàm ghi file
+	    DataProvider.getThiSinhBus().ghiDuLieuFile(noiDung, duongDan);
+	    
+	    JOptionPane.showMessageDialog(rootPane, "Ghi dữ liệu ra file thành công");	    
+	}
+    }//GEN-LAST:event_btnLuuActionPerformed
+
+    private void rdTop5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTop5ActionPerformed
+        // TODO add your handling code here:
+	
+    }//GEN-LAST:event_rdTop5ActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+       
+	//Khai báo dòng chọn để xóa thí sinh
+	int dong = jTableThiSinh.getSelectedRow();;
+	
+	//Khai báo số báo danh cần xóa
+	String soBD = "";
+	
+	//Bắt lỗi khi người dùng chưa chọn thí sinh cần xóa
+	if(dong != -1)
+	{
+	    soBD = "" + jTableThiSinh.getValueAt(dong, 0);
+	}
+	else
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn thí sinh cần xóa");
+	    return;
+	}
+	
+	//Gọi hàm xóa thí sinh
+	List<ThiSinh> lstXoa = DataProvider.getThiSinhBus().xoa(soBD);
+	
+	//Reload lại danh sách
+	hienThiDanhSachThiSinh();
+    }//GEN-LAST:event_btnXoaActionPerformed
+    
+    public static void hienThiDanhSachThiSinh()
     {
 	//Khai báo tiêu đề danh sách
 	String tieuDe[] = new String[]{"Số báo danh","Họ tên","Giới tính","Ngày sinh","Quê quán","Tổng","Toán","Lý","Hóa"};
@@ -276,7 +431,7 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
 	duongDan = txtDuongDanFile.getText();
 	
 	//Khai báo list để chứa dữ liệu thí sinh
-	List<ThiSinh> lstThiSinh = DataProvider.getThiSinhBus().layDuLieuFile(duongDan);
+	List<ThiSinh> lstThiSinh = DataProvider.getThiSinhBus().layDanhSach(duongDan);
 	
 	//Khai báo mảng để hiển thị dữ liệu lên bảng
 	Object row[] = new Object[9];	
@@ -301,11 +456,12 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
 	    row[7] = ts.getDiemLy();
 	    row[8] = ts.getDiemHoa();	
 	    
+	    //Add mảng vào model
 	    model.addRow(row);
 	}
 	
+	//Hiển thị model lên table
 	jTableThiSinh.setModel(model);	
-	
     }
     
     /**
@@ -348,6 +504,7 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
     private javax.swing.JButton btnChonFile;
     private javax.swing.JButton btnDong;
     private javax.swing.ButtonGroup btnGroupHienThi;
+    private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnXoa;
@@ -358,12 +515,12 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableThiSinh;
+    private static javax.swing.JTable jTableThiSinh;
     private javax.swing.JLabel lblTongSo;
     private javax.swing.JRadioButton rdDiemLiet;
     private javax.swing.JRadioButton rdDiemSan;
     private javax.swing.JRadioButton rdTatCa;
     private javax.swing.JRadioButton rdTop5;
-    private javax.swing.JTextField txtDuongDanFile;
+    private static javax.swing.JTextField txtDuongDanFile;
     // End of variables declaration//GEN-END:variables
 }

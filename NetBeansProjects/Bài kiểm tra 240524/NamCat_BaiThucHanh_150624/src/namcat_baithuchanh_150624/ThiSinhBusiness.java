@@ -7,11 +7,14 @@ package namcat_baithuchanh_150624;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,13 +24,33 @@ public class ThiSinhBusiness {
     
     //Khai báo List chứa dữ liệu thí sinh
     private List<ThiSinh> lstThiSinh = new ArrayList<ThiSinh>();
-   
-    public ThiSinh layThiSinh(String soBaoDanh, String hoTen)
+    
+    /**
+     * Hàm hỗ trợ gán thông tin cho object
+     * @param soBaoDanh
+     * @param hoTen
+     * @param gioiTinh
+     * @param ngaySinh
+     * @param queQuan
+     * @param tongDiem
+     * @param diemToan
+     * @param diemLy
+     * @param diemHoa
+     * @return 
+     */
+    public ThiSinh ganThongTin(String soBaoDanh, String hoTen, String gioiTinh, String ngaySinh, String queQuan, double tongDiem, double diemToan, double diemLy, double diemHoa)
     {
 	ThiSinh objTS = new ThiSinh();
 	
 	objTS.setSoBaoDanh(soBaoDanh);
 	objTS.setHoTen(hoTen);
+	objTS.setGioiTinh(gioiTinh);
+	objTS.setNgaySinh(ngaySinh);
+	objTS.setQueQuan(queQuan);
+	objTS.setTongDiem(tongDiem);
+	objTS.setDiemToan(diemToan);
+	objTS.setDiemLy(diemLy);
+	objTS.setDiemHoa(diemHoa);
 	
 	return objTS;
     }    
@@ -40,18 +63,18 @@ public class ThiSinhBusiness {
     {
 	if(lstThiSinh.isEmpty())
 	{
-	    layDuLieuFile(duongDan);
+	    docDuLieuFile(duongDan);
 	}
 	
 	return lstThiSinh;
     }
-    
-    public List<ThiSinh> layDuLieuFile(String duongDan)
+   /**
+    * Hàm đọc dữ liệu từ file
+    * @param duongDan
+    * @return 
+    */
+    public List<ThiSinh> docDuLieuFile(String duongDan)
     {	
-	ThiSinh objTS = new ThiSinh();
-	
-	ThiSinh objDS[] = new ThiSinh[10];
-	
 	FileReader fileReader = null;
 	
 	try {
@@ -60,14 +83,16 @@ public class ThiSinhBusiness {
 	    
 	    String dong = "";
 	    
-	    int i = 0;
-	    
 	    while((dong = buffer.readLine()) != null)
 	    {
 		String objTemp[] = dong.split(";");
 		
-		lstThiSinh.add(layThiSinh(objTemp[0], objTemp[1]));
+		double diemToan = Double.parseDouble(objTemp[5]);
+		double diemLy = Double.parseDouble(objTemp[6]);
+		double diemHoa = Double.parseDouble(objTemp[7]);
+		double tongDiem = diemToan + diemLy + diemHoa;
 		
+		lstThiSinh.add(ganThongTin(objTemp[0], objTemp[1], objTemp[2], objTemp[3], objTemp[4], tongDiem, diemToan, diemLy, diemHoa));	
 	    }
 	    
 	    //Đóng bộ đệm
@@ -75,15 +100,34 @@ public class ThiSinhBusiness {
 	    fileReader.close();
 	    
 	} catch (FileNotFoundException ex) {
-	    System.out.println("Không tìm thấy file. Chi tiết lỗi: " + ex.getMessage());
+	    System.err.println("Không tìm thấy file. Chi tiết lỗi: " + ex.getMessage());
 	} catch (IOException ex) {
-	    System.out.println("Lỗi quá trình đọc file. Chi tiết lỗi: " + ex.getMessage());
+	    System.err.println("Lỗi quá trình đọc file. Chi tiết lỗi: " + ex.getMessage());
 	} 
 	
 	return lstThiSinh;
-    }    
-
+    }  
     
+    public void ghiDuLieuFile(String noiDung, String duongDan)
+    {
+	FileWriter writer = null;
+	try {
+	    writer = new FileWriter(duongDan, true);
+	    
+	    //Ghi thông tin ra file
+	    writer.write(noiDung + "\n");
+	    
+	    //Đẩy ra file để ghi
+	    writer.flush();
+	    
+	    //Đóng luồng ghi
+	    writer.close();
+	    
+	} catch (IOException ex) {
+	    System.out.println("Lỗi khi ghi thông tin ra file. Chi tiết lỗi " + ex.getMessage());
+	}	
+    }
+ 
     /**
      * Hàm kiểm tra trùng số báo danh
      * @param soBaoDanh
@@ -207,6 +251,7 @@ public class ThiSinhBusiness {
 	
 	return lstThiSinhAscending;
     }
+    
     
     
 

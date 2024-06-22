@@ -10,11 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -220,39 +216,96 @@ public class ThiSinhBusiness {
 	return lstThiSinh;
     }
     
-    /**
-     * Hàm sắp xếp số báo danh tăng dần
-     * @return 
-     */
-    public List<ThiSinh> sapXepSBDTangDan()
-    {
-	List<Integer> lstSoBD = new ArrayList<Integer>();
-	List<ThiSinh> lstThiSinhAscending = new ArrayList<ThiSinh>();
+    public List<ThiSinh> top5DiemCaoNhat()
+    {	
+	List<ThiSinh> lstThiSinhs = new ArrayList<>();
 	
-	for(int i = 0; i < lstThiSinh.size(); i++)
+	List<ThiSinh> lstTop5 = new ArrayList<ThiSinh>();
+	
+	ThiSinh objTS;
+	
+	for(ThiSinh ts: lstThiSinh)
 	{
-	    int n = Integer.parseInt(lstThiSinh.get(i).getSoBaoDanh().substring(3));
-	    lstSoBD.add(n);
+	    lstThiSinhs.add(ts);
 	}
 	
-	Collections.sort(lstSoBD);
-	
-	for(int i = 0; i < lstThiSinh.size(); i++)
+	for(int i = 0; i < lstThiSinhs.size()-1; i++)
 	{
-	    for(int j = 0; j < lstThiSinh.size(); j++)
+	    for(int j = i+1; j < lstThiSinhs.size(); j++)
 	    {
-		if(Integer.parseInt(lstThiSinh.get(j).getSoBaoDanh().substring(3)) == lstSoBD.get(i))
+		if(lstThiSinhs.get(i).getTongDiem() < lstThiSinhs.get(j).getTongDiem())
 		{
-		    lstThiSinhAscending.add(lstThiSinh.get(i));
-		    break;
+		    objTS = lstThiSinhs.get(i);
+		    lstThiSinhs.set(i, lstThiSinhs.get(j));
+		    lstThiSinhs.set(j, objTS);
+		    
 		}
 	    }
 	}
 	
-	return lstThiSinhAscending;
+	for(int i = 0; i < 4; i++)
+	{
+	    lstTop5.add(lstThiSinhs.get(i));
+	}
+	
+	double max = lstThiSinhs.get(4).getDiemToan();
+	
+	for(int i = 4; i < lstThiSinhs.size(); i++)
+	{
+	    if(lstThiSinhs.get(i).getDiemToan() > max)
+	    {
+		max = lstThiSinhs.get(i).getDiemToan();
+	    }
+	}
+	
+	for(int i = 4; i < lstThiSinhs.size(); i++)
+	{
+	    if(!lstThiSinhs.get(i).getQueQuan().equals("Hà Nội") && lstThiSinhs.get(i).getDiemToan() == max)
+	    {
+		lstTop5.add(lstThiSinhs.get(i));
+		break;
+	    }
+	    if(i == lstThiSinhs.size()-1)
+	    {
+		lstTop5.add(lstThiSinhs.get(4));
+	    }
+	}
+
+	return lstTop5;
     }
     
+    public List<ThiSinh> diemSan()
+    {
+	List<ThiSinh> lstDiemSan = new ArrayList<>();
+	
+	for(int i = 0; i < lstThiSinh.size(); i++)
+	{
+	    if(lstThiSinh.get(i).getTongDiem() >= 15)
+	    {
+		if(lstThiSinh.get(i).getDiemToan() > 1 && lstThiSinh.get(i).getDiemLy() > 1 && lstThiSinh.get(i).getDiemHoa() > 1)
+		{
+		    lstDiemSan.add(lstThiSinh.get(i));
+		}
+	    }
+	}
+	
+	return lstDiemSan;
+    }
     
+     public List<ThiSinh> diemLiet()
+    {
+	List<ThiSinh> lstDiemLiet = new ArrayList<>();
+	
+	for(int i = 0; i < lstThiSinh.size(); i++)
+	{
+	    if(lstThiSinh.get(i).getDiemToan() <= 1 || lstThiSinh.get(i).getDiemLy() <= 1 || lstThiSinh.get(i).getDiemHoa() <= 1)
+	    {
+		lstDiemLiet.add(lstThiSinh.get(i));
+	    }
+	}
+	
+	return lstDiemLiet;
+    }   
     
 
     

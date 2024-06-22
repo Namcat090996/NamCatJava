@@ -92,9 +92,19 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
 
         btnGroupHienThi.add(rdDiemSan);
         rdDiemSan.setText("Đạt điểm sàn");
+        rdDiemSan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdDiemSanActionPerformed(evt);
+            }
+        });
 
         btnGroupHienThi.add(rdDiemLiet);
         rdDiemLiet.setText("Thí sinh có điểm liệt");
+        rdDiemLiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdDiemLietActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,7 +127,7 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
                 .addComponent(rdDiemSan)
                 .addGap(18, 18, 18)
                 .addComponent(rdDiemLiet)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,23 +244,22 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(lblTongSo))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -260,9 +269,9 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +280,7 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -389,7 +398,16 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
 
     private void rdTop5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTop5ActionPerformed
         // TODO add your handling code here:
-	
+	if(txtDuongDanFile.getText().length() == 0)
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn file cần xem");
+	    btnChonFile.requestFocus();
+	    return;
+	}
+	else
+	{
+	    top5DiemCaoNhat();
+	}
     }//GEN-LAST:event_rdTop5ActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -417,6 +435,34 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
 	//Reload lại danh sách
 	hienThiDanhSachThiSinh();
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void rdDiemSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdDiemSanActionPerformed
+        // TODO add your handling code here:
+	if(txtDuongDanFile.getText().length() == 0)
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn file cần xem");
+	    btnChonFile.requestFocus();
+	    return;
+	}
+	else
+	{
+	    diemSan();
+	}        
+    }//GEN-LAST:event_rdDiemSanActionPerformed
+
+    private void rdDiemLietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdDiemLietActionPerformed
+        // TODO add your handling code here:
+	if(txtDuongDanFile.getText().length() == 0)
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn file cần xem");
+	    btnChonFile.requestFocus();
+	    return;
+	}
+	else
+	{
+	    diemLiet();
+	}          
+    }//GEN-LAST:event_rdDiemLietActionPerformed
     
     public static void hienThiDanhSachThiSinh()
     {
@@ -462,9 +508,186 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
 	    model.addRow(row);
 	}
 	
+	int tongSo = 0;
+	
+	tongSo = lstThiSinh.size();
+	
+	lblTongSo.setText("" + tongSo);	
+	
 	//Hiển thị model lên table
 	jTableThiSinh.setModel(model);	
     }
+    
+    public void top5DiemCaoNhat()
+    {
+	//Khai báo tiêu đề danh sách
+	String tieuDe[] = new String[]{"Số báo danh","Họ tên","Giới tính","Ngày sinh","Quê quán","Tổng","Toán","Lý","Hóa"};
+	
+	//Khai báo đối tượng để hiển thị dữ liệu lên bảng
+	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);	
+
+	//Khai báo đường dẫn file
+	String duongDan = "";
+	
+	//Lấy đường dẫn từ file 
+	duongDan = txtDuongDanFile.getText();
+	
+	//Khai báo list để chứa dữ liệu thí sinh
+	List<ThiSinh> lstThiSinh = DataProvider.getThiSinhBus().layDanhSach(duongDan);
+	
+	//Khai báo list để chứa dữ liệu thí sinh
+	List<ThiSinh> lstTop5 = DataProvider.getThiSinhBus().top5DiemCaoNhat();
+	
+	//Khai báo mảng để hiển thị dữ liệu lên bảng
+	Object row[] = new Object[9];	
+	
+	//Gán dữ liệu cho mảng
+	for(ThiSinh ts: lstTop5)
+	{
+	    row[0] = ts.getSoBaoDanh();
+	    row[1] = ts.getHoTen();
+	    if(ts.getGioiTinh().equals("0"))
+	    {
+		row[2] = "Nam";
+	    }
+	    if(ts.getGioiTinh().equals("1"))
+	    {
+		row[2] = "Nữ";
+	    }
+	    row[3] = ts.getNgaySinh();
+	    row[4] = ts.getQueQuan();
+	    row[5] = ts.getTongDiem();
+	    row[6] = ts.getDiemToan();
+	    row[7] = ts.getDiemLy();
+	    row[8] = ts.getDiemHoa();	
+	    
+	    //Add mảng vào model
+	    model.addRow(row);
+	}
+	
+	int tongSo = 0;
+	
+	tongSo = lstTop5.size();
+	
+	lblTongSo.setText("" + tongSo);
+	
+	//Hiển thị model lên table
+	jTableThiSinh.setModel(model);	
+    }
+
+    public void diemSan()
+    {
+	//Khai báo tiêu đề danh sách
+	String tieuDe[] = new String[]{"Số báo danh","Họ tên","Giới tính","Ngày sinh","Quê quán","Tổng","Toán","Lý","Hóa"};
+	
+	//Khai báo đối tượng để hiển thị dữ liệu lên bảng
+	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);	
+
+	//Khai báo đường dẫn file
+	String duongDan = "";
+	
+	//Lấy đường dẫn từ file 
+	duongDan = txtDuongDanFile.getText();
+	
+	//Khai báo list để chứa dữ liệu thí sinh
+	List<ThiSinh> lstThiSinh = DataProvider.getThiSinhBus().layDanhSach(duongDan);
+	
+	//Khai báo list để chứa dữ liệu thí sinh
+	List<ThiSinh> lstDiemSan = DataProvider.getThiSinhBus().diemSan();
+	
+	//Khai báo mảng để hiển thị dữ liệu lên bảng
+	Object row[] = new Object[9];	
+	
+	//Gán dữ liệu cho mảng
+	for(ThiSinh ts: lstDiemSan)
+	{
+	    row[0] = ts.getSoBaoDanh();
+	    row[1] = ts.getHoTen();
+	    if(ts.getGioiTinh().equals("0"))
+	    {
+		row[2] = "Nam";
+	    }
+	    if(ts.getGioiTinh().equals("1"))
+	    {
+		row[2] = "Nữ";
+	    }
+	    row[3] = ts.getNgaySinh();
+	    row[4] = ts.getQueQuan();
+	    row[5] = ts.getTongDiem();
+	    row[6] = ts.getDiemToan();
+	    row[7] = ts.getDiemLy();
+	    row[8] = ts.getDiemHoa();	
+	    
+	    //Add mảng vào model
+	    model.addRow(row);
+	}
+	
+	int tongSo = 0;
+	
+	tongSo = lstDiemSan.size();
+	
+	lblTongSo.setText("" + tongSo);
+	
+	//Hiển thị model lên table
+	jTableThiSinh.setModel(model);	
+    }    
+    
+    public void diemLiet()
+    {
+	//Khai báo tiêu đề danh sách
+	String tieuDe[] = new String[]{"Số báo danh","Họ tên","Giới tính","Ngày sinh","Quê quán","Tổng","Toán","Lý","Hóa"};
+	
+	//Khai báo đối tượng để hiển thị dữ liệu lên bảng
+	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);	
+
+	//Khai báo đường dẫn file
+	String duongDan = "";
+	
+	//Lấy đường dẫn từ file 
+	duongDan = txtDuongDanFile.getText();
+	
+	//Khai báo list để chứa dữ liệu thí sinh
+	List<ThiSinh> lstThiSinh = DataProvider.getThiSinhBus().layDanhSach(duongDan);
+	
+	//Khai báo list để chứa dữ liệu thí sinh
+	List<ThiSinh> lstDiemLiet = DataProvider.getThiSinhBus().diemLiet();
+	
+	//Khai báo mảng để hiển thị dữ liệu lên bảng
+	Object row[] = new Object[9];	
+	
+	//Gán dữ liệu cho mảng
+	for(ThiSinh ts: lstDiemLiet)
+	{
+	    row[0] = ts.getSoBaoDanh();
+	    row[1] = ts.getHoTen();
+	    if(ts.getGioiTinh().equals("0"))
+	    {
+		row[2] = "Nam";
+	    }
+	    if(ts.getGioiTinh().equals("1"))
+	    {
+		row[2] = "Nữ";
+	    }
+	    row[3] = ts.getNgaySinh();
+	    row[4] = ts.getQueQuan();
+	    row[5] = ts.getTongDiem();
+	    row[6] = ts.getDiemToan();
+	    row[7] = ts.getDiemLy();
+	    row[8] = ts.getDiemHoa();	
+	    
+	    //Add mảng vào model
+	    model.addRow(row);
+	}
+	
+	int tongSo = 0;
+	
+	tongSo = lstDiemLiet.size();
+	
+	lblTongSo.setText("" + tongSo);
+	
+	//Hiển thị model lên table
+	jTableThiSinh.setModel(model);	
+    }    
     
     /**
      * @param args the command line arguments
@@ -518,7 +741,7 @@ public class fmDanhSachThiSinh extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTableThiSinh;
-    private javax.swing.JLabel lblTongSo;
+    private static javax.swing.JLabel lblTongSo;
     private javax.swing.JRadioButton rdDiemLiet;
     private javax.swing.JRadioButton rdDiemSan;
     private javax.swing.JRadioButton rdTatCa;

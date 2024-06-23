@@ -70,14 +70,14 @@ public class Stanford_LamViecVoiLuongKiTu {
         System.out.println("Đọc các thư mục và file con trong 1 thư mục cha: ");
         
         System.out.println("Danh sách các file, thư mục con là: ");
-        File curDir = new File("/Volumes/DATA/Stanford/Courses/Java");
+        File curDir = new File("E:\\Làm việc");
         
         String[] lstDir = curDir.list();
         
         //Duyệt từng thông tin
         for(int i = 0; i < lstDir.length; i++)
         {
-            File fileSub = new File("/Volumes/DATA/Stanford/Courses/Java/" + lstDir[i]);
+            File fileSub = new File("E:\\Làm việc" + lstDir[i]);
             
             if(fileSub.isDirectory())
             {

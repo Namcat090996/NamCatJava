@@ -4,8 +4,7 @@
  */
 package namcat_lamviecvoifile;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  *
  * @author ADMIN
@@ -54,7 +53,7 @@ public class NamCat_LamViecVoiLuongKiTu {
 	FileWriter fileWriter = null;
 	
 	try {
-	    fileWriter = new FileWriter("E:\\OneDrive - EVNPECC3\\Documents\\test4.txt");
+	    fileWriter = new FileWriter("E:\\OneDrive - EVNPECC3\\Documents\\test4.txt", true);
 	    
 	for(int i = 0; i < 10; i++)
 	{
@@ -79,14 +78,14 @@ public class NamCat_LamViecVoiLuongKiTu {
 	
 	System.out.println("Danh sách các file, thư mục con là: ");
 	
-	File curDir = new File("E:\\Làm việc");
+	File curDir = new File("D:\\File dữ liệu Java\\");
 	
 	String[] lstDir = curDir.list();
 	
 	//Duyệt từng thông tin
 	for(int i = 0; i < lstDir.length; i++)
 	{
-	    File fileSub = new File("E:\\Làm việc" + lstDir[i]);
+	    File fileSub = new File("D:\\File dữ liệu Java\\" + lstDir[i]);
 	    
 	    if(fileSub.isDirectory())
 	    {

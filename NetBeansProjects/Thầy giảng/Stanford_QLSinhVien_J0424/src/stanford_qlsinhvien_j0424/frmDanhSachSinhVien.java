@@ -5,6 +5,7 @@
 package stanford_qlsinhvien_j0424;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  * @author dangquang16
  */
 public class frmDanhSachSinhVien extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form frmDanhSachSinhVien
      */
@@ -213,11 +214,36 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
+        //Declare row needed to select
+	int dong = 0;
+	
+	//Declare maSV needed to delete
+	String maSV = "";
+	
+	//Get the row
+	dong = jTableSinhVien.getSelectedRow();
+	
+	//Get MaSV value
+	maSV = "" + jTableSinhVien.getValueAt(dong, 0);
+
+	//Assign MaSV value
+	boolean ketQua = DataProvider.getSinhVienBus().xoa(maSV);
+	
+        if(ketQua)
+        {
+            //Reload lại danh sách
+	    hienThiDanhSachSinhVien();	    
+	    
+            JOptionPane.showMessageDialog(rootPane, "Xóa thông tin sinh viên thành công");      
+        }	
+	
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
-        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không ?", "Thoát chương trình", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+	{
+	    System.exit(0);
+	}
     }//GEN-LAST:event_btnDongActionPerformed
 
     /**

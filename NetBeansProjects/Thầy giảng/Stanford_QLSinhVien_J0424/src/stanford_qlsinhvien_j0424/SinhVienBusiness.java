@@ -4,6 +4,7 @@
  */
 package stanford_qlsinhvien_j0424;
 
+import com.mysql.cj.xdevapi.Result;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
@@ -22,51 +23,58 @@ public class SinhVienBusiness {
     
     public List<SinhVien> layDanhSach() {
 	
-	//Khai báo danh sách
+	//Declare a list to contain student data
 	List<SinhVien> lstSinhVien = new ArrayList<>();
-
+	
+	//Declare a command by MySQL language
 	String strSQL = "Select MaSV, HoTen, DienThoai, Email, DiaChi from SinhVien";
-	//Khai báo kết nối
+	
+	//Declare a connection
 	Connection conn = null;
-
+	
 	try {
-
-	    //Kết nối đến db cần làm việc
+	    
+	    //Call the connection function to database needed to work
 	    conn = DataProvider.ketNoi();
-
-	    //Tạo công việc
+	    
+	    //Declare a statement
 	    Statement stm = conn.createStatement();
-
-	    //Thực hiện và trả về kết quả
+	    
+	    //Return results
 	    ResultSet rs = stm.executeQuery(strSQL);
-
-	    //Duyệt từng dòng để đưa về object SinhVien
-	    SinhVien objSV;
-	    while (rs.next()) {
+	    
+	    //Declare an object to get student data
+	    SinhVien objSV = null;
+	    
+	    while(rs.next())
+	    {
 		objSV = new SinhVien();
 		objSV.setMaSV(rs.getString("MaSV"));
 		objSV.setHoTen(rs.getString("HoTen"));
 		objSV.setDienThoai(rs.getString("DienThoai"));
 		objSV.setEmail(rs.getString("Email"));
-		objSV.setDiaChi(rs.getString("DiaChi"));
-
-		//Thêm vào danh sách
+		objSV.setDiaChi(rs.getString("DiaChi"));	
+		
+		//Add object to list
 		lstSinhVien.add(objSV);
 	    }
+	    
 	} catch (SQLException ex) {
 	    Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
-	} finally {
+	} finally
+	{
 	    try {
-		if (conn != null) {
-		    conn.close();
+		if(conn != null)
+		{
+		//Close the connection
+		conn.close();		    
 		}
 	    } catch (SQLException ex) {
 		Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
 	    }
 	}
-
-	return lstSinhVien;
 	
+	return lstSinhVien;
     }
     
     /**
@@ -76,40 +84,74 @@ public class SinhVienBusiness {
      */
     public SinhVien layChiTiet(String maSV)
     {
-        SinhVien objSV = null;
-        
-        //Duyệt từng phần tử để tìm sv trùng mã
-        for(SinhVien sv : lstSinhVien)
-        {
-            if(sv.getMaSV().equals(maSV))
-            {
-                objSV = sv;
-                break;
-            }
-        }
-        
-        return objSV;
+	//Declare a connection
+ 	Connection conn = null;
+
+	//Declare a command by MySQL language
+	String strSQL = String.format("Select * from sinhvien where MaSV = '%s'", maSV);
+
+	//Declare an object to get student data
+	SinhVien objSV = null;
+	
+	try {
+	    //Call the connection function to database needed to work
+	    conn = DataProvider.ketNoi();
+	    
+	    //Declare a statement
+	    Statement stm = conn.createStatement();
+	    
+	    //Return results
+	    ResultSet rs = stm.executeQuery(strSQL);	    
+	    
+	    //Assign data to object
+	    if(rs.next())
+	    {
+		objSV = new SinhVien();
+		objSV.setMaSV(rs.getString("MaSV"));
+		objSV.setHoTen(rs.getString("HoTen"));
+		objSV.setDienThoai(rs.getString("DienThoai"));
+		objSV.setEmail(rs.getString("Email"));
+		objSV.setDiaChi(rs.getString("DiaChi"));
+	    }    
+	} catch (SQLException ex) {
+	    Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
+	} finally
+	{
+	    try {
+		if(conn != null)
+		{
+		//Close the connection
+		conn.close();		    
+		}
+	    } catch (SQLException ex) {
+		Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	}
+	
+	return objSV;
     }
     
     /**
      * Hàm thực hiện thêm thông tin sinh viên vào hệ thống
-     * 
      * @param objSV, Đối tượng sinh viên
      * @return True nếu thêm thành công, False nếu thêm không thành công
      */
     public boolean themMoi(SinhVien objSV)
     {
-
+	    //Declare a boolean
 	    boolean ketQua = false;
 	    
+	    //Declare a connection
 	    Connection conn = null;
 	    
+	    //Call the connection function to database needed to work
 	    conn = DataProvider.ketNoi();
 	    
-	    String strInsert = "Insert into SinhVien(MaSV, HoTen, DienThoai, Email, DiaChi) values(?, ?, ?, ?, ?)";
+	    //Declare a command by MySQl language
+	    String strInsert = "Insert into SinhVien(MaSV, HoTen, DienThoai, Email, DiaChi) values (?, ?, ?, ?, ?)";
 	try {
 	    
-	    //Khai báo công việc
+	    //Khai báo công việc - Declare a prepare statement
 	    PreparedStatement preStatement = conn.prepareStatement(strInsert);
 	    
 	    //Thiết lập giá trị cho các tham số
@@ -119,7 +161,7 @@ public class SinhVienBusiness {
 	    preStatement.setString(4, objSV.getEmail());
 	    preStatement.setString(5, objSV.getDiaChi());
 	    
-	    //Thực hiện công việc
+	    //Thực hiện công việc - Execute the work
 	    ketQua = preStatement.executeUpdate() > 0;
 	    
 	} catch (SQLException ex) {
@@ -135,7 +177,6 @@ public class SinhVienBusiness {
 	}
 	
 	return ketQua;
-	
     }
     
     /**
@@ -145,18 +186,41 @@ public class SinhVienBusiness {
      */
     public boolean capNhat(SinhVien objSV)
     {
-        //Duyệt sinh viên để tìm sv trùng mã và cập nhật giá trị mới cần sửa
-        for(int i = 0; i < lstSinhVien.size(); i++)
-        {
-            //Nếu có sv trùng mã
-            if(lstSinhVien.get(i).getMaSV().equals(objSV.getMaSV()))
-            {
-                lstSinhVien.set(i, objSV);
-                return true;
-            }
-        }
-        
-        return false;
+	//Declare a boolean
+	boolean ketQua = false;
+	
+	//Declare a connection
+	Connection conn = null;
+	
+	try {
+	    
+	    //Call the connection function to database needed to work
+	    conn = DataProvider.ketNoi();
+	    
+	    //Declare a statement
+	    Statement stm = conn.createStatement();
+	    
+	    //Declare a command by MySQL language
+	    String strUpdate = String.format("Update sinhvien set HoTen = '%s', DienThoai = '%s', Email = '%s', DiaChi = '%s' where MaSV = '%s'", objSV.getHoTen(), objSV.getDienThoai(), objSV.getEmail(), objSV.getDiaChi(), objSV.getMaSV());
+	    
+	    //Execute the work
+	    ketQua = stm.executeUpdate(strUpdate) > 0;
+	    
+	} catch (SQLException ex) {
+	    Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
+	} finally
+	{
+	    try {
+		if(conn != null)
+		{
+		    conn.close();		    
+		}
+	    } catch (SQLException ex) {
+		Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	}
+	
+	return ketQua;
     }
     
     /**
@@ -166,16 +230,38 @@ public class SinhVienBusiness {
      */
     public boolean xoa(String maSV)
     {
-        //Lấy thông tin sv cần xóa
-        SinhVien objSV = layChiTiet(maSV);
-        
-        if(objSV != null)
-        {
-            lstSinhVien.remove(objSV);
-            
-            return true;
-        }
-        
-        return false;
+	//Declare a boolean
+	boolean ketQua = false;
+
+	//Declare a connection
+	Connection conn = null;
+
+	try {
+
+	    //Call the connection function to db needed to work
+	    conn = DataProvider.ketNoi();
+
+	    //Declare a command by MySQL language
+	    String strDelete = String.format("Delete from sinhvien where MaSV = '%s'", maSV);
+
+	    //Declare a statement
+	    Statement stm = conn.createStatement();
+	    
+	    //Execute the work
+	    ketQua = stm.executeUpdate(strDelete) > 0;
+
+	} catch (SQLException ex) {
+	    Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
+	} finally {
+	    try {
+		if (conn != null) {
+		    conn.close();
+		}
+	    } catch (SQLException ex) {
+		Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	}
+	
+	return ketQua;
     }
 }

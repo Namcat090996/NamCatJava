@@ -4,6 +4,8 @@
  */
 package stanford_qlsinhvien_j0424;
 
+import java.util.Date;
+
 /**
  *
  * @author dangquang16
@@ -19,6 +21,12 @@ public class SinhVien {
     private String email;
     
     private String diaChi;
+    
+    private int gioiTinh;
+    
+    private Date ngaySinh;
+    
+    private String maKhoa;
     
     /**
      * Hàm khởi tạo không có tham số truyền vào
@@ -69,8 +77,7 @@ public class SinhVien {
     public void setMaSV(String maSV)
     {
         this.maSV = maSV;
-    }
-    
+    }  
 
     public String getHoTen() {
         return hoTen;
@@ -96,7 +103,6 @@ public class SinhVien {
         this.email = email;
     }
     
-    
     public String getDiaChi() {
         return diaChi;
     }
@@ -104,5 +110,28 @@ public class SinhVien {
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
     }
-    
+
+    public int getGioiTinh() {
+	return gioiTinh;
+    }
+
+    public void setGioiTinh(int gioiTinh) {
+	this.gioiTinh = gioiTinh;
+    }
+
+    public Date getNgaySinh() {
+	return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+	this.ngaySinh = ngaySinh;
+    }
+
+    public String getMaKhoa() {
+	return maKhoa;
+    }
+
+    public void setMaKhoa(String maKhoa) {
+	this.maKhoa = maKhoa;
+    }    
 }

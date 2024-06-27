@@ -4,6 +4,7 @@
  */
 package stanford_qlsinhvien_j0424;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -32,7 +33,7 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTuKhoa = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSinhVien = new javax.swing.JTable();
@@ -54,6 +55,11 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
         jLabel1.setText("Từ khóa:");
 
         jButton1.setText("Tìm kiếm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,7 +69,7 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -74,7 +80,7 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -246,13 +252,24 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
 	}
     }//GEN-LAST:event_btnDongActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String thongTin = txtTuKhoa.getText();
+	
+	boolean ketQua = DataProvider.getSinhVienBus().timKiem(thongTin);
+	
+	if(ketQua)
+	{
+	    hienThiDanhSachSinhVien();
+	}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * Hàm hiển thị danh sách sv lên jTable
      */
     public static void hienThiDanhSachSinhVien()
     {
         //Khai báo tiêu đề
-        String tieuDe[] = new String[]{"Mã SV", "Họ tên", "Điện thoại", "Email", "Địa chỉ"};
+        String tieuDe[] = new String[]{"Mã SV", "Họ tên", "Ngày Sinh", "Điện thoại", "Email", "Địa chỉ"};
         
         //Khai báo 1 đối tượng để phục vụ hiển thị lên table
         DefaultTableModel model = new DefaultTableModel(tieuDe, 0);
@@ -261,18 +278,24 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
         List<SinhVien> lstSV = DataProvider.getSinhVienBus().layDanhSach();
         
         Object row[];
+	
+	SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
         
         //Duyệt từng sv để thêm vào model
         for(SinhVien sv : lstSV)
         {
-            row = new Object[5];
+            row = new Object[6];
             
             //Gán giá trị
             row[0] = sv.getMaSV();
             row[1] = sv.getHoTen();
-            row[2] = sv.getDienThoai();
-            row[3] = sv.getEmail();
-            row[4] = sv.getDiaChi();
+	    if(sv.getNgaySinh() != null)
+	    {
+		row[2] = f.format(sv.getNgaySinh());		
+	    }
+            row[3] = sv.getDienThoai();
+            row[4] = sv.getEmail();
+            row[5] = sv.getDiaChi();
             
             //Thêm vào model
             model.addRow(row);
@@ -332,6 +355,6 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTableSinhVien;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtTuKhoa;
     // End of variables declaration//GEN-END:variables
 }

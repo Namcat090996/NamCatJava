@@ -6,27 +6,26 @@ package stanford_qlsinhvien_j0424;
 
 /**
  *
- * @author Dell Precision 7550
+ * @author dangquang16
  */
 public class ChuyenKhoa {
+    
+    private String maKhoa;
+    private String tenKhoa;
 
     public String getMaKhoa() {
-	return maKhoa;
+        return maKhoa;
     }
 
     public void setMaKhoa(String maKhoa) {
-	this.maKhoa = maKhoa;
+        this.maKhoa = maKhoa;
     }
 
     public String getTenKhoa() {
-	return tenKhoa;
+        return tenKhoa;
     }
 
     public void setTenKhoa(String tenKhoa) {
-	this.tenKhoa = tenKhoa;
+        this.tenKhoa = tenKhoa;
     }
-
-    private String maKhoa;
-    
-    private String tenKhoa;
 }

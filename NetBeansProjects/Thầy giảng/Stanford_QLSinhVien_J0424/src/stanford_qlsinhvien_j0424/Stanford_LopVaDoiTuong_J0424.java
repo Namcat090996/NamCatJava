@@ -20,16 +20,15 @@ public class Stanford_LopVaDoiTuong_J0424 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-	
-	try {
-	    if(!DataProvider.ketNoi().isClosed())
-	    {
-		System.out.println("Kết nối đến MySQL thành công !");
-	    }
-	} catch (SQLException ex) {
-	    System.out.println("Có lỗi xảy ra khi thực hiện trong MySQL. Chi tiết: " + ex.getMessage());;
-	}
         
-	
+        try {
+            if(!DataProvider.ketNoi().isClosed())
+            {
+                System.out.println("Kết nối đến MySQL thành công !");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Stanford_LopVaDoiTuong_J0424.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
 }

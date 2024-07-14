@@ -9,7 +9,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.transform.Result;
 
 /**
  *
@@ -26,7 +25,7 @@ public class SinhVienBus {
 	//Khai báo danh sách
 	List<SinhVien> lstSV = new ArrayList<SinhVien>();
 	
-	//Khai báo object SinhVien
+	//Khai báo object 
 	SinhVien objSV = null;
 	
 	//Khai báo kết nối
@@ -46,7 +45,7 @@ public class SinhVienBus {
 	    //Thực hiện công việc và trả về kết quả
 	    ResultSet rs = preStm.executeQuery();
 	    
-	    //Gán giá trị cho objSV và add object vào ListSV
+	    //Gán giá trị cho object và add object vào list
 	    while(rs.next())//Duyệt từng dòng trong database
 	    {
 		objSV = new SinhVien();
@@ -141,7 +140,7 @@ public class SinhVienBus {
      */
     public SinhVien layChiTietSV(String maSV)
     {
-	//Khai báo object SinhVien
+	//Khai báo object 
 	SinhVien objSV = null;
 	
 	//Khai báo kết nối
@@ -161,7 +160,7 @@ public class SinhVienBus {
 	    //Thực hiện công việc và trả về kết quả
 	    ResultSet rs = preStm.executeQuery();
 	    
-	    //Gán giá trị cho objSV 
+	    //Gán giá trị cho object 
 	    while(rs.next())//Duyệt từng dòng trong database
 	    {
 		objSV = new SinhVien();
@@ -301,14 +300,14 @@ public class SinhVienBus {
 	//Khai báo danh sách
 	List<SinhVien> lstSV = new ArrayList<SinhVien>();
 	
-	//Khai báo object SinhVien
+	//Khai báo object 
 	SinhVien objSV = null;
 	
 	//Khai báo kết nối
 	Connection conn = null;
 	
 	//Khai báo câu lệnh MySQL
-	String strFind = "Select MaSV, HoTen, GioiTinh, NgaySinh, DienThoai, Email, DiaChi, MaKhoa from sinhvien where 1=1";
+	String strFind = "Select * from sinhvien where 1=1";
 	
 	//Nhập thông tin ô từ khóa
 	if(!tuKhoa.isEmpty() && tuKhoa.length() > 0)
@@ -333,7 +332,7 @@ public class SinhVienBus {
 	    //Thực hiện công việc và trả về kết quả
 	    ResultSet rs = preStm.executeQuery();
 	    
-	    //Gán giá trị cho objSV và add object vào ListSV
+	    //Gán giá trị cho object và add object vào list
 	    while(rs.next())//Duyệt từng dòng trong database
 	    {
 		objSV = new SinhVien();
@@ -367,6 +366,11 @@ public class SinhVienBus {
 	return lstSV;
     }   
     
+    /**
+     * Hàm kiểm tra trùng mã SV
+     * @param maSV
+     * @return 
+     */
     public boolean kiemTraTrungMaSV(String maSV)
     {
 	//Khai báo boolean
@@ -389,12 +393,12 @@ public class SinhVienBus {
 	    //Thực hiện công việc và trả về kết quả
 	    ResultSet rs = preStm.executeQuery();
 	    
-	    String ma;
+	    String maNhap;
 	    
 	    while(rs.next())
 	    {
-		ma = rs.getString("MaSV");
-		if(maSV.equals(ma))
+		maNhap = rs.getString("MaSV");
+		if(maSV.equals(maNhap))
 		{
 		    ketQua = false;
 		    break;

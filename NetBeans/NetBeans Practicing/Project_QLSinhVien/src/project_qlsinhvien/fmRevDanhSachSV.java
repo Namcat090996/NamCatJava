@@ -184,11 +184,11 @@ public class fmRevDanhSachSV extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -196,11 +196,11 @@ public class fmRevDanhSachSV extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cboChuyenKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCapNhat)
                     .addComponent(btnDong))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,14 +210,14 @@ public class fmRevDanhSachSV extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -354,14 +354,20 @@ public class fmRevDanhSachSV extends javax.swing.JFrame {
 	if(!this.maSV.isEmpty())//TH sửa
 	{
 	    ketQua = sinhVienBus.capNhatSV(objSV);
-	    JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin sinh viên thành công");
+            if(ketQua)
+            {
+                JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin sinh viên thành công");
+            }            	    
 	}
 	else//TH thêm mới
 	{
 	    if(kiemTraTrung == true)//Nếu mã sinh viên thêm mới không trùng mã sinh viên với danh sách đã có
 	    {
 		ketQua = sinhVienBus.themMoiSV(objSV);
-		JOptionPane.showMessageDialog(rootPane, "Thêm mới thông tin sinh viên thành công");	
+                if(ketQua)
+                {
+                    JOptionPane.showMessageDialog(rootPane, "Thêm mới thông tin sinh viên thành công");	
+                }                  		
 	    }
 	    else
 	    {
@@ -416,6 +422,7 @@ public class fmRevDanhSachSV extends javax.swing.JFrame {
 	if(objSV != null)
 	{
 	    txtMaSV.setText(maSV);
+            txtMaSV.setEditable(false);
 	    txtHoTen.setText(objSV.getHoTen());
 	    txtDienThoai.setText(objSV.getDienThoai());
 	    txtEmail.setText(objSV.getEmail());

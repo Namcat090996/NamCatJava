@@ -11,16 +11,10 @@ package project_qlsinhvien;
 public class ChuyenKhoa {
 
     private String maKhoa;
+    
     private String tenKhoa;
-    private String OrderNumber;
-
-    public String getOrderNumber() {
-        return OrderNumber;
-    }
-
-    public void setOrderNumber(String OrderNumber) {
-        this.OrderNumber = OrderNumber;
-    }
+    
+    private String orderNumber;
     
     public String getMaKhoa() {
         return maKhoa;
@@ -37,4 +31,12 @@ public class ChuyenKhoa {
     public void setTenKhoa(String tenKhoa) {
         this.tenKhoa = tenKhoa;
     }
+    
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }    
 }

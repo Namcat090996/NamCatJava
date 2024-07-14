@@ -5,6 +5,7 @@
 package project_qlsinhvien;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -16,6 +17,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class fmDanhSachSV extends javax.swing.JFrame {
 
+    public String getMaKhoa() {
+        return maKhoa;
+    }
+
+    public void setMaKhoa(String maKhoa) {
+        this.maKhoa = maKhoa;
+    }
+
+    private String maKhoa = "";
+    
     /**
      * Creates new form fmDanhSachSV
      */
@@ -50,25 +61,28 @@ public class fmDanhSachSV extends javax.swing.JFrame {
 
         jTextField6.setText("jTextField6");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách sinh viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         jScrollPane1.setPreferredSize(new java.awt.Dimension(460, 423));
 
         jTableSinhVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8"
             }
         ));
         jScrollPane1.setViewportView(jTableSinhVien);
@@ -222,7 +236,10 @@ public class fmDanhSachSV extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-	//Gọi hàm hiển thị danh sách khoa
+        //Ngăn không cho người dùng sửa thông tin khi double click vào jTable
+        jTableSinhVien.setDefaultEditor(Object.class, null); 	
+
+        //Gọi hàm hiển thị danh sách khoa
 	hienThiDanhSachKhoa();
 	
 	//Gọi hàm hiển thị danh sách sinh viên
@@ -305,8 +322,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
 	}
 	else
 	{
-	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn sinh viên cần xóa thông tin");
-	    return;	    
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn sinh viên cần xóa thông tin");	    
 	}
     }//GEN-LAST:event_btnXoaActionPerformed
 
@@ -338,15 +354,15 @@ public class fmDanhSachSV extends javax.swing.JFrame {
 	//Gán object vào model
 	for(ChuyenKhoa objKhoa: lstKhoa)
 	{
-	    model.addElement(objKhoa);
+	    model.addElement(objKhoa);         
 	}
-	
+       
 	//Render để hiển thị tên khoa trên combobox
 	cboChuyenKhoa.setRenderer(new ChuyenKhoaRender());
 	
 	//Set model lên combobox
 	cboChuyenKhoa.setModel(model);
-    }
+    }    
     
     /**
      * Hàm hiển thị danh sách tìm kiếm sinh viên
@@ -361,10 +377,10 @@ public class fmDanhSachSV extends javax.swing.JFrame {
 	
 	ChuyenKhoa objKhoa = (ChuyenKhoa)cboChuyenKhoa.getSelectedItem();
 	
-	if(objKhoa != null)
-	{
-	    maKhoa = objKhoa.getMaKhoa();
-	}
+        if(objKhoa != null)
+        {
+            maKhoa = objKhoa.getMaKhoa();
+        }
 	
 	//Khai báo tiêu đề cho table
 	String tieuDe[] = new String[]{"Mã sinh viên", "Họ Tên", "Giới tính", "Ngày sinh", "Điện thoại", "Email", "Địa chỉ", "Mã Khoa"};
@@ -414,9 +430,9 @@ public class fmDanhSachSV extends javax.swing.JFrame {
 	}
 		
 	//Thêm model vào table
-	jTableSinhVien.setModel(model);
-	
+	jTableSinhVien.setModel(model);	
     }
+    
     /**
      * @param args the command line arguments
      */

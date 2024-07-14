@@ -55,7 +55,7 @@ public class ChuyenKhoaBusiness {
                 lstKhoa.add(objKhoa);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ChuyenKhoaBusiness.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
         try {
@@ -64,7 +64,7 @@ public class ChuyenKhoaBusiness {
                 }
             
             } catch (SQLException ex) {
-                Logger.getLogger(ChuyenKhoaBusiness.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
             }
         }      
         
@@ -105,7 +105,7 @@ public class ChuyenKhoaBusiness {
                 objKhoa.setTenKhoa(rs.getString("TenKhoa"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ChuyenKhoaBusiness.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
         try {
@@ -114,7 +114,7 @@ public class ChuyenKhoaBusiness {
                 }
             
             } catch (SQLException ex) {
-                Logger.getLogger(ChuyenKhoaBusiness.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SinhVienBusiness.class.getName()).log(Level.SEVERE, null, ex);
             }
         }      
         

@@ -149,7 +149,7 @@ public class fmThongTinDangNhap extends javax.swing.JFrame {
 	
 	//Take user information entered on the interface
 	tenDangNhap = txtTenDangNhap.getText();
-	matKhau = new String (txtMatKhau.getPassword());
+	matKhau = new String(txtMatKhau.getPassword());
 	
 	//Check user information entered on the interface
 	if(tenDangNhap.length() == 0)
@@ -164,7 +164,7 @@ public class fmThongTinDangNhap extends javax.swing.JFrame {
 	    txtMatKhau.requestFocus();
 	    return;
 	}
-	if(tenDangNhap.equals("Nam Cát") && matKhau.equals("Thảo Ly"))
+	if(tenDangNhap.equals("admin") && matKhau.equals("123"))
 	{
 	    JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
 	}

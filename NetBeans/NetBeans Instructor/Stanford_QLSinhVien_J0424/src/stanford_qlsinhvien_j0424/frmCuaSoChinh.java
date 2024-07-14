@@ -10,6 +10,12 @@ package stanford_qlsinhvien_j0424;
  */
 public class frmCuaSoChinh extends javax.swing.JFrame {
 
+    public static boolean isTrangThaiDangNhap = false;
+    
+    //Lưu thông tin tên đăng nhập và userid
+    public static String userName = "";
+    public static int userId = 0;
+
     /**
      * Creates new form frmCuaSoChinh
      */
@@ -28,6 +34,8 @@ public class frmCuaSoChinh extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jPanel1 = new javax.swing.JPanel();
+        lblTrangThai = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuHeThong = new javax.swing.JMenu();
         menuItemNguoiDung = new javax.swing.JMenuItem();
@@ -51,6 +59,31 @@ public class frmCuaSoChinh extends javax.swing.JFrame {
         jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        lblTrangThai.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTrangThai.setText("admin");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(675, Short.MAX_VALUE)
+                .addComponent(lblTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(lblTrangThai)
+                .addContainerGap())
+        );
 
         menuHeThong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stanford_qlsinhvien_j0424/images/settings_16.png"))); // NOI18N
         menuHeThong.setText("Hệ thống");
@@ -59,9 +92,19 @@ public class frmCuaSoChinh extends javax.swing.JFrame {
         menuHeThong.add(menuItemNguoiDung);
 
         menuItemDangNhap.setText("Đăng nhập");
+        menuItemDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemDangNhapActionPerformed(evt);
+            }
+        });
         menuHeThong.add(menuItemDangNhap);
 
         menuItemDangXuat.setText("Đăng xuất");
+        menuItemDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemDangXuatActionPerformed(evt);
+            }
+        });
         menuHeThong.add(menuItemDangXuat);
 
         menuItemThoat.setText("Thoát chương trình");
@@ -122,11 +165,13 @@ public class frmCuaSoChinh extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 392, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 354, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -144,6 +189,57 @@ public class frmCuaSoChinh extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuItemThoatActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        kiemTraQuyenSuDung(isTrangThaiDangNhap);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void menuItemDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDangNhapActionPerformed
+        dangNhapHeThong();
+    }//GEN-LAST:event_menuItemDangNhapActionPerformed
+
+    private void menuItemDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDangXuatActionPerformed
+        isTrangThaiDangNhap = false;
+        userName = "";
+        userId = 0;
+        
+        dangNhapHeThong();
+    }//GEN-LAST:event_menuItemDangXuatActionPerformed
+
+    /**
+     * Đăng nhập hệ thống
+     */
+    private void dangNhapHeThong()
+    {
+        kiemTraQuyenSuDung(false);
+        
+        frmDangNhap frmLogin = new frmDangNhap();
+        
+        frmLogin.setVisible(true);
+    }
+    
+    /**
+     * Hàm kiểm tra và xử lý quyền sử dụng chức năng của phần mềm khi đăng nhập thành công hay không
+     * @param isQuyen 
+     */
+    private void kiemTraQuyenSuDung(boolean  isQuyen)
+    {
+        menuItemDangNhap.setVisible(!isQuyen);
+        menuItemDangXuat.setVisible(isQuyen);
+        menuItemNguoiDung.setVisible(isQuyen);
+        menuNghiepVu.setEnabled(isQuyen);
+        menuDanhMuc.setEnabled(isQuyen);
+        menuBaoCao.setEnabled(isQuyen);
+        
+        if(isQuyen)
+        {
+            lblTrangThai.setText("Bạn đang đăng nhập: " + userName);
+        }
+        else
+        {
+            lblTrangThai.setText("Chưa đăng nhập");
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -186,7 +282,9 @@ public class frmCuaSoChinh extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JLabel lblTrangThai;
     private javax.swing.JMenu menuBaoCao;
     private javax.swing.JMenu menuDanhMuc;
     private javax.swing.JMenu menuHeThong;

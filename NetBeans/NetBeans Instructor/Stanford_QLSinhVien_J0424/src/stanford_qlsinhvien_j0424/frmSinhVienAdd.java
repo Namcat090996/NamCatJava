@@ -163,6 +163,7 @@ public class frmSinhVienAdd extends javax.swing.JFrame {
         txtDiaChi.setRows(5);
         jScrollPane1.setViewportView(txtDiaChi);
 
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stanford_qlsinhvien_j0424/images/save.png"))); // NOI18N
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +171,7 @@ public class frmSinhVienAdd extends javax.swing.JFrame {
             }
         });
 
+        btnDong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stanford_qlsinhvien_j0424/images/cancel.gif"))); // NOI18N
         btnDong.setText("Đóng");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,7 +198,7 @@ public class frmSinhVienAdd extends javax.swing.JFrame {
                         .addComponent(rbtnNam)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rbtnNu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jDateChooserNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)

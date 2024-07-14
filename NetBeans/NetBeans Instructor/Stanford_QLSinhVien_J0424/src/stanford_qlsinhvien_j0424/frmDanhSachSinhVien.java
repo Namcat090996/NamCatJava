@@ -56,6 +56,7 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
 
         jLabel1.setText("Từ khóa:");
 
+        btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stanford_qlsinhvien_j0424/images/ZoomHS.png"))); // NOI18N
         btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +113,7 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableSinhVien);
 
+        btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stanford_qlsinhvien_j0424/images/add-icon.png"))); // NOI18N
         btnThemMoi.setText("Thêm mới");
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +121,7 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
             }
         });
 
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stanford_qlsinhvien_j0424/images/book_edit.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +129,7 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
             }
         });
 
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stanford_qlsinhvien_j0424/images/delete.gif"))); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +137,7 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
             }
         });
 
+        btnDong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stanford_qlsinhvien_j0424/images/cancel.gif"))); // NOI18N
         btnDong.setText("Đóng");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,7 +317,6 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
         tuKhoa = txtTuKhoa.getText();
         
         ChuyenKhoa objKhoa = (ChuyenKhoa)cboKhoa.getSelectedItem();
-	
         if(objKhoa != null)
         {
             maKhoa = objKhoa.getMaKhoa();

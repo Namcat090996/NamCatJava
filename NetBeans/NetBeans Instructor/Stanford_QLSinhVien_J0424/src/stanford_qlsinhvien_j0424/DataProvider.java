@@ -29,7 +29,7 @@ public class DataProvider {
     //Khai báo driver mysql cần làm việc
     private static final String JDBC_DRIVER="com.mysql.cj.jdbc.Driver";
     //Khai báo db cần làm việc
-    private static final String DATABASE_LINK = "jdbc:mysql://localhost:3306/qlsinhvien?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false";
+    private static final String DATABASE_LINK = "jdbc:mysql://localhost:3306/j042401cb?allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false";
     
     /**
      * Hàm kết nối đến db cần làm việc
@@ -43,7 +43,7 @@ public class DataProvider {
         {
             Class.forName(JDBC_DRIVER);
             
-            conn = DriverManager.getConnection(DATABASE_LINK, "root", "Namcat@@0909");
+            conn = DriverManager.getConnection(DATABASE_LINK, "root", "Stanford");
             
         } catch (ClassNotFoundException ex) {
             System.err.println("Không tìm thấy driver của MySQL cần dùng. Chi tiết: " + ex.getMessage());

@@ -23,7 +23,17 @@ public class NguoiDung {
     private String email;
     
     private String diaChi;
+    
+    private String vaiTro;
 
+    public String getVaiTro() {
+        return vaiTro;
+    }
+
+    public void setVaiTro(String vaiTro) {
+        this.vaiTro = vaiTro;
+    }
+    
     public int getUserId() {
         return userId;
     }

@@ -25,7 +25,17 @@ public class DiemThi {
     private Float diemThi;
     
     private String maPhong;
+    
+    private String maKhoa;
 
+    public String getMaKhoa() {
+        return maKhoa;
+    }
+
+    public void setMaKhoa(String maKhoa) {
+        this.maKhoa = maKhoa;
+    }
+    
     public String getMaSV() {
         return maSV;
     }

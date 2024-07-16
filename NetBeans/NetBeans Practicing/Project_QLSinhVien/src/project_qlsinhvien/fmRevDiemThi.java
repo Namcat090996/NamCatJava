@@ -255,12 +255,23 @@ public class fmRevDiemThi extends javax.swing.JFrame {
         DiemThi objDiem = new DiemThi();       
         
         //Gán giá trị vào đối tượng
-        objDiem.setMaSV(this.maSV);  
-        objDiem.setMaMH(maMH);            
+        objDiem.setMaSV(this.maSV);
+        if(objMH != null)
+        {
+            objDiem.setMaMH(maMH);    
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui lòng thử lại");
+            return;
+        }
         objDiem.setNgayThi(jDateChooserNgayThi.getDate());
         objDiem.setDiemThi(diemThi);
-        objDiem.setMaPhong(maPH);
-        
+        if(objPH != null)
+        {
+            objDiem.setMaPhong(maPH);   
+        }
+
         //Khai báo kết quả trả về và kiểm tra trùng
         boolean ketQua, kiemTraTrung;
         

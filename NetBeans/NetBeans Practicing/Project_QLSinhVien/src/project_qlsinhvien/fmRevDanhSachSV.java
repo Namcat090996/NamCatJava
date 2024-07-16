@@ -338,7 +338,10 @@ public class fmRevDanhSachSV extends javax.swing.JFrame {
 	objSV.setDienThoai(dienThoai);
 	objSV.setEmail(email);
 	objSV.setDiaChi(diaChi);
-	objSV.setMaKhoa(maKhoa);
+        if(objKhoa != null)
+        {
+            objSV.setMaKhoa(maKhoa);            
+        }
 	
 	//Khai báo đối tượng để gọi hàm cập nhật/thêm mới
 	SinhVienBus sinhVienBus = new SinhVienBus();

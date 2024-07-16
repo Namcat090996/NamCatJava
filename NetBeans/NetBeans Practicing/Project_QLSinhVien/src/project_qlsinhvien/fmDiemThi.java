@@ -205,7 +205,7 @@ public class fmDiemThi extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã sinh viên", "Họ tên", "Mã môn học", "Tên môn học", "Ngày thi", "Điểm thi", "Mã phòng học"
+                "Mã sinh viên", "Họ tên", "Tên môn học", "Ngày thi", "Điểm thi", "Mã phòng học"
             }
         ));
         jScrollPane2.setViewportView(jTableDiemThi);
@@ -243,24 +243,33 @@ public class fmDiemThi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTraCuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraCuuActionPerformed
-
+        //Gọi hàm tra cứu điểm sinh viên
+        hienThiDanhSachTraCuuDiem();
     }//GEN-LAST:event_btnTraCuuActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         //Khai báo dòng cần chọn
 	int dong = 0;
 	
-	//Khai báo điểm sinh viên cần sửa
-	String maSV = "", maMH = "";
+	//Khai báo mã sinh viên và mã môn học của sinh viên cần sửa điểm
+	String maSV = "", tenMH = "", maMH = "";
 	
 	//Chọn dòng trên table
 	dong = jTableDiemThi.getSelectedRow();
  
 	if(dong != -1)
 	{
-	    //Lấy mã sinh viên từ dòng được chọn
+	    //Lấy mã sinh viên và tên môn học từ dòng được chọn
 	    maSV = "" + jTableDiemThi.getValueAt(dong, 0);
-            maMH = "" + jTableDiemThi.getValueAt(dong, 2);
+            tenMH = "" + jTableDiemThi.getValueAt(dong, 2);
+            
+            //Khai báo đối tượng và gọi hàm lấy chi tiết mã môn học
+            DiemThiBus diemThiBus = new DiemThiBus();
+            DiemThi objDT = diemThiBus.layChiTietMaMH(maSV, tenMH);
+            if(objDT != null)
+            {
+                maMH = objDT.getMaMH();                
+            }
 	}
 	else
 	{
@@ -271,7 +280,7 @@ public class fmDiemThi extends javax.swing.JFrame {
 	//Khai báo object để hiển thị form sửa điểm sinh viên
 	fmRevDiemThi fmSua = new fmRevDiemThi();
 	
-	//Truyền giá trị điểm vào form sửa
+	//Truyền giá trị vào form sửa
         fmSua.setMaSV(maSV);
         fmSua.setMaMH(maMH);	
 	
@@ -283,20 +292,26 @@ public class fmDiemThi extends javax.swing.JFrame {
 	//Khai báo dòng cần chọn
 	int dong = 0;
 
-	//Khai báo mã sinh viên cần xóa
-	String maSV = "";
+	//Khai báo mã sinh viên và mã môn học của sinh viên cần xóa
+	String maSV = "", tenMH = "", maMH = "";
 
 	//Chọn dòng trên table
-	dong = jTableSinhVien.getSelectedRow();
+	dong = jTableDiemThi.getSelectedRow();
 	
 	//Bắt lỗi khi chưa chọn sinh viên cần xóa
 	if(dong != -1)
 	{
-	    //Lấy mã sinh viên từ dòng được chọn
-	    maSV = "" + jTableSinhVien.getValueAt(dong, 0);
-	    
-	    //Khai báo object để gọi hàm xóa thông tin sinh viên
-	    SinhVienBus sinhVienBus = new SinhVienBus();
+	    //Lấy mã sinh viên và tên môn học từ dòng được chọn
+	    maSV = "" + jTableDiemThi.getValueAt(dong, 0);
+            tenMH = "" + jTableDiemThi.getValueAt(dong, 2);
+            
+            //Khai báo đối tượng và gọi hàm lấy chi tiết mã môn học
+            DiemThiBus diemThiBus = new DiemThiBus();
+            DiemThi objDT = diemThiBus.layChiTietMaMH(maSV, tenMH);
+            if(objDT != null)
+            {
+                maMH = objDT.getMaMH();                
+            }
 	    
 	    //Đưa ra cảnh báo trước khi xóa
 	    int ketQua = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xóa không ?", "Cảnh báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -305,18 +320,18 @@ public class fmDiemThi extends javax.swing.JFrame {
 	    if(ketQua == JOptionPane.YES_OPTION)
 	    {
 		//Gọi hàm xóa thông tin sinh viên
-		boolean xoa = sinhVienBus.xoaSV(maSV);
+		boolean xoa = diemThiBus.xoaDiemSV(maSV, maMH);
 		
 		//Xóa thành công
 		if(xoa)
 		{
-		    hienThiDanhSachSinhVien();
+		    hienThiDanhSachDiem();
 		}
 	    }
 	}
 	else
 	{
-	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn sinh viên cần xóa thông tin");	    
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn môn học và điểm của sinh viên cần xóa");	    
 	}
     }//GEN-LAST:event_btnXoaActionPerformed
 
@@ -496,7 +511,7 @@ public class fmDiemThi extends javax.swing.JFrame {
     public static void hienThiDanhSachDiem()
     {
 	//Khai báo tiêu đề cho table
-	String tieuDe[] = new String[]{"Mã sinh viên", "Họ tên", "Mã môn học", "Tên môn học", "Ngày thi", "Điểm thi", "Mã phòng học"};
+	String tieuDe[] = new String[]{"Mã sinh viên", "Họ tên", "Tên môn học", "Ngày thi", "Điểm thi", "Mã phòng học"};
 	
 	//Khai báo model để hiển thị dữ liệu lên table
 	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);        
@@ -528,15 +543,14 @@ public class fmDiemThi extends javax.swing.JFrame {
             //Duyệt từng đối tượng sinh viên để thêm vào đối tượng row[]
             for(DiemThi objDiemSV: lstDiemSV)
             {
-                row = new Object[7];
+                row = new Object[6];
                 //Gán giá trị cho đối tượng
                 row[0] = objDiemSV.getMaSV();
                 row[1] = objDiemSV.getHoTen();
-                row[2] = objDiemSV.getMaMH();
-                row[3] = objDiemSV.getTenMH();
-                row[4] = date.format(objDiemSV.getNgayThi());
-                row[5] = objDiemSV.getDiemThi();
-                row[6] = objDiemSV.getMaPhong();              
+                row[2] = objDiemSV.getTenMH();
+                row[3] = date.format(objDiemSV.getNgayThi());
+                row[4] = objDiemSV.getDiemThi();
+                row[5] = objDiemSV.getMaPhong();              
 
                 //Thêm đối tượng vào model
                 model.addRow(row);
@@ -549,7 +563,61 @@ public class fmDiemThi extends javax.swing.JFrame {
 	{
             jTableDiemThi.setModel(model);
 	}
-    }    
+    } 
+    
+    /**
+    * Hàm hiển thị danh sách tra cứu điểm thi sinh viên
+    */
+    public void hienThiDanhSachTraCuuDiem()
+    {
+	//Khai báo tiêu đề cho table
+	String tieuDe[] = new String[]{"Mã sinh viên", "Họ tên", "Tên môn học", "Ngày thi", "Điểm thi", "Mã phòng học"};
+	
+	//Khai báo model để hiển thị dữ liệu lên table
+	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);        
+        
+        //Khai báo dòng cần chọn và mã cần chọn
+	String tuKhoa, maKhoa, maMH;
+	
+	//Chọn dòng trên table
+	tuKhoa = txtTuKhoa.getText();
+        
+        ChuyenKhoaBus chuyenKhoaBus = new ChuyenKhoaBus();
+        ChuyenKhoa objKhoa = (ChuyenKhoa)cboChuyenKhoa.getSelectedItem();
+        maKhoa = objKhoa.getMaKhoa();
+        MonHoc objMH = (MonHoc)cboMonHoc.getSelectedItem();
+        maMH = objMH.getMaMH();
+        
+        //Khai báo đối tượng từ lớp 
+        DiemThiBus diemThiBus = new DiemThiBus();
+
+        //Khai báo đối tượng để format ngày sinh
+        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+
+        //Gọi hàm lấy danh sách 
+        List<DiemThi> lstDiemSV = diemThiBus.traCuuDiemSV(tuKhoa, maKhoa, maMH);
+
+        //Khai báo đối tượng để chứa thông tin sinh viên và thêm vào model
+        Object row[];
+
+        //Duyệt từng đối tượng sinh viên để thêm vào đối tượng row[]
+        for (DiemThi objDiemSV : lstDiemSV) {
+            row = new Object[6];
+            //Gán giá trị cho đối tượng
+            row[0] = objDiemSV.getMaSV();
+            row[1] = objDiemSV.getHoTen();
+            row[2] = objDiemSV.getTenMH();
+            row[3] = date.format(objDiemSV.getNgayThi());
+            row[4] = objDiemSV.getDiemThi();
+            row[5] = objDiemSV.getMaPhong();
+
+            //Thêm đối tượng vào model
+            model.addRow(row);
+        }
+
+        //Thêm model vào table
+        jTableDiemThi.setModel(model);
+    } 
     
     /**
      * @param args the command line arguments

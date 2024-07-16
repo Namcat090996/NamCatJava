@@ -5,7 +5,6 @@
 package project_qlsinhvien;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -93,7 +92,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
 
         jLabel4.setText("Chuyên khoa:");
 
-        cboChuyenKhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboChuyenKhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TenKhoa" }));
 
         btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {

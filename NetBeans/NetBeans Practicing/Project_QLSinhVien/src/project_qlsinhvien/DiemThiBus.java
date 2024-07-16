@@ -21,13 +21,67 @@ import java.util.logging.Logger;
 public class DiemThiBus {
     
     /**
+     * Hàm lấy chi tiết mã môn học
+     * @param maSV
+     * @param tenMH 
+     * @return 
+     */
+    public DiemThi layChiTietMaMH(String maSV, String tenMH)
+    {
+	//Khai báo object 
+	DiemThi objDiem = null;
+	
+	//Khai báo kết nối
+	Connection conn = null;
+	
+	//Khai báo câu lệnh MySQL
+	String strDetail = String.format("Select dt.MaSV, dt.MaMH, mh.TenMonHoc from diemthi dt JOIN sinhvien sv ON dt.MaSV = sv.MaSV JOIN monhoc mh ON dt.MaMH = mh.MaMH where (sv.MaSV = '%s' AND mh.TenMonHoc = '%s')", maSV, tenMH);
+	
+	try {
+	    
+	    //Kết nối với Database cần làm việc
+	    conn = DataAccess.ketNoi();
+	    
+	    //Khai báo PreStatement
+	    PreparedStatement preStm = conn.prepareStatement(strDetail);
+	    
+	    //Thực hiện công việc và trả về kết quả
+	    ResultSet rs = preStm.executeQuery();
+	    
+	    //Gán giá trị cho object 
+	    while(rs.next())//Duyệt từng dòng trong database
+	    {
+		objDiem = new DiemThi();
+		
+		//Gán giá trị cho các thuộc tính lấy được từ các cột tương ứng với dòng dữ liệu lấy được
+                objDiem.setMaMH(rs.getString("MaMH"));
+	    }
+	    
+	} catch (SQLException ex) {
+	    Logger.getLogger(DiemThiBus.class.getName()).log(Level.SEVERE, null, ex);
+	} finally
+	{
+	    try {
+		if(conn != null)
+		{
+		    conn.close();		    
+		}
+	    } catch (SQLException ex) {
+		Logger.getLogger(DiemThiBus.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	}
+	
+	return objDiem;
+    }        
+    
+    /**
      * Hàm lấy danh sách điểm thi sinh viên
      * @return 
      */
     public List<DiemThi> layDanhSachDiem(String maSV)
     {
 	//Khai báo danh sách
-	List<DiemThi> lstDiemSV = new ArrayList<DiemThi>();
+	List<DiemThi> lstDiemSV = new ArrayList<>();
 	
 	//Khai báo object 
 	DiemThi objDiemSV = null;
@@ -109,7 +163,7 @@ public class DiemThiBus {
 	    //Gán giá trị cho các tham số
 	    preStm.setString(1, objDiem.getMaSV());
             preStm.setString(2, objDiem.getMaMH());
-            preStm.setDate(4, new Date(objDiem.getNgayThi().getTime()));
+            preStm.setDate(3, new Date(objDiem.getNgayThi().getTime()));
             preStm.setFloat(4, objDiem.getDiemThi());
             preStm.setString(5, objDiem.getMaPhong());
             
@@ -132,7 +186,60 @@ public class DiemThiBus {
 	}
 	
 	return ketQua;	
-    }   
+    } 
+    
+    /**
+     * Hàm cập nhật điểm sinh viên
+     * @param objDiem 
+     * @param maMH 
+     * @return 
+     */
+    public boolean capNhatDiem(DiemThi objDiem, String maMH)
+    {
+	//Khai báo boolean
+	boolean ketQua = false;
+	
+	//Khai báo kết nối
+	Connection conn = null;
+	
+	//Khai báo câu lệnh MySQL
+	String strUpdate = "Update diemthi set MaMH = ?, NgayThi = ?, DiemThi = ?, MaPhong = ? where (MaSV = ? AND MaMH = ?)";
+	
+	try {
+	    
+	    //Kết nối với Database cần làm việc
+	    conn = DataAccess.ketNoi();
+	    
+	    //Khai báo PreStatement
+	    PreparedStatement preStm = conn.prepareStatement(strUpdate);
+ 
+	    //Gán giá trị cho các tham số
+            preStm.setString(1, objDiem.getMaMH());
+	    preStm.setDate(2, new Date(objDiem.getNgayThi().getTime()));
+            preStm.setFloat(3, objDiem.getDiemThi());
+            preStm.setString(4, objDiem.getMaPhong());
+            preStm.setString(5, objDiem.getMaSV());
+            preStm.setString(6, maMH);
+	    
+	    //Thực hiện công việc và trả về kết quả
+	    ketQua = preStm.executeUpdate() > 0;//Trả về true khi biểu thức đúng, false khi ngược lại	    
+	    
+	} catch (SQLException ex) {
+	    Logger.getLogger(DiemThiBus.class.getName()).log(Level.SEVERE, null, ex);
+	} finally
+	{
+	    try {
+		if(conn != null)
+		{
+		    conn.close();		    
+		}
+	    } catch (SQLException ex) {
+		Logger.getLogger(DiemThiBus.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	}
+	
+	return ketQua;	
+    }    
     
     /**
      * Hàm lấy chi tiết điểm sinh viên
@@ -168,7 +275,6 @@ public class DiemThiBus {
 		objDiem = new DiemThi();
 		
 		//Gán giá trị cho các thuộc tính lấy được từ các cột tương ứng với dòng dữ liệu lấy được
-		objDiem.setMaSV(rs.getString("MaSV"));
                 objDiem.setMaSV(rs.getString("MaSV"));
                 objDiem.setMaMH(rs.getString("MaMH"));
                 objDiem.setNgayThi(rs.getDate("NgayThi"));
@@ -191,7 +297,64 @@ public class DiemThiBus {
 	}
 	
 	return objDiem;
-    }    
+    } 
     
+    /**
+     * Hàm kiểm tra trùng điểm thi trên cùng 1 sinh viên và cùng 1 môn học
+     * @param maSV 
+     * @param maMH 
+     * @return 
+     */
+    public boolean kiemTraTrungDiem(String maSV, String maMH)
+    {
+	//Khai báo boolean
+	boolean ketQua = true;
+	
+	//Khai báo kết nối
+	Connection conn = null;
+	
+	//Khai báo câu lệnh MySQL
+	String strDuplicate = "Select * from diemthi";
+	
+	try {
+	    
+	    //Kết nối với Database cần làm việc
+	    conn = DataAccess.ketNoi();
+	    
+	    //Khai báo PreStatement
+	    PreparedStatement preStm = conn.prepareStatement(strDuplicate);
+	    
+	    //Thực hiện công việc và trả về kết quả
+	    ResultSet rs = preStm.executeQuery();
+	    
+	    String maSVDup, maMHDup;
+	    
+	    while(rs.next())
+	    {
+		maSVDup = rs.getString("MaSV");
+                maMHDup = rs.getString("MaMH");
+		if(maSV.equals(maSVDup) && maMH.equals(maMHDup))
+		{
+		    ketQua = false;
+		    break;
+		}
+	    }    
+	    
+	} catch (SQLException ex) {
+	    Logger.getLogger(DiemThiBus.class.getName()).log(Level.SEVERE, null, ex);
+	} finally
+	{
+	    try {
+		if(conn != null)
+		{
+		    conn.close();		    
+		}
+	    } catch (SQLException ex) {
+		Logger.getLogger(DiemThiBus.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	}
+	
+	return ketQua;	
+    }    
     
 }

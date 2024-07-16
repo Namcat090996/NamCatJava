@@ -6,6 +6,7 @@ package project_qlsinhvien;
 
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,9 +64,7 @@ public class fmRevDiemThi extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtMaSV = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         txtHoTen = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         btnCapNhat = new javax.swing.JButton();
         btnDong = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -75,6 +74,7 @@ public class fmRevDiemThi extends javax.swing.JFrame {
         jDateChooserNgayThi = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         txtDiemThi = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -87,10 +87,6 @@ public class fmRevDiemThi extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhập thông tin điểm thi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jLabel1.setText("Mã SV:");
-
-        jLabel2.setText("Họ tên:");
-
-        jLabel6.setText("Điểm thi:");
 
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -114,36 +110,30 @@ public class fmRevDiemThi extends javax.swing.JFrame {
 
         cboTenPhongHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TenPhongHoc" }));
 
-        jDateChooserNgayThi.setDateFormatString("dd/MM/YYYY");
-
         jLabel7.setText("Ngày thi:");
+
+        jLabel9.setText("Điểm thi:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnCapNhat)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDong))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel8))
                                 .addGap(16, 16, 16)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboTenMonHoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtHoTen)
-                                    .addComponent(cboTenMonHoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtHoTen))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -151,28 +141,30 @@ public class fmRevDiemThi extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jDateChooserNgayThi, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(32, 32, 32)
-                                        .addComponent(jLabel6)
+                                        .addComponent(jDateChooserNgayThi, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtDiemThi, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cboTenPhongHoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addGap(22, 22, 22))
+                                        .addComponent(txtDiemThi, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cboTenPhongHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCapNhat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDong)))
+                .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cboTenMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -184,16 +176,16 @@ public class fmRevDiemThi extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7)
                             .addComponent(jDateChooserNgayThi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtDiemThi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                            .addComponent(txtDiemThi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCapNhat)
                     .addComponent(btnDong))
-                .addGap(22, 22, 22))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,9 +200,9 @@ public class fmRevDiemThi extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -218,30 +210,100 @@ public class fmRevDiemThi extends javax.swing.JFrame {
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         //Khai báo biến
-        String maSV = "", hoTen = "", monHoc = "", phongHoc = "";
+        String maMH = "", maPH = "", strDiemThi = "";
         float diemThi = 0;
         
-        SinhVienBus sinhVienBus = new SinhVienBus();
-        SinhVien objSV = sinhVienBus.layChiTietSV(maSV);
+        //Gọi hàm hiển thị chi tiết
+        DiemThiBus diemThiBus = new DiemThiBus();       
         
-        MonHocBus monHocBus = new MonHocBus();
-        
+        //Lấy thông tin trên giao diện
+        strDiemThi = txtDiemThi.getText();
+        //Môn học
         MonHoc objMH = (MonHoc)cboTenMonHoc.getSelectedItem();
         
-        //Gán các thông tin đã có sẵn lên giao diện
-        maSV = this.maSV;
-        hoTen = objSV.getHoTen();
         if(objMH != null)
         {
-            monHoc = objMH.getTenMonHoc();
+            maMH = objMH.getMaMH().trim();
         }
         
-        txtMaSV.setText(maSV);
-        txtHoTen.setText(hoTen);
+        //Phòng học
+        PhongHoc objPH = (PhongHoc)cboTenPhongHoc.getSelectedItem();
         
+        if(objPH != null)
+        {
+            maPH = objPH.getMaPH().trim();
+        }
         
-
-	
+        //Bắt lỗi khi người dùng chưa nhập đủ thông tin
+        if(strDiemThi.length() == 0)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Bạn cần nhập điểm thi");
+            txtDiemThi.requestFocus();
+            return;            
+        }        
+        
+        //Bắt lỗi khi người dùng nhập kí tự chữ cái vào trường điểm thi
+        try {
+            diemThi = Float.parseFloat(strDiemThi);
+        } catch (NumberFormatException e) {
+            System.err.println("Có lỗi xảy ra. Chi tiết lỗi: " + e.getMessage());
+            JOptionPane.showMessageDialog(rootPane, "Điểm thi phải là giá trị kiểu số");
+            return;
+        }
+        
+        //Khai báo đối tượng
+        DiemThi objDiem = new DiemThi();       
+        
+        //Gán giá trị vào đối tượng
+        objDiem.setMaSV(this.maSV);  
+        objDiem.setMaMH(maMH);            
+        objDiem.setNgayThi(jDateChooserNgayThi.getDate());
+        objDiem.setDiemThi(diemThi);
+        objDiem.setMaPhong(maPH);
+        
+        //Khai báo kết quả trả về và kiểm tra trùng
+        boolean ketQua, kiemTraTrung;
+        
+        //Gọi hàm kiểm tra trùng
+        kiemTraTrung = diemThiBus.kiemTraTrungDiem(this.maSV, maMH);
+        
+        if(!this.maSV.isEmpty() && !this.maMH.isEmpty())//TH sửa
+        {
+            ketQua = diemThiBus.capNhatDiem(objDiem, this.maMH);
+            if(ketQua)
+            {
+                JOptionPane.showMessageDialog(rootPane, "Cập nhật điểm sinh viên thành công");
+            }
+            else
+            {
+                if(kiemTraTrung == false)
+                {
+                    JOptionPane.showMessageDialog(rootPane, "Điểm của sinh viên cho môn học này đã tồn tại. Vui lòng thử lại");
+                    return;                       
+                }           
+            }
+        }
+        else//TH thêm mới
+        {
+	    if(kiemTraTrung == true)
+	    {
+		ketQua = diemThiBus.themMoiDiem(objDiem);
+                if(ketQua)
+                {
+                    JOptionPane.showMessageDialog(rootPane, "Thêm mới điểm sinh viên thành công");
+                }                		
+	    }
+	    else
+	    {
+		JOptionPane.showMessageDialog(rootPane, "Điểm của sinh viên cho môn học này đã tồn tại. Vui lòng thử lại");
+		return;		
+	    }            
+        }
+        
+        if(ketQua)
+        {
+            fmDiemThi.hienThiDanhSachDiem();
+        }	
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
@@ -252,33 +314,36 @@ public class fmRevDiemThi extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
 	//Gọi hàm hiển thị chi tiết khoa
-	hienThiDanhSachKhoa();
+	hienThiDanhSachMonHoc();
+        hienThiDanhSachPhongHoc();
 	
 	//Gọi hàm sửa/thêm mới thông tin sinh viên
-	if(!maMH.isEmpty())
+	if(!this.maSV.isEmpty() && !this.maMH.isEmpty())
 	{
 	    this.setTitle("Sửa điểm số sinh viên");
 	    //Gọi hàm hiển thị chi tiết sinh viên
 	    hienThiSuaDiemSV();
 	}
-	if(!maSV.isEmpty())
+	else
 	{
 	    this.setTitle("Thêm mới điểm số sinh viên");
+	    //Gọi hàm hiển thị chi tiết sinh viên
+	    hienThiThemMoiDiemSV();
 	}	
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * Hàm hiển thị chi tiết sinh viên
+     * Hàm hiển thị form sửa điểm sinh viên
      */
     public void hienThiSuaDiemSV()
-    {
+    {       
 	//Khai báo đối tượng 
+        DiemThiBus diemThiBus = new DiemThiBus();
 	SinhVienBus sinhVienBus = new SinhVienBus();
         MonHocBus monHocBus = new MonHocBus();
         PhongHocBus phongHocBus = new PhongHocBus();
-        DiemThiBus diemThiBus = new DiemThiBus();
 	
-	//Gọi hàm hiển thị chi tiết sinh viên          
+	//Gọi hàm hiển thị chi tiết         
         DiemThi objDiem = diemThiBus.layChiTietDiemSV(this.maSV, this.maMH);
 	SinhVien objSV = sinhVienBus.layChiTietSV(objDiem.getMaSV());
         MonHoc objMH = monHocBus.layChiTietMH(objDiem.getMaMH());
@@ -288,7 +353,9 @@ public class fmRevDiemThi extends javax.swing.JFrame {
 	if(objDiem != null)
 	{
 	    txtMaSV.setText(this.maSV);
+            txtMaSV.setEditable(false);
             txtHoTen.setText(objSV.getHoTen());
+            txtHoTen.setEditable(false);
             
             if(objMH != null)
             {
@@ -310,31 +377,80 @@ public class fmRevDiemThi extends javax.swing.JFrame {
     }
     
     /**
-     * Hàm hiển thị danh sách khoa
+     * Hàm hiển thị form thêm mới điểm sinh viên
      */
-    public void hienThiDanhSachKhoa()
+    public void hienThiThemMoiDiemSV()
+    {        
+	//Khai báo đối tượng 
+	SinhVienBus sinhVienBus = new SinhVienBus();
+        	
+	//Gọi hàm hiển thị chi tiết         
+	SinhVien objSV = sinhVienBus.layChiTietSV(this.maSV);
+        
+	//Gán giá trị vào textfield
+	if(objSV != null)
+	{
+	    txtMaSV.setText(this.maSV);
+            txtHoTen.setText(objSV.getHoTen());
+            txtMaSV.setEditable(false);
+            txtHoTen.setEditable(false);
+	}        
+    }    
+    
+    /**
+     * Hàm hiển thị danh sách môn học
+     */
+    public void hienThiDanhSachMonHoc()
     {
 	//Khai báo object
-	ChuyenKhoaBus chuyenKhoaBus = new ChuyenKhoaBus();
+	MonHocBus monHocBus = new MonHocBus();
 	
-	//Gọi hàm lấy danh sách khoa
-	List<ChuyenKhoa> lstKhoa = chuyenKhoaBus.layDanhSachKhoa();
+	//Gọi hàm lấy danh sách 
+	List<MonHoc> lstMH = monHocBus.layDanhSachMH();	
 	
 	//Khai báo model để hiển thị lên combobox
 	DefaultComboBoxModel model = new DefaultComboBoxModel();
 	
 	//Gán object vào model
-	for(ChuyenKhoa objKhoa: lstKhoa)
+	for(MonHoc objMH: lstMH)
 	{
-	    model.addElement(objKhoa);
+	    model.addElement(objMH);         
 	}
-	
+       
 	//Render để hiển thị tên khoa trên combobox
-	cboTenMonHoc.setRenderer(new ChuyenKhoaRender());
+	cboTenMonHoc.setRenderer(new MonHocRender());
 	
 	//Set model lên combobox
 	cboTenMonHoc.setModel(model);
+    }
+    
+    /**
+     * Hàm hiển thị danh sách phòng học
+     */
+    public void hienThiDanhSachPhongHoc()
+    {
+	//Khai báo object
+	PhongHocBus phongHocBus = new PhongHocBus();
+	
+	//Gọi hàm lấy danh sách 
+	List<PhongHoc> lstPH = phongHocBus.layDanhSachPH();
+	
+	//Khai báo model để hiển thị lên combobox
+	DefaultComboBoxModel model = new DefaultComboBoxModel();
+	
+	//Gán object vào model
+	for(PhongHoc objPH: lstPH)
+	{
+	    model.addElement(objPH);         
+	}
+       
+	//Render để hiển thị tên khoa trên combobox
+	cboTenPhongHoc.setRenderer(new PhongHocRender());
+	
+	//Set model lên combobox
+	cboTenPhongHoc.setModel(model);
     }    
+    
     /**
      * @param args the command line arguments
      */
@@ -379,11 +495,10 @@ public class fmRevDiemThi extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboTenPhongHoc;
     private com.toedter.calendar.JDateChooser jDateChooserNgayThi;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtDiemThi;

@@ -4,6 +4,7 @@
  */
 package project_qlsinhvien;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -13,8 +14,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Dell Precision 7550
  */
-public class fmDiemThi extends javax.swing.JFrame {
-
+public class fmDiemThi extends javax.swing.JFrame {   
+    
     /**
      * Creates new form fmDiemThi
      */
@@ -69,7 +70,7 @@ public class fmDiemThi extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+                "Mã sinh viên", "Họ tên", "Giới tính", "Điện thoại", "Mã khoa"
             }
         ));
         jTableSinhVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -103,21 +104,21 @@ public class fmDiemThi extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addComponent(txtTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cboChuyenKhoa, 0, 174, Short.MAX_VALUE)
-                .addGap(25, 25, 25)
+                .addComponent(cboChuyenKhoa, 0, 154, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cboMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGap(43, 43, 43)
                 .addComponent(btnTraCuu)
-                .addGap(26, 26, 26))
+                .addGap(27, 27, 27))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,16 +126,16 @@ public class fmDiemThi extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(txtTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel4)
+                        .addComponent(cboMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTraCuu))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(cboChuyenKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(cboMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTraCuu)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addComponent(txtTuKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         btnSua.setText("Sửa");
@@ -204,7 +205,7 @@ public class fmDiemThi extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã sinh viên", "Họ tên", "Mã môn học", "Tên môn học", "Ngày thi", "Điểm thi", "Mã phòng"
+                "Mã sinh viên", "Họ tên", "Mã môn học", "Tên môn học", "Ngày thi", "Điểm thi", "Mã phòng học"
             }
         ));
         jScrollPane2.setViewportView(jTableDiemThi);
@@ -214,17 +215,14 @@ public class fmDiemThi extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane2)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)))))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -238,7 +236,7 @@ public class fmDiemThi extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -263,11 +261,10 @@ public class fmDiemThi extends javax.swing.JFrame {
 	    //Lấy mã sinh viên từ dòng được chọn
 	    maSV = "" + jTableDiemThi.getValueAt(dong, 0);
             maMH = "" + jTableDiemThi.getValueAt(dong, 2);
-            
 	}
 	else
 	{
-	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn điểm của sinh viên cần sửa");
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn môn học và điểm của sinh viên cần sửa");
 	    return;	    
 	}
 	
@@ -275,7 +272,8 @@ public class fmDiemThi extends javax.swing.JFrame {
 	fmRevDiemThi fmSua = new fmRevDiemThi();
 	
 	//Truyền giá trị điểm vào form sửa
-	
+        fmSua.setMaSV(maSV);
+        fmSua.setMaMH(maMH);	
 	
 	//Hiển thị form sửa thông tin sinh viên
 	fmSua.setVisible(true);
@@ -343,12 +341,12 @@ public class fmDiemThi extends javax.swing.JFrame {
 	String maSV = "";
 	
 	//Chọn dòng trên table
-	dong = jTableDiemThi.getSelectedRow();
+	dong = jTableSinhVien.getSelectedRow();
  
 	if(dong != -1)
 	{
 	    //Lấy mã sinh viên từ dòng được chọn
-	    maSV = "" + jTableDiemThi.getValueAt(dong, 3);	
+	    maSV = "" + jTableSinhVien.getValueAt(dong, 0);	
 	}
 	else
 	{
@@ -498,7 +496,7 @@ public class fmDiemThi extends javax.swing.JFrame {
     public static void hienThiDanhSachDiem()
     {
 	//Khai báo tiêu đề cho table
-	String tieuDe[] = new String[]{"Mã sinh viên", "Họ tên", "Mã môn học", "Tên môn học", "Ngày thi", "Điểm thi", "Mã phòng"};
+	String tieuDe[] = new String[]{"Mã sinh viên", "Họ tên", "Mã môn học", "Tên môn học", "Ngày thi", "Điểm thi", "Mã phòng học"};
 	
 	//Khai báo model để hiển thị dữ liệu lên table
 	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);        
@@ -517,7 +515,10 @@ public class fmDiemThi extends javax.swing.JFrame {
 	    maSV = "" + jTableSinhVien.getValueAt(dong, 0);
             //Khai báo đối tượng từ lớp 
             DiemThiBus diemThiBus = new DiemThiBus();
-
+            
+            //Khai báo đối tượng để format ngày sinh
+            SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+            
             //Gọi hàm lấy danh sách 
             List<DiemThi> lstDiemSV = diemThiBus.layDanhSachDiem(maSV);
 
@@ -533,13 +534,12 @@ public class fmDiemThi extends javax.swing.JFrame {
                 row[1] = objDiemSV.getHoTen();
                 row[2] = objDiemSV.getMaMH();
                 row[3] = objDiemSV.getTenMH();
-                row[4] = objDiemSV.getNgayThi();
+                row[4] = date.format(objDiemSV.getNgayThi());
                 row[5] = objDiemSV.getDiemThi();
-                row[6] = objDiemSV.getMaPhong();
+                row[6] = objDiemSV.getMaPhong();              
 
                 //Thêm đối tượng vào model
                 model.addRow(row);
-
             }
 
             //Thêm model vào table

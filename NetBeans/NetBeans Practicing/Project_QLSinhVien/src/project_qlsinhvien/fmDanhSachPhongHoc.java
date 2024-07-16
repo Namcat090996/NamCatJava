@@ -285,9 +285,9 @@ public class fmDanhSachPhongHoc extends javax.swing.JFrame {
         String maPH = "", tenPH = "", moTa = "";
         
         //Lấy thông tin trên giao diện
-        maPH = txtMaPH.getText();
-        tenPH = txtTenPH.getText();
-        moTa = txtMoTa.getText();
+        maPH = txtMaPH.getText().trim();
+        tenPH = txtTenPH.getText().trim();
+        moTa = txtMoTa.getText().trim();
 
         
         //Bắt lỗi người dùng
@@ -364,9 +364,9 @@ public class fmDanhSachPhongHoc extends javax.swing.JFrame {
         String maPH = "", tenPH = "", moTa = ""; 
 
         //Lấy thông tin trên giao diện
-        maPH = txtMaPH.getText();
-        tenPH = txtTenPH.getText();
-        moTa = txtMoTa.getText();
+        maPH = txtMaPH.getText().trim();
+        tenPH = txtTenPH.getText().trim();
+        moTa = txtMoTa.getText().trim();
 
         //Khai báo dòng cần chọn
         int dong = 0;
@@ -499,7 +499,7 @@ public class fmDanhSachPhongHoc extends javax.swing.JFrame {
 	String tuKhoa = "";
 	
 	//Lấy từ khóa để tìm kiếm
-	tuKhoa = txtTuKhoa.getText();
+	tuKhoa = txtTuKhoa.getText().trim();
 	
 	//Khai báo tiêu đề cho table
 	String tieuDe[] = new String[]{"Mã phòng học", "Tên phòng học", "Mô tả"};

@@ -74,10 +74,10 @@
                               <Component id="rbtnNam" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="rbtnNu" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jDateChooserNgaySinh" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="jDateChooserNgaySinh" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -276,7 +276,7 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserNgaySinh">
           <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/YYYY"/>
+            <Property name="dateFormatString" type="java.lang.String" value=""/>
           </Properties>
         </Component>
       </SubComponents>

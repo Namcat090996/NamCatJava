@@ -318,6 +318,10 @@ public class fmDanhSachSV extends javax.swing.JFrame {
 		{
 		    hienThiDanhSachSinhVien();
 		}
+                else
+                {
+                    JOptionPane.showMessageDialog(rootPane, "Không thể xóa thông tin sinh viên đã được sử dụng. Vui lòng thử lại", "Warning", JOptionPane.ERROR_MESSAGE);                    
+                }
 	    }
 	}
 	else

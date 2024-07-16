@@ -286,9 +286,9 @@ public class fmDanhSachMonHoc extends javax.swing.JFrame {
         int soTiet = 0;
         
         //Lấy thông tin trên giao diện
-        maMH = txtMaMH.getText();
-        tenMonHoc = txtTenMH.getText();
-        strSoTiet = txtSoTiet.getText();
+        maMH = txtMaMH.getText().trim();
+        tenMonHoc = txtTenMH.getText().trim();
+        strSoTiet = txtSoTiet.getText().trim();
 
         
         //Bắt lỗi người dùng
@@ -374,9 +374,9 @@ public class fmDanhSachMonHoc extends javax.swing.JFrame {
         int soTiet = 0;
 
         //Lấy thông tin trên giao diện
-        maMH = txtMaMH.getText();
-        tenMonHoc = txtTenMH.getText();
-        strSoTiet = txtSoTiet.getText();
+        maMH = txtMaMH.getText().trim();
+        tenMonHoc = txtTenMH.getText().trim();
+        strSoTiet = txtSoTiet.getText().trim();
 
         //Khai báo dòng cần chọn
         int dong = 0;
@@ -517,7 +517,7 @@ public class fmDanhSachMonHoc extends javax.swing.JFrame {
 	String tuKhoa = "";
 	
 	//Lấy từ khóa để tìm kiếm
-	tuKhoa = txtTuKhoa.getText();
+	tuKhoa = txtTuKhoa.getText().trim();
 	
 	//Khai báo tiêu đề cho table
 	String tieuDe[] = new String[]{"Mã môn học", "Tên môn học", "Số tiết"};

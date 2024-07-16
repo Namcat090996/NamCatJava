@@ -286,9 +286,9 @@ public class fmDanhSachKhoa extends javax.swing.JFrame {
         String maKhoa = "", tenKhoa = "", orderNumber = "";
         
         //Lấy thông tin trên giao diện
-        maKhoa = txtMaKhoa.getText();
-        tenKhoa = txtTenKhoa.getText();
-        orderNumber = txtOrderNumber.getText();
+        maKhoa = txtMaKhoa.getText().trim();
+        tenKhoa = txtTenKhoa.getText().trim();
+        orderNumber = txtOrderNumber.getText().trim();
         
         //Bắt lỗi người dùng
         //Mã khoa
@@ -364,9 +364,9 @@ public class fmDanhSachKhoa extends javax.swing.JFrame {
         String maKhoa = "", tenKhoa = "", orderNumber = ""; 
 
         //Lấy thông tin trên giao diện
-        maKhoa = txtMaKhoa.getText();
-        tenKhoa = txtTenKhoa.getText();
-        orderNumber = txtOrderNumber.getText();
+        maKhoa = txtMaKhoa.getText().trim();
+        tenKhoa = txtTenKhoa.getText().trim();
+        orderNumber = txtOrderNumber.getText().trim();
 
         //Khai báo dòng cần chọn
         int dong = 0;
@@ -499,7 +499,7 @@ public class fmDanhSachKhoa extends javax.swing.JFrame {
 	String tuKhoa = "";
 	
 	//Lấy từ khóa để tìm kiếm
-	tuKhoa = txtTuKhoa.getText();
+	tuKhoa = txtTuKhoa.getText().trim();
 	
 	//Khai báo tiêu đề cho table
 	String tieuDe[] = new String[]{"Mã khoa", "Tên khoa", "Order Number"};

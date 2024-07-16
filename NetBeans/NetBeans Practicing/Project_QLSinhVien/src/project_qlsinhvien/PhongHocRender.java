@@ -10,9 +10,9 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 /**
  *
- * @author Dell Precision 7550
+ * @author ADMIN
  */
-public class MonHocRender extends BasicComboBoxRenderer {
+public class PhongHocRender extends BasicComboBoxRenderer {
 
     /**
      * Hàm render kiểu object về kiểu String
@@ -28,11 +28,11 @@ public class MonHocRender extends BasicComboBoxRenderer {
         if(value != null)
         {
             //Lấy đối tượng môn học
-            MonHoc objMH = (MonHoc)value; 
+            PhongHoc objPH = (PhongHoc)value; 
             //Render lại nội dung
-            setText(objMH.getTenMonHoc());   
+            setText(objPH.getTenPH());   
         }
         
         return this;
-    }  
+    }      
 }

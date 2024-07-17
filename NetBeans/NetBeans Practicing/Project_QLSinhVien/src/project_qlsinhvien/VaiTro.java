@@ -10,16 +10,26 @@ package project_qlsinhvien;
  */
 public class VaiTro {
     
-    private String vaiTro;
+    private String maVaiTro;
+    
+    private String tenVaiTro;
     
     private String chucNang;
 
-    public String getVaiTro() {
-        return vaiTro;
+    public String getTenVaiTro() {
+        return tenVaiTro;
     }
 
-    public void setVaiTro(String vaiTro) {
-        this.vaiTro = vaiTro;
+    public void setTenVaiTro(String tenVaiTro) {
+        this.tenVaiTro = tenVaiTro;
+    }
+
+    public String getMaVaiTro() {
+        return maVaiTro;
+    }
+
+    public void setMaVaiTro(String maVaiTro) {
+        this.maVaiTro = maVaiTro;
     }
 
     public String getChucNang() {

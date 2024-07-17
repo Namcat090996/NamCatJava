@@ -59,6 +59,7 @@ public class fmDanhSachMonHoc extends javax.swing.JFrame {
         btnLuu = new javax.swing.JButton();
         btnDong = new javax.swing.JButton();
 
+        setTitle("Quản lý thông tin môn học");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -361,11 +362,7 @@ public class fmDanhSachMonHoc extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
-        //Đưa ra cảnh báo đóng chương trình
-	if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắc muốn thoát không ?", "Cảnh báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
-	{
-	    System.exit(0);
-	}
+        this.setVisible(false);
     }//GEN-LAST:event_btnDongActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed

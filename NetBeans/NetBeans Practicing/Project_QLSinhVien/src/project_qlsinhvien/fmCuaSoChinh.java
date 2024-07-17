@@ -10,10 +10,10 @@ package project_qlsinhvien;
  */
 public class fmCuaSoChinh extends javax.swing.JFrame {
 
-    public static boolean trangThaiDangNhap = false;
-    //Lưu thông tin tên đăng nhập và userid
-    public static String userName = "";
+    public static boolean isTrangThaiDangNhap = false;
     
+    //Lưu thông tin tên đăng nhập và UserId
+    public static String userName = "";    
     public static int userId = 0;
     
     /**
@@ -35,62 +35,58 @@ public class fmCuaSoChinh extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         lblTrangThai = new javax.swing.JLabel();
+        lblVaiTro = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuHeThong = new javax.swing.JMenu();
-        jMenuItemNguoiDung = new javax.swing.JMenuItem();
+        jMenuItemUser = new javax.swing.JMenuItem();
         jMenuItemDangNhap = new javax.swing.JMenuItem();
         jMenuItemDangXuat = new javax.swing.JMenuItem();
         jMenuItemThoat = new javax.swing.JMenuItem();
         jMenuNghiepVu = new javax.swing.JMenu();
-        jMenuItemSinhVien = new javax.swing.JMenuItem();
-        jMenuItemKhoa = new javax.swing.JMenuItem();
-        jMenuItemMonHoc = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItemSV = new javax.swing.JMenuItem();
+        jMenuItemDiemThi = new javax.swing.JMenuItem();
         jMenuDanhMuc = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItemPH = new javax.swing.JMenuItem();
+        jMenuItemMH = new javax.swing.JMenuItem();
+        jMenuItemKhoa = new javax.swing.JMenuItem();
         jMenuBaoCao = new javax.swing.JMenu();
         jMenuTroGiup = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Hệ thống quản lý sinh viên");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        lblTrangThai.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblTrangThai.setText("admin");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(920, Short.MAX_VALUE)
-                .addComponent(lblTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+            .addGap(0, 732, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblTrangThai)
-                .addContainerGap(16, Short.MAX_VALUE))
+            .addGap(0, 46, Short.MAX_VALUE)
         );
+
+        lblTrangThai.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTrangThai.setText("UserDangNhap");
+
+        lblVaiTro.setText("VaiTroDangNhap");
 
         jMenuHeThong.setText("Hệ thống");
 
-        jMenuItemNguoiDung.setText("Người dùng");
-        jMenuItemNguoiDung.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemUser.setText("Quản lý người dùng");
+        jMenuItemUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemNguoiDungActionPerformed(evt);
+                jMenuItemUserActionPerformed(evt);
             }
         });
-        jMenuHeThong.add(jMenuItemNguoiDung);
+        jMenuHeThong.add(jMenuItemUser);
 
         jMenuItemDangNhap.setText("Đăng nhập");
         jMenuItemDangNhap.addActionListener(new java.awt.event.ActionListener() {
@@ -109,39 +105,60 @@ public class fmCuaSoChinh extends javax.swing.JFrame {
         jMenuHeThong.add(jMenuItemDangXuat);
 
         jMenuItemThoat.setText("Đóng chương trình");
+        jMenuItemThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemThoatActionPerformed(evt);
+            }
+        });
         jMenuHeThong.add(jMenuItemThoat);
 
         jMenuBar1.add(jMenuHeThong);
 
         jMenuNghiepVu.setText("Nghiệp vụ");
 
-        jMenuItemSinhVien.setText("Sinh viên");
-        jMenuItemSinhVien.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemSV.setText("Quản lý sinh viên");
+        jMenuItemSV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemSinhVienActionPerformed(evt);
+                jMenuItemSVActionPerformed(evt);
             }
         });
-        jMenuNghiepVu.add(jMenuItemSinhVien);
+        jMenuNghiepVu.add(jMenuItemSV);
 
-        jMenuItemKhoa.setText("Chuyên khoa");
-        jMenuNghiepVu.add(jMenuItemKhoa);
-
-        jMenuItemMonHoc.setText("Môn học");
-        jMenuNghiepVu.add(jMenuItemMonHoc);
-
-        jMenuItem8.setText("Nhập điểm thi");
-        jMenuNghiepVu.add(jMenuItem8);
-        jMenuNghiepVu.add(jSeparator1);
-
-        jMenuItem9.setText("Tra cứu điểm thi");
-        jMenuNghiepVu.add(jMenuItem9);
+        jMenuItemDiemThi.setText("Nhập/Tra cứu điểm thi");
+        jMenuItemDiemThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDiemThiActionPerformed(evt);
+            }
+        });
+        jMenuNghiepVu.add(jMenuItemDiemThi);
 
         jMenuBar1.add(jMenuNghiepVu);
 
         jMenuDanhMuc.setText("Danh mục");
 
-        jMenuItem10.setText("Phòng học");
-        jMenuDanhMuc.add(jMenuItem10);
+        jMenuItemPH.setText("Quản lý phòng học");
+        jMenuItemPH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPHActionPerformed(evt);
+            }
+        });
+        jMenuDanhMuc.add(jMenuItemPH);
+
+        jMenuItemMH.setText("Quản lý môn học");
+        jMenuItemMH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMHActionPerformed(evt);
+            }
+        });
+        jMenuDanhMuc.add(jMenuItemMH);
+
+        jMenuItemKhoa.setText("Quản lý khoa");
+        jMenuItemKhoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemKhoaActionPerformed(evt);
+            }
+        });
+        jMenuDanhMuc.add(jMenuItemKhoa);
 
         jMenuBar1.add(jMenuDanhMuc);
 
@@ -157,52 +174,107 @@ public class fmCuaSoChinh extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblVaiTro)
+                    .addComponent(lblTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 445, Short.MAX_VALUE)
+                .addGap(0, 376, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTrangThai)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblVaiTro)
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNguoiDungActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemNguoiDungActionPerformed
+    private void jMenuItemUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUserActionPerformed
+        //Gọi form quản lý người dùng
+       fmDSNguoiDung fmUser = new fmDSNguoiDung();
+       
+       fmUser.setVisible(true);
+    }//GEN-LAST:event_jMenuItemUserActionPerformed
 
-    private void jMenuItemSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSinhVienActionPerformed
+    private void jMenuItemSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSVActionPerformed
         //HIển thị form danh sách sinh viên
         fmDanhSachSV fmSinhVien = new fmDanhSachSV();
         
         fmSinhVien.setVisible(true);
-    }//GEN-LAST:event_jMenuItemSinhVienActionPerformed
+    }//GEN-LAST:event_jMenuItemSVActionPerformed
 
     private void jMenuItemDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDangNhapActionPerformed
+        //Gọi hàm đăng nhập hệ thống
         dangNhapHeThong();
     }//GEN-LAST:event_jMenuItemDangNhapActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        kiemTraQuyenSuDung(trangThaiDangNhap);
+        //Gọi hàm kiểm tra quyền sử dụng 
+        kiemTraQuyenSuDung(isTrangThaiDangNhap);
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItemDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDangXuatActionPerformed
-        trangThaiDangNhap = false;
+        //Set trạng thái hàm kiểm tra quyền sử dụng sau khi đăng xuất
+        isTrangThaiDangNhap = false;
+        
+        //Reset trạng thái hiển thị khi đăng xuất
         userName = "";
         userId = 0;
+        
+        //Gọi hàm đăng nhập hệ thống
         dangNhapHeThong();
     }//GEN-LAST:event_jMenuItemDangXuatActionPerformed
+
+    private void jMenuItemThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemThoatActionPerformed
+        //Thoát chương trình
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemThoatActionPerformed
+
+    private void jMenuItemDiemThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDiemThiActionPerformed
+        //Gọi form nhập/tra cứu điểm thi
+        fmDSDiemThi fmDiemThi = new fmDSDiemThi();
+        
+        fmDiemThi.setVisible(true);
+    }//GEN-LAST:event_jMenuItemDiemThiActionPerformed
+
+    private void jMenuItemPHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPHActionPerformed
+        //Gọi form quản lý phòng học
+        fmDanhSachPhongHoc fmPH = new fmDanhSachPhongHoc();
+        
+        fmPH.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPHActionPerformed
+
+    private void jMenuItemMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMHActionPerformed
+        //Gọi form quản lý môn học
+        fmDanhSachMonHoc fmMH = new fmDanhSachMonHoc();
+        
+        fmMH.setVisible(true);
+    }//GEN-LAST:event_jMenuItemMHActionPerformed
+
+    private void jMenuItemKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKhoaActionPerformed
+        //Gọi form quản lý khoa
+        fmDanhSachKhoa fmKhoa = new fmDanhSachKhoa();
+        
+        fmKhoa.setVisible(true);
+    }//GEN-LAST:event_jMenuItemKhoaActionPerformed
     
     private void dangNhapHeThong()
     {
+        //Set trạng thái hàm kiểm tra quyền sử dụng trước khi đăng nhập được vào hệ thống
         kiemTraQuyenSuDung(false);
         
-        fmDangNhap fmLogin = new fmDangNhap();
-        
-        fmLogin.setVisible(true);
-        
+        //Gọi form đăng nhập
+        fmDangNhap fmLogin = new fmDangNhap(); 
+        fmLogin.setVisible(true);       
     }
     
     /**
@@ -211,20 +283,45 @@ public class fmCuaSoChinh extends javax.swing.JFrame {
      */
     private void kiemTraQuyenSuDung(boolean isQuyen)
     {
+        //Quyền sử dụng chức năng của phần mềm khi đăng nhập thành công hay không
         jMenuItemDangNhap.setVisible(!isQuyen);
         jMenuItemDangXuat.setVisible(isQuyen);
-        jMenuItemNguoiDung.setVisible(isQuyen);
-        jMenuNghiepVu.setEnabled(isQuyen);
-        jMenuDanhMuc.setEnabled(isQuyen);
-        jMenuBaoCao.setEnabled(isQuyen);
         
+        //Thực hiện phân quyền
         if(isQuyen)
         {
-            lblTrangThai.setText("Bạn đang đăng nhập: " + userName);
+            if(!userName.isEmpty() && userId != 0)//Nếu đăng nhập thành công
+            {
+                //Lấy vai trò người dùng để phân quyền
+                NguoiDungBus nguoiDungBus = new NguoiDungBus();
+                NguoiDung objUser = nguoiDungBus.layThongTinDangNhap(userName); 
+                //Quản lý
+                if(objUser.getTenVaiTro().equals("Quản lý"))
+                {
+                    jMenuItemUser.setVisible(isQuyen);
+                    jMenuNghiepVu.setEnabled(isQuyen);
+                    jMenuDanhMuc.setEnabled(isQuyen);
+                    jMenuBaoCao.setEnabled(isQuyen);  
+                }
+                else//Nhân viên
+                {
+                    jMenuItemUser.setVisible(!isQuyen);
+                    jMenuNghiepVu.setEnabled(isQuyen);
+                    jMenuDanhMuc.setEnabled(!isQuyen);
+                    jMenuBaoCao.setEnabled(isQuyen);            
+                } 
+                lblTrangThai.setText("Tài khoản: " + userName);
+                lblVaiTro.setText("Chức năng: " + objUser.getTenVaiTro());
+            }            
         }
-        else
+        else//Nếu chưa đăng nhập
         {
+            jMenuItemUser.setVisible(isQuyen);
+            jMenuNghiepVu.setEnabled(isQuyen);
+            jMenuDanhMuc.setEnabled(isQuyen);
+            jMenuBaoCao.setEnabled(isQuyen); 
             lblTrangThai.setText("Chưa đăng nhập");
+            lblVaiTro.setText("");            
         }
     }
     
@@ -269,20 +366,19 @@ public class fmCuaSoChinh extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuDanhMuc;
     private javax.swing.JMenu jMenuHeThong;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItemDangNhap;
     private javax.swing.JMenuItem jMenuItemDangXuat;
+    private javax.swing.JMenuItem jMenuItemDiemThi;
     private javax.swing.JMenuItem jMenuItemKhoa;
-    private javax.swing.JMenuItem jMenuItemMonHoc;
-    private javax.swing.JMenuItem jMenuItemNguoiDung;
-    private javax.swing.JMenuItem jMenuItemSinhVien;
+    private javax.swing.JMenuItem jMenuItemMH;
+    private javax.swing.JMenuItem jMenuItemPH;
+    private javax.swing.JMenuItem jMenuItemSV;
     private javax.swing.JMenuItem jMenuItemThoat;
+    private javax.swing.JMenuItem jMenuItemUser;
     private javax.swing.JMenu jMenuNghiepVu;
     private javax.swing.JMenu jMenuTroGiup;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lblTrangThai;
+    private javax.swing.JLabel lblVaiTro;
     // End of variables declaration//GEN-END:variables
 }

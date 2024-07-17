@@ -60,6 +60,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
 
         jTextField6.setText("jTextField6");
 
+        setTitle("Quản lý thông tin sinh viên");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -235,6 +236,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       
         //Ngăn không cho người dùng sửa thông tin khi double click vào jTable
         jTableSinhVien.setDefaultEditor(Object.class, null); 	
 
@@ -246,11 +248,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
-        //Đưa ra cảnh báo đóng chương trình
-	if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắc muốn thoát không ?", "Cảnh báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
-	{
-	    System.exit(0);
-	}
+        this.setVisible(false);
     }//GEN-LAST:event_btnDongActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed

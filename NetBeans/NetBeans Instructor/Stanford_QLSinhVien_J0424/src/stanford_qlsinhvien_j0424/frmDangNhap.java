@@ -118,7 +118,7 @@ public class frmDangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        String tenDangNhap = "", matKhau = "";
+          String tenDangNhap = "", matKhau = "";
        
         //Lấy thông tin trên giao diện
         tenDangNhap = txtTenDangNhap.getText().trim();

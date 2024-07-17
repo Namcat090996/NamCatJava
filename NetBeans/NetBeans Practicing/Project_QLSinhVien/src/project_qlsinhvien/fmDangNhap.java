@@ -44,12 +44,6 @@ public class fmDangNhap extends javax.swing.JFrame {
 
         jLabel2.setText("Mật khẩu:");
 
-        txtMatKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMatKhauActionPerformed(evt);
-            }
-        });
-
         btnHuyBo.setText("Hủy bỏ");
         btnHuyBo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,17 +117,15 @@ public class fmDangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatKhauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMatKhauActionPerformed
-
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        //Khai báo tài khoản và mật khẩu
         String taiKhoan = "", matKhau = "";
         
-        taiKhoan = txtTaiKhoan.getText().trim();
-        
+        //Lấy thông tin trên giao diện
+        taiKhoan = txtTaiKhoan.getText().trim();    
         matKhau = new String(txtMatKhau.getPassword());
         
+        //Bắt lỗi người dùng khi chưa nhập đầy đủ thông tin
 	if(taiKhoan.length() == 0)
 	{
 	    JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tài khoản đăng nhập");
@@ -148,38 +140,43 @@ public class fmDangNhap extends javax.swing.JFrame {
 	}
         
         //Khai báo 1 đối tượng
-        NguoiDungBus bus = new NguoiDungBus();
+        NguoiDungBus nguoiDungBus = new NguoiDungBus();
         
         //Lấy thông tin user đăng nhập
-        NguoiDung objUser = bus.layThongTinDangNhap(taiKhoan);
+        NguoiDung objUser = nguoiDungBus.layThongTinDangNhap(taiKhoan);
         
+        //Kiểm tra tài khoản có tồn tại trong hệ thống hay không
         if(objUser != null)
         {
-           String matKhauDb = objUser.getMatKhau();
+           //Mã hóa mật khẩu
+           matKhau = nguoiDungBus.GenerateMD5(matKhau);
+           String matKhauDB = objUser.getMatKhau();
            
-           if(matKhau.equals(matKhauDb))//true
+           //Kiểm tra mật khẩu đăng nhập
+           if(matKhau.equals(matKhauDB))//true
            {
                //Xử lý khi đăng nhập thành công
-               //Lưu trạng thái đăng nhập thành công và hiển thị giao diện chính của phần mềm
-               
+               //Lưu trạng thái đăng nhập thành công và hiển thị giao diện chính của phần mềm              
                this.setVisible(false);
                
-               fmCuaSoChinh.trangThaiDangNhap = true;
+               //Sau khi đăng nhập thành công, sẽ mở được thêm các chức năng cho người dùng thao tác
+               fmCuaSoChinh.isTrangThaiDangNhap = true;
                
+               //Đưa trạng thái đăng nhập thành công lên giao diện
                fmCuaSoChinh.userId = objUser.getUserId();
                fmCuaSoChinh.userName = objUser.getTenDangNhap();
                
+               //Gọi hàm hiển thị cửa sổ chính 
                fmCuaSoChinh fmMain = new fmCuaSoChinh();
-               
                fmMain.setVisible(true);
            }
-           else
+           else//Sai mật khẩu
            {
                JOptionPane.showMessageDialog(rootPane, "Mật khẩu nhập không chính xác. Vui lòng kiểm tra lại");
                txtMatKhau.requestFocus();
            }
         }
-	else
+	else//Tài khoản không tồn tại trong hệ thống
 	{
 	    JOptionPane.showMessageDialog(rootPane, "Tài khoản không tồn tại trong hệ thống. Vui lòng kiểm tra lại");
             txtTaiKhoan.requestFocus();
@@ -187,10 +184,7 @@ public class fmDangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnHuyBoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyBoActionPerformed
-        fmCuaSoChinh fmMain = new fmCuaSoChinh();
-        
-        fmMain.setVisible(true);
-        
+        //Đóng form đăng nhập
         this.setVisible(false);
     }//GEN-LAST:event_btnHuyBoActionPerformed
 

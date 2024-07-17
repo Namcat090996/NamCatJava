@@ -262,7 +262,7 @@ public class fmRevDiemThi extends javax.swing.JFrame {
         }
         else
         {
-            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui lòng thử lại");
+            JOptionPane.showMessageDialog(rootPane, "Thông tin môn học không được để trống. Yêu cầu cập nhật", "Warning", JOptionPane.ERROR_MESSAGE);
             return;
         }
         objDiem.setNgayThi(jDateChooserNgayThi.getDate());
@@ -270,6 +270,11 @@ public class fmRevDiemThi extends javax.swing.JFrame {
         if(objPH != null)
         {
             objDiem.setMaPhong(maPH);   
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(rootPane, "Thông tin phòng học không được để trống. Yêu cầu cập nhật", "Warning", JOptionPane.ERROR_MESSAGE);
+            return;            
         }
 
         //Khai báo kết quả trả về và kiểm tra trùng
@@ -313,7 +318,7 @@ public class fmRevDiemThi extends javax.swing.JFrame {
         
         if(ketQua)
         {
-            fmDiemThi.hienThiDanhSachDiem();
+            fmDSDiemThi.hienThiDanhSachDiem();
         }	
     }//GEN-LAST:event_btnCapNhatActionPerformed
 

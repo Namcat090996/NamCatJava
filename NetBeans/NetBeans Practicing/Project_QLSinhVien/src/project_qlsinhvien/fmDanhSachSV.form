@@ -8,6 +8,9 @@
       </Properties>
     </Component>
   </NonVisualComponents>
+  <Properties>
+    <Property name="title" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; th&#xf4;ng tin sinh vi&#xea;n"/>
+  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>

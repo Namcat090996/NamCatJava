@@ -51,7 +51,8 @@ public class VaiTroBus {
 	    while(rs.next())//Duyệt từng dòng trong database
 	    {
 		objVaiTro = new VaiTro();
-		objVaiTro.setVaiTro(rs.getString("VaiTro"));
+                objVaiTro.setMaVaiTro(rs.getString("MaVaiTro"));
+		objVaiTro.setTenVaiTro(rs.getString("TenVaiTro"));
 		objVaiTro.setChucNang(rs.getString("ChucNang"));
 		
 		//Thêm vào danh sách
@@ -73,5 +74,60 @@ public class VaiTroBus {
 	}
 	
 	return lstVaiTro;
-    }     
+    } 
+
+    /**
+     * Hàm lấy chi tiết vai trò người dùng
+     * @param maVaiTro  
+     * @return 
+     */
+    public VaiTro layChiTietVaiTroUser(String maVaiTro)
+    {
+	//Khai báo object 
+	VaiTro objVaiTro = null;
+	
+	//Khai báo kết nối
+	Connection conn = null;
+	
+	//Khai báo câu lệnh MySQL
+	String strDetail = String.format("Select * from vaitro where MaVaiTro = '%s'", maVaiTro);
+	
+	try {
+	    
+	    //Kết nối với Database cần làm việc
+	    conn = DataAccess.ketNoi();
+	    
+	    //Khai báo PreStatement
+	    PreparedStatement preStm = conn.prepareStatement(strDetail);
+	    
+	    //Thực hiện công việc và trả về kết quả
+	    ResultSet rs = preStm.executeQuery();
+	    
+	    //Gán giá trị cho object và add object vào list
+	    while(rs.next())//Duyệt từng dòng trong database
+	    {
+		objVaiTro = new VaiTro();
+		
+		//Gán giá trị cho các thuộc tính lấy được từ các cột tương ứng với dòng dữ liệu lấy được
+		objVaiTro.setMaVaiTro(rs.getString("MaVaiTro"));
+		objVaiTro.setTenVaiTro(rs.getString("TenVaiTro"));
+                objVaiTro.setChucNang(rs.getString("ChucNang"));
+	    }
+	    
+	} catch (SQLException ex) {
+	    Logger.getLogger(VaiTroBus.class.getName()).log(Level.SEVERE, null, ex);
+	} finally
+	{
+	    try {
+		if(conn != null)
+		{
+		    conn.close();		    
+		}
+	    } catch (SQLException ex) {
+		Logger.getLogger(VaiTroBus.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	}
+	
+	return objVaiTro;	
+    }    
 }

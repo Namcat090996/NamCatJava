@@ -4,12 +4,26 @@
  */
 package project_qlsinhvien;
 
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ADMIN
  */
 public class fmRevNguoiDung extends javax.swing.JFrame {
 
+    private String tenDangNhap = "";
+
+    public String getTenDangNhap() {
+        return tenDangNhap;
+    }
+
+    public void setTenDangNhap(String tenDangNhap) {
+        this.tenDangNhap = tenDangNhap;
+    }
+    
     /**
      * Creates new form fmThemNguoiDung
      */
@@ -30,7 +44,6 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtTenDangNhap = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtMatKhau = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtHoTen = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -41,8 +54,13 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtDienThoai = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
+        txtMatKhau = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhập thông tin người dùng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -97,14 +115,13 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEmail)
-                            .addComponent(cboVaiTro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cboVaiTro, 0, 318, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtTenDangNhap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                        .addComponent(txtMatKhau, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtHoTen, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(txtDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTenDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                                    .addComponent(txtHoTen)
+                                    .addComponent(txtMatKhau))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(22, 22, 22))
         );
@@ -139,7 +156,7 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCapNhat)
                     .addComponent(btnDong))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,24 +164,163 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        //Khai báo biến
+        String tenDangNhap = "", matKhau = "", matKhauMH = "", hoTen = "", dienThoai = "", email = "", maVaiTro = "";
+        
+        //Lấy thông tin trên giao diện
+        tenDangNhap = txtTenDangNhap.getText().trim();
+        matKhau = new String(txtMatKhau.getPassword());
+        hoTen = txtHoTen.getText().trim();
+        dienThoai = txtDienThoai.getText().trim();
+        email = txtEmail.getText().trim();
+        
+        VaiTro objVaiTro = (VaiTro)cboVaiTro.getSelectedItem();
+        
+        if(objVaiTro != null)
+        {
+            maVaiTro = objVaiTro.getMaVaiTro().trim();
+        }
+        
+	//Bắt lỗi khi người dùng không nhập đủ thông tin 	
+	//Tên đăng nhập        
+	if(tenDangNhap.length() == 0)
+	{
+            JOptionPane.showMessageDialog(rootPane, "Bạn cần nhập tên đăng nhập");
+            txtTenDangNhap.requestFocus();
+            return;	    
+	}
+	//Mật khẩu        
+	if(matKhau.length() == 0)
+	{
+            JOptionPane.showMessageDialog(rootPane, "Bạn cần nhập mật khẩu");
+            jPanel1.requestFocus();
+            return;	    
+	} 
+	//Họ tên 
+	if(hoTen.length() == 0)
+	{
+            JOptionPane.showMessageDialog(rootPane, "Bạn cần nhập họ tên");
+            txtHoTen.requestFocus();
+            return;	    
+	}
+	//Kiểm tra họ tên nếu chứa chữ số
+	char hoTenCheck[] = hoTen.toCharArray();
+	
+	for(char giaTri: hoTenCheck)
+	{
+	    if(Character.isDigit(giaTri))
+	    {
+		JOptionPane.showMessageDialog(rootPane, "Tên không hợp lệ");
+		txtHoTen.requestFocus();
+		return;
+	    }	    
+	}
+	//Điện thoại
+	if(dienThoai.length() == 0)
+	{
+            JOptionPane.showMessageDialog(rootPane, "Bạn cần nhập số điện thoại sinh viên");
+            txtDienThoai.requestFocus();
+            return;	    
+	}
+	if(dienThoai.contains(" "))
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ");
+	    txtDienThoai.requestFocus();
+	    return;	    
+	}
+	//Kiểm tra nếu điện thoại chứa kí tự chữ cái
+	char dienThoaiCheck[] = dienThoai.toCharArray();
+	
+	for(char giaTri: dienThoaiCheck)
+	{
+	    if(Character.isLetter(giaTri))
+	    {
+		JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ");
+		txtDienThoai.requestFocus();
+		return;
+	    }	    
+	}
+	//Email
+	if(email.length() == 0)
+	{
+            JOptionPane.showMessageDialog(rootPane, "Bạn cần nhập email sinh viên");
+            txtEmail.requestFocus();
+            return;	    
+	}
+        
+	//Khai báo đối tượng để gọi hàm cập nhật/thêm mới
+	NguoiDungBus nguoiDungBus = new NguoiDungBus(); 
+        
+        //Mã hóa mật khẩu
+        matKhauMH = nguoiDungBus.GenerateMD5(matKhau);
 
-
+        //Khai báo đối tượng
+        NguoiDung objUser = new NguoiDung();
+        
+        //Gán giá trị cho object
+        objUser.setTenDangNhap(tenDangNhap);
+        objUser.setMatKhau(matKhauMH);
+        objUser.setHoTen(hoTen);
+        objUser.setDienThoai(dienThoai);
+        objUser.setEmail(email);
+        if(objVaiTro != null)
+        {
+            objUser.setMaVaiTro(maVaiTro);
+        }
+	
+	//Khai báo kết quả trả về và kiểm tra trùng mã sinh viên
+	boolean ketQua, kiemTraTrung; 
+	
+	//Gọi hàm kiểm tra trùng mã sinh viên
+	kiemTraTrung = nguoiDungBus.kiemTraTrungTenDN(tenDangNhap);
+	
+	if(!this.tenDangNhap.isEmpty())//TH sửa
+	{
+	    ketQua = nguoiDungBus.capNhatUser(objUser);
+            if(ketQua)
+            {
+                JOptionPane.showMessageDialog(rootPane, "Cập nhật thông tin người dùng thành công");
+            }            	    
+	}
+	else//TH thêm mới
+	{
+	    if(kiemTraTrung == true)//Nếu không trùng tên đăng nhập
+	    {
+		ketQua = nguoiDungBus.themMoiUser(objUser);
+                if(ketQua)
+                {
+                    JOptionPane.showMessageDialog(rootPane, "Thêm mới thông tin người dùng thành công");	
+                }                  		
+	    }
+	    else
+	    {
+		JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập này đã tồn tại. Vui lòng nhập lại tên đăng nhập");
+		txtTenDangNhap.requestFocus();
+		return;		
+	    }
+	}
+	
+	if(ketQua)
+	{
+            fmDSNguoiDung.hienThiDanhSachUser();
+	}        
+        
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
@@ -172,6 +328,81 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnDongActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+     	//Gọi hàm hiển thị chi tiết vai trò
+	hienThiDanhSachVaiTro();
+	
+	//Gọi hàm sửa/thêm mới thông tin sinh viên
+	if(!tenDangNhap.isEmpty())
+	{
+	    this.setTitle("Sửa thông tin người dùng");
+	    //Gọi hàm hiển thị chi tiết người dùng
+            hienThiChiTietNguoiDung();
+	    
+	}
+	else
+	{
+	    this.setTitle("Thêm mới thông tin người dùng");
+	}
+    }//GEN-LAST:event_formWindowOpened
+
+    public void hienThiChiTietNguoiDung()
+    {
+	//Khai báo đối tượng 
+	NguoiDungBus nguoiDungBus = new NguoiDungBus();
+	
+	//Gọi hàm hiển thị chi tiết
+	NguoiDung objUser = nguoiDungBus.layChiTietUser(tenDangNhap);
+	
+	//Gán giá trị vào textfield
+	if(objUser != null)
+	{
+            txtTenDangNhap.setText(tenDangNhap);
+            txtTenDangNhap.setEditable(false);
+            txtMatKhau.setText(objUser.getMatKhau());
+	    txtHoTen.setText(objUser.getHoTen());
+	    txtDienThoai.setText(objUser.getDienThoai());
+	    txtEmail.setText(objUser.getEmail());
+	    
+            VaiTroBus vaiTroBus = new VaiTroBus();
+
+            VaiTro objVaiTro = vaiTroBus.layChiTietVaiTroUser(objUser.getMaVaiTro());
+	    
+	    if(objVaiTro != null)
+	    {
+		//Hiển thị khoa của sinh viên được chọn trên combobox
+		cboVaiTro.getModel().setSelectedItem(objVaiTro);		
+	    }
+	}
+    } 
+    
+    /**
+     * Hiển thị danh sách vai trò người dùng trên cbo
+     */
+    public void hienThiDanhSachVaiTro()
+    {
+	//Khai báo object
+	VaiTroBus vaiTroBus = new VaiTroBus();
+	
+	//Gọi hàm lấy danh sách khoa
+	List<VaiTro> lstVaiTro = vaiTroBus.layDanhSachVaiTro();
+	
+	//Khai báo model để hiển thị lên combobox
+	DefaultComboBoxModel model = new DefaultComboBoxModel();
+	
+	//Gán object vào model
+	for(VaiTro objVaiTro: lstVaiTro)
+	{
+	    model.addElement(objVaiTro);         
+	}
+       
+	//Render để hiển thị tên khoa trên combobox
+	cboVaiTro.setRenderer(new VaiTroRender());
+	
+	//Set model lên combobox
+	cboVaiTro.setModel(model);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -222,7 +453,7 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
     private javax.swing.JTextField txtDienThoai;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;
-    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
 }

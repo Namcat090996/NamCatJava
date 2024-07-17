@@ -22,18 +22,26 @@ public class NguoiDung {
     
     private String email;
     
-    private String diaChi;
+    private String maVaiTro;
     
-    private String vaiTro;
+    private String tenVaiTro;
 
-    public String getVaiTro() {
-        return vaiTro;
+    public String getTenVaiTro() {
+        return tenVaiTro;
     }
 
-    public void setVaiTro(String vaiTro) {
-        this.vaiTro = vaiTro;
+    public void setTenVaiTro(String tenVaiTro) {
+        this.tenVaiTro = tenVaiTro;
     }
     
+    public String getMaVaiTro() {
+        return maVaiTro;
+    }
+
+    public void setMaVaiTro(String maVaiTro) {
+        this.maVaiTro = maVaiTro;
+    }
+   
     public int getUserId() {
         return userId;
     }
@@ -82,11 +90,4 @@ public class NguoiDung {
         this.email = email;
     }
 
-    public String getDiaChi() {
-        return diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }   
 }

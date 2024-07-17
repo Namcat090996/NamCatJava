@@ -45,7 +45,7 @@ public class fmDSNguoiDung extends javax.swing.JFrame {
         cboVaiTro = new javax.swing.JComboBox<>();
         btnTimKiem = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quản lý thông tin người dùng");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -207,11 +207,75 @@ public class fmDSNguoiDung extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        //Khai báo dòng cần chọn
+	int dong = 0;
+	
+	//Khai báo tên đăng nhập cần chọn để sửa
+	String tenDangNhap = "";
+	
+	//Chọn dòng trên table
+	dong = jTableUser.getSelectedRow();
+ 
+	if(dong != -1)
+	{
+	    //Lấy mã sinh viên từ dòng được chọn
+	    tenDangNhap = "" + jTableUser.getValueAt(dong, 1);	
+	}
+	else
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn người dùng cần sửa thông tin");
+	    return;	    
+	}
+	
+	//Khai báo object để hiển thị form sửa thông tin 
+        fmRevNguoiDung fmSua = new fmRevNguoiDung();
+	
+	//Truyền giá trị vào form sửa
+        fmSua.setTenDangNhap(tenDangNhap);
 
+	//Hiển thị form sửa thông tin
+	fmSua.setVisible(true);
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+	//Khai báo dòng cần chọn
+	int dong = 0;
 
+	//Khai báo tên đăng nhập của người dùng cần xóa
+	String tenDangNhap = "";
+
+	//Chọn dòng trên table
+	dong = jTableUser.getSelectedRow();
+	
+	//Bắt lỗi khi chưa chọn dòng
+	if(dong != -1)
+	{
+	    //Lấy người dùng từ dòng được chọn
+	    tenDangNhap = "" + jTableUser.getValueAt(dong, 1);
+	    
+	    //Khai báo object 
+	    NguoiDungBus nguoiDungBus = new NguoiDungBus();
+	    
+	    //Đưa ra cảnh báo trước khi xóa
+	    int ketQua = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xóa không ?", "Cảnh báo", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+	
+	    //Thực hiện xóa
+	    if(ketQua == JOptionPane.YES_OPTION)
+	    {
+		//Gọi hàm xóa thông tin sinh viên
+		boolean xoa = nguoiDungBus.xoaUser(tenDangNhap);
+		
+		//Xóa thành công
+		if(xoa)
+		{
+		    hienThiDanhSachUser();
+		}
+	    }
+	}
+	else
+	{
+	    JOptionPane.showMessageDialog(rootPane, "Bạn phải chọn người dùng cần xóa thông tin");	    
+	}
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -219,18 +283,14 @@ public class fmDSNguoiDung extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
-        //Đưa ra cảnh báo đóng chương trình
-        if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắc muốn thoát không ?", "Cảnh báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
-        {
-            System.exit(0);
-        }
+        this.setVisible(false);
     }//GEN-LAST:event_btnDongActionPerformed
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-        //Khai báo object để hiển thị form thêm mới thông tin sinh viên
-        fmRevDanhSachSV fmThemMoi = new fmRevDanhSachSV();
+        //Khai báo object 
+        fmRevNguoiDung fmThemMoi = new fmRevNguoiDung();
 
-        //Hiển thị form thêm mới thông tin sinh viên
+        //Hiển thị form thêm mới 
         fmThemMoi.setVisible(true);
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
@@ -240,15 +300,20 @@ public class fmDSNguoiDung extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    
         //Ngăn không cho người dùng sửa thông tin khi double click vào jTable
         jTableUser.setDefaultEditor(Object.class, null);        
 
         //Gọi hàm hiển thị vai trò người dùng
+        hienThiDanhSachVaiTro();
         
         //Gọi hàm hiển thị danh sách người dùng
         hienThiDanhSachUser();
     }//GEN-LAST:event_formWindowOpened
     
+    /**
+     * Hiển thị danh sách vai trò người dùng trên cbo
+     */
     public void hienThiDanhSachVaiTro()
     {
 	//Khai báo object
@@ -259,24 +324,24 @@ public class fmDSNguoiDung extends javax.swing.JFrame {
 	
 	//Set mục khoa đầu trống để hiển thị toàn bộ danh sách người dùng
         VaiTro root = new VaiTro();
-        root.setVaiTro("");
-        root.setChucNang("---Chọn vai trò---");
+        root.setMaVaiTro("");
+        root.setTenVaiTro("---Chọn vai trò---");
         lstVaiTro.add(0, root);
 	
 	//Khai báo model để hiển thị lên combobox
 	DefaultComboBoxModel model = new DefaultComboBoxModel();
 	
 	//Gán object vào model
-	for(ChuyenKhoa objKhoa: lstKhoa)
+	for(VaiTro objVaiTro: lstVaiTro)
 	{
-	    model.addElement(objKhoa);         
+	    model.addElement(objVaiTro);         
 	}
        
 	//Render để hiển thị tên khoa trên combobox
-	cboChuyenKhoa.setRenderer(new ChuyenKhoaRender());
+	cboVaiTro.setRenderer(new VaiTroRender());
 	
 	//Set model lên combobox
-	cboChuyenKhoa.setModel(model);
+	cboVaiTro.setModel(model);
     } 
     
     /**
@@ -290,15 +355,15 @@ public class fmDSNguoiDung extends javax.swing.JFrame {
 	//Lấy từ khóa và vai trò lựa chọn để tìm kiếm
 	tuKhoa = txtTuKhoa.getText();
 	
-	NguoiDung objVaiTro = (NguoiDung)cboVaiTro.getSelectedItem();
+	VaiTro objVaiTro = (VaiTro)cboVaiTro.getSelectedItem();
 	
         if(objVaiTro != null)
         {
-            vaiTro = objVaiTro.getVaiTro();
+            vaiTro = objVaiTro.getMaVaiTro();
         }
 	
 	//Khai báo tiêu đề cho table
-	String tieuDe[] = new String[]{"UserId", "Tên đăng nhập", "Mật khẩu", "Họ tên", "Điện thoại", "Email", "Vai Trò"};
+	String tieuDe[] = new String[]{"UserId", "Tên đăng nhập", "Mật khẩu", "Họ tên", "Điện thoại", "Email", "Vai trò"};
 	
 	//Khai báo model để hiển thị dữ liệu lên table
 	DefaultTableModel model = new DefaultTableModel(tieuDe, 0);
@@ -308,10 +373,26 @@ public class fmDSNguoiDung extends javax.swing.JFrame {
 	
 	//Gọi hàm lấy danh sách 
 	List<NguoiDung> lstUser = nguoiDungBus.timKiemUser(tuKhoa, vaiTro);
-	
+        
+        //Sắp xếp lại UserId
+        NguoiDung objSX;
+        
+	for(int i = 0; i < lstUser.size()-1; i++)
+	{
+	    for(int j = i+1; j < lstUser.size(); j++)
+	    {
+		if(lstUser.get(i).getUserId() > lstUser.get(j).getUserId())
+		{
+		    objSX = lstUser.get(i);
+		    lstUser.set(i, lstUser.get(j));
+		    lstUser.set(j, objSX);		    
+		}
+	    }
+	}
+       
 	//Khai báo đối tượng để chứa thông tin sinh viên và thêm vào model
-	Object row[];	
-	
+	Object row[];
+
 	//Duyệt từng đối tượng sinh viên để thêm vào đối tượng row[]
 	for(NguoiDung objUser: lstUser)
 	{
@@ -323,11 +404,13 @@ public class fmDSNguoiDung extends javax.swing.JFrame {
 	    row[3] = objUser.getHoTen();
 	    row[4] = objUser.getDienThoai();
 	    row[5] = objUser.getEmail();
-            row[6] = objUser.getVaiTro();
+            row[6] = objUser.getTenVaiTro();
 	    
 	    //Thêm đối tượng vào model
 	    model.addRow(row);	    
 	}
+        
+        jTableUser.setModel(model);
     }
         
     /**
@@ -379,7 +462,7 @@ public class fmDSNguoiDung extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableUser;
+    private static javax.swing.JTable jTableUser;
     private static javax.swing.JTextField txtTuKhoa;
     // End of variables declaration//GEN-END:variables
 }

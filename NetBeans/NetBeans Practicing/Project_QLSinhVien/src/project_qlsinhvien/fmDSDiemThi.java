@@ -14,12 +14,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Dell Precision 7550
  */
-public class fmDiemThi extends javax.swing.JFrame {   
+public class fmDSDiemThi extends javax.swing.JFrame {   
     
     /**
      * Creates new form fmDiemThi
      */
-    public fmDiemThi() {
+    public fmDSDiemThi() {
         initComponents();
     }
 
@@ -51,7 +51,7 @@ public class fmDiemThi extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableDiemThi = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quản lý thông tin điểm thi");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -336,10 +336,11 @@ public class fmDiemThi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
         //Ngăn không cho người dùng sửa thông tin khi double click vào jTable
         jTableSinhVien.setDefaultEditor(Object.class, null); 
-        jTableDiemThi.setDefaultEditor(Object.class, null);     
-        
+        jTableDiemThi.setDefaultEditor(Object.class, null);  
+                
         //Gọi hàm hiển thị danh sách môn học và khoa
         hienThiDanhSachMonHoc();
         hienThiDanhSachKhoa();
@@ -380,11 +381,7 @@ public class fmDiemThi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
-        //Đưa ra cảnh báo đóng chương trình
-        if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắc muốn thoát không ?", "Cảnh báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
-        {
-            System.exit(0);
-        }
+        this.setVisible(false);
     }//GEN-LAST:event_btnDongActionPerformed
 
     private void jTableSinhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSinhVienMouseClicked
@@ -582,13 +579,15 @@ public class fmDiemThi extends javax.swing.JFrame {
 	//Chọn dòng trên table
 	tuKhoa = txtTuKhoa.getText();
         
-        ChuyenKhoaBus chuyenKhoaBus = new ChuyenKhoaBus();
+        //Lấy mã khoa 
         ChuyenKhoa objKhoa = (ChuyenKhoa)cboChuyenKhoa.getSelectedItem();
         maKhoa = objKhoa.getMaKhoa();
+        
+        //Lấy mã môn học
         MonHoc objMH = (MonHoc)cboMonHoc.getSelectedItem();
         maMH = objMH.getMaMH();
         
-        //Khai báo đối tượng từ lớp 
+        //Khai báo đối tượng 
         DiemThiBus diemThiBus = new DiemThiBus();
 
         //Khai báo đối tượng để format ngày sinh
@@ -636,20 +635,21 @@ public class fmDiemThi extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fmDiemThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fmDSDiemThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fmDiemThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fmDSDiemThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fmDiemThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fmDSDiemThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fmDiemThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fmDSDiemThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fmDiemThi().setVisible(true);
+                new fmDSDiemThi().setVisible(true);
             }
         });
     }

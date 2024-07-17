@@ -342,6 +342,11 @@ public class fmRevDanhSachSV extends javax.swing.JFrame {
         {
             objSV.setMaKhoa(maKhoa);            
         }
+        else
+        {
+            JOptionPane.showMessageDialog(rootPane, "Thông tin khoa không được để trống. Yêu cầu cập nhật", "Warning", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 	
 	//Khai báo đối tượng để gọi hàm cập nhật/thêm mới
 	SinhVienBus sinhVienBus = new SinhVienBus();
@@ -391,8 +396,7 @@ public class fmRevDanhSachSV extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDongActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-	//Gọi hàm hiển thị chi tiết khoa
+     	//Gọi hàm hiển thị chi tiết khoa
 	hienThiDanhSachKhoa();
 	
 	//Gọi hàm sửa/thêm mới thông tin sinh viên

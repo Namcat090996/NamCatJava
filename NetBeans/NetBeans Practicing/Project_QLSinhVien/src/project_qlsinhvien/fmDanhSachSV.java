@@ -16,6 +16,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class fmDanhSachSV extends javax.swing.JFrame {
 
+    private static String taiKhoanDangNhap = "";
+
+    public String getTaiKhoanDangNhap() {
+        return taiKhoanDangNhap;
+    }
+
+    public void setTaiKhoanDangNhap(String taiKhoanDangNhap) {
+        this.taiKhoanDangNhap = taiKhoanDangNhap;
+    }    
+    
     public String getMaKhoa() {
         return maKhoa;
     }
@@ -95,6 +105,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
 
         cboChuyenKhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TenKhoa" }));
 
+        btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-find-16.png"))); // NOI18N
         btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +143,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-booked2-16.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +151,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
             }
         });
 
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-delete2-16.png"))); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +159,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
             }
         });
 
+        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-save-16.png"))); // NOI18N
         btnLuu.setText("Lưu");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,6 +167,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
             }
         });
 
+        btnDong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-close-window-16.png"))); // NOI18N
         btnDong.setText("Đóng");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,6 +175,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
             }
         });
 
+        btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-add-16.png"))); // NOI18N
         btnThemMoi.setText("Thêm mới");
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,7 +188,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnThemMoi)
                 .addGap(18, 18, 18)
                 .addComponent(btnSua)
@@ -202,25 +218,25 @@ public class fmDanhSachSV extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(22, 22, 22)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -236,7 +252,21 @@ public class fmDanhSachSV extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       
+        
+        ////Lấy vai trò nếu là sinh viên thì chỉ cho tra cứu thông tin
+        if(!this.taiKhoanDangNhap.isEmpty())
+        {
+            NguoiDungBus nguoiDungbus = new NguoiDungBus();    
+            NguoiDung objUser = nguoiDungbus.layThongTinDangNhap(taiKhoanDangNhap);
+            if(objUser.getTenVaiTro().equals("Sinh viên"))
+            {
+                btnThemMoi.setEnabled(false);
+                btnSua.setEnabled(false);
+                btnLuu.setEnabled(false);
+                btnXoa.setEnabled(false);
+            }
+        }  
+        
         //Ngăn không cho người dùng sửa thông tin khi double click vào jTable
         jTableSinhVien.setDefaultEditor(Object.class, null); 	
 

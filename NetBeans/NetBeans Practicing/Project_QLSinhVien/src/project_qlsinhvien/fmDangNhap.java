@@ -44,6 +44,7 @@ public class fmDangNhap extends javax.swing.JFrame {
 
         jLabel2.setText("Mật khẩu:");
 
+        btnHuyBo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-close-window-16.png"))); // NOI18N
         btnHuyBo.setText("Hủy bỏ");
         btnHuyBo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,6 +52,7 @@ public class fmDangNhap extends javax.swing.JFrame {
             }
         });
 
+        btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-login-16.png"))); // NOI18N
         btnDangNhap.setText("Đăng nhập");
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +167,12 @@ public class fmDangNhap extends javax.swing.JFrame {
                //Đưa trạng thái đăng nhập thành công lên giao diện
                fmCuaSoChinh.userId = objUser.getUserId();
                fmCuaSoChinh.userName = objUser.getTenDangNhap();
+               
+               //Gửi tên đăng nhập qua form điểm thi
+               fmDSDiemThi fmDiemThi = new fmDSDiemThi();
+               fmDanhSachSV fmSinhVien = new fmDanhSachSV();
+               fmDiemThi.setTaiKhoanDangNhap(objUser.getTenDangNhap());
+               fmSinhVien.setTaiKhoanDangNhap(objUser.getTenDangNhap());
                
                //Gọi hàm hiển thị cửa sổ chính 
                fmCuaSoChinh fmMain = new fmCuaSoChinh();

@@ -15,6 +15,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Dell Precision 7550
  */
 public class fmDSDiemThi extends javax.swing.JFrame {   
+
+    private static String taiKhoanDangNhap = "";
+
+    public String getTaiKhoanDangNhap() {
+        return taiKhoanDangNhap;
+    }
+
+    public void setTaiKhoanDangNhap(String taiKhoanDangNhap) {
+        this.taiKhoanDangNhap = taiKhoanDangNhap;
+    }
     
     /**
      * Creates new form fmDiemThi
@@ -42,7 +52,7 @@ public class fmDSDiemThi extends javax.swing.JFrame {
         btnTraCuu = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cboChuyenKhoa = new javax.swing.JComboBox<>();
-        jPanel5 = new javax.swing.JPanel();
+        jPanelBtn = new javax.swing.JPanel();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnLuu = new javax.swing.JButton();
@@ -88,6 +98,7 @@ public class fmDSDiemThi extends javax.swing.JFrame {
 
         cboMonHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TenMonHoc" }));
 
+        btnTraCuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-find-16.png"))); // NOI18N
         btnTraCuu.setText("Tra cứu");
         btnTraCuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +149,7 @@ public class fmDSDiemThi extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-booked2-16.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +157,7 @@ public class fmDSDiemThi extends javax.swing.JFrame {
             }
         });
 
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-delete2-16.png"))); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,8 +165,10 @@ public class fmDSDiemThi extends javax.swing.JFrame {
             }
         });
 
+        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-save-16.png"))); // NOI18N
         btnLuu.setText("Lưu");
 
+        btnDong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-close-window-16.png"))); // NOI18N
         btnDong.setText("Đóng");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +176,7 @@ public class fmDSDiemThi extends javax.swing.JFrame {
             }
         });
 
+        btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-add-16.png"))); // NOI18N
         btnThemMoi.setText("Thêm mới");
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,12 +184,12 @@ public class fmDSDiemThi extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelBtnLayout = new javax.swing.GroupLayout(jPanelBtn);
+        jPanelBtn.setLayout(jPanelBtnLayout);
+        jPanelBtnLayout.setHorizontalGroup(
+            jPanelBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBtnLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnThemMoi)
                 .addGap(18, 18, 18)
                 .addComponent(btnSua)
@@ -185,11 +201,11 @@ public class fmDSDiemThi extends javax.swing.JFrame {
                 .addComponent(btnDong)
                 .addGap(16, 16, 16))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        jPanelBtnLayout.setVerticalGroup(
+            jPanelBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBtnLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSua)
                     .addComponent(btnXoa)
                     .addComponent(btnLuu)
@@ -218,7 +234,7 @@ public class fmDSDiemThi extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)))
@@ -235,7 +251,7 @@ public class fmDSDiemThi extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -336,11 +352,27 @@ public class fmDSDiemThi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-
+        
+        //Lấy vai trò nếu là sinh viên thì chỉ cho tra cứu thông tin
+        if(!this.taiKhoanDangNhap.isEmpty())
+        {
+            NguoiDungBus nguoiDungbus = new NguoiDungBus();    
+            NguoiDung objUser = nguoiDungbus.layThongTinDangNhap(taiKhoanDangNhap);
+            if(objUser.getTenVaiTro().equals("Sinh viên"))
+            {
+                btnThemMoi.setEnabled(false);
+                btnSua.setEnabled(false);
+                btnLuu.setEnabled(false);
+                btnXoa.setEnabled(false);
+            }
+        } 
+        
         //Ngăn không cho người dùng sửa thông tin khi double click vào jTable
         jTableSinhVien.setDefaultEditor(Object.class, null); 
-        jTableDiemThi.setDefaultEditor(Object.class, null);  
-                
+        jTableDiemThi.setDefaultEditor(Object.class, null); 
+        
+
+      
         //Gọi hàm hiển thị danh sách môn học và khoa
         hienThiDanhSachMonHoc();
         hienThiDanhSachKhoa();
@@ -667,7 +699,7 @@ public class fmDSDiemThi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanelBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private static javax.swing.JTable jTableDiemThi;

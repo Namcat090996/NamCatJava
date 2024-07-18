@@ -64,14 +64,15 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhập thông tin người dùng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        jLabel1.setText("Tên đăng nhập:");
+        jLabel1.setText("Tên đăng nhập (*):");
 
-        jLabel2.setText("Mật khẩu:");
+        jLabel2.setText("Mật khẩu (*):");
 
-        jLabel4.setText("Họ tên:");
+        jLabel4.setText("Họ tên (*):");
 
-        jLabel5.setText("Điện thoại:");
+        jLabel5.setText("Điện thoại (*):");
 
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-update-16.png"))); // NOI18N
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +80,7 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
             }
         });
 
+        btnDong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project_qlsinhvien/images/icons8-close-window-16.png"))); // NOI18N
         btnDong.setText("Đóng");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +104,7 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCapNhat)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDong, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnDong, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -255,13 +257,6 @@ public class fmRevNguoiDung extends javax.swing.JFrame {
 		txtDienThoai.requestFocus();
 		return;
 	    }	    
-	}
-	//Email
-	if(email.length() == 0)
-	{
-            JOptionPane.showMessageDialog(rootPane, "Bạn cần nhập email sinh viên");
-            txtEmail.requestFocus();
-            return;	    
 	}
         
 	//Khai báo đối tượng để gọi hàm cập nhật/thêm mới

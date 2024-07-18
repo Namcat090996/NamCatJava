@@ -30,7 +30,7 @@
               <EmptySpace min="26" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanelBtn" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jScrollPane2" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" pref="804" max="32767" attributes="0"/>
@@ -52,7 +52,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="226" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+              <Component id="jPanelBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -219,6 +219,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnTraCuu">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/project_qlsinhvien/images/icons8-find-16.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Tra c&#x1ee9;u"/>
           </Properties>
           <Events>
@@ -245,13 +248,13 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel5">
+    <Container class="javax.swing.JPanel" name="jPanelBtn">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnThemMoi" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnSua" min="-2" max="-2" attributes="0"/>
@@ -284,6 +287,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnSua">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/project_qlsinhvien/images/icons8-booked2-16.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
           </Properties>
           <Events>
@@ -292,6 +298,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnXoa">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/project_qlsinhvien/images/icons8-delete2-16.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
           </Properties>
           <Events>
@@ -300,11 +309,17 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnLuu">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/project_qlsinhvien/images/icons8-save-16.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnDong">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/project_qlsinhvien/images/icons8-close-window-16.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="&#x110;&#xf3;ng"/>
           </Properties>
           <Events>
@@ -313,6 +328,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnThemMoi">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/project_qlsinhvien/images/icons8-add-16.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m m&#x1edb;i"/>
           </Properties>
           <Events>

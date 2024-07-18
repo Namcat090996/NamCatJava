@@ -61,7 +61,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnCapNhat" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnDong" min="-2" pref="78" max="-2" attributes="0"/>
+                          <Component id="btnDong" min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -139,30 +139,33 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xea;n &#x111;&#x103;ng nh&#x1ead;p:"/>
+            <Property name="text" type="java.lang.String" value="T&#xea;n &#x111;&#x103;ng nh&#x1ead;p (*):"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTenDangNhap">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u:"/>
+            <Property name="text" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u (*):"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="H&#x1ecd; t&#xea;n:"/>
+            <Property name="text" type="java.lang.String" value="H&#x1ecd; t&#xea;n (*):"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtHoTen">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec7;n tho&#x1ea1;i:"/>
+            <Property name="text" type="java.lang.String" value="&#x110;i&#x1ec7;n tho&#x1ea1;i (*):"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnCapNhat">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/project_qlsinhvien/images/icons8-update-16.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
           </Properties>
           <Events>
@@ -171,6 +174,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnDong">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/project_qlsinhvien/images/icons8-close-window-16.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="&#x110;&#xf3;ng"/>
           </Properties>
           <Events>

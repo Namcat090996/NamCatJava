@@ -414,9 +414,9 @@ public class fmBaiTap1 extends javax.swing.JFrame {
 	}
 
 	try {
-	    dayLon  = Double.parseDouble(txtDayLon.getText());
-	    dayNho  = Double.parseDouble(txtDayNho.getText());
-	    chieuCao  = Double.parseDouble(txtChieuCao.getText());
+	    dayLon = Double.parseDouble(txtDayLon.getText());
+	    dayNho = Double.parseDouble(txtDayNho.getText());
+	    chieuCao = Double.parseDouble(txtChieuCao.getText());
 	    
 	} catch (NumberFormatException e) {
 	    System.err.println("Giá trị đáy lớn, đáy nhỏ và chiều cao phải là giá trị kiểu số. Chi tiết lỗi:" + e.getMessage());

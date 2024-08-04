@@ -66,16 +66,12 @@ public class TinhToan {
      */
     public static int giaiThua(int n)
     {
-	long ketQua = 1;
+	int ketQua = 1;
 	
 	for(int i = n; i >= 1; i--)
 	{
 	    ketQua *= i;
 	    
-	    if(ketQua >= Integer.MAX_VALUE)
-	    {
-		return -1;
-	    }
 	}
 	return (int)ketQua;
     }

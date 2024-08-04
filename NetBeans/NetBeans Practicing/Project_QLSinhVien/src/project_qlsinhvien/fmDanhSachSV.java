@@ -253,7 +253,7 @@ public class fmDanhSachSV extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
-        ////Lấy vai trò nếu là sinh viên thì chỉ cho tra cứu thông tin
+        //Lấy vai trò nếu là sinh viên thì chỉ cho tra cứu thông tin
         if(!this.taiKhoanDangNhap.isEmpty())
         {
             NguoiDungBus nguoiDungbus = new NguoiDungBus();    

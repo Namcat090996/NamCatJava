@@ -170,6 +170,10 @@ public class baiTapVeMang {
         System.out.printf("- Giá trị phần tử ngẫu nhiên trong mảng arr[%d] = %.2f\t", index, arr[index]);
     }
 
+    public static void main(String[] args) {
+        baiTapVeMang bt = new baiTapVeMang();
+    }
+
     
 
 

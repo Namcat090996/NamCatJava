@@ -1,24 +1,24 @@
 @charset "UTF-8";
-/*Áp dụng css cho menu2*/
-#menu2{
-	display: inline-block;
-	background-color: red;
-	width: 100%;
-	height: 50px;
-	font-size: 18px;
+/*Áp dụng css cho id=menu*/
+#menu2 {
+    display: inline-block;
+    background-color: red;
+    width: 100%;
+    height: 50px; 
+    font-size: 18px;
 }
 
-#menu2 ul{
+#menu2 ul {
 	display: flex;
-	margin: 0px;
-	padding: 0px;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
 }
 
-#menu2 li{
-	list-style-type: none;
-	width: 150px;
-	height: 50px;
-	place-content: center;
-	text-align: center;
+#menu2 li {
+    height: 50px;
+    width: 150px;
+    text-align: center;
+    place-content: center;
 }
 

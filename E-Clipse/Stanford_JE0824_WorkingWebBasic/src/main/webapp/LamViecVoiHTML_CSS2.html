@@ -2,17 +2,45 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Làm việc với HTML, CSS trong Java Web</title>
 <link rel="stylesheet" type="text/css" href="css/mystyle2.css">
 <style type="text/css">
+
+/*Áp dụng css cho thẻ có id=stanford*/
+#stanford {
+	font-size: 30px;
+	font-family: Arial;
+	color: #1293fc;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+/*Áp dụng css cho thẻ có class=moTa*/
+.moTa {
+	font-size: 20px;
+	font-style: italic;
+	color: #80131e;
+	font-family: "Times New Roman";
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/*Áp dụng css cho thẻ p có class=moTa*/
+p.moTa {
+	font-size: 20px;
+	color: #80131e;
+	font-family: "Time New Roman";
+	font-style: italic;
+}
+
 a {
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: underline;
-	font-size: 20px;
-	color: yellow;
+	font-size: 18px;
+	color: red;
 }
 </style>
 </head>
@@ -20,7 +48,7 @@ a:hover {
 	<!-- Tạo menu -->
 	<div id="menu2">
 		<ul>
-			<li><a href="#">Trang chủ</a></li>
+			<li><a href="#gioi_thieu">Trang chủ</a></li>
 			<li><a href="#">Giới thiệu</a></li>
 			<li><a href="#">Khóa học</a></li>
 			<li><a href="#">Tin tức</a></li>
@@ -28,5 +56,37 @@ a:hover {
 			<li><a href="#">Đăng kí</a></li>
 		</ul>
 	</div>
+
+	<h1 style="color: #f711e0;">Stanford - Dạy kinh nghiệm lập trình</h1>
+	<h2>Stanford - Dạy kinh nghiệm lập trình</h2>
+	<h3>Stanford - Dạy kinh nghiệm lập trình</h3>
+	<h4>Stanford - Dạy kinh nghiệm lập trình</h4>
+	<h5 id="gioi_thieu">Stanford - Dạy kinh nghiệm lập trình</h5>
+	<h6 class="moTa">Stanford - Dạy kinh nghiệm lập trình</h6>
+
+	<p id="stanford">Giới thiệu về khóa Java Developer tại Stanford</p>
+	<!-- Giới thiệu khóa Java Web for Dev -->
+	<p style="font-size: 20px;">
+		Khóa học <b style="font-size: 24px; color: blue;"><i>Java web
+				for Developer</i></b> tại Stanford cung cấp cho các bạn các mảng kiến thức
+		quan trọng sau:
+	</p>
+	<div class="moTa">- Lập trình web cơ bản với HTML, CSS,
+		Javascript và jQuery</div>
+	<div class="moTa">- Lập trình với Servlet và JSP</div>
+	<p class="moTa">- Lập trình với MySQL bằng JDBC</p>
+	<p class="moTa">- Làm việc với hàm, tập lệnh truy vấn nâng cao
+		trong MySQL</p>
+	<p class="moTa">- Làm việc với Spring MVC từ cơ bản đến nâng cao</p>
+	<p class="moTa">- Làm việc với các framework jQuery, Bootstrap,
+		Hibernate, Spring MVC, Restful API,..</p>
+	<p>- Làm việc với Spring boot, JPA, Thymeleaf,...</p>
+	<p>- Project cuối khóa</p>
+	<p>
+		Địa chỉ: Số 20 ngõ 678 đường Láng, Đống Đa, Hà nội<br>Website: <a style="color: black;"
+			href="https://stanford.com.vn" title="Nhấn vào đây để chuyển tiếp"
+			target="_blank">stanford.com.vn</a>
+	</p>
+	<img src="images/stanford_350.png">
 </body>
 </html>

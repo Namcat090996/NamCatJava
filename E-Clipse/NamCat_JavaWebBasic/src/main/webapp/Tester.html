@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.container {
+	display: flex;
+	flex-wrap: wrap; /* Cho phép các phần tử con bao bọc qua nhiều hàng */
+	height: 300px; /* Chiều cao của container */
+	border: 1px solid black;
+	align-content: center; /* Phân phối các hàng trong container */
+}
+
+.item {
+	width: 60px;
+	height: 60px;
+	margin: 5px;
+	background-color: lightblue;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid darkblue;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.item {
+	flex: 1 30%; /* Tùy chỉnh kích thước các phần tử */
+	margin: 5px;
+}
+
+.break {
+	break-after: always; /* Ngắt dòng sau phần tử này */
+}
+</style>
+</head>
+<body>
+	<div style="display: flex; flex-wrap: wrap;">
+		<div style="flex-basis: 100px; background-color: lightblue;">Div
+			1</div>
+		<div style="flex-basis: 100px; background-color: lightgreen;">Div
+			2</div>
+		<div style="flex-basis: 100%; background-color: lightcoral;">Div
+			3 (Bắt đầu hàng mới)</div>
+		<div style="flex-basis: 100px; background-color: lightyellow;">Div
+			4</div>
+		<div style="flex-basis: 100px; background-color: lightpink;">Div
+			5</div>
+	</div>
+
+	<div style="display: flex; flex-wrap: wrap;">
+		<div style="flex: 1; order: 1; background-color: lightblue;">Div
+			1</div>
+		<div style="flex: 1; order: 2; background-color: lightgreen;">Div
+			2</div>
+		<div style="flex: 1; order: 4; background-color: lightcoral;">Div
+			3</div>
+		<div style="flex: 1; order: 3; background-color: lightyellow;">Div
+			4 (Ngắt hàng trước thẻ này)</div>
+	</div>
+
+	<div class="container">
+		<div class="item">Item 1</div>
+		<div class="item">Item 2</div>
+		<div class="item break">Item 3 (Break after this)</div>
+		<div class="item">Item 4</div>
+		<div class="item">Item 5</div>
+	</div>
+</body>
+</html>

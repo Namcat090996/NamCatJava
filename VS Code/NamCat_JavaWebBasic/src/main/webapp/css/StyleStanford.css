@@ -6,7 +6,7 @@
     float: none;
     margin: 0;
     text-decoration: none;
-    background: #EAEAEA url(../images/white-grad.png) left top;
+    background: #EAEAEA url(../images/white-grad.png) repeat-x left top;
     border-right: 1px solid #bbb;
     border-bottom: 1px solid #bfbfbf;
     padding: 4px;

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Làm việc với ngôn ngữ lập trình JavaScript</title>
+        <meta charset="utf-8"/>
+        <script type="text/JavaScript">
+            function HienThiNgayThang() {
+                document.getElementById("ngayThang").innerHTML = Date();
+                document.getElementById("ngayThang").style.color = "red";
+            }
+
+            function LamViecVoiJS() {
+                //Khai báo biến
+                var hoTen = "Nguyễn Văn An";
+                var tuoi = 25;
+                var diaChi = "Hải Phòng";
+
+                //Ghi log ra trình duyệt
+                console.log("Họ tên: " + hoTen);
+                console.log("Tuổi: " + tuoi);
+                console.log("Địa chỉ: " + diaChi);
+                
+                
+            }
+        </script>
+    </head>
+    <body onload="LamViecVoiJS()">
+        <p id="ngayThang"></p>
+        <a href="#" onclick="HienThiNgayThang()">Hiển thị ngày</a>
+    </body>
+</html>

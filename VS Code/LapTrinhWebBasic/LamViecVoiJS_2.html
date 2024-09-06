@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Làm việc với ngôn ngữ lập trình JavaScript</title>
+    <meta charset="UTF-8" />
+    <script type="text/JavaScript">
+            function HienThiNgayThang() {
+                document.getElementById("ngayThang").innerHTML = Date();
+                document.getElementById("ngayThang").style.color = "red";
+                document.write("Chào mừng bạn đến với JS !");
+            }
+
+            function LamViecVoiJS() {
+                //Khai báo 1 đối tượng trong js
+                var objNam = {"MaSV": "SF001", "HoTen": "Nguyễn Văn Nam", "Tuoi": 25, "DiaChi": "Hà Nội"};
+
+                console.log("Thông tin sinh viên là: ");
+                console.log("Mã SV: " + objNam.MaSV);
+                console.log("Họ tên: " + objNam.HoTen);
+                console.log("Tuổi: " + objNam.Tuoi);
+                console.log("Địa chỉ: " + objNam.DiaChi);
+
+                console.log("Thông tin sinh viên, cách 2: ");
+
+                for(s in objNam)
+                {
+                    console.log(s + ": " + objNam[s]); 
+                }
+            }
+
+            function ThucHienTinhTongHaiSo() {
+                //Khai báo biến
+                var soa = 0, sob = 0, tong = 0;
+
+                //Lấy thông tin trên giao diện
+                soa = document.getElementById("txtSoa").value;
+                sob = document.getElementById("txtSob").value;
+
+                //Chuyển về dạng số
+                soa = parseFloat(soa);
+                sob = parseFloat(sob);
+
+                //Tính toán
+                tong = soa + sob;
+
+                //In ra kết quả
+                document.getElementById("txtKetQua").value = tong;              
+            }
+
+            function LamViecVoiJSWindow() {
+                var strThongTin = "Browser, width = " + window.innerWidth + ", height = " + window.innerHeight + "\n";
+
+                strThongTin += "Screen, width = " + screen.availWidth + ", height = " + screen.availHeight + "\n";
+
+                //alert(strThongTin);  
+
+                /*
+                var ketQua = confirm("Bạn có chắc chắn muốn mở trang Stanford không ?");
+
+                if(ketQua)
+                {
+                    location.assign("https://stanford.com.vn");
+                }
+            }
+
+            function DangKyNguoiDungMoi() {
+                window.open("DangKyNguoiDungNew.html", "Đăng ký người dùng", "width=400, height=450, scrollbars=no, toolbar=no, menubar=no, status=no, resiable=no");
+                */
+
+               var hoTen = prompt("Họ tên", "Nhập họ tên của bạn");
+
+               if(hoTen != null)
+                {
+                    alert("Bạn vừa nhập họ tên là: " + hoTen)
+                }
+            }
+
+    </script>
+</head>
+
+<body onload="LamViecVoiJS()">
+    <p id="ngayThang"></p>
+    <a href="#" onclick="HienThiNgayThang()">Hiển thị ngày</a>
+    &nbsp;
+    <a href="#" onclick="LamViecVoiJSWindow()">Làm việc với JS Window</a>
+    &nbsp;
+    <a href="#" onclick="DangKyNguoiDungMoi()">Đăng ký mới</a>
+    <fieldset>
+        <legend>Tính tổng 2 số</legend>
+        <table>
+            <tr>
+                <td>Số a</td>
+                <td><input type="text" id="txtSoa" /></td>
+            </tr>
+            <tr>
+                <td>Số b</td>
+                <td><input type="text" id="txtSob" /></td>
+            </tr>  
+            <tr>
+                <td>Kết quả</td>
+                <td><input type="text" id="txtKetQua" /></td>
+            </tr>   
+            <tr>
+                <td></td>
+                <td><input type="button" value="Tính toán" onclick="ThucHienTinhTongHaiSo()" /></td>
+            </tr>           
+        </table>
+            
+    </fieldset>
+</body>
+
+</html>

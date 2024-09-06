@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chương trình tính toán</title>
+        <!--Khai báo thư viện js để sử dụng-->
+        <script type="text/Javascript" src="js/TinhToan.js"></script>
+        <!--Xử lý công việc-->
+        <script type="text/Javascript">
+            function ThucHienChuongTrinhTinhToan()
+            {
+                var soa = 0, sob = 0, ketQua = 0;
+                var phepToan = "";
+
+                soa = document.getElementById("txtSoa").value;
+                sob = document.getElementById("txtSob").value;
+                phepToan = document.getElementById("cboPhepToan").value;
+
+                if(soa.length == 0)
+                {
+                    alert("Bạn cần nhập số a");
+                    document.getElementById("txtSoa").focus();
+                    return;
+                }
+                if(sob.length == 0)
+                {
+                    alert("Bạn cần nhập số b");
+                    document.getElementById("txtSob").focus();
+                    return;
+                }
+                //Chuyển về dạng số
+                soa = parseFloat(soa);
+                sob = parseFloat(sob);
+
+                //Xử lý tính toán
+                switch(phepToan)
+                {
+                    case "1": ketQua = TongHaiSo(soa, sob);
+                        break;
+                    case "2": ketQua = HieuHaiSo(soa, sob);
+                        break;
+                    case "3": ketQua = TichHaiSo(soa, sob);
+                        break;
+                    case "4": 
+                    if(sob != 0){
+                        ketQua = ThuongHaiSo(soa, sob);
+                    }
+                    else
+                    {
+                        alert("Bạn cần nhập số b khác 0");
+                        document.getElementById("txtSob").focus();
+                        return;
+                    }
+                    break;
+
+                }
+
+                //Hiển thị kết quả
+                document.getElementById("txtKetQua").value = ketQua;
+            }
+        </script>
+    </head>
+    <body>
+        <fieldset>
+            <legend>
+                Nhập 2 số cần tính toán
+            </legend>
+            <table>
+                <tr>
+                    <td>Số a:</td>
+                    <td>
+                        <input type="text" id="txtSoa"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Số b:</td>
+                    <td>
+                        <input type="text" id="txtSob"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phép toán:</td>
+                    <td>
+                        <select id="cboPhepToan">
+                            <option value="1">Cộng</option>
+                            <option value="2">Trừ</option>
+                            <option value="3">Nhân</option>
+                            <option value="4">Chia</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kết quả:</td>
+                    <td>
+                        <input type="text" id="txtKetQua"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="Tính toán" onclick="ThucHienChuongTrinhTinhToan()"/>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </body>
+</html>

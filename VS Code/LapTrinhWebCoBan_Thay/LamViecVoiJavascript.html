@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Làm việc với lập trình Javascript</title>
+        <meta charset="UTF-8"/>
+        <script type="text/Javascript">
+            function HienThiNgayThang()
+            {
+                document.getElementById("ngayThang").innerHTML = Date();
+                document.getElementById("ngayThang").style.color = "red";
+                document.write("Chào mừng bạn đến với JS !");
+            }
+
+            function LamViecVoiJS()
+            {
+                //Khai báo biến
+                var hoTen = "Nguyễn Văn An";
+                var tuoi = 25;
+                var diaChi = "Hải Phòng";
+
+                //Ghi log ra trình duyệt
+                console.log("Họ tên: " + hoTen);
+                console.log("Tuổi: " + tuoi);
+                console.log("Địa chỉ: " + diaChi);
+
+                //Khai báo 1 mảng
+                var arr = new Array();
+
+                //Gán giá trị cho các phần tử
+                arr[0] = 2;
+                arr[1] = 4;
+                arr[2] = 6;
+
+                console.log("Giá trị của phần tử thứ 1 là: " + arr[0]);
+                console.log("Giá trị của phần tử thứ 3 là: " + arr[2]);
+                
+                console.log("Mảng Hoa quả: ");
+                
+                //Khai báo mảng
+                var arrHoaQua = new Array("Táo", "Lê", "Cam", "Quýt", "Mít", "Dừa");
+
+                console.log("Giá trị của phần tử thứ 1 là: " + arrHoaQua[0]);
+                console.log("Giá trị của phần tử thứ 3 là: " + arrHoaQua[2]);
+
+                console.log("Mảng arr2: ");
+
+                var arr2 = [2, 5, 8, 9];
+
+                console.log("Giá trị của phần tử thứ 1 là: " + arr2[0]);
+                console.log("Giá trị của phần tử thứ 3 là: " + arr2[2]);
+
+                //Gọi hàm để sử dụng
+                //GioiThieu();
+
+                var tong = TongHaiSo(5, 4);
+
+                console.log("Tổng hai số 5 và 4 là: " + tong);
+
+                var tenCongTy = "Stanford - Đào tạo và phát triển công nghệ";
+
+                var tenVietTat = tenCongTy.substring(0, 8);
+
+                console.log("Tên viết tắt: " + tenVietTat);
+
+                var strData = "50;20;30;60;90";
+
+                var arr3 = strData.split(";");
+
+                console.log("Các chuỗi lấy được là: ");
+
+                for(var i = 0; i < arr3.length; i++)
+                {
+                    console.log(arr3[i]);
+                }
+                //Lấy ngày trong tuần
+                var ngay = new Date().getDay();
+
+                var ketQua = "";
+                switch(ngay)
+                {
+                    case 0: 
+                        ketQua = "Chủ nhật";
+                        break;
+                    case 1: 
+                        ketQua = "Thứ hai";
+                        break;
+                    case 2: 
+                        ketQua = "Thứ ba";
+                        break;
+                    case 3: 
+                        ketQua = "Thứ tư";
+                        break;
+                    case 4: 
+                        ketQua = "Thứ năm";
+                        break;
+                    case 5: 
+                        ketQua = "Thứ sáu";
+                        break;
+                    case 6: 
+                        ketQua = "Thứ bẩy";
+                        break;
+                }
+                
+                console.log("Hôm nay là ngày : " + ketQua);
+
+                //Khai báo 1 đối tượng trong js
+                var objNam = {"MaSV": "SF001", "HoTen": "Nguyễn Văn Nam", "Tuoi": 25, "DiaChi": "Hà Nội"};
+
+                console.log("Thông tin sinh viên là: ");
+                console.log("Mã SV: " + objNam.MaSV);
+                console.log("Họ tên: " + objNam.HoTen);
+                console.log("Tuổi: " + objNam.Tuoi);
+                console.log("Địa chỉ: " + objNam.DiaChi);
+
+                console.log("Thông tin sinh viên, cách 2: ");
+                //Duyệt in từng thuộc tính của đối tượng
+                for(s in objNam)
+                {
+                    console.log(s + ": " + objNam[s]);
+                }
+            }
+
+            function TongHaiSo(a, b)
+            {
+                return a + b;
+            }
+
+            function HieuHaiSo(a, b)
+            {
+                return a - b;
+            }
+
+            function GioiThieu()
+            {
+                alert("Chào mừng các bạn đến với JS !");
+            }
+
+            //Xử lý chương trình tính tổng hai số bằng js
+            function ThucHienTinhTongHaiSo()
+            {
+                //Khai báo biến
+                var soa = 0, sob = 0, tong = 0;
+
+                //Lấy thông tin trên giao diện
+                soa = document.getElementById("txtSoa").value;
+                sob = document.getElementById("txtSob").value;
+
+                //Chuyển về dạng số
+                soa = parseFloat(soa);
+                sob = parseFloat(sob);
+
+                tong = TongHaiSo(soa, sob);
+
+                //Hiển thị kết quả
+                document.getElementById("txtKetQua").value = tong;
+            }
+
+            function LamViecVoiJSWindow()
+            {
+                var strThongTin = "Browser, width = " + window.innerWidth + ", height = " + window.innerHeight + "\n";
+                
+                strThongTin += "Screen, width = " + screen.availWidth + ", height = " + screen.availHeight + "\n";
+
+                //alert(strThongTin);
+                /*
+                var ketQua = confirm("Bạn có chắc chắn muốn mở trang Stanford");
+
+                if(ketQua)
+                {
+                    location.assign("https://stanford.com.vn");
+                }*/
+
+                var hoTen = prompt("Họ tên","Nhập tên của bạn");
+
+                if(hoTen != null)
+                {
+                    alert("Bạn vừa nhập họ tên là: " + hoTen);
+                }
+            }
+
+            function DangKyNguoiDungMoi()
+            {
+                window.open("NguoiDungPopup.html", "Đăng ký người dùng", "width=400,height=450,scrollbars=no,toolbar=no,menubar=no,status=no,resizable=no");
+            }
+        </script>
+    </head>
+    <body onload="LamViecVoiJS()">
+        <p id="ngayThang"></p>
+        <a href="#" onclick="HienThiNgayThang()">Hiển thị ngày</a>
+        &nbsp;
+        <a href="#" onclick="LamViecVoiJSWindow()">Làm việc với JS Window</a>
+        &nbsp;
+        <a href="#" onclick="DangKyNguoiDungMoi()">Đăng ký mới</a>
+        <fieldset>
+            <legend>
+                Nhập 2 số cần tính tổng
+            </legend>
+            <table>
+                <tr>
+                    <td>Số a:</td>
+                    <td>
+                        <input type="text" id="txtSoa"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Số b:</td>
+                    <td>
+                        <input type="text" id="txtSob"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kết quả:</td>
+                    <td>
+                        <input type="text" id="txtKetQua"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="Tính toán" onclick="ThucHienTinhTongHaiSo()"/>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </body>
+</html>

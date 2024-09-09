@@ -3,6 +3,11 @@
     <head>
         <title>Làm việc với lập trình Javascript</title>
         <meta charset="UTF-8"/>
+        <style>
+            tr {
+                height: 30px;
+            }
+        </style>
         <script type="text/Javascript">
             function HienThiNgayThang()
             {
@@ -29,7 +34,6 @@
                     
                 }
                 
-
                 //Lấy ngày trong tuần
                 var ngay = new Date().getDay();
                 var ketQua = "";
@@ -59,7 +63,7 @@
                         break;  
                 }
 
-                console.log("Ngày hôm nay là: " + ketQua);
+                // console.log("Ngày hôm nay là: " + ketQua);
             }
 
             function TongHaiSo(a, b)
@@ -76,45 +80,53 @@
             {
                 alert("Chào mừng các bạn đến với JS !");
             }
+
+            function TinhTongHaiSo() {
+                var soa = 0, sob = 0, ketQua = 0;
+
+                //Lấy thông tin từ giao diện
+                soa = document.getElementById("txtSoa").value;
+                sob = document.getElementById("txtSob").value;
+
+                //Chuyển về dạng float
+                soa = parseFloat(soa);
+                sob = parseFloat(sob);
+
+                //Gọi hàm tính toán
+                ketQua = TongHaiSo(soa, sob);
+
+                //Hiển thị kết quả
+                document.getElementById("txtKetQua").value = ketQua;
+            }
         </script>
     </head>
     <body onload="LamViecVoiJS()">
+        <fieldset style="display: inline-block;">
+            <legend>Nhập 2 số cần tính tổng</legend>
+            <table>
+                <tr style="height: 30px;">
+                    <td>Số a</td>
+                    <td><input type="text" id="txtSoa"></td>
+                </tr>
+                <tr>
+                    <td>Số b</td>
+                    <td><input type="text" id="txtSob"></td>
+                </tr>
+                <tr>
+                    <td>Kết quả</td>
+                    <td><input type="text" id="txtKetQua"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="button" value="Tính toán" onclick="TinhTongHaiSo()"></td>
+                </tr>
+            </table>
+        </fieldset>
         <p id="ngayThang"></p>
         <a href="#" onclick="HienThiNgayThang()">Hiển thị ngày</a>
         &nbsp;
         <a href="#" onclick="LamViecVoiJSWindow()">Làm việc với JS Window</a>
         &nbsp;
         <a href="#" onclick="DangKyNguoiDungMoi()">Đăng ký mới</a>
-        <fieldset>
-            <legend>
-                Nhập 2 số cần tính tổng
-            </legend>
-            <table>
-                <tr>
-                    <td>Số a:</td>
-                    <td>
-                        <input type="text" id="txtSoa"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Số b:</td>
-                    <td>
-                        <input type="text" id="txtSob"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Kết quả:</td>
-                    <td>
-                        <input type="text" id="txtKetQua"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="button" value="Tính toán" onclick="ThucHienTinhTongHaiSo()"/>
-                    </td>
-                </tr>
-            </table>
-        </fieldset>
     </body>
 </html>

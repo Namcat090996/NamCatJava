@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Làm việc với lập trình Javascript</title>
+        <meta charset="UTF-8"/>
+        <script type="text/Javascript">
+            function HienThiNgayThang()
+            {
+                document.getElementById("ngayThang").innerHTML = Date();
+                document.getElementById("ngayThang").style.color = "red";
+            }
+
+            function LamViecVoiJS()
+            {
+                //Tạo object trong JS
+                var objCat = {"MaSV": "SF001", "HoTen": "Huỳnh Nam Cát", "Tuoi": 28, "DiaChi":"Đà Nẵng"};
+
+                //In đối tượng ra console
+                console.log("Thông tin của sinh viên là: ");
+                console.log("Mã sinh viên: " + objCat.MaSV);
+                console.log("Họ tên: " + objCat.HoTen);
+                console.log("Tuổi: " + objCat.Tuoi);
+                console.log("Địa chỉ: " + objCat.DiaChi);
+
+                console.log("Thông tin của sinh viên là, cách 2: ");
+                for (s in objCat)
+                {
+                    console.log(s + ": " + objCat[s]);
+                    
+                }
+                
+
+                //Lấy ngày trong tuần
+                var ngay = new Date().getDay();
+                var ketQua = "";
+
+                switch(ngay) 
+                {
+                    case 0:
+                        ketQua = "Chủ nhật";
+                        break;  
+                    case 1:
+                        ketQua = "Thứ hai";
+                        break;  
+                    case 2:
+                        ketQua = "Thứ ba";
+                        break;  
+                    case 3:
+                        ketQua = "Thứ tư";
+                        break;  
+                    case 4:
+                        ketQua = "Thứ năm";
+                        break;  
+                    case 5:
+                        ketQua = "Thứ sáu";
+                        break;  
+                    case 6:
+                        ketQua = "Thứ bảy";
+                        break;  
+                }
+
+                console.log("Ngày hôm nay là: " + ketQua);
+            }
+
+            function TongHaiSo(a, b)
+            {
+                return a + b;
+            }
+
+            function HieuHaiSo(a, b)
+            {
+                return a - b;
+            }
+
+            function GioiThieu()
+            {
+                alert("Chào mừng các bạn đến với JS !");
+            }
+        </script>
+    </head>
+    <body onload="LamViecVoiJS()">
+        <p id="ngayThang"></p>
+        <a href="#" onclick="HienThiNgayThang()">Hiển thị ngày</a>
+        &nbsp;
+        <a href="#" onclick="LamViecVoiJSWindow()">Làm việc với JS Window</a>
+        &nbsp;
+        <a href="#" onclick="DangKyNguoiDungMoi()">Đăng ký mới</a>
+        <fieldset>
+            <legend>
+                Nhập 2 số cần tính tổng
+            </legend>
+            <table>
+                <tr>
+                    <td>Số a:</td>
+                    <td>
+                        <input type="text" id="txtSoa"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Số b:</td>
+                    <td>
+                        <input type="text" id="txtSob"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kết quả:</td>
+                    <td>
+                        <input type="text" id="txtKetQua"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="Tính toán" onclick="ThucHienTinhTongHaiSo()"/>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </body>
+</html>

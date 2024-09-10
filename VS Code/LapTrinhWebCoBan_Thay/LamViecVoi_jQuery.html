@@ -14,10 +14,9 @@
 
         #container
         {
-            display: block;
+            display: inline-block;
             width: 100%;
             border: 2px solid silver;
-            clear: both;
         }
 
         #container #box1, #box2, #box3
@@ -36,7 +35,6 @@
             //alert("Chào mừng các bạn đến với jQuery !");
 
             //Ẩn các ảnh đi
-
             $("#btnShow").click(function(){
                 $("#box1").fadeIn();
                 $("#box2").fadeIn("slow");
@@ -91,7 +89,7 @@
                 var trangThai = $(this).prop("checked");
                 console.log("Trạng thái: " + trangThai);
 
-                $("input.checkinfo").prop("checked", trangThai);
+                $("input.chkinfo").prop("checked", trangThai);
                 
             })
 
@@ -121,14 +119,9 @@
         </div>
         <div id="box3">
             <img src="images/anh-3.jpeg" width="250" height="250" />
-        </div>                
+        </div>   
+        <div style="clear: both;"></div>           
     </div>
-
-	<p>- Lập trình với MySQL bằng JDBC</p>
-	<p>- Làm việc với hàm, tập lệnh truy vấn nâng cao trong MySQL</p>
-	<p>- Làm việc với Spring MVC từ cơ bản đến nâng cao</p>
-	<p>- Làm việc với các framework jQuery, Bootstrap, Hibernate,
-		Spring MVC, Restful API,..</p>
 
 	<h3>Danh sách lớp</h3>
 	<table border=1 style="width: 60%;border-collapse: collapse;">
@@ -143,7 +136,7 @@
 		</tr>
 		<tr>
             <td>
-                <input type="checkbox" id="chkinfo" />
+                <input type="checkbox" class="chkinfo" />
             </td>            
 			<td class="center">1</td>
 			<td>Bạch Văn Trúc</span></td>
@@ -152,7 +145,7 @@
 		</tr>
 		<tr>
             <td>
-                <input type="checkbox" id="chkinfo" />
+                <input type="checkbox" class="chkinfo" />
             </td>                
 			<td class="center">2</td>
 			<td>Huỳnh Nam Cát</td>
@@ -161,7 +154,7 @@
 		</tr>
 		<tr>
             <td>
-                <input type="checkbox" id="chkinfo" />
+                <input type="checkbox" class="chkinfo" />
             </td>                
 			<td class="center">3</td>
 			<td>Nguyễn Duy Phương</td>
@@ -170,7 +163,7 @@
 		</tr>
 		<tr>
             <td>
-                <input type="checkbox" id="chkinfo" />
+                <input type="checkbox" class="chkinfo" />
             </td>                
 			<td class="center">4</td>
 			<td>Nguyễn Thế Mạnh</td>
@@ -179,7 +172,7 @@
 		</tr>
 		<tr>
             <td>
-                <input type="checkbox" id="chkinfo" />
+                <input type="checkbox" class="chkinfo" />
             </td>                 
 			<td class="center">5</td>
 			<td>Tạ Văn Huy</td>

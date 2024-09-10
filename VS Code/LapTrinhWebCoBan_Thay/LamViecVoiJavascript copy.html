@@ -66,6 +66,31 @@
                 // console.log("Ngày hôm nay là: " + ketQua);
             }
 
+            function LamViecVoiJSWindow() {
+                var strKichThuoc = "Browser width: " + window.innerWidth + ", height: " + window.innerHeight + "\n";
+                strKichThuoc += "Screen width: " + screen.availWidth + ", height: " + screen.availHeight + "\n";
+
+                alert(strKichThuoc);
+
+                var ketQua = confirm("Bạn có muốn đi tới trang tiếp không ?");
+
+                if(ketQua)
+                {
+                    location.assign("https://stanford.com.vn");
+                }
+
+                var hoTen = prompt("Họ tên", "Nhập họ tên của bạn");
+
+                if(hoTen != null)
+                {
+                    alert("Bạn vừa nhập họ tên là: " + hoTen);
+                }
+            }
+
+            function DangKyNguoiDungMoi() {
+                window.open("NguoiDungPopup.html", "Đăng ký người dùng mới", "width=400, height=400, scrollbars=no, toolbar=no");
+            }
+
             function TongHaiSo(a, b)
             {
                 return a + b;
@@ -82,7 +107,7 @@
             }
 
             function TinhTongHaiSo() {
-                var soa = 0, sob = 0, ketQua = 0;
+                var soa = 0, sob = 0, ketQua = 0; 
 
                 //Lấy thông tin từ giao diện
                 soa = document.getElementById("txtSoa").value;
@@ -125,7 +150,7 @@
         <p id="ngayThang"></p>
         <a href="#" onclick="HienThiNgayThang()">Hiển thị ngày</a>
         &nbsp;
-        <a href="#" onclick="LamViecVoiJSWindow()">Làm việc với JS Window</a>
+        <a href="#" onclick="LamViecVoiJSWindow()">Hiển thị cửa sổ</a>
         &nbsp;
         <a href="#" onclick="DangKyNguoiDungMoi()">Đăng ký mới</a>
     </body>

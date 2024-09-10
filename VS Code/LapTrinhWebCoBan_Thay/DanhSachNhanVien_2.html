@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách thông tin nhân viên</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        tr, td, th {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .desciption {
+            background-color: pink;
+            color: blueviolet;
+        }
+
+        .hover-row:hover {
+            background-color: #4C8FFD;
+        }
+   
+    </style>
+    <!-- <script>
+        function Mouse() {
+            // Thêm sự kiện cho hàng 1
+            document.getElementById('row1').addEventListener('mouseover', function() {
+                this.style.backgroundColor = '#4C8FFD';
+            });
+
+            document.getElementById('row1').addEventListener('mouseout', function() {
+                this.style.backgroundColor = '';
+            });
+
+            // Thêm sự kiện cho hàng 2
+            document.getElementById('row2').addEventListener('mouseover', function() {
+                this.style.backgroundColor = '#4C8FFD';
+            });
+
+            document.getElementById('row2').addEventListener('mouseout', function() {
+                this.style.backgroundColor = '';
+            });            
+        }
+    </script>       -->
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1 style="text-transform: uppercase;">Danh sách thông tin nhân viên</h1>
+    </div>
+    <table>
+        <tr class="desciption">
+            <th rowspan="2">STT</th>
+            <th rowspan="2">Mã nhân viên</th>
+            <th rowspan="2">Họ tên</th>
+            <th rowspan="2">Giới tính</th>
+            <th rowspan="2">Ngày sinh</th>
+            <th rowspan="2">Điện thoại</th>
+            <th rowspan="2">Email</th>
+            <th rowspan="2">Quê quán</th>
+            <th colspan="3">Trình độ</th>
+        </tr>
+        <tr class="desciption">
+            <th>Tiếng Anh</th>
+            <th>Tiếng Pháp</th>
+            <th>Tiếng Trung</th>
+        </tr>
+        <tr class="hover-row">
+            <td>1</td>
+            <td>SF001</td>
+            <td>Huỳnh Nam Cát</td>
+            <td>Nam</td>
+            <td>09/09/1996</td>
+            <td>0703039948</td>
+            <td>huynhnamcat@gmail.com</td>
+            <td>Đà Nẵng</td>
+            <td>
+                <input type="checkbox" name="" id="checkbox1">
+                <label for="checkbox1">Tích chọn</label>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="hover-row">
+            <td>1</td>
+            <td>SF001</td>
+            <td>Huỳnh Nam Cát</td>
+            <td>Nam</td>
+            <td>09/09/1996</td>
+            <td>0703039948</td>
+            <td>huynhnamcat@gmail.com</td>
+            <td>Đà Nẵng</td>
+            <td>
+                <input type="checkbox" name="" id="checkbox1">
+                <label for="checkbox1">Tích chọn</label>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>        
+    </table>
+  
+</body>
+</html>

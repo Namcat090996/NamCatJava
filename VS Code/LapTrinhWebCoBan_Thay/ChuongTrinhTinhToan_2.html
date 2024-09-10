@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thực hiện chương trình tính toán</title>
+    <style>
+        .td1 {
+            width: 70px;
+        }
+
+        tr {
+            height: 25px;
+        }
+    </style>
+    <!-- Khai báo thư viện JS để sử dụng -->
+    <script type="text/Javascript" src="js/TinhToan.js"></script>
+    <!-- Thực hiện xử lý -->
+    <script type="text/Javascript">
+        function ThucHienTinhToan() {
+            //Declare variables
+            var soa, sob, ketQua, phepTinh;
+
+            //Get data from interface
+            soa = document.getElementById("txtSoa").value;
+            sob = document.getElementById("txtSob").value;
+            phepTinh = document.getElementById("cboPhepTinh").value;
+
+            //Catch the error
+            if (soa.length == 0) {
+                alert("Bạn phải nhập số a");
+                document.getElementById("txtSoa").focus();
+                return;
+            }
+            
+            if (sob.length == 0) {
+                alert("Bạn phải nhập số b");
+                document.getElementById("txtSob").focus();
+                return;
+            }
+
+            //Convert string to float
+            soa = parseFloat(soa);
+            sob = parseFloat(sob);
+
+            //Process and compute
+            switch(phepTinh) 
+            {
+                case "cong": 
+                ketQua = TongHaiSo(soa, sob);
+                break;
+                case "tru": 
+                ketQua = HieuHaiSo(soa, sob);
+                break;
+                case "nhan": 
+                ketQua = TichHaiSo(soa, sob);
+                break;
+                case "chia": 
+                if(sob != 0) {
+                    ketQua = ThuongHaiSo(soa, sob);
+                }
+                else {
+                    alert("Bạn phải nhập lại số b khác 0");
+                    document.getElementById("txtSob").focus();
+                    return;
+                }
+                break;
+            }
+
+            //Show the result
+            document.getElementById("txtKetQua").value = ketQua;
+        }
+    </script>
+</head>
+
+<body>
+    <fieldset style="display: inline-block;">
+        <legend>Nhập 2 số cần tính tổng</legend>
+        <table style="margin-right: 5px;">
+            <tr>
+                <td class="td1">Số a</td>
+                <td><input type="text" id="txtSoa"></td>
+            </tr>
+            <tr>
+                <td>Số b</td>
+                <td><input type="text" id="txtSob"></td>
+            </tr>
+            <tr>
+                <td>Phép tính</td>
+                <td>
+                    <select id="cboPhepTinh">
+                        <option value="cong">Cộng</option>
+                        <option value="tru">Trừ</option>
+                        <option value="nhan">Nhân</option>
+                        <option value="chia">Chia</option>
+                    </select>
+                </td>
+            </tr>            
+            <tr>
+                <td>Kết quả</td>
+                <td><input type="text" id="txtKetQua"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td style="padding-top: 7px;"><input type="button" value="Tính toán" onclick="ThucHienTinhToan()"></td>
+            </tr>
+        </table>
+    </fieldset>
+</body>
+
+</html>

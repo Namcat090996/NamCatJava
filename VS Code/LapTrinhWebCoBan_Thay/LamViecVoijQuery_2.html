@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Làm việc với jQuery trong Java Web</title>
+    <style>
+        .moTa {
+            color: navy;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        #container {
+            display: inline-block;
+            width: 100%;
+            border: 1px solid silver;
+        }
+
+        #container #box1,#container #box2,#container #box3 {
+            float: left;
+            border: 1px solid orange;
+        }
+    </style>
+    <!-- Khai báo thư viện jQuery -->
+    <script type="text/Javascript" src="jquery/jquery-3.7.1.js"></script>
+    <!-- Sử dụng thư viện jQuery -->
+    <script type="text/Javascript">
+        $(document).ready(function(){
+            // alert("Chào mừng bạn đến với jQuery !")
+
+            //Ẩn các ảnh đi
+            // $("#box1").hide();
+
+            $("#btnThucHien").click(function(){
+                //Gán giá trị
+                $("#stanford").text("Tư vấn xây dựng điện 3");
+
+                //Lấy thông tin
+                var tenCongTy = $("#stanford").text();
+
+                //Gán giá trị
+                $("#thongTin").html("<h1>" + tenCongTy + "</h1>")
+
+                //Lấy thông tin từ input
+                var hoTen = $("#txtHoTen").val();
+
+                //Gán thông tin
+                $("#thongBao").text("Họ tên là: " + hoTen);
+                
+                //Lấy thông tin
+                var diaChi = $("a.info").attr("href");
+                var tenCongTy2 = $("a.info").attr("title");
+
+                //Gán thông tin
+                $("#thongBao").before(tenCongTy2 + "<br>");
+                $("#thongBao").after("<br>" + diaChi);
+
+                //Gán thuộc tính với css
+                $("#thongTin").css("background-color", "lightblue");
+                $("#stanford").css("font-size", "20px");
+                $("#stanford").css("color", "red");
+
+                //Áp css cho các thẻ p
+                $("p").addClass("moTa");
+            })
+
+            //Tích chọn tất cả hoặc bỏ chọn tất cả
+            $("#chkAll").change(function () { 
+                //Lấy trạng thái gán chkAll vào biến
+                var trangThai = $("#chkAll").prop("checked");
+                console.log("Trạng thái: " + trangThai);           
+                
+                //Gán trạng thái chkAll vào checkbox con
+                $("input.checkinfo").prop("checked", trangThai);       
+            });
+
+        })
+    </script>
+</head>
+<body>
+    <p id="stanford"></p>
+    <p id="thongTin"></p>
+    <p>
+        Họ tên:
+        <input type="text" id="txtHoTen">
+    </p>
+    <div style="margin-bottom: 20px;">
+        <a href="#" id="btnThucHien">Thực hiện</a>
+        &nbsp;
+        &nbsp;
+        <a href="#" id="btnShow">Hiển thị</a>
+        &nbsp;
+        &nbsp;
+        <a href="#" class="btnHide">Ấn</a>        
+    </div>
+
+    <div id="container">
+        <div id="box1">
+            <img src="images/anh-1.jpeg" style="position: relative; top: 2px" width="250" height="250" />
+        </div>           
+        <div id="box2">
+            <img src="images/anh-2.jpeg" style="position: relative; top: 2px" width="250" height="250" />
+        </div>
+        <div id="box3">
+            <img src="images/anh-3.jpeg" style="position: relative; top: 2px" width="250" height="250" />
+        </div>     
+    </div>
+
+	<h3>Danh sách lớp</h3>
+	<table border=1 style="width: 60%; border-collapse: collapse;">
+		<tr>
+            <th>
+                <input type="checkbox" id="chkAll" />
+            </th>
+			<th style="width:10%;">STT</th>
+			<th style="width:60%;">Họ tên</th>
+			<th style="width:10%;">Tuổi</th>
+			<th style="width:20%;">Quê quán</th>
+		</tr>
+		<tr>
+            <td>
+                <input type="checkbox" class="checkinfo" />
+            </td>            
+			<td class="center">1</td>
+			<td>Bạch Văn Trúc</span></td>
+			<td class="center">21</td>
+			<td>Hà Nội</td>
+		</tr>
+		<tr>
+            <td>
+                <input type="checkbox" class="checkinfo" />
+            </td>                
+			<td class="center">2</td>
+			<td>Huỳnh Nam Cát</td>
+			<td class="center">25</td>
+			<td>Hồ Chí Minh</td>
+		</tr>
+		<tr>
+            <td>
+                <input type="checkbox" class="checkinfo" />
+            </td>                
+			<td class="center">3</td>
+			<td>Nguyễn Duy Phương</td>
+			<td class="center">26</td>
+			<td>Thanh Hóa</td>
+		</tr>
+		<tr>
+            <td>
+                <input type="checkbox" class="checkinfo" />
+            </td>                
+			<td class="center">4</td>
+			<td>Nguyễn Thế Mạnh</td>
+			<td class="center">22</td>
+			<td>Hưng Yên</td>
+		</tr>
+		<tr>
+            <td>
+                <input type="checkbox" class="checkinfo" />
+            </td>                 
+			<td class="center">5</td>
+			<td>Tạ Văn Huy</td>
+			<td class="center">25</td>
+			<td>Hà Nội</td>
+		</tr>
+	</table>    
+    <p>
+        <span id="thongBao" style="color: red;"></span>
+    </p>
+    <p>
+        Địa chỉ: Lô 13, 14, 15 Khu Dân Cư Tây Cầu Dứa, Vĩnh Hiệp, Nha Trang, Khánh Hòa <br>
+        Website: <a href="https://pecc3.com.vn" class="info" title="Công ty TVXD Điện 3">pecc3.com.vn</a>
+    </p>
+</body>
+</html>

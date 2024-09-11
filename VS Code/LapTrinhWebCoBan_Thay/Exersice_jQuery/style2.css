@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+tr, th, td {
+    border: 1px solid black;
+    height: 30px;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+th {
+    font-weight: bold;
+    text-align: center;
+}
+
+.tr-main {
+    background-color: rgba(241, 172, 44, 0.822);
+}
+
+th:first-child {
+    width: 80px;
+}
+
+th:nth-child(2) {
+    width: 100px;
+}
+
+th:nth-child(3) {
+    width: 180px;
+}
+
+th:nth-child(4) {
+    width: 120px;
+}
+
+th:nth-child(5) {
+    width: 250px;
+}
+
+th:nth-child(6) {
+    width: 120px;
+}
+
+th:nth-child(7) {
+    width: 80px;
+}
+
+td:first-child {
+    text-align: center;
+}
+
+.tr-odd {
+    background-color: rgba(233, 233, 233, 0.973);
+}
+
+.tr-even {
+    background-color: rgba(201, 199, 199, 0.849);
+}
+
+

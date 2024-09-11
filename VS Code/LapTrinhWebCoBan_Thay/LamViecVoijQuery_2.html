@@ -30,7 +30,21 @@
             // alert("Chào mừng bạn đến với jQuery !")
 
             //Ẩn các ảnh đi
-            // $("#box1").hide();
+            $("#box1").hide();
+            $("#box2").hide();
+            $("#box3").hide();
+
+            $("#btnShow").click(function(){
+                $("#box1").fadeIn();
+                $("#box2").fadeIn("slow");
+                $("#box3").fadeIn(4000);                
+            })
+
+            $("#btnHide").click(function(){
+                $("#box1").fadeOut();
+                $("#box2").fadeOut("slow");
+                $("#box3").fadeOut(4000);                
+            })             
 
             $("#btnThucHien").click(function(){
                 //Gán giá trị
@@ -92,7 +106,7 @@
         <a href="#" id="btnShow">Hiển thị</a>
         &nbsp;
         &nbsp;
-        <a href="#" class="btnHide">Ấn</a>        
+        <a href="#" id="btnHide">Ấn</a>        
     </div>
 
     <div id="container">

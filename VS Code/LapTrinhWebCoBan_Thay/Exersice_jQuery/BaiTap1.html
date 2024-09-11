@@ -4,13 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Đăng nhập hệ thống</title>
+    <!-- Declare a css library -->
     <link rel="stylesheet" href="./style1.css">
+    <!-- Declare a jQuery library -->
+    <script type="text/javascript" src="../jQuery/jquery-3.7.1.js"></script>
+    <!-- Compute and process -->
+    <script type="text/javascript">
+        // Call the ready (onload) function
+        $(document).ready(function () {
+            $("#btnDangNhap").click(function (e) { 
+                // Get data from interface
+                var hoTen = $("#txtTaiKhoan").val();
+                var matKhau = $("#txtMatKhau").val();
+
+                // Catch the error
+                if(hoTen.length == 0)
+                {
+                    alert("Bạn cần nhập tên đăng nhập");
+                    hoTen.focus();
+                    return;
+                }
+
+                if(matKhau.length == 0)
+                {
+                    alert("Bạn cần nhập mật khẩu đăng nhập");
+                    matKhau.focus();
+                    return;
+                }                
+                //Set data to interface
+                alert("Đăng nhập thành công !")
+                $("#txtTaiKhoanHienThi").val(hoTen);
+                $("#txtMatKhauHienThi").val(matKhau);           
+            });
+        })
+    </script>
 </head>
 
 <body>
-    <div style="width: 350px; margin-left: auto; margin-right: auto;">
-        <div>
+    <div>
+        <div style="width: 420px; margin: 30px auto;" class="box1">
             <fieldset class="login_group_field">
                 <legend class="anno">Đăng nhập hệ thống</legend>
                 <form>
@@ -36,6 +69,25 @@
                         </tr>
                     </table>
                 </form>
+            </fieldset>
+        </div>
+        <div style="width: 340px; margin: 30px auto;" class="box2">
+            <fieldset class="login_group_field">
+                <legend class="anno">Hiển thị thông tin đăng nhập</legend>
+                    <table>
+                        <tr style="height: 30px;">
+                            <td class="td1">Tên đăng nhập:</td>
+                            <td>
+                                <input class="DangNhap__text" type="text" name="" id="txtTaiKhoanHienThi">
+                            </td>
+                        </tr>
+                        <tr style="height: 30px;">
+                            <td class="td1">Mật khẩu:</td>
+                            <td>
+                                <input class="MatKhau__text" type="text" name="" id="txtMatKhauHienThi">
+                            </td>
+                        </tr>
+                    </table>                
             </fieldset>
         </div>
     </div>

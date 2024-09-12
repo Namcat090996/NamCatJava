@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Đăng ký người dùng</title>
+<!-- Khai báo sử dụng thư viện css -->
+<link rel="stylesheet" type="text/css" href="css/mystyle.css"/>
+ <!--Khai báo thư viện để sử dụng jquery-->
+ <script type="text/javascript" src="jquery/jquery-3.7.1.js"></script>
+ <!--Sử dụng jquery-->
+ <script type="text/javascript">
+	$(document).ready(function(){
+		$("#btnDangKy").click(function(){
+			//Khai báo biến
+			var taiKhoan = "", matKhau = "", matKhauNhapLai = "", hoTen = "", gioiTinh = "", trinhDo = "";
+
+			//Lấy thông tin trên giao diện
+			taiKhoan = $("#txtTaiKhoan").val();
+			matKhau = $("#txtMatKhau").val();
+			matKhauNhapLai = $("#txtMatKhauNhapLai").val();
+			hoTen = $("#txtHoTen").val();
+
+			gioiTinh = $("input[name='gt']:checked").val();
+			console.log("Giới tính: " + gioiTinh);
+			trinhDo = $("#cboTrinhDo").val();
+			console.log("Trình độ: " + trinhDo);
+
+			if(taiKhoan.length == 0)
+			{
+				$("#error").text("Bạn cần nhập tài khoản");
+				$("#txtTaiKhoan").val("");
+				return;
+			}
+			if(matKhau.length == 0)
+			{
+				$("#error").text("Bạn cần nhập mật khẩu");
+				$("#txtMatKhau").val("");
+				return;
+			}
+
+			if(matKhauNhapLai.length == 0)
+			{
+				$("#error").text("Bạn cần nhập mật khẩu nhập lại");
+				$("#txtMatKhauNhapLai").val("");
+				return;
+			}
+
+			if(matKhau != matKhauNhapLai)
+			{
+				$("#error").text("Mật khẩu nhập lại không chính xác");
+				$("#txtMatKhauNhapLai").val("");
+				return;
+			}
+		});
+	});
+ </script>	
+</head>
+<body>
+<!-- Tạo menu -->
+    <div id="menu">
+    	<ul>
+    		<li><a href="LamViecVoiHTML_CSS.html">Trang chủ</a></li>
+    		<li><a href="GioiThieu.html">Giới thiệu</a></li>
+    		<li><a href="#">Khóa học</a></li>
+    		<li><a href="#">Tin tức</a></li>
+    		<li><a href="#">Liên hệ</a></li>
+    		<li><a href="DangKyNguoiDung.html">Đăng ký</a></li>
+    	</ul>
+    </div>
+	<form>
+		<fieldset>
+			<legend>Nhập thông tin đăng ký</legend>
+			<table>
+				<tr>
+					<td>Tài khoản:</td>
+					<td><input type="text" id="txtTaiKhoan" /></td>
+				</tr>
+				<tr>
+					<td>Mật khẩu:</td>
+					<td><input type="password" id="txtMatKhau" /></td>
+				</tr>
+				<tr>
+					<td>Mật khẩu nhập lại:</td>
+					<td><input type="password" id="txtMatKhauNhapLai" /></td>
+				</tr>
+				<tr>
+					<td>Họ tên:</td>
+					<td><input type="text" id="txtHoTen" /></td>
+				</tr>
+				<tr>
+					<td>Giới tính:</td>
+					<td><input type="radio" name="gt" value="0" />Nam &nbsp; <input
+						type="radio" name="gt" value="1" />Nữ</td>
+				</tr>
+				<tr>
+					<td>Ngày sinh:</td>
+					<td><input type="date" id="txtNgaySinh" /></td>
+				</tr>
+				<tr>
+					<td>Điện thoại:</td>
+					<td><input type="text" id="txtDienThoai" /></td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td><input type="text" id="txtEmail" /></td>
+				</tr>
+				<tr>
+					<td>Địa chỉ:</td>
+					<td><textarea rows="5"></textarea></td>
+				</tr>
+				<tr>
+					<td>Trình độ</td>
+					<td>
+						<select id="cboTrinhDo">
+							<option value="THPT">THPT</option>
+							<option value="TCCN">Trung cấp</option>
+							<option value="CD">Cao đẳng</option>
+							<option value="DH">Đại học</option>
+							<option value="ThS">Thạc Sỹ</option>
+							<option value="TS">Tiến Sỹ</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="button" value="Đăng ký" id="btnDangKy" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<span id="error" style="color:red"></span>
+					</td>
+				</tr>
+				
+			</table>
+		</fieldset>
+	</form>
+</body>
+</html>

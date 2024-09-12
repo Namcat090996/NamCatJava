@@ -1,0 +1,70 @@
+.login_group_field {
+    display: block;
+    font-family: Arial;
+    font-size: 12px; 
+    box-shadow: rgba(30, 115, 212, 0.336) -3px 4px 5px 0px;
+    padding-top: 10px;
+    padding-left: 18px;
+    border: solid 1px lightgrey;
+    border-radius: 8px;
+    font-weight: bold;
+    color: darkslategray;    
+    opacity: 0.9;
+    width: 390px;
+    position: relative;
+}
+
+.login_group_field--image {
+    position: absolute;
+    right: 0px;
+    top: -1px;
+}
+
+.DangNhap__image, .HuyBo__image {
+    margin: 7px 5px 5px 2px;
+    border: 1px solid silver;
+    padding: 3px 4px 3px 25px;
+    border-radius: 4px;   
+    box-shadow: rgba(35, 144, 207, 0.411) -1px 2px 5px 0px;
+    transition: background-color 0.3s ease-in-out, border 0.5s ease;
+}
+
+.DangNhap__image {
+    background: url("../images/right_16.png") no-repeat center left 3px;
+    background-color: rgba(167, 168, 157, 0.116);
+    
+}
+
+.HuyBo__image {
+    background: url("../images/cancel.gif") no-repeat center left 3px;
+    background-color: rgba(167, 168, 157, 0.116);
+}
+
+.DangNhap__image:hover, .HuyBo__image:hover {
+    border: 1px solid red;
+    background-color: rgba(235, 156, 37, 0.295);
+    cursor: pointer;
+}
+
+.DangNhap__text, .MatKhau__text {
+    width: 180px;
+    background-color: rgba(195, 187, 235, 0.137);
+    border: 1px solid black;
+    border-radius: 3px;
+    box-shadow: rgba(35, 144, 207, 0.212) -1px 2px 5px 0px;
+}
+
+.td1 {
+    width: 100px;
+    text-align: left;
+    padding-right: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.anno {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;  
+}

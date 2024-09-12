@@ -1,48 +1,105 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Đăng nhập hệ thống</title>
-<link rel="stylesheet" type="text/css" href="css/StyleStanford.css"/>
+	<meta charset="UTF-8">
+	<title>Đăng nhập hệ thống</title>
+	<link rel="stylesheet" type="text/css" href="css/StyleStanford.css" />
+	<!-- Declare a jQuery library -->
+	<script type="text/javascript" src="jQuery/jquery-3.7.1.js"></script>
+	<!-- Compute and process -->
+	<script type="text/javascript">
+		function ThucHienDangNhap()
+		{
+			//Khai báo biến
+			var tenDangNhap = "", matKhau = "";
+			
+			//Lấy thông tin trên giao diện
+			tenDangNhap = $("#txtTenDangNhap").val();
+			matKhau = $("#txtMatKhau").val();
+
+			//Xóa thông báo lỗi cũ đi
+			$("#error").text("");
+
+			if(tenDangNhap.length == 0)
+			{
+				$("#error").text("Bạn cần phải nhập tên đăng nhập");
+				$("#txtTenDangNhap").focus();
+				return;
+			}
+
+			if(matKhau.length == 0)
+			{
+				$("#error").text("Bạn cần phải nhập mật khẩu đăng nhập");
+				$("#txtMatKhau").focus();
+				return;
+			}
+
+			if(tenDangNhap =="admin" && matKhau == "123")
+			{
+				alert("Đăng nhập thành công");
+			}
+			else
+			{
+				alert("Đăng nhập thất bại. Bạn vui lòng kiểm tra lại thông tin");
+			}
+		}
+
+		//Xóa dữ liệu cũ
+		function HuyDangNhap() {
+			$("#txtTenDangNhap").val("");
+			$("#txtMatKhau").val("");
+			$("#error").text("");
+			$("#txtTenDangNhap").focus();
+		}
+	</script>
 </head>
+
 <body>
 
-<form>
-<div style="width: 100%;">
-	<div style="width: 350px; margin-left: auto; margin-right: auto;">
-		<fieldset class="login_group_field">
-		<legend>Nhập thông tin đăng nhập</legend>
-		<table>
-			<tr>
-				<td>
-				Tên đăng nhập
-				</td>
-				<td>
-					<input type="text" id="txtTenDangNhap"/>
-				</td>
-			</tr>
-			<tr>
-				<td>
-				Mật khẩu
-				</td>
-				<td>
-					<input type="password" id="txtMatKhau"/>
-				</td>
-			</tr>
-			<tr>
-				<td>
-				
-				</td>
-				<td>
-					<a href="#" class="stanfButton"><img src="images/right_16.png"/>Đăng nhập</a>
-					<a href="#" class="stanfButton"><img src="images/cancel.gif"/>Hủy bỏ</a>
-				</td>
-			</tr>
-		</table>
-	</fieldset>
-	</div>
-</div>
-	
-</form>
+	<form>
+		<div style="width: 100%;">
+			<div style="width: 350px; margin-left: auto; margin-right: auto;">
+				<fieldset class="login_group_field">
+					<legend>Nhập thông tin đăng nhập</legend>
+					<table>
+						<tr>
+							<td>
+								Tên đăng nhập
+							</td>
+							<td>
+								<input type="text" id="txtTenDangNhap" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Mật khẩu
+							</td>
+							<td>
+								<input type="password" id="txtMatKhau" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+
+							</td>
+							<td>
+								<a href="#" class="stanfButton" onclick="ThucHienDangNhap()"><img src="images/right_16.png" />Đăng nhập</a>
+								<a href="#" class="stanfButton" onclick="HuyDangNhap()"><img src="images/cancel.gif" />Hủy bỏ</a>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<span id="error" style="color: red;"></span>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+			</div>
+		</div>
+
+	</form>
 </body>
+
 </html>

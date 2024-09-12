@@ -16,6 +16,8 @@
     </style>
     <!-- Khai báo thư viện JS để sử dụng -->
     <script type="text/Javascript" src="js/TinhToan.js"></script>
+	<!-- Declare a jQuery library -->
+	<script type="text/javascript" src="jQuery/jquery-3.7.1.js"></script>    
     <!-- Thực hiện xử lý -->
     <script type="text/Javascript">
         function ThucHienTinhToan() {
@@ -23,20 +25,20 @@
             var soa, sob, ketQua, phepTinh;
 
             //Get data from interface
-            soa = document.getElementById("txtSoa").value;
-            sob = document.getElementById("txtSob").value;
-            phepTinh = document.getElementById("cboPhepTinh").value;
+            soa = $("#txtSoa").val();
+            sob = $("#txtSob").val();
+            phepTinh = $("#cboPhepTinh").val();
 
             //Catch the error
             if (soa.length == 0) {
-                alert("Bạn phải nhập số a");
-                document.getElementById("txtSoa").focus();
+                $("#error").text("Bạn phải nhập số a");
+                $("#txtSoa").focus();
                 return;
             }
             
             if (sob.length == 0) {
-                alert("Bạn phải nhập số b");
-                document.getElementById("txtSob").focus();
+                $("#error").text("Bạn phải nhập số b");
+                $("#txtSob").focus();
                 return;
             }
 
@@ -61,15 +63,15 @@
                     ketQua = ThuongHaiSo(soa, sob);
                 }
                 else {
-                    alert("Bạn phải nhập lại số b khác 0");
-                    document.getElementById("txtSob").focus();
+                    $("#error").text("Bạn phải nhập lại số b khác 0");
+                    $("#txtSob").focus();
                     return;
                 }
                 break;
             }
 
             //Show the result
-            document.getElementById("txtKetQua").value = ketQua;
+            $("#txtKetQua").val(ketQua);
         }
     </script>
 </head>
@@ -101,11 +103,17 @@
                 <td>Kết quả</td>
                 <td><input type="text" id="txtKetQua"></td>
             </tr>
-
             <tr>
                 <td></td>
                 <td style="padding-top: 7px;"><input type="button" value="Tính toán" onclick="ThucHienTinhToan()"></td>
             </tr>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <span id="error" style="color: red;"></span>
+                </td>
+            </tr>            
         </table>
     </fieldset>
 </body>

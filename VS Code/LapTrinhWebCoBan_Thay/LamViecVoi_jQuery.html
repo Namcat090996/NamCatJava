@@ -28,13 +28,45 @@
         }
     </style>
     <!--Khai báo thư viện để sử dụng với jQuery-->
-    <script type="text/javascript" src="jquery/jquery-3.7.1.js"></script>
+    <script type="text/javascript" src="jQuery/jquery-3.7.1.js"></script>
+    <!--Khai báo thư viện để sử dụng với jQuery UI-->
+    <script type="text/javascript" src="jQuery/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="jQuery/jquery-ui.css" />
     <!--Sử dụng jquery-->
     <script type="text/javascript">
         $(document).ready(function(){
             //alert("Chào mừng các bạn đến với jQuery !");
 
+            //Sử dụng các ui của jQuery 
+            $("#txtNgaySinh").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd/mm/yy'
+            });
+
+            $("frmDangKy").hide();
+
+            $("#btnDangKy").click(function (e) { 
+                e.preventDefault();
+                $("#frmDangKy").dialog({
+                    height: 250,
+                    width: 300,
+                    modal: true,
+                })
+            });
+
+            //Khai báo danh sách
+            var khoaHocs = ["C", "C++", "C#", "Java", "Javascript", "Python", "Swift", "Koltin", "HTML", "jQuery"];
+
+            $("#txtKhoaHoc").autocomplete({
+                source: khoaHocs
+            });
+
             //Ẩn các ảnh đi
+            $("#box1").hide();
+            $("#box2").hide();
+            $("#box3").hide();
+
             $("#btnShow").click(function(){
                 $("#box1").fadeIn();
                 $("#box2").fadeIn("slow");
@@ -99,8 +131,21 @@
 <body>
     <p id="stanford"></p>
     <p id="thongTin"></p>
+    <fieldset id="frmDangKy" title="Đăng ký người dùng mới">
+        <legend>Nhập thông tin đăng ký</legend>
+        <p>
+            Họ tên:
+            <input type="text" id="txtHoTen" /><br>
+            <br>
+            Ngày sinh:
+            <input type="text" id="txtNgaySinh" />
+        </p>
+        <p>
+            <a href="#" id="btnThucHien">Thực hiện</a>
+        </p>
+    </fieldset>
     <p>
-        <input type="text" id="txtHoTen" />
+        Khóa học: <input type="text" id="txtKhoaHoc" />
     </p>
     <p>
         <a href="#" id="btnThucHien">Thực hiện</a>
@@ -109,6 +154,8 @@
         <a href="#" id="btnShow">Hiển thị</a>
         &nbsp;
         <a href="#" id="btnHide">Ẩn</a>
+        &nbsp;
+        <a href="#" id="btnDangKy">Đăng ký mới</a>
     </p>
     <div id="container">
         <div id="box1">

@@ -1,23 +1,76 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Đăng ký người dùng</title>
-<!-- Khai báo sử dụng thư viện css -->
-<link rel="stylesheet" type="text/css" href="css/mystyle.css"/>
+	<meta charset="UTF-8">
+	<title>Đăng ký người dùng</title>
+	<!-- Khai báo sử dụng thư viện css -->
+	<link rel="stylesheet" type="text/css" href="css/mystyle.css" />
+	<!-- Declare a jQuery library -->
+	<script type="text/javascript" src="jQuery/jquery-3.7.1.js"></script>
+	<!-- Compute and process -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#btnDangKy").click(function (e) { 
+				e.preventDefault();
+				//Khai báo biến
+				var taiKhoan = "", matKhau = "", matKhauNhapLai = "", hoTen = "", gioiTinh = "", trinhDo = "";
+
+				//Lấy thông tin trên giao diện
+				taiKhoan = $("#txtTaiKhoan").val();
+				matKhau = $("#txtMatKhau").val();
+				matKhauNhapLai = $("#txtMatKhauNhapLai").val();
+				hoTen = $("#txtHoTen").val();
+
+				gioiTinh = $("input[name='gt']:checked").val();
+				console.log(gioiTinh);
+				trinhDo = $("#cboTrinhDo").val();
+				console.log("Trình độ: " + trinhDo);
+
+				if(taiKhoan.length == 0)
+				{
+					$("#error").text("Bạn cần nhập tài khoản");
+					$("#txtTaiKhoan").val("");
+					return;
+				}
+				
+				if(matKhau.length == 0)
+				{
+					$("#error").text("Bạn cần nhập mật khẩu");
+					$("#txtMatKhau").val("");
+					return;
+				}
+
+				if(matKhauNhapLai.length == 0)
+				{
+					$("#error").text("Bạn cần nhập mật khẩu nhập lại");
+					$("#txtMatKhauNhapLai").val("");
+					return;
+				}
+
+				if(matKhau != matKhauNhapLai)
+				{
+					$("#error").text("Mật khẩu nhập lại không chính xác");
+					$("#txtMatKhauNhapLai").val("");
+					return;
+				}			
+			});			
+		});
+	</script>	
 </head>
+
 <body>
-<!-- Tạo menu -->
-    <div id="menu">
-    	<ul>
-    		<li><a href="LamViecVoiHTML_CSS.html">Trang chủ</a></li>
-    		<li><a href="GioiThieu.html">Giới thiệu</a></li>
-    		<li><a href="#">Khóa học</a></li>
-    		<li><a href="#">Tin tức</a></li>
-    		<li><a href="#">Liên hệ</a></li>
-    		<li><a href="DangKyNguoiDung.html">Đăng ký</a></li>
-    	</ul>
-    </div>
+	<!-- Tạo menu -->
+	<div id="menu">
+		<ul>
+			<li><a href="LamViecVoiHTML_CSS.html">Trang chủ</a></li>
+			<li><a href="GioiThieu.html">Giới thiệu</a></li>
+			<li><a href="#">Khóa học</a></li>
+			<li><a href="#">Tin tức</a></li>
+			<li><a href="#">Liên hệ</a></li>
+			<li><a href="DangKyNguoiDung.html">Đăng ký</a></li>
+		</ul>
+	</div>
 	<form>
 		<fieldset>
 			<legend>Nhập thông tin đăng ký</legend>
@@ -40,8 +93,7 @@
 				</tr>
 				<tr>
 					<td>Giới tính:</td>
-					<td><input type="radio" name="gt" />Nam &nbsp; <input
-						type="radio" name="gt" />Nữ</td>
+					<td><input type="radio" name="gt" value="0" />Nam &nbsp; <input type="radio" name="gt" value="1" />Nữ</td>
 				</tr>
 				<tr>
 					<td>Ngày sinh:</td>
@@ -62,7 +114,7 @@
 				<tr>
 					<td>Trình độ</td>
 					<td>
-						<select>
+						<select id="cboTrinhDo">
 							<option value="THPT">THPT</option>
 							<option value="TCCN">Trung cấp</option>
 							<option value="CD">Cao đẳng</option>
@@ -74,11 +126,17 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="Đăng ký" /></td>
+					<td><input type="button" value="Đăng ký" id="btnDangKy" /></td>
 				</tr>
-				
+				<tr>
+					<td></td>
+					<td>
+						<span id="error" style="color: red;"></span>
+					</td>
+				</tr>
 			</table>
 		</fieldset>
 	</form>
 </body>
+
 </html>

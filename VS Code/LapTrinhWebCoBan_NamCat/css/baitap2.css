@@ -1,67 +1,31 @@
-* {
-    box-sizing: border-box;
+@charset "UTF-8";
+/*Áp dụng css cho menu*/
+#menu
+{
+	display: inline-block;
+	height: 40px;
+	background-color: navy;
+	width: 100%;
+	padding-bottom: 5px;
 }
 
-body {
-    margin: 10px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+#menu li
+{
+	list-style-type: none;
+	width: 100px;
+	float: left;
+	font-size: 18px;
 }
 
-tr, th, td {
-    border: 1px solid black;
-    height: 30px;
-    padding: 5px;
-    vertical-align: middle;
+#menu li a
+{
+	color: #fff;
+	text-decoration: none;
 }
 
-th {
-    font-weight: bold;
-    text-align: center;
+#menu li a:hover
+{
+	color: #fae0a2;
+	text-decoration: underline;
+	font-size: 20px;
 }
-
-.tr-main {
-    background-color: rgba(241, 172, 44, 0.822);
-}
-
-th:first-child {
-    width: 80px;
-}
-
-th:nth-child(2) {
-    width: 100px;
-}
-
-th:nth-child(3) {
-    width: 180px;
-}
-
-th:nth-child(4) {
-    width: 120px;
-}
-
-th:nth-child(5) {
-    width: 250px;
-}
-
-th:nth-child(6) {
-    width: 120px;
-}
-
-th:nth-child(7) {
-    width: 80px;
-}
-
-td:first-child {
-    text-align: center;
-}
-
-.tr-odd {
-    background-color: rgba(82, 80, 214, 0.432);
-}
-
-.tr-even {
-    background-color: rgba(231, 128, 223, 0.685);
-}
-
-

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Làm việc với jQuery trong Java web</title>
+    <style type="text/css">
+        .moTa {
+            color: navy;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        #container {
+            display: inline-block;
+            width: 100%;
+            border: 2px solid silver;
+            clear: both;
+        }
+
+        #container #box1,
+        #box2,
+        #box3 {
+            width: 255px;
+            height: 255px;
+            float: left;
+            border: 2px solid sandybrown;
+        }
+    </style>
+    <!--Khai báo thư viện để sử dụng jquery-->
+    <script type="text/javascript" src="jquery/jquery-3.7.1.js"></script>
+    <!--Khai báo sử dụng jquery ui-->
+    <script type="text/javascript" src="jquery/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css" />
+    <!--Sử dụng jquery-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //alert("Chào mừng các bạn đến với jQuery !");
+
+            //Sử dụng jQuery UI
+            $("#txtNgaySinh").datepicker({
+                changeMonth: true,
+                changeYear: true,
+            });
+
+            $("#frmDangKy").hide();
+
+            $("#btnDangKy").click(function () {
+                $("#frmDangKy").dialog({
+                    height: 350,
+                    width: 400,
+                    modal: true,
+                });
+            });
+
+            //Khai báo danh sách
+            var khoaHocs = ["C", "C++", "C#", "Java", "Javascript", "Python", "Swift", "Kotlin", "HTML", "jQuery"];
+
+            $( "#txtKhoaHoc" ).autocomplete({
+            source: khoaHocs
+            });
+
+            $("#format").change(function (e) { 
+                e.preventDefault();
+                $("#txtNgaySinh").datepicker("option", "dateFormat", $("#format").val());
+            });
+
+            //Ẩn các ảnh đi
+            $("#box1").hide();
+            $("#box2").hide();
+            $("#box3").hide();
+
+            $("#btnShow").click(function () {
+                $("#box1").fadeIn();
+                $("#box2").fadeIn("slow");
+                $("#box3").fadeIn(4000);
+
+            });
+
+            $("#btnHide").click(function () {
+                $("#box1").fadeOut();
+                $("#box2").fadeOut("slow");
+                $("#box3").fadeOut(4000);
+
+            });
+
+            $("#btnThucHien").click(function () {
+                //Gán giá trị
+                $("#stanford").text("Stanford - Dạy lập trình");
+
+                //Lấy thông tin
+                var tenCongTy = $("#stanford").text();
+
+                //Gán giá trị cho đối tượng
+                $("#thongTin").html("<h1>" + tenCongTy + "</h1>");
+
+                //Lấy thông tin họ tên
+                var hoTen = $("#txtHoTen").val();
+
+                //Hiển thị ra thông báo
+                $("#thongBao").text("Họ tên là: " + hoTen);
+
+                //Lấy địa chỉ web
+                var diaChi = $("a.info").attr("href");
+
+                var tenCongTy2 = $("a.info").attr("title");
+
+                //Hiển thị ra ngoài giao diện
+
+                $("#thongBao").before(tenCongTy2 + "<br>");
+
+                $("#thongBao").after("<br>" + diaChi);
+
+                //Gán thuộc tính css
+                $("#thongTin").css("background-color", "yellow");
+                $("#stanford").css("color", "red");
+                $("#stanford").css("font-style", "bold");
+
+                //Áp css cho các thẻ p
+                $("p").addClass("moTa");
+
+            });
+
+            //Tích chọn tất cả hoặc bỏ chọn tất cả
+            $("#chkAll").change(function () {
+
+                var trangThai = $(this).prop("checked");
+                console.log("Trạng thái: " + trangThai);
+
+                $("input.checkinfo").prop("checked", trangThai);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <p id="stanford"></p>
+    <p id="thongTin"></p>
+    <fieldset id="frmDangKy" title="Đăng ký người dùng mới">
+        <legend>Nhập thông tin đăng ký</legend>
+        <p>
+            Họ tên:
+            <input type="text" id="txtHoTen" /><br>
+            Ngày sinh
+            <input type="text" id="txtNgaySinh" />
+        </p>
+        <p>Format options:<br>
+            <select id="format">
+                <option value="mm/dd/yy">Default - mm/dd/yy</option>
+                <option value="yy-mm-dd">ISO 8601 - yy-mm-dd</option>
+                <option value="d M, y">Short - d M, y</option>
+                <option value="d MM, y">Medium - d MM, y</option>
+                <option value="DD, d MM, yy">Full - DD, d MM, yy</option>
+                <option value="'day' d 'of' MM 'in the year' yy">With text - 'day' d 'of' MM 'in the year' yy</option>
+            </select>
+        </p>
+        <p>
+            <a href="#" id="btnThucHien">Thực hiện</a>
+        </p>
+    </fieldset>
+    <p>
+        Khóa học: <input type="text" id="txtKhoaHoc" />
+    </p>
+    <p>
+        <a href="#" id="btnShow">Hiển thị</a>
+        &nbsp;
+        <a href="#" id="btnHide">Ẩn</a>
+        &nbsp;
+        <a href="#" id="btnDangKy">Đăng ký mới</a>
+    </p>
+    <div id="container">
+        <div id="box1">
+            <img src="images/anh-1.jpeg" width="250" height="250" />
+        </div>
+        <div id="box2">
+            <img src="images/anh-2.jpeg" width="250" height="250" />
+        </div>
+        <div id="box3">
+            <img src="images/anh-3.jpeg" width="250" height="250" />
+        </div>
+    </div>
+    <p>- Lập trình với MySQL bằng JDBC</p>
+    <p>- Làm việc với hàm, tập lệnh truy vấn nâng cao trong MySQL</p>
+    <p>- Làm việc với Spring MVC từ cơ bản đến nâng cao</p>
+    <p>- Làm việc với các framework jQuery, Bootstrap, Hibernate,
+        Spring MVC, Restful API,..</p>
+    <p>- Làm việc với Spring boot, JPA, Thymeleaf,...</p>
+    <p>- Project cuối khóa</p>
+    <h3>Danh sách lớp</h3>
+    <table border=1 style="width: 60%;border-collapse: collapse;">
+        <tr>
+            <th>
+                <input type="checkbox" id="chkAll" />
+            </th>
+            <th style="width:10%;">STT</th>
+            <th style="width:60%;">Họ tên</th>
+            <th style="width:10%;">Tuổi</th>
+            <th style="width:20%;">Quê quán</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" class="checkinfo" />
+            </td>
+            <td class="center">1</td>
+            <td>Bạch Văn Trúc</span></td>
+            <td class="center">21</td>
+            <td>Hà Nội</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" class="checkinfo" />
+            </td>
+            <td class="center">2</td>
+            <td>Huỳnh Nam Cát</td>
+            <td class="center">25</td>
+            <td>Hồ Chí Minh</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" class="checkinfo" />
+            </td>
+            <td class="center">3</td>
+            <td>Nguyễn Duy Phương</td>
+            <td class="center">26</td>
+            <td>Thanh Hóa</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" class="checkinfo" />
+            </td>
+            <td class="center">4</td>
+            <td>Nguyễn Thế Mạnh</td>
+            <td class="center">22</td>
+            <td>Hưng Yên</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" class="checkinfo" />
+            </td>
+            <td class="center">5</td>
+            <td>Tạ Văn Huy</td>
+            <td class="center">25</td>
+            <td>Hà Nội</td>
+        </tr>
+    </table>
+    <p>
+        <span id="thongBao" style="color:red"></span>
+    </p>
+    <p>
+        Địa chỉ: Số 20 ngõ 678 đường Láng, Đống đa, Hà nội<br>
+        Website: <a class="info" href="https://stanford.com.vn"
+            title="Công ty Stanford - Đào tạo và phát triển công nghệ">stanford.com.vn</a>
+    </p>
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương trình tính toán</title>
+    <!-- Declare css library -->
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/baitap3.css">
+    <!-- Declare jQuery library -->
+    <script type="text/javascript" src="jquery/jquery-3.7.1.js"></script>
+    <!-- Process and compute -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnThucHien").click(function (e) { 
+                e.preventDefault();
+                //Declare variables
+                var soa = 0, sob = 0, ketQua = 0;
+                var phepToan = "";
+
+                //Delete the old error
+                $("#error").text("");
+
+                //Get data from interface
+                soa = $("#txtSoa").val();
+                sob = $("#txtSob").val();
+                phepToan = $("#cboPhepToan").val();
+
+                //Catch the error
+                if(soa.length == 0)
+                {
+                    $("#error").text("Bạn phải nhập số a");
+                    $("#txtSoa").focus();
+                    return;
+                }
+                
+                //Convert to float
+                soa = parseFloat(soa);
+                if (isNaN(soa)) {
+                    $("#error").text("Bạn phải nhập số a kiểu số");
+                    $("#txtSoa").focus();
+                    return;
+                }
+
+                if(sob.length == 0)
+                {
+                    $("#error").text("Bạn phải nhập số b");
+                    $("#txtSob").focus();
+                    return;
+                }
+
+                //Convert to float
+                sob = parseFloat(sob);
+                if (isNaN(sob)) {
+                    $("#error").text("Bạn phải nhập số b kiểu số");
+                    $("#txtSob").focus();
+                    return;
+                }
+
+                //Process and compute
+                switch (phepToan) {
+                    case "cong":
+                        ketQua = soa + sob;
+                        break;
+                    case "tru":
+                        ketQua = soa - sob;
+                        break;
+                    case "nhan":
+                        ketQua = soa * sob;
+                        break;
+                    case "chia":
+                        if(sob != 0)
+                        {
+                            ketQua = soa / sob;
+                        }
+                        else
+                        {
+                            $("#error").text("Bạn phải nhập số b khác 0");
+                            $("#txtSob").focus();    
+                            return;                        
+                        }
+                        break;
+                }
+                             
+                //Hiển thị kết quả
+                $("#txtKetQua").val(ketQua);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form action="" class="wrapper">
+        <fieldset class="fieldset">
+            <legend style="font-weight: bold">Thông tin tính toán</legend>
+            <table class="table">
+                <tr>
+                    <td>Nhập số a</td>
+                    <td><input type="text" id="txtSoa"></td>
+                </tr>
+                <tr>
+                    <td>Nhập số b</td>
+                    <td><input type="text" id="txtSob"></td>
+                </tr>
+                <tr>
+                    <td>Phép toán</td>
+                    <td>
+                        <select id="cboPhepToan">
+                            <option value="cong">Cộng</option>
+                            <option value="tru">Trừ</option>
+                            <option value="nhan">Nhân</option>
+                            <option value="chia">Chia</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kết quả</td>
+                    <td>
+                        <input type="text" id="txtKetQua" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="Thực hiện" id="btnThucHien" class="button">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="error"></td>
+                    <td class="error">
+                        <span style="color: red;" id="error"></span>
+                    </td>
+                </tr>                
+            </table>
+        </fieldset>
+    </form>
+</body>
+
+</html>

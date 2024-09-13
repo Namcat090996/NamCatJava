@@ -1,0 +1,35 @@
+.wrapper {
+    display: block;
+}
+
+.fieldset {
+    width: 265px;
+    display: block;
+    border: 1px solid black;
+    margin: 10px auto;
+    padding: 7px 7px 1px 7px;
+}
+
+td, th, tr{
+    padding: 5px;
+}
+
+.error {
+    padding: 3px 3px 3px 5px;
+}
+
+.button {
+    border: 1px solid rgba(0, 0, 0, 0.356);
+    color: red;
+    background-color: aliceblue;
+    transition: background-color 0.5s linear;
+}
+
+.button:hover {
+    cursor: pointer;
+    color: blue;
+    background-color: lightblue;
+}
+
+
+

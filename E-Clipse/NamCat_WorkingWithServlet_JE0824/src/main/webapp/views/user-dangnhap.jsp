@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,21 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập hệ thống</title>
     <!-- Declare a css library -->
-    <link rel="stylesheet" href="css/baitap1.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <h1 style="color: red;">SERVLET</h1>
-    <form method="post">
+    <form action="dangnhap" method="post">
         <div style="width: 420px; margin: 30px auto;" class="box1">
             <fieldset class="login_group_field">
                 <legend class="anno">Đăng nhập hệ thống</legend>
-                <img class="login_group_field--image" src="../images/login_icon.png">
+                <img class="login_group_field--image" src="images/login_icon.png">
                 <table style="border-collapse: collapse;">
                     <tr style="height: 30px;">
                         <td class="td1">Tên đăng nhập:</td>
                         <td>
-                            <input style="color: red;" class="DangNhap__text" type="text" name="txtTaiKhoan">
+                            <input class="DangNhap__text" type="text" name="txtTaiKhoan">
                         </td>
                     </tr>
                     <tr style="height: 30px;">
@@ -33,7 +34,7 @@
                         <td></td>
                         <td>
                             <input class="DangNhap__image" type="submit" value="Đăng nhập" name="btnDangNhap">
-                            <input class="HuyBo__image" type="submit" value="Hủy bỏ" name="btnHuyBo">
+                            <input class="HuyBo__image" type="button" value="Hủy bỏ" name="btnHuyBo">
                         </td>
                     </tr>
                     <tr>

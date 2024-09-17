@@ -46,6 +46,13 @@ public class DangNhapServlet extends HttpServlet {
 				+ "</html>");
 		
 		writer.close();
+		
+		//Lấy thông tin từ file cấu hình
+		String diaChiIP = getServletContext().getInitParameter("IP");
+		String email = getServletContext().getInitParameter("email");
+		
+		System.out.println("Địa chỉ IP: " + diaChiIP);
+		System.out.println("Email: " + email);
 	}
 
 	/**

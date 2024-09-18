@@ -31,13 +31,13 @@
 }
 
 .DangNhap__image {
-    background: url("../images/right_16.png") no-repeat center left 3px;
+    background: url("images/right_16.png") no-repeat center left 3px;
     background-color: rgba(167, 168, 157, 0.116);
     
 }
 
 .HuyBo__image {
-    background: url("../images/cancel.gif") no-repeat center left 3px;
+    background: url("images/cancel.gif") no-repeat center left 3px;
     background-color: rgba(167, 168, 157, 0.116);
 }
 

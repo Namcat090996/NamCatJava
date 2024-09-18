@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Đăng nhập hệ thống</title>
 <!-- Declare a css library -->
-<link rel="stylesheet" type="text/css" href="../css/style.css">
+<link rel="stylesheet" type="text/css" href="bt1-style.css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
 		<div style="width: 420px; margin: 30px auto;" class="box1">
 			<fieldset class="login_group_field">
 				<legend class="anno">Đăng nhập hệ thống</legend>
-				<img class="login_group_field--image" src="../images/login_icon.png">
+				<img class="login_group_field--image" src="images/login_icon.png">
 				<table style="border-collapse: collapse;">
 					<tr style="height: 30px;">
 						<td class="td1">Tên đăng nhập:</td>

@@ -28,7 +28,7 @@ public class BaiTap1 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/user-dangnhap.jsp").forward(request, response);
+		request.getRequestDispatcher("user-dangnhap.jsp").forward(request, response);
 	}
 
 	/**

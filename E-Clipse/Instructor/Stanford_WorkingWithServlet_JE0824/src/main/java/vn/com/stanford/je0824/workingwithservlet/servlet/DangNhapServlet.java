@@ -57,6 +57,12 @@ public class DangNhapServlet extends HttpServlet {
 				
 				System.out.println("Địa chỉ IP: " + diaChiIP);
 				System.out.println("Email: " + email);
+				
+				String diaChiServer = getServletConfig().getInitParameter("server");
+				String tenDb = getServletConfig().getInitParameter("databasename");
+				
+				System.out.println("Địa chỉ Server: " + diaChiServer);
+				System.out.println("Tên cơ sở dữ liệu: " + tenDb);
 	}
 
 	/**

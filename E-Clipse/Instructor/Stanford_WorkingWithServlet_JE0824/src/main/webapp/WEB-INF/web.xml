@@ -12,6 +12,14 @@
   <servlet>
   <servlet-name>HelloServlet2</servlet-name>
   <servlet-class>vn.com.stanford.je0824.workingwithservlet.servlet.HelloServlet2</servlet-class>
+  <init-param>
+  	<param-name>server</param-name>
+  	<param-value>stanford.com.vn</param-value>
+  </init-param>
+  <init-param>
+    <param-name>databasename</param-name>
+  	<param-value>je082401dev</param-value>
+  </init-param>
   </servlet>
   <servlet-mapping>
   <servlet-name>HelloServlet2</servlet-name>

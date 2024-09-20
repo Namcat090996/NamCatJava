@@ -18,7 +18,7 @@ String hoTen = "Nguyễn Minh Anh";
 String diaChi = "Hà Nội";
 int tuoi = 25;
 
-List<String> lstThongTin = new ArrayList();
+List<String> lstThongTin = new ArrayList<String>();
 
 lstThongTin.add("Táo");
 lstThongTin.add("Mận");

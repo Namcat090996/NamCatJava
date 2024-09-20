@@ -7,10 +7,9 @@
 <meta charset="UTF-8">
 <title>Quản lý thông tin sách</title>
 </head>
-<%
+<%!
 //Lấy danh sách sách
 List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
-
 %>
 <body>
 <div style="width:100%; text-align:center;">

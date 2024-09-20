@@ -74,7 +74,7 @@ public class SinhVienBusiness {
      */
     public SinhVien layChiTiet(String maSV)
     {
-        SinhVien objSV = null;
+        SinhVien objSV = new SinhVien();
         
         //Duyệt từng phần tử để tìm sv trùng mã
         for(SinhVien sv : lstSinhVien)

@@ -17,7 +17,7 @@ public class DataProvider {
     
     public static SinhVienBusiness getSinhVienBus()
     {
-        if(sinhVienBus ==null)
+        if(sinhVienBus == null)
         {
             sinhVienBus = new SinhVienBusiness();
         }

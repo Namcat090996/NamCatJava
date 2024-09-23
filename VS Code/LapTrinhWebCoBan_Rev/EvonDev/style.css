@@ -12,39 +12,15 @@ body {
     font-weight: normal;
 }
 
-.effect {
-    text-decoration: none;
-    display: inline-block;
-    padding: 2rem;
-    text-align: center;
-    background-color: white;
-    border: 1px solid orange;
-    margin: 5rem;
-    transition: background-color 1s linear;
-    position: relative;
-    z-index: 1;
+.list {
+    display: flex;
 }
 
-.effect::before {
-    content: "";
-    background-color: orange;
-    width: 0%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-    transition: width 0.25s linear;
+.list__item {
+    width: 18%;
+    height: 10rem;
+    background-color: lightblue;
 }
-
-.effect:hover::before {
-    width: 100%;
-}
-
-.effect:hover {
-    color: white;
-}
-
 
 
 

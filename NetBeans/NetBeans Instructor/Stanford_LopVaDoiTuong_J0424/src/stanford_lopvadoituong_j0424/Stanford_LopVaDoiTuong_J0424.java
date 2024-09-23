@@ -84,6 +84,21 @@ public class Stanford_LopVaDoiTuong_J0424 {
         {
             System.out.println(sv.getMaSV() + "\t" + sv.getHoTen());
         }
-    }
-    
+        
+        Testerer test = new Testerer();
+
+        test.an();
+        test.keu();
+        
+        System.out.println(Tester.mauLong);
+        System.out.println(test.getMauLong());
+        
+        test.choi();
+        
+        Tester ten = new Testerer();
+        
+        ten.an();
+        System.out.println(ten.mauLong);
+        ten.ia();
+    }  
 }

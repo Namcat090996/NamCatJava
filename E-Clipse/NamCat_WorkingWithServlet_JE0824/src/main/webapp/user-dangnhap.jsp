@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<form action="dangnhap" method="post">
+	<form action="dangnhap" method="get">
 		<div style="width: 420px; margin: 30px auto;" class="box1">
 			<fieldset class="login_group_field">
 				<legend class="anno">Đăng nhập hệ thống</legend>

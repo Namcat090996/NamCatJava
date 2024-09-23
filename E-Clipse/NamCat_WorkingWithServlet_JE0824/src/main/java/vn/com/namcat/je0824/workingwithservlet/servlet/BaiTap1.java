@@ -23,25 +23,12 @@ public class BaiTap1 extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	req.getRequestDispatcher("user-dangnhap.jsp").forward(req, resp);
+    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("user-dangnhap.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Gửi yêu cầu lên server
-		String tenDangNhap = request.getParameter("txtTaiKhoan");
-		String matKhau = request.getParameter("txtMatKhau");
-		
-		System.out.println("Tên đăng nhập là: " + tenDangNhap);
-		System.out.println("Mật khẩu là: " + matKhau);
-			
-	}
 
 }

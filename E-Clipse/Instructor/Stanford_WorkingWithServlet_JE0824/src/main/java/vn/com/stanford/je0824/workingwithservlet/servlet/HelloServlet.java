@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.Server;
+
 /**
  * Servlet implementation class HelloServlet
  */
@@ -23,7 +25,13 @@ public class HelloServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	super.service(req, resp);
+    }
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

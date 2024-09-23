@@ -11,7 +11,7 @@
 <h2 style="text-transform: uppercase;">Thêm, sửa thông tin sách</h2>
 </div>
 
-<form method="post">
+<form action="DangNhapServlet" method="get">
 <fieldset>
 	<legend>Nhập thông tin sách</legend>
 	<table>

@@ -8,7 +8,7 @@ package stanford_lopvadoituong_j0424;
  *
  * @author dangquang16
  */
-public class DataProvider {
+public class DataProvider extends Vit {
     
     /**
      * Khai báo 1 thuộc tính tạo đối tượng thuộc lớp SinhVienBusiness để có thể truy cập từ nhiều nơi
@@ -23,5 +23,6 @@ public class DataProvider {
         }
         
         return sinhVienBus;
-    }
+    } 
+    
 }

@@ -85,6 +85,8 @@ public class Stanford_LopVaDoiTuong_J0424 {
             System.out.println(sv.getMaSV() + "\t" + sv.getHoTen());
         }
         
+        SinhVien svb = bus.layChiTiet("SF001");
+        
         Testerer test = new Testerer();
 
         test.an();
@@ -96,6 +98,8 @@ public class Stanford_LopVaDoiTuong_J0424 {
         test.choi();
         
         Tester ten = new Testerer();
+        
+        Testerer ten1 = new Testerer();
         
         ten.an();
         System.out.println(ten.mauLong);

@@ -30,6 +30,11 @@ class Testerer extends Abstract implements Tester, Te {
         System.out.println("Ỉa ra cức");
     }
 
+    @Override
+    public PrintWriter getWriter() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
     
 }

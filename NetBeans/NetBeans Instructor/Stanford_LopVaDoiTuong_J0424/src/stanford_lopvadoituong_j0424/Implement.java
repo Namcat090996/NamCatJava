@@ -6,15 +6,13 @@ package stanford_lopvadoituong_j0424;
 
 /**
  *
- * @author Dell Precision 7550
+ * @author ADMIN
  */
-interface Tester {
+public abstract class Implement implements Tester{
 
-    public static final String mauLong = "vàng";
-    
-    public abstract void an();
-    
+    @Override
     public abstract void ia();
-
-    public abstract PrintWriter getWriter();
+    
+    
+    
 }

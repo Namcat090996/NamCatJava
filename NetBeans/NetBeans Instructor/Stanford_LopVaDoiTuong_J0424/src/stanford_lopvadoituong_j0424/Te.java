@@ -10,5 +10,7 @@ package stanford_lopvadoituong_j0424;
  */
 public interface Te extends Tester {
     
+    public static final String mau_Long = "vàng";
+    
     public abstract void keu();
 }

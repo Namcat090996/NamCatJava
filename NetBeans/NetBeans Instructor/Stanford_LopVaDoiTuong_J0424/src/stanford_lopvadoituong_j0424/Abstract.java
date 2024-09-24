@@ -23,5 +23,4 @@ abstract class Abstract {
     public abstract void choi();
     
     
-    
 }

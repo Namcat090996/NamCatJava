@@ -104,5 +104,7 @@ public class Stanford_LopVaDoiTuong_J0424 {
         ten.an();
         System.out.println(ten.mauLong);
         ten.ia();
+        
+        System.out.println(Te.mauLong);
     }  
 }

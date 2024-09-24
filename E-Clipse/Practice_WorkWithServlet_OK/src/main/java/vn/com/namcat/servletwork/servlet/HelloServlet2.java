@@ -26,13 +26,18 @@ public class HelloServlet2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Duong dan file la: ").append(request.getContextPath());
+		String diaChiIP = getServletContext().getInitParameter("IP");	
+		
+		System.out.println("Địa chỉ IP là: " + diaChiIP);
+		
+		String diaChiServer = getServletConfig().getInitParameter("server");
+		String tenDb = getServletConfig().getInitParameter("databasename");
+		
+		System.out.println("Địa chỉ Server: " + diaChiServer);
+		System.out.println("Tên cơ sở dữ liệu: " + tenDb);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

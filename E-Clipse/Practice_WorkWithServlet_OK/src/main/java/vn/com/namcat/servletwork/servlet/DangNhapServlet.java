@@ -56,8 +56,11 @@ public class DangNhapServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String tenDangNhap = request.getParameter("txtTenDangNhap");
-		String matKhau = request.getParameter("txtMatKhau");
+		//Khai báo biến
+		String tenDangNhap = "", matKhau = "";		
+		
+		tenDangNhap = request.getParameter("txtTenDangNhap");
+		matKhau = request.getParameter("txtMatKhau");
 		
 		System.out.println(tenDangNhap + matKhau);
 	}

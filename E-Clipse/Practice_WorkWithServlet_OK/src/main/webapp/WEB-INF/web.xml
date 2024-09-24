@@ -12,9 +12,25 @@
   <servlet>
 	  <servlet-name>HelloServlet2</servlet-name>
 	  <servlet-class>vn.com.namcat.servletwork.servlet.HelloServlet2</servlet-class>
+	  <init-param>
+	  	<param-name>server</param-name>
+	  	<param-value>stanford.com.vn</param-value>
+	  </init-param>
+	  <init-param>
+	    <param-name>databasename</param-name>
+	  	<param-value>je082401dev</param-value>
+	  </init-param>	  
   </servlet>
   <servlet-mapping>
 	  <servlet-name>HelloServlet2</servlet-name>
 	  <url-pattern>/hlsrl2</url-pattern>
   </servlet-mapping>
+  <context-param>
+  <param-name>IP</param-name>
+  <param-value>192.168.1.15</param-value>
+  </context-param>
+  <context-param>
+  <param-name>Server_Address</param-name>
+  <param-value>K58_31_HHT</param-value>
+  </context-param>
 </web-app>

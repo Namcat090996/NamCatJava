@@ -94,4 +94,47 @@ public class SachBusiness {
 		
 		return false;
 	}
+	
+	/**
+	 * Hàm cập nhật thông tin khi sửa thông tin sách
+	 * @param objSach
+	 * @return
+	 */
+	public boolean capNhat(Sach objSach) {
+		
+		//Duyệt để tìm sách cần cập nhật thông tin mới
+		for(int i = 0; i < lstSach.size(); i++)
+		{
+			if(lstSach.get(i).getId() == objSach.getId())
+			{
+				//Cập nhật thông tin mới cho đối tượng sách
+				lstSach.set(i, objSach);
+				return true;
+			}					
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Xóa thông tin sách
+	 * @param sachId
+	 * @return
+	 */
+	public boolean xoa(int sachId) {
+		
+		//Lấy đối tượng sách theo id cần xóa
+		Sach objSach = layChiTietTheoMa(sachId);
+		
+		if(objSach != null)
+		{
+			//Xóa thông tin
+			lstSach.remove(objSach);			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
 }

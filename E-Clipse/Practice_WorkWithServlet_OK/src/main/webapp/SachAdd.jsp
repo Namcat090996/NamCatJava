@@ -8,25 +8,46 @@
 <meta charset="UTF-8">
 <title>Thêm mới hoặc sửa thông tin sách</title>
 </head>
-<% List<Sach> lstSach = DataProvider.getSachBus().layDanhSach(); %>
+<%
+List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
+%>
 <body>
 	<div style="width: 100%; text-align: center;">
 		<h2 style="text-transform: uppercase;">Thêm, sửa thông tin sách</h2>
 	</div>
 	<div style="width: 500px; margin: 30px auto">
-		<form method="post">
-			<fieldset style="display: inline-block; border-radius: 5px ">
+		<form action="sachadd" method="post">
+			<fieldset style="display: inline-block; border-radius: 5px">
 				<legend>Nhập thông tin sách</legend>
 				<table>
-					<% int sachId = Integer.parseInt(request.getParameter("id")); %>
-					<% Sach objSach = DataProvider.getSachBus().layChiTietTheoMa(sachId);%>					
+					<%
+					Sach objSach = null;
+					String tenSach = "", moTa = "", anhSach = "", strGiaSach = "", tacGia = "";
+					int giaSach;
+					
+					if(request.getParameter("id") != null)
+					{
+						int sachId = Integer.parseInt(request.getParameter("id"));
+						objSach = DataProvider.getSachBus().layChiTietTheoMa(sachId);		
+					}
+					
+					if(objSach != null)
+					{
+						tenSach = objSach.getTenSach();
+						moTa = objSach.getMoTa();
+						giaSach = objSach.getGiaSach();
+						strGiaSach = Integer.toString(giaSach);
+						tacGia = objSach.getTacGia();
+					}
+					%>
 					<tr>
 						<td>Tên sách:</td>
-						<td><input type="text" name="txtTenSach" value="<%= objSach.getTenSach() %>" /></td>
+						<td><input type="text" name="txtTenSach"
+							value="<%=tenSach%>" /></td>
 					</tr>
 					<tr>
 						<td>Mô tả:</td>
-						<td><textarea style="width: 170px" name="txtMoTa" rows=5 ><%= objSach.getMoTa() %></textarea></td>
+						<td><textarea style="width: 170px; font-family: Arial; font-size: 13.3333px" name="txtMoTa" rows=5><%=moTa%></textarea></td>
 					</tr>
 					<tr>
 						<td>Ảnh sách:</td>
@@ -35,11 +56,13 @@
 					</tr>
 					<tr>
 						<td>Giá sách:</td>
-						<td><input type="text" name="txtGiaSach" value="<%= objSach.getGiaSach() %>" /></td>
+						<td><input type="text" name="txtGiaSach"
+							value="<%=strGiaSach%>" /></td>
 					</tr>
 					<tr>
 						<td>Tác giả:</td>
-						<td><input type="text" name="txtTacGia" value="<%= objSach.getTacGia() %>" /></td>
+						<td><input type="text" name="txtTacGia"
+							value="<%=tacGia%>" /></td>
 					</tr>
 					<tr>
 						<td></td>

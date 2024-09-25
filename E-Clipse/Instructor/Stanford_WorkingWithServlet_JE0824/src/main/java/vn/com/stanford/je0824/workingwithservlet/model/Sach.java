@@ -48,7 +48,16 @@ public class Sach {
 	private int giaSach;
 	private Date ngayTao;
 	private String maChuDe;
+	private int soLuong;
 	
+	public int getSoLuong() {
+		return soLuong;
+	}
+
+	public void setSoLuong(int soLuong) {
+		this.soLuong = soLuong;
+	}
+
 	public int getId() {
 		return id;
 	}

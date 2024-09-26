@@ -213,7 +213,22 @@ public class frmDanhSachSinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
+        int dong = 0;
+        String maSV = "";
+        
+        //Lấy chỉ số dòng
+        dong = jTableSinhVien.getSelectedRow();
+        
+        //Lấy mã sv trên dòng chọn
+        maSV  = "" + jTableSinhVien.getValueAt(dong, 0);
+        
+        //Thực hiện xóa
+        boolean ketQua = DataProvider.getSinhVienBus().xoa(maSV);
+        
+        if(ketQua)
+        {
+            hienThiDanhSachSinhVien();
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed

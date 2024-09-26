@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import vn.com.stanford.je0824.workingwithservlet.model.DataProvider;
 import vn.com.stanford.je0824.workingwithservlet.model.Sach;
@@ -30,9 +31,10 @@ public class GioHangServlet extends HttpServlet {
     }
 
 	/**
-	 * @see  Xử lý lưu thông tin sách người dùng chọn vào giỏ hàng 
+	 * @see Xử lý lưu thông tin sách người dùng chọn vào giỏ hàng
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		if(request.getParameter("id") != null)
 		{
 			int sachId = 0;
@@ -46,7 +48,7 @@ public class GioHangServlet extends HttpServlet {
 				boolean isHangDaCo = false;
 				
 				//Khai báo danh sách
-				List<Sach> lstSach = new ArrayList<Sach>();
+				List<Sach> lstSach = new ArrayList<>();
 				
 				HttpSession session = request.getSession(true);
 				
@@ -79,6 +81,7 @@ public class GioHangServlet extends HttpServlet {
 					lstSach.add(objSach);
 				}
 				
+				
 				//Lưu vào giỏ hàng
 				session.setAttribute("gioHang", lstSach);
 				
@@ -91,8 +94,7 @@ public class GioHangServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
 	}
 
 }

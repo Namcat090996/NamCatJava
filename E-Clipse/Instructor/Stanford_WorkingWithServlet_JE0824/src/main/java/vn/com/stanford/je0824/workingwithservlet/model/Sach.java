@@ -48,16 +48,7 @@ public class Sach {
 	private int giaSach;
 	private Date ngayTao;
 	private String maChuDe;
-	private int soLuong;
 	
-	public int getSoLuong() {
-		return soLuong;
-	}
-
-	public void setSoLuong(int soLuong) {
-		this.soLuong = soLuong;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -106,4 +97,15 @@ public class Sach {
 	public void setMaChuDe(String maChuDe) {
 		this.maChuDe = maChuDe;
 	}
+	
+	private int soLuong = 0;
+
+	public int getSoLuong() {
+		return soLuong;
+	}
+
+	public void setSoLuong(int soLuong) {
+		this.soLuong = soLuong;
+	}
+	
 }

@@ -21,7 +21,7 @@ public class SachBusiness {
 	}
 
 	/**
-	 * 
+	 * Hàm tạo dữ liệu ban đầu
 	 */
 	public void taoDuLieuBanDau() {
 
@@ -62,9 +62,9 @@ public class SachBusiness {
 	}
 	
 	/**
-	 * 
+	 * Hàm lấy thông tin chi tiết của sách theo id sách
 	 * @param sachId
-	 * @return
+	 * @return Đối tượng sách tương ứng theo id nếu có
 	 */
 	public Sach layChiTietTheoMa(int sachId) {
 
@@ -81,15 +81,52 @@ public class SachBusiness {
 	}
 	
 	/**
-	 * 
+	 * Hàm thêm mới thông tin sách
 	 * @param objSach
-	 * @return
+	 * @return 
 	 */
 	public boolean themMoi(Sach objSach) {
 		
 		if(objSach != null)
 		{
 			lstSach.add(objSach);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Hàm cập nhật thông tin sách theo id tương ứng
+	 * @param objSach
+	 * @return
+	 */
+	public boolean capNhat(Sach objSach) {
+		//Duyệt trong danh sách để cập nhật thông tin sách
+		for(int i = 0; i < lstSach.size(); i++)
+		{
+			if(lstSach.get(i).getId() == objSach.getId())
+			{
+				//Cập nhật thông tin mới cho đối tượng sách
+				lstSach.set(i, objSach);
+				return true;
+			}
+		}
+		
+		return false;	
+	}
+	
+	/**
+	 * Hàm xóa thông tin sách
+	 * @param sachId
+	 * @return
+	 */
+	public boolean xoa(int sachId) {
+		Sach objSach = layChiTietTheoMa(sachId);
+		
+		if(objSach != null)
+		{
+			lstSach.remove(objSach);
 			return true;
 		}
 		

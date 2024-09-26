@@ -97,11 +97,11 @@ public class SachBusiness {
 	
 	/**
 	 * Hàm cập nhật thông tin khi sửa thông tin sách
-	 * @param objSach
-	 * @return
+	 * @param objSach, đối tượng chứa sách cần cập nhật
+	 * @return true nếu thực hiện thành công, false nếu thất bại
 	 */
-	public boolean capNhat(Sach objSach) {
-		
+	public boolean capNhat(Sach objSach)
+	{
 		//Duyệt để tìm sách cần cập nhật thông tin mới
 		for(int i = 0; i < lstSach.size(); i++)
 		{
@@ -110,7 +110,7 @@ public class SachBusiness {
 				//Cập nhật thông tin mới cho đối tượng sách
 				lstSach.set(i, objSach);
 				return true;
-			}					
+			}
 		}
 		
 		return false;
@@ -121,20 +121,18 @@ public class SachBusiness {
 	 * @param sachId
 	 * @return
 	 */
-	public boolean xoa(int sachId) {
-		
-		//Lấy đối tượng sách theo id cần xóa
+	public boolean xoa(int sachId)
+	{
 		Sach objSach = layChiTietTheoMa(sachId);
 		
 		if(objSach != null)
 		{
 			//Xóa thông tin
-			lstSach.remove(objSach);			
+			lstSach.remove(objSach);
+			
 			return true;
 		}
 		
 		return false;
 	}
-	
-	
 }

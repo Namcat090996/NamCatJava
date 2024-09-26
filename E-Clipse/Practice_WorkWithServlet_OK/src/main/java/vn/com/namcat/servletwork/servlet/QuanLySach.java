@@ -1,5 +1,7 @@
 package vn.com.namcat.servletwork.servlet;
 import java.io.IOException;
+import java.util.Random;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,27 +33,50 @@ public class QuanLySach extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html");
 		
-	    request.setCharacterEncoding("UTF-8");
-	    
-		String tenSach = request.getParameter("txtTenSach");
-		String moTa = request.getParameter("txtMoTa");
-		String strGiaSach = request.getParameter("txtGiaSach");
-		int giaSach = Integer.parseInt(strGiaSach);
-		String tacGia = request.getParameter("txtTacGia");
+		String tenSach = "", anhSach = "", moTa = "", tacGia = "", strSachId = request.getParameter("hSachId");
+		int giaSach = 0, sachId = 0;
+		
+		if(strSachId.length() > 0 && !strSachId.isEmpty())
+		{
+			sachId = Integer.parseInt(request.getParameter("hSachId"));			
+		}
+		
+		tenSach = request.getParameter("txtTenSach");
+		anhSach = request.getParameter("txtAnhSach");
+		moTa = request.getParameter("txtMoTa");
+		tacGia = request.getParameter("txtTacGia");
+		giaSach = Integer.parseInt(request.getParameter("txtGiaSach"));
 		
 		Sach objSach = new Sach();
 		
+		objSach.setId(sachId);
 		objSach.setTenSach(tenSach);
+		objSach.setAnhSach(anhSach);
 		objSach.setMoTa(moTa);
-		objSach.setGiaSach(giaSach);
 		objSach.setTacGia(tacGia);
+		objSach.setGiaSach(giaSach);
+				
+		boolean ketQua = false;
 		
-		boolean ketQua;
-		
-		ketQua = DataProvider.getSachBus().themMoi(objSach);
-		
-		response.sendRedirect("QuanLySach.jsp");
-	}
+		if(sachId > 0)
+		{
+			objSach.setId(sachId);
+			ketQua = DataProvider.getSachBus().capNhat(objSach);
+		}
+		else
+		{
+			Random rd = new Random();
+			sachId = rd.nextInt(5, 100);
+			objSach.setId(sachId);
+		}
 
+		
+		
+		
+		
+		
+	}
 }

@@ -21,6 +21,7 @@
 	display: inline-block;
 	border: 1px solid silver;
 	padding: 5px;
+	
 }
 
 #container .bookinfo h3 {
@@ -31,7 +32,6 @@
 #container .bookinfo img {
 	text-align: center;
 }
-
 #container .bookinfo p {
 	font-size: 16px;
 	text-align: justify;
@@ -43,6 +43,7 @@
 List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
 %>
 <body>
+<form>
 	<div style="width: 100%; text-align: center;">
 		<h2 style="text-transform: uppercase;">Danh sách thông tin sách
 			dành cho bạn</h2>
@@ -59,13 +60,12 @@ List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
 			<p>
 				<%=s.getMoTa()%>
 			</p>
-			<p style="text-align: right;">
-				<a href="GioHangServlet?id=<%=s.getId()%>">Thêm giỏ hàng</a>
+			<p style="text-align:right;">
+			<a href="GioHangServlet?id=<%=s.getId() %>">Thêm giỏ hàng</a>
 			</p>
 		</div>
-		<%
-		}
-		%>
+		<%} %>
 	</div>
+	</form>
 </body>
 </html>

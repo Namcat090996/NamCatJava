@@ -42,8 +42,10 @@ List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
 					%>
 					<tr>
 						<td>Tên sách:</td>
-						<td><input type="text" name="txtTenSach"
-							value="<%=tenSach%>" /></td>
+						<td>
+							<input type="text" name="txtTenSach" value="<%=tenSach%>" />
+							<input type="text" name="hSachId" value="" />
+						</td>
 					</tr>
 					<tr>
 						<td>Mô tả:</td>

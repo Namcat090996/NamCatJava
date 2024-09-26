@@ -5,20 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Quản lý thông tin sách</title>
+<title>Giỏ hàng của bạn</title>
 </head>
 <%
-//Lấy danh sách sách
-List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
+//Lấy danh sách sách tứ session
+List<Sach> lstSach = new ArrayList();
 
+if(session.getAttribute("gioHang") != null)
+{
+	lstSach = (List<Sach>)session.getAttribute("gioHang");
+}
 %>
 <body>
 <div style="width:100%; text-align:center;">
-<h2 style="text-transform: uppercase;">Quản lý thông tin sách</h2>
+<h2 style="text-transform: uppercase;">Giỏ hàng của bạn</h2>
 </div>
-<div style="width: 100%; text-align: right">
-<a href="SachAdd.jsp">Thêm mới</a>
-</div>
+
 <table border="1" style="width:100%; border-collapse:collapse;">
 <tr>
 	<th>
@@ -40,6 +42,7 @@ List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
 	Tác giả
 	</th>
 	<th>
+	Số lượng
 	</th>
 </tr>
 <tbody>
@@ -47,16 +50,14 @@ List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
 for(Sach s : lstSach){
 %>
 <tr>
-	<td><%=s.getAnhSach() %></td>
+	<td><img src="images/<%=s.getAnhSach() %>" width="100" height="120"/></td>
 	<td><%=s.getId() %></td>
 	<td><%=s.getTenSach() %></td>
 	<td><%=s.getMoTa() %></td>
 	<td><%=s.getGiaSach() %></td>
 	<td><%=s.getTacGia() %></td>
 	<td>
-	<a href="SachAdd.jsp?id=<%=s.getId() %>" title="Nhấn vào đây để sửa thông tin">Sửa</a>
-	&nbsp;
-	<a href="#" title="Nhấn vào đây để xóa thông tin">Xóa</a>
+	<%=s.getSoLuong() %>
 	</td>
 </tr>
 <%} %>

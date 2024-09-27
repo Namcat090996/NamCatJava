@@ -39,9 +39,10 @@ List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
 					<td><%=lstSach.get(i).getMoTa()%></td>
 					<td><%=lstSach.get(i).getGiaSach()%></td>
 					<td><%=lstSach.get(i).getTacGia()%></td>
-					<td><a href="SachAdd.jsp?id=<%=lstSach.get(i).getId()%>"
-						title="Nhấn vào đây để sửa thông tin">Sửa</a> &nbsp; <a href="#"
-						title="Nhấn vào đây để xóa thông tin">Xóa</a></td>
+					<td>
+						<a href="SachAdd.jsp?id=<%=lstSach.get(i).getId()%>" title="Nhấn vào đây để sửa thông tin">Sửa</a> &nbsp; 
+						<a href="DeleteServlet?id=<%=lstSach.get(i).getId() %>" title="Nhấn vào đây để xóa thông tin" onclick="return confirm('Bạn có chắc chắn muốn xóa không ?');">Xóa</a>
+					</td>
 				</tr>
 				<%
 				}

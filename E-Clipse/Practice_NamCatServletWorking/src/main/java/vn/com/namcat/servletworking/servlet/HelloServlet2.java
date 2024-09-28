@@ -28,14 +28,24 @@ public class HelloServlet2 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Dia chi la: ").append(request.getContextPath());
+		
+		 doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String diaChiIP = "", email = "", number = "";
+		
+		diaChiIP = getServletContext().getInitParameter("IP");
+		email = getServletContext().getInitParameter("email");
+		
+		System.out.println(diaChiIP + email);
+		
+		number = getServletConfig().getInitParameter("number");
+		
+		System.out.println(number);
 	}
 
 }

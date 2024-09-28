@@ -13,6 +13,8 @@ List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
 
 %>
 <body>
+<%@include file="Header.jsp" %>
+<%@include file="Menu.jsp" %>
 <div style="width:100%; text-align:center;">
 <h2 style="text-transform: uppercase;">Quản lý thông tin sách</h2>
 </div>
@@ -62,5 +64,6 @@ for(Sach s : lstSach){
 <%} %>
 </tbody>
 </table>
+<%@include file="Footer.jsp" %>
 </body>
 </html>

@@ -17,6 +17,8 @@ if(session.getAttribute("gioHang") != null)
 }
 %>
 <body>
+<%@include file="Header.jsp" %>
+<%@include file="Menu.jsp" %>
 <div style="width:100%; text-align:center;">
 <h2 style="text-transform: uppercase;">Giỏ hàng của bạn</h2>
 </div>
@@ -63,5 +65,6 @@ for(Sach s : lstSach){
 <%} %>
 </tbody>
 </table>
+<%@include file="Footer.jsp" %>
 </body>
 </html>

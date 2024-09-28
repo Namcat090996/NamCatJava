@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@page
-	import="java.util.ArrayList,java.util.List,vn.com.stanford.je0824.workingwithservlet.model.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList,java.util.List,vn.com.stanford.je0824.workingwithservlet.model.*"%>
+<!-- Khai báo bộ thẻ để sử dụng trên trang web -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,29 +43,32 @@
 List<Sach> lstSach = DataProvider.getSachBus().layDanhSach();
 %>
 <body>
-<form>
-	<div style="width: 100%; text-align: center;">
-		<h2 style="text-transform: uppercase;">Danh sách thông tin sách
-			dành cho bạn</h2>
-	</div>
-	<div id="container">
-		<%
-		for (Sach s : lstSach) {
-		%>
-		<div class="bookinfo">
-			<h3><%=s.getTenSach()%></h3>
-			<p>
-				<img src="images/<%=s.getAnhSach()%>" width="120" height="130" />
-			</p>
-			<p>
-				<%=s.getMoTa()%>
-			</p>
-			<p style="text-align:right;">
-			<a href="GioHangServlet?id=<%=s.getId() %>">Thêm giỏ hàng</a>
-			</p>
+<%@include file="Header.jsp" %>
+<jsp:include page="Menu.jsp"></jsp:include>
+	<form>
+		<div style="width: 100%; text-align: center;">
+			<h2 style="text-transform: uppercase;">Danh sách thông tin sách
+				dành cho bạn</h2>
 		</div>
-		<%} %>
-	</div>
+		<div id="container">
+			<%
+			for (Sach s : lstSach) {
+			%>
+			<div class="bookinfo">
+				<h3><%=s.getTenSach()%></h3>
+				<p>
+					<img src="images/<%=s.getAnhSach()%>" width="120" height="130" />
+				</p>
+				<p>
+					<%=s.getMoTa()%>
+				</p>
+				<p style="text-align:right;">
+				<a href="GioHangServlet?id=<%=s.getId() %>">Thêm giỏ hàng</a>
+				</p>
+			</div>
+			<%} %>
+		</div>
 	</form>
+<%@include file="Footer.jsp" %>	
 </body>
 </html>

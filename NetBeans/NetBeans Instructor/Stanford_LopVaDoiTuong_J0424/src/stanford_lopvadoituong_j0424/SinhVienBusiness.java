@@ -148,4 +148,24 @@ public class SinhVienBusiness {
         
         return false;
     }
+    
+    /**
+     * Hàm xóa thông tin sinh viên trong hệ thống
+     * @param maSV, mã sv cần xóa
+     * @return true nếu xóa thành công, false nếu không xóa thành công
+     */
+    public boolean xoa1(String maSV)
+    {
+        
+        for(SinhVien objSV: lstSinhVien)
+        {
+            if(objSV.getMaSV().equals(maSV))
+            {
+                lstSinhVien.remove(objSV);
+                return true;
+            }
+        }
+        
+        return false;
+    }    
 }

@@ -10,7 +10,6 @@
 <style type="text/css">
 #container {
 	display: inline-block;
-	width: 100%;
 	text-align: center;
 }
 

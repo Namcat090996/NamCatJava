@@ -53,14 +53,14 @@ public class GioHangServlet extends HttpServlet {
 				HttpSession session = request.getSession(true);
 				
 				if(session != null && session.getAttribute("gioHang") != null)
-				{
+				{				
 					lstSach = (List<Sach>)session.getAttribute("gioHang");
 					
 					//Duyệt xem có mặt hàng trong giỏ hay chưa
 					for(int i = 0; i < lstSach.size(); i++)
 					{
 						if(lstSach.get(i).getId() == sachId)
-						{
+						{				
 							objSach.setSoLuong(lstSach.get(i).getSoLuong() + 1);
 							lstSach.set(i, objSach);
 							isHangDaCo = true;

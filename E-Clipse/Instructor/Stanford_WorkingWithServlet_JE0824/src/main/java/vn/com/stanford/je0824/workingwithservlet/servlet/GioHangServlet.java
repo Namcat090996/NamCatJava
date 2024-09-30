@@ -14,6 +14,7 @@ import javax.websocket.Session;
 
 import vn.com.stanford.je0824.workingwithservlet.model.DataProvider;
 import vn.com.stanford.je0824.workingwithservlet.model.Sach;
+import vn.com.stanford.je0824.workingwithservlet.model.SachBusiness;
 
 /**
  * Servlet implementation class GioHangServlet
@@ -60,7 +61,7 @@ public class GioHangServlet extends HttpServlet {
 					for(int i = 0; i < lstSach.size(); i++)
 					{
 						if(lstSach.get(i).getId() == sachId)
-						{				
+						{							
 							objSach.setSoLuong(lstSach.get(i).getSoLuong() + 1);
 							lstSach.set(i, objSach);
 							isHangDaCo = true;

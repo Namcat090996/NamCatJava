@@ -20,15 +20,24 @@
 	border: 1px solid silver;
 	display: inline-block;
 	width: 17%;
-	height: 350px;
+	height: 370px;
 	margin: 5px;
+	border-color: olive;
+	border-radius: 4px;
 }
 
 p {
-	margin: 10px 10px 15px 7px;
+	margin: 10px 10px 30px 7px;
 	height: 60px;
 }
 
+h3 {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 35px;
+	height: 20px;
+	opacity: 80%;
+}
 </style>
 </head>
 <%
@@ -43,7 +52,7 @@ List<Sach> lstSach = DataSupplier.getSachBus().layDanhSach();
 			for (Sach s : lstSach) {
 			%>
 			<div class="wrapper__item">
-				<h3 style="text-align: center; margin-top: 20px;"><%=s.getTenSach()%></h3>
+				<h3><%=s.getTenSach()%></h3>
 				<div style="text-align: center;">
 					<img alt="" src="images/<%=s.getAnhSach()%>" width="130px" height="150px">
 				</div>

@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Quản lý thông tin sách</title>
+<script type="text/javascript">
+	function confirmDelete() {
+		return confirm("Bạn có chắc chắn muốn xóa sách này ?");
+	}
+</script>
 </head>
 <%
 //Get the book list
@@ -45,7 +50,7 @@ List<Sach> lstSach = DataSupplier.getSachBus().layDanhSach();
 					<td><%=s.getTacGia() %></td>
 					<td>
 						<a title="Nhấn vào đây để sửa thông tin" href="BookInfo.jsp?id=<%=s.getId()%>">Sửa</a> &nbsp;
-						<a title="" href="#">Sửa</a>
+						<a title="Nhấn vào đây để xóa thông tin" href="BookDelete?id=<%=s.getId()%>" onclick="return confirmDelete();">Xóa</a>
 					</td>
 				</tr>
 				<% } %>	

@@ -26,12 +26,12 @@
 	border-radius: 4px;
 }
 
-p {
+.wrapper__item p {
 	margin: 10px 10px 30px 7px;
 	height: 60px;
 }
 
-h3 {
+.wrapper__item h3 {
 	text-align: center;
 	margin-top: 20px;
 	margin-bottom: 35px;
@@ -45,6 +45,8 @@ h3 {
 List<Sach> lstSach = DataSupplier.getSachBus().layDanhSach();
 %>
 <body>
+<%@ include file="Header.jsp"%>
+<jsp:include page="Menu.jsp"></jsp:include>
 	<h2 style="text-transform: uppercase; text-align: center;">Danh sách thông tin sách dành cho bạn</h2>
 	<form action="">
 		<div class="wrapper">
@@ -67,5 +69,6 @@ List<Sach> lstSach = DataSupplier.getSachBus().layDanhSach();
 			%>
 		</div>
 	</form>
+<%@ include file="Footer.jsp"%>
 </body>
 </html>

@@ -12,6 +12,8 @@
 List<Sach> lstSach = DataSupplier.getSachBus().layDanhSach();
 %>
 <body>
+<%@ include file="Header.jsp"%>
+<jsp:include page="Menu.jsp"></jsp:include>
 	<div style="text-align: center;">
 		<h2 style="text-transform: uppercase;">Quản lý thông tin sách</h2>
 	</div>
@@ -50,5 +52,6 @@ List<Sach> lstSach = DataSupplier.getSachBus().layDanhSach();
 			</tbody>
 		</table>
 	</form>
+<%@ include file="Footer.jsp"%>
 </body>
 </html>

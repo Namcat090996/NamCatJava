@@ -17,6 +17,8 @@ if(session.getAttribute("gioHang") != null)
 }
 %>
 <body>
+<%@ include file="Header.jsp"%>
+<jsp:include page="Menu.jsp"></jsp:include>
 	<div style="text-align: center;">
 		<h2 style="text-transform: uppercase;">Giỏ hàng của bạn</h2>
 	</div>
@@ -48,5 +50,6 @@ if(session.getAttribute("gioHang") != null)
 			</tbody>
 		</table>
 	</form>
+<%@ include file="Footer.jsp"%>
 </body>
 </html>

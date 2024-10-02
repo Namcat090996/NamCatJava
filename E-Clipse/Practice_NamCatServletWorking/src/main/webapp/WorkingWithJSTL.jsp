@@ -42,6 +42,20 @@ String tenCongTy = "Stanford - Dạy lập trình hướng đối tượng";
 		<c:when test="${param.tuoi > 13 && param.tuoi < 60}">You're young</c:when>
 		<c:otherwise>You're old</c:otherwise>
 	</c:choose>
+	<br>
+	Nhập số điện thoại:
+	<input type="text" name="txtSoDienThoai"/>
+	<br>
+	<input type="submit" name="btnThucHien" value="Thực hiện"/>
+	<br>
+	<c:set var="phoneNumber" value="${param.txtSoDienThoai}"></c:set>
+	<ul>
+	<c:forTokens items="${phoneNumber}" delims="-" var="par">
+	<li>
+		<c:out value="${par}"></c:out>
+	</li>	
+	</c:forTokens>
+	</ul>
 	</form>
 	<h3>List of student</h3>
 	<%
@@ -69,7 +83,6 @@ String tenCongTy = "Stanford - Dạy lập trình hướng đối tượng";
 			</c:forEach>
 	
 		</tbody>
-		
 	</table>
 	
 </body>

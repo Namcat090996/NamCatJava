@@ -1,6 +1,7 @@
 <%@page import="vn.com.namcat.servletworking.model.*"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,23 +38,32 @@ List<Sach> lstSach = DataSupplier.getSachBus().layDanhSach();
 				<th></th>
 			</tr>
 			<tbody>
-				<%
-				for(Sach s: lstSach) {
-				
-				%>
+			<c:forEach var="s" items="<%=lstSach %>">
 				<tr>
-					<td><%=s.getAnhSach() %></td>
-					<td><%=s.getId() %></td>
-					<td><%=s.getTenSach() %></td>
-					<td><%=s.getMoTa() %></td>
-					<td><%=s.getGiaSach() %></td>
-					<td><%=s.getTacGia() %></td>
 					<td>
-						<a title="Nhấn vào đây để sửa thông tin" href="BookInfo.jsp?id=<%=s.getId()%>">Sửa</a> &nbsp;
-						<a title="Nhấn vào đây để xóa thông tin" href="BookDelete?id=<%=s.getId()%>" onclick="return confirmDelete();">Xóa</a>
+						<c:out value="${s.anhSach}"></c:out>
 					</td>
-				</tr>
-				<% } %>	
+					<td>
+						<c:out value="${s.id}"></c:out>
+					</td>
+					<td>
+						<c:out value="${s.tenSach}"></c:out>
+					</td>
+					<td>
+						<c:out value="${s.moTa}"></c:out>
+					</td>
+					<td>
+						<c:out value="${s.giaSach}"></c:out>
+					</td>
+					<td>
+						<c:out value="${s.tacGia}"></c:out>
+					</td>
+					<td>
+						<a title="Nhấn vào đây để sửa thông tin" href="BookInfo.jsp?id=<c:out value='${s.id}'></c:out>">Sửa</a> &nbsp;
+						<a title="Nhấn vào đây để xóa thông tin" href="BookDelete?id=<c:out value='${s.id}'></c:out>" onclick="return confirmDelete();">Xóa</a>
+					</td>
+				</tr>			
+			</c:forEach>
 			</tbody>
 		</table>
 	</form>

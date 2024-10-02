@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div style="width: 100%; text-align: center;">
-<h1 style="text-transform: uppercase; color: blue;">Hệ thống bán sách trực tuyến</h1>
+<div style="width: 100%;text-align: center;">
+<h1 style="text-transform: uppercase;color: blue;">
+Hệ thống bán sách trực tuyến
+</h1>
 </div>
 </body>
 </html>

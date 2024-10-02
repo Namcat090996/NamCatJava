@@ -1,6 +1,7 @@
 <%@page import="vn.com.namcat.servletworking.model.*"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,23 +51,24 @@ List<Sach> lstSach = DataSupplier.getSachBus().layDanhSach();
 	<h2 style="text-transform: uppercase; text-align: center;">Danh sách thông tin sách dành cho bạn</h2>
 	<form action="">
 		<div class="wrapper">
-			<%
-			for (Sach s : lstSach) {
-			%>
+			<c:forEach var="s" items="<%=lstSach%>">
 			<div class="wrapper__item">
-				<h3><%=s.getTenSach()%></h3>
+				<h3>
+					<c:out value="${s.tenSach}"></c:out>
+				</h3>
 				<div style="text-align: center;">
-					<img alt="" src="images/<%=s.getAnhSach()%>" width="130px" height="150px">
+					<img alt="" src="images/<c:out value='${s.anhSach}'></c:out>" width="130px" height="150px">
 				</div>
-				<p><%=s.getMoTa()%></p>
+				<p>
+					<c:out value="${s.moTa}"></c:out>
+				</p>
 				<div style="text-align: center;">
-					<a href="BookCartServlet?id=<%=s.getId()%>">Thêm vào giỏ hàng</a>
+					<a href="BookCartServlet?id=<c:out value='${s.id}'></c:out>">Thêm vào giỏ hàng</a>
 				</div>
 	
-			</div>
-			<%
-			}
-			%>
+			</div>		
+			</c:forEach>
+
 		</div>
 	</form>
 <%@ include file="Footer.jsp"%>

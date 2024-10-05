@@ -142,23 +142,13 @@ public class SachBusiness {
 	 */
 	public boolean themMoi(Sach objSach)
 	{
-		//Khai báo boolean
-		boolean ketQua = false;
-		
-		//Khai báo câu lệnh SQL
-		String strInsert = "Insert into Sach (MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, MaChuDe, NgayTao) values (?, ?, ?, ?, ?, ?, ?, ?)";
-		
-		//Khai báo kết nối
-		Connection conn = null;
-		
-		try {
-			//Kết nối với Database cần làm việc
-			conn = DataProvider.ketNoi();
-			
-			//Khai báo
+		if(objSach != null)
+		{
+			lstSach.add(objSach);
+			return true;
 		}
 		
-		return ketQua;
+		return false;
 	}
 	
 	/**

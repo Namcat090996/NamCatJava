@@ -33,7 +33,7 @@ public class SachImpl implements SachDao {
             ResultSet rs = stm.executeQuery(strSQL);
 
             //Declare a book object
-            Sach objSach;
+            Sach objSach = null;
 
             //Loop through each row to get the list
             while(rs.next()) {
@@ -55,7 +55,7 @@ public class SachImpl implements SachDao {
                 lstSach.add(objSach);
             }
         } catch (SQLException ex) {
-            System.out.println("Có lỗi xảy ra khi thực hiiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
+            System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
         }
         finally {
             if(conn != null)
@@ -118,7 +118,7 @@ public class SachImpl implements SachDao {
                 objSach.setTacGia(rs.getString("TacGia"));
             }
         } catch (SQLException ex) {
-            System.out.println("Có lỗi xảy ra khi thực hiiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
+            System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
         }
         finally {
             if(conn != null)
@@ -172,7 +172,7 @@ public class SachImpl implements SachDao {
             ketQua = preStm.executeUpdate() > 0;
 
         } catch (SQLException ex) {
-            System.out.println("Có lỗi xảy ra khi thực hiiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
+            System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
         }
         finally {
             if(conn != null)
@@ -221,7 +221,7 @@ public class SachImpl implements SachDao {
             ketQua = preStm.executeUpdate() > 0;
 
         } catch (SQLException ex) {
-            System.out.println("Có lỗi xảy ra khi thực hiiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
+            System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
         }
         finally {
             if(conn != null)
@@ -263,7 +263,7 @@ public class SachImpl implements SachDao {
             ketQua = preStm.executeUpdate() > 0;
 
         } catch (SQLException ex) {
-            System.out.println("Có lỗi xảy ra khi thực hiiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
+            System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
         }
         finally {
             if(conn != null)

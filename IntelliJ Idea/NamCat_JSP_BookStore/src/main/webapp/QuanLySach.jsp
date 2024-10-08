@@ -13,9 +13,9 @@
 <head>
     <title>Quản lý thông tin sách</title>
     <script type="text/javascript">
-        function confirmDelete()
+        function confirmDelete(event)
         {
-            return confirm("Bạn có chắc cắn muốn xóa không ?")
+            return confirm("Bạn có chắc chắn muốn xóa không ?")
         }
     </script>
 </head>
@@ -28,10 +28,10 @@
 <body>
 <%@include file="admin/header.jsp" %>
 <%@include file="admin/menu.jsp" %>
-<div style="width:100%; text-align:center;">
+<div style="text-align:center;">
     <h2 style="text-transform: uppercase;">Quản lý thông tin sách</h2>
 </div>
-<div style="width: 100%; text-align: right">
+<div style="text-align: right">
     <a href="SachAdd.jsp">Thêm mới</a>
 </div>
 <table border="1" style="width:100%; border-collapse:collapse;">

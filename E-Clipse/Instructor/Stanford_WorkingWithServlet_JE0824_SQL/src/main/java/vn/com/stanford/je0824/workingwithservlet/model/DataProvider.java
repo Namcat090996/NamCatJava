@@ -36,7 +36,7 @@ public class DataProvider {
             Class.forName(JDBC_DRIVER);
             
             //Kết nối đến db trong mysql cần làm việc
-            conn = DriverManager.getConnection(DATABASE_LINK, "root", "Stanford");
+            conn = DriverManager.getConnection(DATABASE_LINK, "root", "Namcat@@0909");
             
         } catch (ClassNotFoundException ex) {
             System.err.println("Lỗi không tìm thấy driver. Chi tiết: " + ex.getMessage());

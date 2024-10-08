@@ -19,7 +19,7 @@
     if(request.getParameter("id") != null)
     {
         //Get book code
-        sachId = request.getParameter("id");
+        sachId = "" + request.getParameter("id");
 
         //Declare object
         SachDao sachDao = new SachImpl();
@@ -44,6 +44,7 @@
     <div style="text-align: center">
         <h2 style="text-transform: uppercase">Thêm, sửa thông tin sách</h2>
     </div>
+
     <form method="post" action="SachServlet">
         <fieldset>
             <legend>Nhập thông tin sách</legend>
@@ -95,7 +96,9 @@
                 <tr>
                     <td></td>
                     <td>
-                        <input type="submit" value="Cập nhật" name="btnCapNhat"> &nbsp; <a href="QuanLySach.jsp">Trở lại</a>
+                        <input type="submit" value="Cập nhật" name="btnCapNhat">
+                        &nbsp;
+                        <a href="QuanLySach.jsp">Trở lại</a>
                     </td>
                 </tr>
             </table>

@@ -95,6 +95,9 @@ public class SachImpl implements SachDao {
             //Create a statement to query data in the database
             PreparedStatement preStm = conn.prepareStatement(strDetail);
 
+            //Assign value to book code that you want to find
+            preStm.setString(1, maSach);
+
             //Execute the queries and return the results
             ResultSet rs = preStm.executeQuery();
 
@@ -103,9 +106,6 @@ public class SachImpl implements SachDao {
 
                 //Instantiate the book object
                 objSach = new Sach();
-
-                //Assign value to book code that you want to find
-                preStm.setString(1, maSach);
 
                 //Assign to book object
                 objSach.setMaSach(rs.getString("MaSach"));
@@ -145,7 +145,7 @@ public class SachImpl implements SachDao {
         boolean ketQua = false;
 
         //Declare a SQL command
-        String strAdd = "Insert into sach (MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, NgayTao, MaChuDe) values (?, ?, ?, ?, ?, ?, ?, ?)";
+        String strAdd = "Insert into sach(MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, NgayTao, MaChuDe) values(?, ?, ?, ?, ?, ?, ?, ?)";
 
         //Declare a connection
         Connection conn = null;
@@ -213,7 +213,7 @@ public class SachImpl implements SachDao {
             preStm.setString(3, objSach.getAnhSach());
             preStm.setFloat(4, objSach.getGiaSach());
             preStm.setString(5, objSach.getTacGia());
-            preStm.setDate(6, new Date(objSach.getNgayTao().getTime()));
+            preStm.setDate(6, new Date(objSach.getNgayCapNhat().getTime()));
             preStm.setString(7, objSach.getMaChuDe());
             preStm.setString(8, objSach.getMaSach());
 

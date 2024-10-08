@@ -12,6 +12,12 @@
 <html>
 <head>
     <title>Quản lý thông tin sách</title>
+    <script type="text/javascript">
+        function confirmDelete()
+        {
+            return confirm("Bạn có chắc cắn muốn xóa không ?")
+        }
+    </script>
 </head>
 <%
     //Lấy danh sách sách
@@ -64,7 +70,7 @@
             <td>
                 <a href="SachAdd.jsp?id=${s.maSach}" title="Nhấn vào đây để sửa thông tin">Sửa</a>
                 &nbsp;
-                <a href="SachServletXoa?id=${s.maSach}" title="Nhấn vào đây để xóa thông tin">Xóa</a>
+                <a href="SachServletXoa?id=${s.maSach}" title="Nhấn vào đây để xóa thông tin" onclick="return confirmDelete();">Xóa</a>
             </td>
         </tr>
     </c:forEach>

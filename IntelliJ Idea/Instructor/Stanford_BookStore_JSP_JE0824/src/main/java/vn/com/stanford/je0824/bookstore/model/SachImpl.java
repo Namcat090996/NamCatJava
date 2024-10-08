@@ -187,7 +187,7 @@ public class SachImpl implements SachDao{
             comm.setString(3, objSach.getAnhSach());
             comm.setFloat(4, objSach.getGiaSach());
             comm.setString(5, objSach.getTacGia());
-            comm.setDate(6, new Date(objSach.getNgayCapNhat().getTime()));
+
             comm.setString(7, objSach.getMaChuDe());
 
             comm.setString(8, objSach.getMaSach());

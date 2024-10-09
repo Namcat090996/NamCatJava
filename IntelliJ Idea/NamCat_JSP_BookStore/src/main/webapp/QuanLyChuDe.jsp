@@ -30,21 +30,18 @@
 <div style="text-align: center">
     <h2 style="text-transform: uppercase">Quản lý thông tin sách</h2>
 </div>
-<div style="text-align: right">
-    <a href="ChuDeAdd.jsp">Thêm mới</a>
-</div>
 <div>
     <table border="1" style="border-collapse: collapse; width: 500px; margin-left: auto; margin-right: auto;">
         <tr>
             <th>Mã chủ đề</th>
             <th>Tên chủ đề</th>
-            <th></th>
+            <th><a href="ChuDeAdd.jsp">Thêm mới</a></th>
         </tr>
         <tbody>
         <c:forEach var="c" items="<%=lstChuDe%>">
             <tr>
-                <td style="text-align: center">${c.tenChuDe}</td>
                 <td style="text-align: center">${c.maChuDe}</td>
+                <td style="text-align: center">${c.tenChuDe}</td>
                 <td style="text-align: center">
                     <a href="ChuDeAdd.jsp?id=${c.maChuDe}" title="Nhấn vào đây để sửa thông tin">Sửa</a>
                     &nbsp;

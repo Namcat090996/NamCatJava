@@ -32,7 +32,7 @@ public class SachServlet extends HttpServlet {
 
         //Declare variables
         boolean isInsert = true;
-        String maSach = "", tenSach = "", moTa = "", anhSach = "", tacGia = "", sachId = "";
+        String maSach = "", tenSach = "", moTa = "", anhSach = "", tacGia = "", sachId = "", maChuDe = "";
         int giaSach = 0;
 
         //Check if the book code is null/empty
@@ -48,6 +48,7 @@ public class SachServlet extends HttpServlet {
             anhSach = request.getParameter("txtAnhSach");
             tacGia = request.getParameter("txtTacGia");
             giaSach = Integer.parseInt("" + request.getParameter("txtGiaSach"));
+            maChuDe = request.getParameter("cboChuDe");
 
             //Declare book object
             Sach objSach = new Sach();
@@ -73,7 +74,7 @@ public class SachServlet extends HttpServlet {
             objSach.setAnhSach(anhSach);
             objSach.setTacGia(tacGia);
             objSach.setGiaSach(giaSach);
-            objSach.setMaChuDe("TH");
+            objSach.setMaChuDe(maChuDe);
 
             //Declare an object to call an update/add function
             SachDao sachDao = new SachImpl();

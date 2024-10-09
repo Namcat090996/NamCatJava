@@ -43,7 +43,7 @@
 <div style="text-align: center">
     <h2 style="text-transform: uppercase">Thêm, sửa thông tin sách</h2>
 </div>
-<form>
+<form method="post" action="ChuDeServlet">
     <fieldset>
         <legend>Nhập thông tin chủ đề</legend>
         <table>
@@ -51,6 +51,7 @@
                 <td>Mã chủ đề: </td>
                 <td>
                     <input type="text" name="txtMaChuDe" value="<%=maChuDe%>">
+                    <input type="hidden" name="hChuDeId" value="<%=chuDeId%>">
                 </td>
             </tr>
             <tr>

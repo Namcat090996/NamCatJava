@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -7,14 +8,25 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="vn.com.stanford.bst.model.*,vn.com.stanford.bst.entities.*" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <html>
 <head>
     <title>Thêm hoặc sửa sách</title>
 </head>
 <%
     //Declare variables
-    String sachId = "", maSach = "", tenSach = "", moTa = "", anhSach = "", tacGia = "";
+    String sachId = "", maSach = "", tenSach = "", moTa = "", anhSach = "", tacGia = "", maChuDe = "";
     int giaSach = 0;
+
+    //Declare object to get subject list using function
+    ChuDeDao chuDe = new ChuDeImpl();
+
+    //Declare subject list
+    List<ChuDe> lstChuDe = new ArrayList<ChuDe>();
+
+    //Get subject list
+    lstChuDe = chuDe.layDanhSach();
 
     if(request.getParameter("id") != null)
     {
@@ -36,6 +48,7 @@
             anhSach = objSach.getAnhSach();
             tacGia = objSach.getTacGia();
             giaSach = objSach.getGiaSach();
+            maChuDe = objSach.getMaChuDe();
         }
 
     }
@@ -91,6 +104,18 @@
                     </td>
                     <td>
                         <input type="text" name="txtTacGia" value="<%=tacGia%>"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Chủ đề:
+                    </td>
+                    <td>
+                        <select name="cboChuDe">
+                            <c:forEach var="c" items="<%=lstChuDe%>">
+                                <option value="${c.maChuDe}" name="slChuDe">${c.tenChuDe}</option>
+                            </c:forEach>
+                        </select>
                     </td>
                 </tr>
                 <tr>

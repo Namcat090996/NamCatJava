@@ -113,7 +113,7 @@
                     <td>
                         <select name="cboChuDe">
                             <c:forEach var="c" items="<%=lstChuDe%>">
-                                <option value="${c.maChuDe}" <%=maChuDe%>>${c.tenChuDe}</option>
+                                <option value="${c.maChuDe}" ${c.maChuDe == maChuDe ? 'selected' : ''}>${c.tenChuDe}</option>
                             </c:forEach>
                         </select>
                     </td>

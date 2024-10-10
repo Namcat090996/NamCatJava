@@ -12,9 +12,30 @@ import java.util.Date;
 
 @WebServlet(name = "SachServlet", value = "/SachServlet")
 public class SachServlet extends HttpServlet {
+    /**
+     * Xử lý xóa thông tin sách
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String maSach = "" + request.getParameter("id");
 
+        if(!maSach.isEmpty())
+        {
+            SachDao sachDao = new SachImpl();
+
+            //Thực hiện xóa
+            boolean ketQua = sachDao.xoa(maSach);
+
+            if(ketQua)
+            {
+                response.sendRedirect("QuanLySach.jsp");
+            }
+
+        }
     }
 
     /**
@@ -37,7 +58,7 @@ public class SachServlet extends HttpServlet {
 
         //Khai báo biến
         boolean isInsert = true;
-        String maSach = "", tenSach = "", moTa = "", anhSach = "", tacGia = "", sachId = "";
+        String maSach = "", tenSach = "", moTa = "", anhSach = "", tacGia = "", sachId = "", maChuDe = "";
         int giaSach = 0;
 
         if(request.getParameter("hSachId") != null && !request.getParameter("hSachId").isEmpty())
@@ -48,6 +69,7 @@ public class SachServlet extends HttpServlet {
         moTa = request.getParameter("txtMoTa");
         anhSach = request.getParameter("txtAnhSach");
         tacGia = request.getParameter("txtTacGia");
+        maChuDe = request.getParameter("cboChuDe");
 
         giaSach = Integer.parseInt("" + request.getParameter("txtGiaSach"));
 
@@ -71,7 +93,7 @@ public class SachServlet extends HttpServlet {
         objSach.setAnhSach(anhSach);
         objSach.setTacGia(tacGia);
         objSach.setGiaSach(giaSach);
-        objSach.setMaChuDe("TH");
+        objSach.setMaChuDe(maChuDe);
 
         boolean ketQua = false;
 

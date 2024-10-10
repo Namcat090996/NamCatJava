@@ -18,6 +18,29 @@
     SachDao sachDao = new SachImpl();
 
     List<Sach> lstSach = sachDao.layDanhSach();
+
+    request.setCharacterEncoding("utf-8");
+
+    String tuKhoa = "", maCD = "";
+
+    if(request.getParameter("txtTuKhoa") != null)
+    {
+        tuKhoa = "" + request.getParameter("txtTuKhoa");
+    }
+
+    if(request.getParameter("cboChuDe") != null)
+    {
+        maCD = "" + request.getParameter("cboChuDe");
+    }
+
+    //Khai báo danh sách chủ đề
+    List<ChuDe> lstChuDe = new ArrayList<ChuDe>();
+
+    //Khai báo đối tượng để gọi hàm lấy danh sách
+    ChuDeDao chuDe = new ChuDeImpl();
+
+    //Lấy danh sách chủ đề từ database
+    lstChuDe = chuDe.layDanhSach();
 %>
 <body>
 <%@include file="admin/header.jsp" %>
@@ -25,6 +48,39 @@
 <div style="width:100%; text-align:center;">
     <h2 style="text-transform: uppercase;">Quản lý thông tin sách</h2>
 </div>
+<form method="post">
+<fieldset>
+    <legend>
+        Nhập thông tin tìm kiếm
+    </legend>
+    <table>
+        <tr>
+            <td>Từ khóa:</td>
+            <td>
+                <input type="text" name="txtTuKhoa" value="<%=tuKhoa%>"/>
+            </td>
+            <td>Chủ đề:</td>
+            <td>
+                <select name="cboChuDe">
+                    <option value="">Chọn chủ đề</option>
+                    <c:set var="maCD" value="<%=maCD%>"/>
+                    <c:forEach var="c" items="<%=lstChuDe %>">
+                        <c:if test="${c.maChuDe==maCD}">
+                            <option value="${c.maChuDe}" selected="selected">${c.tenChuDe}</option>
+                        </c:if>
+                        <c:if test="${c.maChuDe!=maCD}">
+                            <option value="${c.maChuDe}">${c.tenChuDe}</option>
+                        </c:if>
+                    </c:forEach>
+                </select>
+            </td>
+            <td>
+                <input type="submit" name="btnTimKiem" value="Tìm kiếm"/>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+</form>
 <div style="width: 100%; text-align: right">
     <a href="SachAdd.jsp">Thêm mới</a>
 </div>
@@ -64,7 +120,7 @@
             <td>
                 <a href="SachAdd.jsp?id=${s.maSach}" title="Nhấn vào đây để sửa thông tin">Sửa</a>
                 &nbsp;
-                <a href="SachServletXoa?id=${s.maSach}" title="Nhấn vào đây để xóa thông tin">Xóa</a>
+                <a href="SachServlet?id=${s.maSach}" title="Nhấn vào đây để xóa thông tin" onclick="return confirm('Bạn có chắc chắn muốn xóa không ?')">Xóa</a>
             </td>
         </tr>
     </c:forEach>

@@ -278,4 +278,79 @@ public class SachImpl implements SachDao {
 
         return ketQua;
     }
+
+    /**
+     * Function search the book by keyword and selected subject
+     * @param tuKhoa
+     * @param maChuDe
+     * @return
+     */
+    @Override
+    public List<Sach> timKiemSach(String tuKhoa, String maChuDe) {
+        //Declare a list
+        List<Sach> lstSach = new ArrayList<Sach>();
+
+        String strSQL = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, MaChuDe, NgayTao from Sach where 1=1";
+
+        if(!tuKhoa.isEmpty())
+        {
+            strSQL += " and (MaSach = '" + tuKhoa + "' OR TenSach like '%" + tuKhoa + "%' OR TacGia like '%" + tuKhoa + "%')";
+        }
+
+        if(!maChuDe.isEmpty())
+        {
+            strSQL+= " and MaChuDe = '" + maChuDe + "'";
+        }
+
+        //Declare a connection
+        Connection conn = null;
+
+        try {
+            //Connect to the database needs to work
+            conn = DataProvider.ketNoi();
+
+            //Create a statement to query data in the database
+            Statement stm = conn.createStatement();
+
+            //Execute the queries and return the results
+            ResultSet rs = stm.executeQuery(strSQL);
+
+            //Declare a book object
+            Sach objSach = null;
+
+            //Loop through each row to get the list
+            while(rs.next()) {
+
+                //Instantiate the book object
+                objSach = new Sach();
+
+                //Assign to book object
+                objSach.setMaSach(rs.getString("MaSach"));
+                objSach.setTenSach(rs.getString("TenSach"));
+                objSach.setMoTa(rs.getString("MoTa"));
+                objSach.setAnhSach(rs.getString("AnhSach"));
+                objSach.setGiaSach(rs.getInt("GiaSach"));
+                objSach.setMaChuDe(rs.getString("MaChuDe"));
+                objSach.setNgayTao(rs.getDate("NgayTao"));
+                objSach.setTacGia(rs.getString("TacGia"));
+
+                //Add objetc to list
+                lstSach.add(objSach);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
+        }
+        finally {
+            if(conn != null)
+            {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    System.out.println("Có lỗi xảy ra khi đóng kết nối. Chi tiết lỗi: " + ex.getMessage());
+                }
+            }
+        }
+
+        return lstSach;
+    }
 }

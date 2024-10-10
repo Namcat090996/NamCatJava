@@ -12,18 +12,39 @@
 <html>
 <head>
     <title>Quản lý thông tin sách</title>
-    <script type="text/javascript">
-        function confirmDelete(event)
-        {
-            return confirm("Bạn có chắc chắn muốn xóa không ?")
-        }
-    </script>
 </head>
 <%
-    //Lấy danh sách sách
+    //Set utf-8 for request
+    request.setCharacterEncoding("utf-8");
+
+    //Declare variables
+    String tuKhoa = "", maChuDe = "";
+
+    //Get data from input if it's not null
+    if(request.getParameter("txtTuKhoa") != null)
+    {
+        tuKhoa = "" + request.getParameter("txtTuKhoa");
+    }
+
+    if(request.getParameter("cboChuDe") != null)
+    {
+        maChuDe = "" + request.getParameter("cboChuDe");
+    }
+
+    //Declare object to get book list using function
     SachDao sachDao = new SachImpl();
 
-    List<Sach> lstSach = sachDao.layDanhSach();
+    //Get book list from keyword and subject
+    List<Sach> lstSach = sachDao.timKiemSach(tuKhoa, maChuDe);
+
+    //Declare object to get subject list using function
+    ChuDeDao chuDe = new ChuDeImpl();
+
+    //Declare subject list
+    List<ChuDe> lstChuDe = new ArrayList<ChuDe>();
+
+    //Get subject list
+    lstChuDe = chuDe.layDanhSach();
 %>
 <body>
 <%@include file="admin/header.jsp" %>
@@ -34,6 +55,39 @@
 <div style="text-align: right">
     <a href="SachAdd.jsp">Thêm mới</a>
 </div>
+<form method="post">
+<fieldset>
+    <legend>Nhập thông tin tìm kiếm</legend>
+    <table>
+        <tr>
+            <td>Từ khóa: </td>
+            <td>
+                <input type="text" name="txtTuKhoa" value="<%=tuKhoa%>">
+            </td>
+            &nbsp;
+            <td>Chủ đề: </td>
+            <td>
+                <select name="cboChuDe">
+                    <option value="">Chọn chủ đề</option>
+                    <c:set var="MaChuDe" value="<%=maChuDe%>"></c:set>
+                    <c:forEach var="c" items="<%=lstChuDe%>">
+                        <c:if test="${c.maChuDe == MaChuDe}">
+                            <option value="${c.maChuDe}" selected="selected">${c.tenChuDe}</option>
+                        </c:if>
+                        <c:if test="${c.maChuDe != MaChuDe}">
+                            <option value="${c.maChuDe}">${c.tenChuDe}</option>
+                        </c:if>
+                    </c:forEach>
+                </select>
+            </td>
+            &nbsp;
+            <td>
+                <input type="submit" name="btnTimKiem" value="Tìm kiếm">
+            </td>
+        </tr>
+    </table>
+</fieldset>
+</form>
 <table border="1" style="width:100%; border-collapse:collapse;">
     <tr>
         <th>
@@ -70,7 +124,7 @@
             <td>
                 <a href="SachAdd.jsp?id=${s.maSach}" title="Nhấn vào đây để sửa thông tin">Sửa</a>
                 &nbsp;
-                <a href="SachServletXoa?id=${s.maSach}" title="Nhấn vào đây để xóa thông tin" onclick="return confirmDelete();">Xóa</a>
+                <a href="SachServlet?id=${s.maSach}" title="Nhấn vào đây để xóa thông tin" onclick="return confirm('Bạn có chắc chắn muốn xóa không ???')">Xóa</a>
             </td>
         </tr>
     </c:forEach>

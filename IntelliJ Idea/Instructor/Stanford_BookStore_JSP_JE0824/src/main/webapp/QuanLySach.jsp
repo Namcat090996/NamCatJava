@@ -14,13 +14,7 @@
     <title>Quản lý thông tin sách</title>
 </head>
 <%
-    //Lấy danh sách sách
-    SachDao sachDao = new SachImpl();
-
-    List<Sach> lstSach = sachDao.layDanhSach();
-
     request.setCharacterEncoding("utf-8");
-
     String tuKhoa = "", maCD = "";
 
     if(request.getParameter("txtTuKhoa") != null)
@@ -33,14 +27,17 @@
         maCD = "" + request.getParameter("cboChuDe");
     }
 
+    //Lấy danh sách sách
+    SachDao sachDao = new SachImpl();
+
+    List<Sach> lstSach = sachDao.timKiemSach(tuKhoa, maCD);
+
     //Khai báo danh sách chủ đề
     List<ChuDe> lstChuDe = new ArrayList<ChuDe>();
 
-    //Khai báo đối tượng để gọi hàm lấy danh sách
-    ChuDeDao chuDe = new ChuDeImpl();
+    ChuDeDao chuDeDao = new ChuDeImpl();
 
-    //Lấy danh sách chủ đề từ database
-    lstChuDe = chuDe.layDanhSach();
+    lstChuDe = chuDeDao.layDanhSach();
 %>
 <body>
 <%@include file="admin/header.jsp" %>
@@ -120,7 +117,7 @@
             <td>
                 <a href="SachAdd.jsp?id=${s.maSach}" title="Nhấn vào đây để sửa thông tin">Sửa</a>
                 &nbsp;
-                <a href="SachServlet?id=${s.maSach}" title="Nhấn vào đây để xóa thông tin" onclick="return confirm('Bạn có chắc chắn muốn xóa không ?')">Xóa</a>
+                <a href="SachServlet?id=${s.maSach}" onclick="return confirm('Bạn có chắc chắn muốn xóa không ?')" title="Nhấn vào đây để xóa thông tin">Xóa</a>
             </td>
         </tr>
     </c:forEach>

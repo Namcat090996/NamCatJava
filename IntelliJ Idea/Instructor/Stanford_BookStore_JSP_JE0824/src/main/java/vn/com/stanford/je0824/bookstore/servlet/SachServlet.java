@@ -12,15 +12,23 @@ import java.util.Date;
 
 @WebServlet(name = "SachServlet", value = "/SachServlet")
 public class SachServlet extends HttpServlet {
-    /**
+
+    /***
      * Xử lý xóa thông tin sách
-     * @param request
-     * @param response
+     * @param request   an {@link HttpServletRequest} object that
+     *                  contains the request the client has made
+     *                  of the servlet
+     *
+     * @param response  an {@link HttpServletResponse} object that
+     *                  contains the response the servlet sends
+     *                  to the client
+     *
      * @throws ServletException
      * @throws IOException
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String maSach = "" + request.getParameter("id");
 
         if(!maSach.isEmpty())
@@ -34,7 +42,6 @@ public class SachServlet extends HttpServlet {
             {
                 response.sendRedirect("QuanLySach.jsp");
             }
-
         }
     }
 

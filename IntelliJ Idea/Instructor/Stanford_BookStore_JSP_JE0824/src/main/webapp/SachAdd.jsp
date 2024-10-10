@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: dangb
@@ -7,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="vn.com.stanford.je0824.bookstore.model.*,vn.com.stanford.je0824.bookstore.entities.*" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
+<%@page import="java.util.List, java.util.ArrayList,vn.com.stanford.je0824.bookstore.model.*,vn.com.stanford.je0824.bookstore.entities.*" %>
+<!-- Khai báo bộ thẻ để sử dụng trên trang web -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Thêm hoặc sửa sách</title>
@@ -17,7 +16,7 @@
 <body>
 <%
     //Xử lý hiển thị chi tiết
-    String sachId = "", maSach = "", tenSach = "", moTa = "", anhSach = "", tacGia = "", maChuDe = "";
+    String sachId = "", maSach = "", tenSach = "", moTa = "", anhSach = "", tacGia = "", maCD = "";
     int giaSach = 0;
     if(request.getParameter("id") != null)
     {
@@ -35,18 +34,17 @@
             anhSach = objSach.getAnhSach();
             tacGia = objSach.getTacGia();
             giaSach = objSach.getGiaSach();
-            maChuDe = objSach.getMaChuDe();
+            maCD = objSach.getMaChuDe();
         }
     }
 
     //Khai báo danh sách chủ đề
     List<ChuDe> lstChuDe = new ArrayList<ChuDe>();
 
-    //Khai báo đối tượng để gọi hàm lấy danh sách
-    ChuDeDao chuDe = new ChuDeImpl();
+    ChuDeDao chuDeDao = new ChuDeImpl();
 
-    //Lấy danh sách chủ đề từ database
-    lstChuDe = chuDe.layDanhSach();
+    lstChuDe = chuDeDao.layDanhSach();
+
 %>
 <div style="width:100%; text-align:center;">
     <h2 style="text-transform: uppercase;">Thêm, sửa thông tin sách</h2>
@@ -113,7 +111,7 @@
                 <td>
                     <select name="cboChuDe">
                         <option value="">Chọn chủ đề</option>
-                        <c:set var="maCD" value="<%=maChuDe%>"/>
+                        <c:set var="maCD" value="<%=maCD%>"/>
                         <c:forEach var="c" items="<%=lstChuDe %>">
                             <c:if test="${c.maChuDe==maCD}">
                                 <option value="${c.maChuDe}" selected="selected">${c.tenChuDe}</option>

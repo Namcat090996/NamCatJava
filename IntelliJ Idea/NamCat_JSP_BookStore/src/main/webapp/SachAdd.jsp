@@ -112,9 +112,16 @@
                     </td>
                     <td>
                         <select name="cboChuDe">
-                            <c:forEach var="c" items="<%=lstChuDe%>">
-                                <option value="${c.maChuDe}" ${c.maChuDe == maChuDe ? 'selected' : ''}>${c.tenChuDe}</option>
-                            </c:forEach>
+                            <option value="">Chọn chủ đề</option>
+                            <c:set var="MaChuDe" value="<%=maChuDe%>"></c:set>
+                                <c:forEach var="c" items="<%=lstChuDe%>">
+                                    <c:if test="${c.maChuDe == MaChuDe}">
+                                        <option value="${c.maChuDe}" selected="selected">${c.tenChuDe}</option>
+                                    </c:if>
+                                    <c:if test="${c.maChuDe != MaChuDe}">
+                                        <option value="${c.maChuDe}">${c.tenChuDe}</option>
+                                    </c:if>
+                                </c:forEach>
                         </select>
                     </td>
                 </tr>

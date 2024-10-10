@@ -12,9 +12,41 @@ import java.util.Date;
 
 @WebServlet(name = "SachServlet", value = "/SachServlet")
 public class SachServlet extends HttpServlet {
+    /**
+     * Xử lý xóa thông tin sách
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //Check if the book code is null
+        if(request.getParameter("id") != null && !request.getParameter("id").isEmpty())
+        {
+            //Declare variables
+            String maSach = "";
 
+            //Declare a return result
+            boolean isDel = false;
+
+            //Get book code
+            maSach = request.getParameter("id");
+
+            //Declare object to call delete function
+            SachDao sachDao = new SachImpl();
+
+            if(maSach.length() != 0 && !maSach.isEmpty())
+            {
+                //Implement the delete function
+                isDel = sachDao.xoa(maSach);
+
+                if(isDel)
+                {
+                    response.sendRedirect("QuanLySach.jsp");
+                }
+            }
+        }
     }
 
     /**

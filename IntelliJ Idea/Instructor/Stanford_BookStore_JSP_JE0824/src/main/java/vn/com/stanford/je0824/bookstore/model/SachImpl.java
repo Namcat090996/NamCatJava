@@ -8,6 +8,79 @@ import java.util.List;
 
 public class SachImpl implements SachDao{
 
+    /**
+     * Hàm tìm kiếm thông tin sách
+     * @param tuKhoa
+     * @param maCD
+     * @return
+     */
+    @Override
+    public List<Sach> timKiemSach(String tuKhoa, String maCD) {
+        //Khai báo 1 danh sách
+        List<Sach> lstSach = new ArrayList<Sach>();
+
+        String strSQL = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, MaChuDe, NgayTao from Sach where 1=1";
+
+        if(!tuKhoa.isEmpty())
+        {
+            strSQL += " and (MaSach = '" + tuKhoa + "' OR TenSach like '%" + tuKhoa + "%' OR TacGia like '%" + tuKhoa + "%')";
+        }
+
+        if(!maCD.isEmpty())
+        {
+            strSQL+= " and MaChuDe = '" + maCD + "'";
+        }
+        //Khai báo kết nối
+        Connection conn = null;
+
+        try
+        {
+            conn = DataProvider.ketNoi();
+
+            //Khai báo công việc
+            Statement comm = conn.createStatement();
+
+            //Lấy kết quả
+            ResultSet rs = comm.executeQuery(strSQL);
+
+            //Đọc từng dòng để đưa về danh sách
+            Sach objSach;
+            while(rs.next())
+            {
+                //Khởi tạo đối tượng
+                objSach = new Sach();
+
+                objSach.setMaSach(rs.getString("MaSach"));
+                objSach.setTenSach(rs.getString("TenSach"));
+                objSach.setMoTa(rs.getString("MoTa"));
+                objSach.setAnhSach(rs.getString("AnhSach"));
+                objSach.setGiaSach(rs.getInt("GiaSach"));
+                objSach.setMaChuDe(rs.getString("MaChuDe"));
+                objSach.setNgayTao(rs.getDate("NgayTao"));
+                objSach.setTacGia(rs.getString("TacGia"));
+
+                //Thêm vào danh sách
+                lstSach.add(objSach);
+            }
+        }
+        catch(SQLException ex)
+        {
+            System.err.println("Có lỗi xảy ra. Chi tiết: " + ex.getMessage());
+        }
+        finally {
+            if(conn!= null)
+            {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return lstSach;
+    }
+
     @Override
     public List<Sach> layDanhSach() {
         //Khai báo 1 danh sách
@@ -187,7 +260,7 @@ public class SachImpl implements SachDao{
             comm.setString(3, objSach.getAnhSach());
             comm.setFloat(4, objSach.getGiaSach());
             comm.setString(5, objSach.getTacGia());
-
+            comm.setDate(6, new Date(objSach.getNgayCapNhat().getTime()));
             comm.setString(7, objSach.getMaChuDe());
 
             comm.setString(8, objSach.getMaSach());
@@ -247,73 +320,5 @@ public class SachImpl implements SachDao{
         }
 
         return false;
-    }
-
-    @Override
-    public List<Sach> timKiemSach(String tuKhoa, String maCD) {
-        //Khai báo 1 danh sách
-        List<Sach> lstSach = new ArrayList<Sach>();
-
-        String strSQL = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, MaChuDe, NgayTao from Sach where 1=1";
-
-        if(tuKhoa.isEmpty())
-        {
-            strSQL += " and (MaSach = '" + tuKhoa + "' OR TenSach like '%" + tuKhoa + "%' OR TacGia like '%" + tuKhoa + "%')";
-        }
-
-        if(!maCD.isEmpty())
-        {
-            strSQL +=  " and MaChuDe = '" + maCD + "'";
-        }
-
-        //Khai báo kết nối
-        Connection conn = null;
-
-        try
-        {
-            conn = DataProvider.ketNoi();
-
-            //Khai báo công việc
-            Statement comm = conn.createStatement();
-
-            //Lấy kết quả
-            ResultSet rs = comm.executeQuery(strSQL);
-
-            //Đọc từng dòng để đưa về danh sách
-            Sach objSach;
-            while(rs.next())
-            {
-                //Khởi tạo đối tượng
-                objSach = new Sach();
-
-                objSach.setMaSach(rs.getString("MaSach"));
-                objSach.setTenSach(rs.getString("TenSach"));
-                objSach.setMoTa(rs.getString("MoTa"));
-                objSach.setAnhSach(rs.getString("AnhSach"));
-                objSach.setGiaSach(rs.getInt("GiaSach"));
-                objSach.setMaChuDe(rs.getString("MaChuDe"));
-                objSach.setNgayTao(rs.getDate("NgayTao"));
-                objSach.setTacGia(rs.getString("TacGia"));
-
-                //Thêm vào danh sách
-                lstSach.add(objSach);
-            }
-        }
-        catch(SQLException ex)
-        {
-            System.err.println("Có lỗi xảy ra. Chi tiết: " + ex.getMessage());
-        }
-        finally {
-            if(conn!= null)
-            {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }
-        return lstSach;
     }
 }

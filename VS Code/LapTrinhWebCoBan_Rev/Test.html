@@ -3,33 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/mystyle.css">
+    <title>clear: left Example</title>
     <style>
-        .parent {
+        .box {
+            width: 100px;
+            height: 100px;
             background-color: lightblue;
-        }
-
-        .child {
-            width: 50%;
             float: left;
-            background-color: lightcoral;
-            padding: 20px;
-            box-sizing: border-box;
+            margin: 10px;
         }
 
-        /* Clearfix */
-        .clearfix::after {
-            content: "";
-            display: block;
-            clear: both;
-        }        
+        .clear-left {
+            clear: left;
+            background-color: lightgreen;
+            padding: 10px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
-    <div class="parent clearfix">
-        <div class="child">Div con 1</div>
-        <div class="child">Div con 2</div>
-    </div>
+
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+
+    <!-- This div will clear left floats, so it will appear below the floated elements on the left -->
+    <div class="clear-left">This clears the left float</div>
+
 </body>
 </html>

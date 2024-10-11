@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList,java.util.List,vn.com.stanford.bst.model.*,vn.com.stanford.bst.entities.*" %>
-<!-- Khai báo bộ thẻ để sử dụng trên trang web -->
+<!--  Khai báo bộ thẻ để sử dụng trên trang web -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -69,7 +69,7 @@
             <td>
                 <select name="cboChuDe">
                     <option value="">Chọn chủ đề</option>
-                    <c:set var="MaChuDe" value="<%=maChuDe%>"></c:set>
+                    <c:set var="MaChuDe" value="<%=maChuDe%>"/>
                     <c:forEach var="c" items="<%=lstChuDe%>">
                         <c:if test="${c.maChuDe == MaChuDe}">
                             <option value="${c.maChuDe}" selected="selected">${c.tenChuDe}</option>

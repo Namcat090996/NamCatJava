@@ -28,17 +28,6 @@
         </c:forEach>
     </ul>
 </div>
-<div class="templatemo_content_left_section">
-    <h1>Sách bán chạy</h1>
-    <ul>
-        <li><a href="#">Vestibulum ullamcorper</a></li>
-        <li><a href="#">Maece nas metus</a></li>
-        <li><a href="#">In sed risus ac feli</a></li>
-        <li><a href="#">Praesent mattis varius</a></li>
-        <li><a href="#">Maece nas metus</a></li>
-        <li><a href="#">In sed risus ac feli</a></li>
-    </ul>
-</div>
 
 <div class="templatemo_content_left_section">
     <a href="http://validator.w3.org/check?uri=referer">

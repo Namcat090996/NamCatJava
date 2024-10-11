@@ -39,7 +39,7 @@ public class GioHangServlet extends HttpServlet {
 
                     for(int i = 0; i < lstSach.size(); i++)
                     {
-                        if(lstSach.get(i).getMaSach() == maSach)
+                        if(lstSach.get(i).getMaSach().equals(maSach))
                         {
                             objSach.setSoLuong(lstSach.get(i).getSoLuong() + 1);
                             lstSach.set(i, objSach);

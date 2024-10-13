@@ -1,35 +1,32 @@
-package vn.com.stanford.je0824.bookstore.model;
+package vn.com.namcat.bookshop.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DataProvider {
+public class DataAccess {
+
+    //Declare database_link and jdbc_driver
     private static final String JDBC_DRIVER="com.mysql.cj.jdbc.Driver";
     private static final String DATABASE_LINK = "jdbc:mysql://localhost:3306/je082401dev?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true";
 
-    /**
-     * Hàm kết nối đến db cần làm việc
-     * @return
-     */
     public static Connection ketNoi()
     {
+        //Declare a connection
         Connection conn = null;
 
         try {
-            //Nạp driver
+            //Charge the jdbc driver
             Class.forName(JDBC_DRIVER);
 
-            //Kết nối đến db trong mysql cần làm việc
-            conn = DriverManager.getConnection(DATABASE_LINK, "root", "Stanford");
-
+            //Connect to database needs to work
+            conn = DriverManager.getConnection(DATABASE_LINK, "root", "Namcat@@0909");
         } catch (ClassNotFoundException ex) {
-            System.err.println("Lỗi không tìm thấy driver. Chi tiết: " + ex.getMessage());
+            System.out.println("Error because of driver not found");
         } catch (SQLException ex) {
-            System.err.println("Không kết nối được với Database trên MySQL. Chi tiết: " + ex.getMessage());
+            System.out.println("Error due to database not connected on MySQL");
         }
 
         return conn;
-
     }
 }

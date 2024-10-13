@@ -10,7 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.Date;
 
-@WebServlet(name = "SachServlet", value = "/SachServlet")
+@WebServlet(name = "SachServlet", value = "/admin/SachServlet")
 public class SachServlet extends HttpServlet {
 
     /***

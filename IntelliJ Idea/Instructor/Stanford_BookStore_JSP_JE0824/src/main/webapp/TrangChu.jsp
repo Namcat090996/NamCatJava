@@ -19,9 +19,9 @@
     request.setCharacterEncoding("utf-8");
     String maCD = "";
 
-    if(request.getParameter("id") != null)
+    if(request.getParameter("ma") != null)
     {
-        maCD = "" + request.getParameter("id");
+        maCD = "" + request.getParameter("ma");
     }
 
     //Lấy danh sách sách
@@ -49,8 +49,8 @@
                     <div class="product_info">
                         <p>${s.moTa}</p>
                         <h3>${s.giaSach}</h3>
-                        <div class="buy_now_button"><a href="GioHangServlet?id=${s.maSach}">Mua ngay</a></div>
-                        <div class="detail_button"><a href="SachAdd.jsp?id=${s.maSach}">Chi tiết</a></div>
+                        <div class="buy_now_button"><a href="#">Mua ngay</a></div>
+                        <div class="detail_button"><a href="ChiTiet.jsp?id=${s.maSach}">Chi tiết</a></div>
                     </div>
                     <div class="cleaner">&nbsp;</div>
                 </div>
@@ -60,7 +60,7 @@
                 <c:if test="${i.index%2!=0}">
                     <div class="cleaner_with_height">&nbsp;</div>
                 </c:if>
-            </c:forEach>
+        </c:forEach>
             <a href="#"><img src="images/templatemo_ads.jpg" alt="ads"/></a>
         </div> <!-- end of content right -->
 

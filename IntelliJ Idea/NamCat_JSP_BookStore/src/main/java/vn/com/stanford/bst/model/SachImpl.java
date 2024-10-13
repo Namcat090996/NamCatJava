@@ -51,7 +51,7 @@ public class SachImpl implements SachDao {
                 objSach.setNgayTao(rs.getDate("NgayTao"));
                 objSach.setTacGia(rs.getString("TacGia"));
 
-                //Add objetc to list
+                //Add objetc to the list
                 lstSach.add(objSach);
             }
         } catch (SQLException ex) {

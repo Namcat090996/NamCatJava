@@ -287,44 +287,59 @@ public class SachImpl implements SachDao {
      */
     @Override
     public List<Sach> timKiemSach(String tuKhoa, String maChuDe) {
-        //Declare a list
+        //Declare a book list
         List<Sach> lstSach = new ArrayList<Sach>();
-
-        String strSQL = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, MaChuDe, NgayTao from Sach where 1=1";
-
-        if(!tuKhoa.isEmpty())
-        {
-            strSQL += " and (MaSach = '" + tuKhoa + "' OR TenSach like '%" + tuKhoa + "%' OR TacGia like '%" + tuKhoa + "%')";
-        }
-
-        if(!maChuDe.isEmpty())
-        {
-            strSQL+= " and MaChuDe = '" + maChuDe + "'";
-        }
 
         //Declare a connection
         Connection conn = null;
 
+        //Declare SQL command
+        String strSearch  = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, MaChuDe, NgayTao from sach where 1=1";
+
+        if(!tuKhoa.isEmpty())
+        {
+            strSearch += " and (MaSach = ? OR TenSach like ? OR TacGia like ?)";
+        }
+
+        if(!maChuDe.isEmpty())
+        {
+            strSearch += " and MaChuDe = ?";
+        }
+
         try {
-            //Connect to the database needs to work
+            //Connect to database needs to work
             conn = DataProvider.ketNoi();
 
-            //Create a statement to query data in the database
-            Statement stm = conn.createStatement();
+            //Create a statement to query data in database
+            PreparedStatement preStm = conn.prepareStatement(strSearch);
 
-            //Execute the queries and return the results
-            ResultSet rs = stm.executeQuery(strSQL);
+            int index = 1;
 
-            //Declare a book object
+            //Assign values to keyword and subject object
+            if(!tuKhoa.isEmpty())
+            {
+                preStm.setString(index++, tuKhoa);
+                preStm.setString(index++, tuKhoa);
+                preStm.setString(index++, tuKhoa);
+            }
+
+            if(!maChuDe.isEmpty())
+            {
+                preStm.setString(index++, maChuDe);
+            }
+
+            //Execute the queries and return results
+            ResultSet rs = preStm.executeQuery();
+
+            //Declare a Sach object
             Sach objSach = null;
 
-            //Loop through each row to get the list
-            while(rs.next()) {
-
-                //Instantiate the book object
+            //Loop through the data rows in rs to get the list
+            while(rs.next())
+            {
+                //Instantiate the Sach object
                 objSach = new Sach();
 
-                //Assign to book object
                 objSach.setMaSach(rs.getString("MaSach"));
                 objSach.setTenSach(rs.getString("TenSach"));
                 objSach.setMoTa(rs.getString("MoTa"));
@@ -334,20 +349,20 @@ public class SachImpl implements SachDao {
                 objSach.setNgayTao(rs.getDate("NgayTao"));
                 objSach.setTacGia(rs.getString("TacGia"));
 
-                //Add objetc to list
+                //Add object to the list
                 lstSach.add(objSach);
             }
         } catch (SQLException ex) {
-            System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
+            System.out.println("Error due to database not connected on MySQL");
         }
         finally {
-            if(conn != null)
-            {
-                try {
+            try {
+                if(conn != null)
+                {
                     conn.close();
-                } catch (SQLException ex) {
-                    System.out.println("Có lỗi xảy ra khi đóng kết nối. Chi tiết lỗi: " + ex.getMessage());
                 }
+            } catch (SQLException ex) {
+                System.out.println("Error due to unclosed connection");
             }
         }
 

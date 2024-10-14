@@ -1,6 +1,7 @@
-package vn.com.stanford.bst.model;
+package vn.com.namcat.bookshop.model;
 
-import vn.com.stanford.bst.entities.ChuDe;
+import vn.com.namcat.bookshop.entities.ChuDe;
+import vn.com.namcat.bookshop.entities.Sach;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,114 +15,109 @@ public class ChuDeImpl implements ChuDeDao {
      */
     @Override
     public List<ChuDe> layDanhSach() {
-        //Declare subject list
+        //Declare a book list
         List<ChuDe> lstChuDe = new ArrayList<ChuDe>();
 
-        //Declare connection
+        //Declare a connection
         Connection conn = null;
 
-        //Declare a SQL command
-        String strList = "Select MaChuDe, tenChuDe from chude";
+        //Declare SQL command
+        String strGetList  = "Select MaChuDe, TenChuDe from chude";
 
         try {
-            //Connect to the database needs to work
-            conn = DataProvider.ketNoi();
+            //Connect to database needs to work
+            conn = DataAccess.ketNoi();
 
-            //Create a statement to query data in the database
+            //Create a statement to query data in database
             Statement stm = conn.createStatement();
 
             //Execute the queries and return results
-            ResultSet rs = stm.executeQuery(strList);
+            ResultSet rs = stm.executeQuery(strGetList);
 
-            //Declare a subject object
+            //Declare a Sach object
             ChuDe objChuDe = null;
 
-            //Loop through each row to get the list
-            while (rs.next())
+            //Loop through the data rows in rs to get the list
+            while(rs.next())
             {
-                //Instantiate the subject object
+                //Instantiate the Sach object
                 objChuDe = new ChuDe();
 
-                //Assign values to subject object
                 objChuDe.setMaChuDe(rs.getString("MaChuDe"));
-                objChuDe.setTenChuDe(rs.getString("tenChuDe"));
+                objChuDe.setTenChuDe(rs.getString("TenChuDe"));
 
                 //Add object to the list
                 lstChuDe.add(objChuDe);
             }
         } catch (SQLException ex) {
-            System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
+            System.out.println("Error due to database not connected on MySQL");
         }
         finally {
             try {
-                conn.close();
+                if(conn != null)
+                {
+                    conn.close();
+                }
             } catch (SQLException ex) {
-                System.out.println("Có lỗi xảy ra khi đóng kết nối. Chi tiết lỗi: " + ex.getMessage());
+                System.out.println("Error due to unclosed connection");
             }
         }
 
         return lstChuDe;
     }
 
-    /**
-     * Function to get the detailed subject info
-     * @param maChuDe
-     * @return
-     */
     @Override
     public ChuDe layChiTiet(String maChuDe) {
-        //Declare subject object
+        //Declare a Sach object
         ChuDe objChuDe = null;
-
-        //Declare a SQL command
-        String strDetail = "Select MaChuDe, tenChuDe from chude where MaChuDe = ?";
 
         //Declare a connection
         Connection conn = null;
 
+        //Declare SQL command
+        String strDetail  = "Select MaChuDe, TenChuDe from  where MaChuDe = ?";
+
         try {
             //Connect to database needs to work
-            conn = DataProvider.ketNoi();
+            conn = DataAccess.ketNoi();
 
-            //Create a statement to query data in the database
+            //Create a statement to query data in database
             PreparedStatement preStm = conn.prepareStatement(strDetail);
 
-            //Set subject code to SQL command
+            //Assign value to MaChuDe that you want to see detailed info
             preStm.setString(1, maChuDe);
 
-            //Execute the query and return results
+            //Execute the queries and return results
             ResultSet rs = preStm.executeQuery();
 
+            //Loop through the data rows in rs to get the list
             if(rs.next())
             {
-                //Instantiate subject object
+                //Instantiate the Sach object
                 objChuDe = new ChuDe();
 
-                //Assign values to ChuDe object
+                //Assign values to subject object
                 objChuDe.setMaChuDe(rs.getString("MaChuDe"));
-                objChuDe.setTenChuDe(rs.getString("tenChuDe"));
-            }
+                objChuDe.setTenChuDe(rs.getString("TenSach"));
 
+            }
         } catch (SQLException ex) {
-            System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
+            System.out.println("Error due to database not connected on MySQL");
         }
         finally {
             try {
-                conn.close();
+                if(conn != null)
+                {
+                    conn.close();
+                }
             } catch (SQLException ex) {
-                System.out.println("Có lỗi xảy ra khi đóng kết nối. Chi tiết lỗi: " + ex.getMessage());
+                System.out.println("Error due to unclosed connection");
             }
         }
 
         return objChuDe;
-
     }
 
-    /**
-     * Function to add a new subject
-     * @param objChuDe
-     * @return
-     */
     @Override
     public boolean themMoi(ChuDe objChuDe) {
         //Declare a boolean
@@ -135,7 +131,7 @@ public class ChuDeImpl implements ChuDeDao {
 
         try {
             //Connect to database needs to work
-            conn = DataProvider.ketNoi();
+            conn = DataAccess.ketNoi();
 
             //Create a statement to query data in the database
             PreparedStatement preStm = conn.prepareStatement(strAdd);
@@ -161,11 +157,6 @@ public class ChuDeImpl implements ChuDeDao {
         return ketQua;
     }
 
-    /**
-     * Function to update subject info
-     * @param objChuDe
-     * @return
-     */
     @Override
     public boolean capNhat(ChuDe objChuDe) {
         //Declare a boolean
@@ -179,7 +170,7 @@ public class ChuDeImpl implements ChuDeDao {
 
         try {
             //Connect to database needs to work
-            conn = DataProvider.ketNoi();
+            conn = DataAccess.ketNoi();
 
             //Create a statement to query data in the database
             PreparedStatement preStm = conn.prepareStatement(strUpdate);
@@ -205,11 +196,6 @@ public class ChuDeImpl implements ChuDeDao {
         return ketQua;
     }
 
-    /**
-     * Function to delete subject
-     * @param maChuDe
-     * @return
-     */
     @Override
     public boolean xoa(String maChuDe) {
         //Declare a boolean
@@ -224,7 +210,7 @@ public class ChuDeImpl implements ChuDeDao {
         try {
 
             //Connect to the database needs to work
-            conn = DataProvider.ketNoi();
+            conn = DataAccess.ketNoi();
 
             //Create a statement to query data in the database
             PreparedStatement preStm = conn.prepareStatement(strDelete);

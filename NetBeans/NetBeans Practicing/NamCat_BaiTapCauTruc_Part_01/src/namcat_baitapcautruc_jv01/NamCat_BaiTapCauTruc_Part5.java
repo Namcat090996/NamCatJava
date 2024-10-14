@@ -226,6 +226,10 @@ public class NamCat_BaiTapCauTruc_Part5 {
     }	
     
     */
+    
+    int x = 5;
+    int y = x++;
+    System.out.println(y);
   
    
   }

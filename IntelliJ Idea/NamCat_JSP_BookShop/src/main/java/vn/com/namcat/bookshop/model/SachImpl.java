@@ -85,7 +85,7 @@ public class SachImpl implements SachDao {
         Connection conn = null;
 
         //Declare SQL command
-        String strDetail  = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, MaChuDe, NgayTao from  where MaSach = ?";
+        String strDetail  = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, MaChuDe, NgayTao from sach where MaSach = ?";
 
         try {
             //Connect to database needs to work
@@ -214,7 +214,7 @@ public class SachImpl implements SachDao {
             preStm.setString(1, objSach.getTenSach());
             preStm.setString(2, objSach.getMoTa());
             preStm.setString(3, objSach.getAnhSach());
-            preStm.setFloat(4, objSach.getGiaSach());
+             preStm.setFloat(4, objSach.getGiaSach());
             preStm.setString(5, objSach.getTacGia());
             preStm.setDate(6, new Date(objSach.getNgayCapNhat().getTime()));
             preStm.setString(7, objSach.getMaChuDe());

@@ -1,15 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
+<%@ page import="vn.com.namcat.bookshop.model.*" %>
+<%@ page import="vn.com.namcat.bookshop.entities.*" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
-  User: ADMIN
-  Date: 10/6/2024
-  Time: 10:05 PM
+  User: Dell Precision 7550
+  Date: 10/14/2024
+  Time: 6:59 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="vn.com.stanford.bst.model.*,vn.com.stanford.bst.entities.*" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
+<!-- Khai báo bộ thẻ để sử dụng trên trang web -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Thêm hoặc sửa sách</title>
@@ -19,21 +20,22 @@
     String sachId = "", maSach = "", tenSach = "", moTa = "", anhSach = "", tacGia = "", maChuDe = "";
     int giaSach = 0;
 
-    //Declare object to get subject list using function
-    ChuDeDao chuDe = new ChuDeImpl();
+    //Declare an object to use functions
+    ChuDeDao chuDeDao = new ChuDeImpl();
 
-    //Declare subject list
+    //Declare ChuDe list
     List<ChuDe> lstChuDe = new ArrayList<ChuDe>();
 
-    //Get subject list
-    lstChuDe = chuDe.layDanhSach();
+    //Get ChuDe list
+    lstChuDe = chuDeDao.layDanhSach();
 
+    //Check if the id is null
     if(request.getParameter("id") != null)
     {
         //Get book code
         sachId = "" + request.getParameter("id");
 
-        //Declare object
+        //Declare an object to use functions
         SachDao sachDao = new SachImpl();
 
         //Get book object from book code
@@ -56,7 +58,6 @@
     <div style="text-align: center">
         <h2 style="text-transform: uppercase">Thêm, sửa thông tin sách</h2>
     </div>
-
     <form method="post" action="SachServlet">
         <fieldset>
             <legend>Nhập thông tin sách</legend>
@@ -81,46 +82,38 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        Ảnh sách:
-                    </td>
+                    <td>Ảnh sách: </td>
                     <td>
                         <input type="text" name="txtAnhSach" value="<%=anhSach%>"/>
                         <input type="file"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        Giá sách:
-                    </td>
+                    <td>Giá sách: </td>
                     <td>
                         <input type="text" name="txtGiaSach" value="<%=giaSach%>"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        Tác giả:
-                    </td>
+                    <td>Tác giả: </td>
                     <td>
                         <input type="text" name="txtTacGia" value="<%=tacGia%>"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        Chủ đề:
-                    </td>
+                    <td>Chủ đề: </td>
                     <td>
                         <select name="cboChuDe">
                             <option value="">Chọn chủ đề</option>
-                            <c:set var="MaChuDe" value="<%=maChuDe%>"/>
-                                <c:forEach var="c" items="<%=lstChuDe%>">
-                                    <c:if test="${c.maChuDe == MaChuDe}">
-                                        <option value="${c.maChuDe}" selected="selected">${c.tenChuDe}</option>
-                                    </c:if>
-                                    <c:if test="${c.maChuDe != MaChuDe}">
-                                        <option value="${c.maChuDe}">${c.tenChuDe}</option>
-                                    </c:if>
-                                </c:forEach>
+                            <c:set var="maCD" value="<%=maChuDe%>"/>
+                            <c:forEach var="c" items="<%=lstChuDe%>">
+                                <c:if test="${c.maChuDe == maCD}">
+                                    <option value="${c.maChuDe}" selected="selected">${c.tenChuDe}</option>
+                                </c:if>
+                                <c:if test="${c.maChuDe != maCD}">
+                                    <option value="${c.maChuDe}">${c.tenChuDe}</option>
+                                </c:if>
+                            </c:forEach>
                         </select>
                     </td>
                 </tr>

@@ -1,12 +1,13 @@
-<%--
+<%@ page import="vn.com.namcat.bookshop.model.*" %>
+<%@ page import="vn.com.namcat.bookshop.entities.*" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
-  User: dangb
-  Date: 09/10/2024
-  Time: 8:04 PM
+  User: ADMIN
+  Date: 10/14/2024
+  Time: 10:08 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="java.util.List,vn.com.stanford.je0824.bookstore.model.*,vn.com.stanford.je0824.bookstore.entities.*" %>
 <!-- Khai báo bộ thẻ để sử dụng trên trang web -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -33,10 +34,9 @@
 <div id="templatemo_container">
 
     <jsp:include page="home/menu.jsp"/>
-
     <jsp:include page="home/header.jsp"/>
-    <div id="templatemo_content">
 
+    <div id="templatemo_content">
         <div id="templatemo_content_left">
             <jsp:include page="home/sidebar.jsp"/>
         </div> <!-- end of content left -->
@@ -49,18 +49,20 @@
                     <div class="product_info">
                         <p>${s.moTa}</p>
                         <h3>${s.giaSach}</h3>
-                        <div class="buy_now_button"><a href="#">Mua ngay</a></div>
+                        <div class="buy_now_button">
+                            <a href="GioHangServlet?id=${s.maSach}">Mua ngay</a>
+                        </div>
                         <div class="detail_button"><a href="ChiTiet.jsp?id=${s.maSach}">Chi tiết</a></div>
                     </div>
                     <div class="cleaner">&nbsp;</div>
                 </div>
                 <c:if test="${i.index%2==0}">
-                <div class="cleaner_with_width">&nbsp;</div>
+                    <div class="cleaner_with_width">&nbsp;</div>
                 </c:if>
                 <c:if test="${i.index%2!=0}">
                     <div class="cleaner_with_height">&nbsp;</div>
                 </c:if>
-        </c:forEach>
+            </c:forEach>
             <a href="#"><img src="images/templatemo_ads.jpg" alt="ads"/></a>
         </div> <!-- end of content right -->
 

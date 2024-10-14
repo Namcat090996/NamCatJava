@@ -14,6 +14,7 @@ public class Sach {
     private String maChuDe;
     private Date ngayTao;
     private Date ngayCapNhat;
+    private int soLuong;
 
     //Retrieve the getter and setter function
     public String getAnhSach() {
@@ -86,5 +87,13 @@ public class Sach {
 
     public void setNgayCapNhat(Date ngayCapNhat) {
         this.ngayCapNhat = ngayCapNhat;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 }

@@ -1,8 +1,7 @@
 package vn.com.namcat.bookshop.servlet;
 
-import vn.com.namcat.bookshop.entities.Sach;
-import vn.com.namcat.bookshop.model.SachDao;
-import vn.com.namcat.bookshop.model.SachImpl;
+import vn.com.namcat.bookshop.entities.*;
+import vn.com.namcat.bookshop.model.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

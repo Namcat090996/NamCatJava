@@ -75,7 +75,7 @@ public class ChuDeImpl implements ChuDeDao {
         Connection conn = null;
 
         //Declare SQL command
-        String strDetail  = "Select MaChuDe, TenChuDe from  where MaChuDe = ?";
+        String strDetail  = "Select MaChuDe, TenChuDe from chude where MaChuDe = ?";
 
         try {
             //Connect to database needs to work
@@ -98,7 +98,7 @@ public class ChuDeImpl implements ChuDeDao {
 
                 //Assign values to subject object
                 objChuDe.setMaChuDe(rs.getString("MaChuDe"));
-                objChuDe.setTenChuDe(rs.getString("TenSach"));
+                objChuDe.setTenChuDe(rs.getString("TenChuDe"));
 
             }
         } catch (SQLException ex) {

@@ -66,7 +66,7 @@
                 <td>
                     <input type="submit" name="btnCapNhat" value="Cập nhật"/>
                     &nbsp;
-                    <a href="admin/QuanLySach.jsp">Trở lại</a>
+                    <a href="QuanLyChuDe.jsp">Trở lại</a>
                 </td>
             </tr>
         </table>

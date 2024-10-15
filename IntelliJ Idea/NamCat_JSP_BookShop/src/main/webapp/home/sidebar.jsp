@@ -16,6 +16,7 @@
     //Declare the list
     List<ChuDe> lstChuDe = new ArrayList<>();
 
+    //Declare an object to call the functions
     ChuDeDao chuDeDao = new ChuDeImpl();
 
     //Get the list

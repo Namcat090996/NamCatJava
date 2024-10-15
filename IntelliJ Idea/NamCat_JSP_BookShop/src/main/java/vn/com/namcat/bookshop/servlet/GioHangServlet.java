@@ -15,30 +15,77 @@ public class GioHangServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //Declare variables
-        String maSach = "";
-        boolean isHangDaCo = false;
-
         //Check if the request of book code is null
         if(request.getParameter("id") != null)
         {
+            //Declare variables
+            String maSach = "";
+
             //Get book code
             maSach = request.getParameter("id");
 
-            //Declare a session
-            HttpSession session = request.getSession(true);
+            //Declare an object to call functions
+            SachDao sachDao = new SachImpl();
 
-            //Declare a book list in session
-            List<Sach> lstSach = new ArrayList<Sach>();
+            //Get the detailed book object by book code
+            Sach objSach = sachDao.layChiTiet(maSach);
 
-            if(session != null && session.getAttribute("gioHang") != null)
+            if(objSach != null)
             {
-                //Get the book list in session if existed
+                //Declare variables
+                boolean isHangDaCo = false;
 
+                //Declare a session
+                HttpSession session = request.getSession(true);
+
+                //Declare a book list in session
+                List<Sach> lstSach = new ArrayList<Sach>();
+
+                if(session != null && session.getAttribute("gioHang") != null)
+                {
+                    //Get the book list in session if existed
+                    lstSach = (List<Sach>)session.getAttribute("gioHang");
+
+                    //Check if the book code already exists in the shopping cart
+                    for(int i = 0; i < lstSach.size(); i++)
+                    {
+                        if(lstSach.get(i).getMaSach() == maSach)
+                        {
+                            //Set the quantities for book object
+                            objSach.setSoLuong(lstSach.get(i).getSoLuong() + 1);
+
+                            //Add book object to book list again
+                            lstSach.set(i, objSach);
+
+                            //The book is already in shopping cart
+                            isHangDaCo = true;
+                        }
+                    }
+                    if(isHangDaCo == false) //The book isn't currently in shopping cart
+                    {
+                        //Set the quantities for book object
+                        objSach.setSoLuong(1);
+
+                        //Insert book object into book list
+                        lstSach.add(objSach);
+                    }
+                }
+                else
+                {
+                    //Set the quantities for book object
+                    objSach.setSoLuong(1);
+
+                    //Insert book object into book list
+                    lstSach.add(objSach);
+                }
+
+                //Save book list to "gioHang" attribute in session
+                session.setAttribute("gioHang", lstSach);
+
+                //Return the main page
+                response.sendRedirect("TrangChu.jsp");
             }
         }
-
-
     }
 
     @Override

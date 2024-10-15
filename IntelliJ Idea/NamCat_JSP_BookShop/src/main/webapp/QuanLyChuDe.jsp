@@ -40,7 +40,7 @@
                 <td style="text-align: center">
                     <a href="ChuDeAdd.jsp?id=${c.maChuDe}" title="Nhấn vào đây để sửa thông tin">Sửa</a>
                     &nbsp;
-                    <a href="ChuDeServletXoa?id=${c.maChuDe}" title="Nhấn vào đây để xóa thông tin" onclick="return confirm('Bạn có chắc chắn muốn xóa không ?')">Xóa</a>
+                    <a href="ChuDeServlet?id=${c.maChuDe}" title="Nhấn vào đây để xóa thông tin" onclick="return confirm('Bạn có chắc chắn muốn xóa không ?')">Xóa</a>
                 </td>
             </tr>
         </c:forEach>

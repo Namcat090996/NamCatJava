@@ -17,17 +17,22 @@
 </head>
 <body>
 <%
+    //Ser utf-8 for request
     request.setCharacterEncoding("utf-8");
+
+    //Declare variables
     String maCD = "";
 
+    //Check if the parameter of request is null
     if(request.getParameter("ma") != null)
     {
         maCD = "" + request.getParameter("ma");
     }
 
-    //Lấy danh sách sách
+    //Declare an object to call the function
     SachDao sachDao = new SachImpl();
 
+    //Get the book list
     List<Sach> lstSach = sachDao.timKiemSach("", maCD);
 %>
 <!-- Templates from www.stanford.com.vn -->

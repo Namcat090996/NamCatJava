@@ -6,6 +6,7 @@ import vn.com.namcat.bookshop.entities.Sach;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class ChuDeImpl implements ChuDeDao {
 
@@ -22,17 +23,17 @@ public class ChuDeImpl implements ChuDeDao {
         Connection conn = null;
 
         //Declare SQL command
-        String strGetList  = "Select MaChuDe, TenChuDe from chude";
+        String strGetList  = "{call SP_LayDanhSachChuDe}";
 
         try {
             //Connect to database needs to work
             conn = DataAccess.ketNoi();
 
             //Create a statement to query data in database
-            Statement stm = conn.createStatement();
+            CallableStatement call = conn.prepareCall(strGetList);
 
             //Execute the queries and return results
-            ResultSet rs = stm.executeQuery(strGetList);
+            ResultSet rs = call.executeQuery();
 
             //Declare a Sach object
             ChuDe objChuDe = null;
@@ -75,20 +76,20 @@ public class ChuDeImpl implements ChuDeDao {
         Connection conn = null;
 
         //Declare SQL command
-        String strDetail  = "Select MaChuDe, TenChuDe from chude where MaChuDe = ?";
+        String strDetail  = "{call SP_LayChiTietChuDe(?)}";
 
         try {
             //Connect to database needs to work
             conn = DataAccess.ketNoi();
 
             //Create a statement to query data in database
-            PreparedStatement preStm = conn.prepareStatement(strDetail);
+            CallableStatement call = conn.prepareCall(strDetail);
 
             //Assign value to MaChuDe that you want to see detailed info
-            preStm.setString(1, maChuDe);
+            call.setString(1, maChuDe);
 
             //Execute the queries and return results
-            ResultSet rs = preStm.executeQuery();
+            ResultSet rs = call.executeQuery();
 
             //Loop through the data rows in rs to get the list
             if(rs.next())
@@ -127,21 +128,21 @@ public class ChuDeImpl implements ChuDeDao {
         Connection conn = null;
 
         //Declare a SQL command
-        String strAdd = "Insert into chude(MaChuDe, tenChuDe) values (?, ?)";
+        String strAdd = "{call SP_ThemChuDe(?,?)}";
 
         try {
             //Connect to database needs to work
             conn = DataAccess.ketNoi();
 
             //Create a statement to query data in the database
-            PreparedStatement preStm = conn.prepareStatement(strAdd);
+            CallableStatement call = conn.prepareCall(strAdd);
 
             //Assign values to database
-            preStm.setString(1, objChuDe.getMaChuDe());
-            preStm.setString(2, objChuDe.getTenChuDe());
+            call.setString(1, objChuDe.getMaChuDe());
+            call.setString(2, objChuDe.getTenChuDe());
 
             //Execute the query and return results
-            ketQua = preStm.executeUpdate() > 0;
+            ketQua = call.executeUpdate() > 0;
 
         } catch (SQLException ex) {
             System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
@@ -166,21 +167,21 @@ public class ChuDeImpl implements ChuDeDao {
         Connection conn = null;
 
         //Declare a SQL command
-        String strUpdate = "Update chude set tenChuDe = ? where MaChuDe = ?";
+        String strUpdate = "{call SP_SuaChuDe(?,?)}";
 
         try {
             //Connect to database needs to work
             conn = DataAccess.ketNoi();
 
             //Create a statement to query data in the database
-            PreparedStatement preStm = conn.prepareStatement(strUpdate);
+            CallableStatement call = conn.prepareCall(strUpdate);
 
             //Assign values to database
-            preStm.setString(1, objChuDe.getTenChuDe());
-            preStm.setString(2, objChuDe.getMaChuDe());
+            call.setString(1, objChuDe.getMaChuDe());
+            call.setString(2, objChuDe.getTenChuDe());
 
             //Execute the query and return results
-            ketQua = preStm.executeUpdate() > 0;
+            ketQua = call.executeUpdate() > 0;
 
         } catch (SQLException ex) {
             System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());
@@ -202,7 +203,7 @@ public class ChuDeImpl implements ChuDeDao {
         boolean ketQua = false;
 
         //Declare a SQL command
-        String strDelete = "Delete from chude where MaChuDe = ?";
+        String strDelete = "{call SP_XoaChuDe(?)}";
 
         //Declare a connection
         Connection conn = null;
@@ -213,13 +214,13 @@ public class ChuDeImpl implements ChuDeDao {
             conn = DataAccess.ketNoi();
 
             //Create a statement to query data in the database
-            PreparedStatement preStm = conn.prepareStatement(strDelete);
+            CallableStatement call = conn.prepareCall(strDelete);
 
             //Assign values
-            preStm.setString(1, maChuDe);
+            call.setString(1, maChuDe);
 
             //Execute the queries and return the results
-            ketQua = preStm.executeUpdate() > 0;
+            ketQua = call.executeUpdate() > 0;
 
         } catch (SQLException ex) {
             System.out.println("Có lỗi xảy ra khi thực hiện truy vấn dữ liệu. Chi tiết lỗi: " + ex.getMessage());

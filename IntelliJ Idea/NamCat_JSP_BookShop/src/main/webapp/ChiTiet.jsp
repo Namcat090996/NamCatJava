@@ -17,13 +17,19 @@
 </head>
 <body>
 <%
+    //Declare a book object
     Sach objSach = null;
 
+    //Check if the parameter of reuqest is null
     if(request.getParameter("id") != null) {
 
+        //Get book code
         String maSach = "" + request.getParameter("id");
+
+        //Declare an object to call the functions
         SachDao sachDao = new SachImpl();
 
+        //Get a book object
         objSach = sachDao.layChiTiet(maSach);
     }
 %>

@@ -1,4 +1,19 @@
 package vn.com.namcat.nhanvien.model;
 
-public class NhanVienImpl {
+import vn.com.namcat.nhanvien.entities.NhanVien;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+
+public class NhanVienImpl implements NhanVienDao {
+
+    @Override
+    public List<NhanVien> layDanhSach() {
+        //Declare a staff list
+        List<NhanVien> lstNV = new ArrayList<NhanVien>();
+
+
+        return lstNV;
+    }
 }

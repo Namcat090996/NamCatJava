@@ -10,8 +10,9 @@ public class NhanVienImpl implements NhanVienDao {
 
     @Override
     public List<NhanVien> layDanhSach() {
-        //Declare a staff list
+        //Declare a NhanVien list
         List<NhanVien> lstNV = new ArrayList<NhanVien>();
+
 
 
         return lstNV;

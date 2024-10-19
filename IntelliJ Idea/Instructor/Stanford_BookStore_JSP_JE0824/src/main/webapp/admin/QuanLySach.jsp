@@ -121,7 +121,6 @@
             </td>
         </tr>
     </c:forEach>
-
     </tbody>
 </table>
 <%@include file="footer.jsp" %>

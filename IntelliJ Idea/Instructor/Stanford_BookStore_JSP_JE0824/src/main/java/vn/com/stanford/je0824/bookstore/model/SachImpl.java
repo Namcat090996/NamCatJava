@@ -30,6 +30,9 @@ public class SachImpl implements SachDao{
         {
             strSQL+= " and MaChuDe = '" + maCD + "'";
         }
+
+        strSQL += " order by moTa ASC";
+
         //Khai báo kết nối
         Connection conn = null;
 

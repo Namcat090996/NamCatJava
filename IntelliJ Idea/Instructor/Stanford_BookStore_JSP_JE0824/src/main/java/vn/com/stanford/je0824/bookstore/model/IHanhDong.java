@@ -13,4 +13,6 @@ public interface IHanhDong<T, idT> {
     boolean capNhat(T obj);
 
     boolean xoa(idT id);
+
+    public void sayHello();
 }

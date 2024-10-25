@@ -16,6 +16,5 @@ public class ChuDeMapper implements RowMapper<ChuDe> {
         chuDe.setTenChuDe(rs.getString("TenChuDe"));
 
         return chuDe;
-
     }
 }

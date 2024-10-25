@@ -1,12 +1,15 @@
 package vn.com.stanford.je0824.bookstore.model;
 
-import sun.jvm.hotspot.HelloWorld;
-
 public class HelloWorldService {
 
-    private IHanhDong helloWorld;
+    private HelloWorld helloWorld;
 
     public HelloWorldService() {
         this.helloWorld = new StrutsHelloWorld();
     }
+
+    public void sayHello() {
+        helloWorld.sayHello();
+    }
+
 }

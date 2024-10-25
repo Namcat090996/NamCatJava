@@ -12,8 +12,10 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--  Cấu hình để Spring container quét và tự động đăng ký các lớp Java trong Package được chỉ định (các lớp được đánh dấu bằng annotation) -->
     <context:component-scan
             base-package="vn.com.stanford.je0824.bookstore" />
+    <!--  Kích họạt các tính năng của Spring MVC, cho phép sử dụng các annotation để xử lý request, respsone và các logic liên quan -->
     <mvc:annotation-driven />
     <bean id="viewResolver2"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">

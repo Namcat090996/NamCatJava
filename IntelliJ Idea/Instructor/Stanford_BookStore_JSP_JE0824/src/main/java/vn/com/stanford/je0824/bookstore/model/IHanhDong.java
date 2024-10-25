@@ -14,5 +14,4 @@ public interface IHanhDong<T, idT> {
 
     boolean xoa(idT id);
 
-    public void sayHello();
 }

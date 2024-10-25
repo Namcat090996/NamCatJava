@@ -11,7 +11,6 @@ public class GioiThieuController {
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String loiGioiThieu(Model model)
     {
-        model.addAttribute("loiChao", "Chào mừng các bạn đến với SpringMVC - Stanford !");
         return "GioiThieu";
     }
 }

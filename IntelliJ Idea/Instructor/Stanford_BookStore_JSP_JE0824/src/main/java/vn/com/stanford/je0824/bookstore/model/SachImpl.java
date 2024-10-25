@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SachImpl implements SachDao{
+public class SachImpl implements SachDao {
 
     /**
      * Hàm tìm kiếm thông tin sách

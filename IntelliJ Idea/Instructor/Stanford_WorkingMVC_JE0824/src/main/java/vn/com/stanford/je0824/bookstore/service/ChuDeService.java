@@ -19,6 +19,6 @@ public class ChuDeService {
      */
     public List<ChuDe> layDanhSach()
     {
-        return chuDeDao.getList();
+        return  chuDeDao.getList();
     }
 }

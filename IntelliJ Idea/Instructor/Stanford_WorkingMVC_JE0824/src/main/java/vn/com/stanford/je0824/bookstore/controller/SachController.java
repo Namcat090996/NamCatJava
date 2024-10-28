@@ -15,6 +15,7 @@ import vn.com.stanford.je0824.bookstore.entities.Sach;
 import vn.com.stanford.je0824.bookstore.service.ChuDeService;
 import vn.com.stanford.je0824.bookstore.service.SachService;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class SachController {
      * @return
      */
     @RequestMapping(value = "/admin/sach/themMoiSach", method = RequestMethod.POST)
-    public String themMoiHoacSuaSach(@ModelAttribute("sach") Sach objSach, BindingResult result, Model model)
+    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, Model model)
     {
         System.out.println("Mã sách: " + objSach.getMaSach());
         System.out.println("Tên sách: " + objSach.getTenSach());

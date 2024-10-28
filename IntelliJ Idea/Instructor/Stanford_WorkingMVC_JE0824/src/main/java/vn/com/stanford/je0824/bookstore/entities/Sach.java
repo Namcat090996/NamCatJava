@@ -1,5 +1,6 @@
 package vn.com.stanford.je0824.bookstore.entities;
 
+import javax.validation.constraints.*;
 import java.util.Date;
 
 public class Sach {
@@ -36,7 +37,7 @@ public class Sach {
         this.giaSach = giaSach;
     }
 
-
+    @NotBlank(message = "Bạn cần phải nhập mã sách")
     private String maSach;
 
     public String getMaSach() {
@@ -47,12 +48,14 @@ public class Sach {
         this.maSach = maSach;
     }
 
-
+    @NotEmpty(message = "Bạn cần phải nhập tên sách")
     private String tenSach;
     private String moTa;
     private String anhSach;
     private String tacGia;
 
+    @NotNull(message = "Bạn cần phải nhập giá sách")
+    @Min(value = 0, message = "Bạn phải nhập giá sách lớn hơn 0")
     private int giaSach;
     private Date ngayTao;
     private Date ngayCapNhat;

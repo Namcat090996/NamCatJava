@@ -6,16 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ChuDeMapper implements RowMapper<ChuDe> {
+
     @Override
     public ChuDe mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         ChuDe chuDe = new ChuDe();
 
-        chuDe.setMaChuDe(rs.getString("MaChuDe"));
-
-        chuDe.setTenChuDe(rs.getString("TenChuDe"));
+        chuDe.setMaChuDe(rs.getString("maChuDe"));
+        chuDe.setTenChuDe(rs.getString("tenChuDe"));
 
         return chuDe;
-
     }
 }

@@ -13,13 +13,14 @@ public class SachService {
     @Autowired
     SachDao sachDao;
 
-    public List<Sach> layDanhSach() {
-        return sachDao.getList();
+    public List<Sach> layDanhSach()
+    {
+        return  sachDao.getList();
     }
 
     public Sach layChiTiet(String maSach)
     {
-        return sachDao.getById(maSach);
+        return  sachDao.getById(maSach);
     }
 
     public boolean themMoi(Sach objSach)
@@ -36,4 +37,5 @@ public class SachService {
     {
         return sachDao.delete(maSach);
     }
+
 }

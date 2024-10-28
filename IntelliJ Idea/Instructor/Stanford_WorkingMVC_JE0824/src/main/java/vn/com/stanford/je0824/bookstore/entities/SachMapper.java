@@ -27,10 +27,9 @@ public class SachMapper implements RowMapper<Sach> {
 
         objSach.setNgayTao(rs.getDate("NgayTao"));
 
-        objSach.setNgayCapNhat(rs.getDate("NgayCapNhat"));
+        objSach.setNgayTao(rs.getDate("NgayCapNhat"));
 
         return objSach;
+
     }
-
-
 }

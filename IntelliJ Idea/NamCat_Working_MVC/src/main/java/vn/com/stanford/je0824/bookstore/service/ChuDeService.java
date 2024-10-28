@@ -13,10 +13,6 @@ public class ChuDeService {
     @Autowired
     ChuDeDao chuDeDao;
 
-    /**
-     * Lấy danh sách chủ đề
-     * @return
-     */
     public List<ChuDe> layDanhSach()
     {
         return chuDeDao.getList();

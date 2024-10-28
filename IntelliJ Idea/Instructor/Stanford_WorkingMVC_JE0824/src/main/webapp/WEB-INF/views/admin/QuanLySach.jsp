@@ -18,7 +18,7 @@
 <div style="width: 100%; text-align: center">
     <h2>Quản lý thông tin sách</h2>
 </div>
-<div style="text-align: right">
+<div style="width: 100%; text-align: right">
     <a href="${urlSave}">Thêm mới</a>
 </div>
 <table border="1" style="width:100%; border-collapse: collapse">
@@ -45,8 +45,8 @@
                 <td>${s.ngayTao}</td>
                 <td>${s.tacGia}</td>
                 <td>${s.maChuDe}</td>
-                <td> <a href="${urlUpdate}/${sach.maSach}">Sửa</a></td>
-                <td> <a href="${urlDelete}/${sach.maSach}" onclick="return confirm('Bạn có chắc chắn muốn xóa thông tin này ?');">Xóa</a></td>
+                <td> <a href="${urlUpdate}/${s.maSach}">Sửa</a></td>
+                <td> <a href="${urlDelete}/${s.maSach}" onclick="return confirm('Bạn có chắc chắn muốn xóa thông tin này ?');">Xóa</a></td>
             </tr>
         </c:forEach>
     </c:if>

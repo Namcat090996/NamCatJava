@@ -36,10 +36,23 @@ public class Sach {
         this.giaSach = giaSach;
     }
 
+
+    private String maSach;
+
+    public String getMaSach() {
+        return maSach;
+    }
+
+    public void setMaSach(String maSach) {
+        this.maSach = maSach;
+    }
+
+
     private String tenSach;
     private String moTa;
     private String anhSach;
     private String tacGia;
+
     private int giaSach;
     private Date ngayTao;
     private Date ngayCapNhat;
@@ -107,13 +120,4 @@ public class Sach {
         this.soLuong = soLuong;
     }
 
-    private String maSach;
-
-    public String getMaSach() {
-        return maSach;
-    }
-
-    public void setMaSach(String maSach) {
-        this.maSach = maSach;
-    }
 }

@@ -3,11 +3,14 @@ package vn.com.stanford.je0824.bookstore.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import vn.com.stanford.je0824.bookstore.entities.ChuDe;
+import vn.com.stanford.je0824.bookstore.model.SachDao;
 import vn.com.stanford.je0824.bookstore.entities.Sach;
 import vn.com.stanford.je0824.bookstore.service.ChuDeService;
 import vn.com.stanford.je0824.bookstore.service.SachService;
@@ -24,13 +27,13 @@ public class SachController {
     @Autowired
     ChuDeService chuDeService;
 
-    @RequestMapping(value = "admin/sach", method = RequestMethod.GET)
-    public String hienThiDanhSach(Model model)
-    {
+    @RequestMapping(value = "/admin/sach", method = RequestMethod.GET)
+    public String hienThiDanhSach(Model model) {
+
         //Lấy danh sách thông tin sách
         List<Sach> lstSach = sachService.layDanhSach();
 
-        //Dựa vào model để hiển thị ra view
+        //Đưa vào model để hiển thị ra view
         model.addAttribute("lstSach", lstSach);
 
         return "admin/QuanLySach";
@@ -38,7 +41,8 @@ public class SachController {
 
     @RequestMapping(value = "/admin/sach/them")
     public String hienThiThemMoiSach(Model model) {
-        model.addAttribute("Sach", new Sach());
+
+        model.addAttribute("sach", new Sach());
 
         return "admin/SachAdd";
     }
@@ -46,8 +50,7 @@ public class SachController {
     @RequestMapping(value = "/admin/sach/sua/{id}")
     public String hienThiChiTietSach(@PathVariable("id") String id, Model model) {
 
-        Sach objSach = sachService.layChiTiet(id)
-                ;
+        Sach objSach = sachService.layChiTiet(id);
 
         model.addAttribute("sach", objSach);
 
@@ -60,52 +63,57 @@ public class SachController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "admin/sach/themMoiSach", method = RequestMethod.POST)
-    public String themMoiHoacSuaSach(@ModelAttribute("sach") Sach objSach, Model model) {
-
+    @RequestMapping(value = "/admin/sach/themMoiSach", method = RequestMethod.POST)
+    public String themMoiHoacSuaSach(@ModelAttribute("sach") Sach objSach, BindingResult result, Model model)
+    {
         System.out.println("Mã sách: " + objSach.getMaSach());
         System.out.println("Tên sách: " + objSach.getTenSach());
 
-        boolean isInsert = true;
+        if(result.hasErrors()) {
 
-        //Nếu sách đã có thì là sửa
-        Sach objSachOld = sachService.layChiTiet(objSach.getMaSach());
+            model.addAttribute("message", "Bạn cần phải nhập đủ thông tin");
+            model.addAttribute("sach", objSach);
 
-        if(objSachOld != null)
-        {
-            isInsert = false;
-        }
-
-        boolean ketQua = false;
-
-        if(isInsert)
-        {
-            objSach.setNgayTao(new Date());
-            objSach.setNgayCapNhat(new Date());
-
-            ketQua = sachService.themMoi(objSach);
+            return "admin/SachAdd";
         }
         else
         {
-            objSach.setNgayCapNhat(new Date());
+            boolean isInsert = true;
 
-            ketQua = sachService.capNhat(objSach);
-        }
+            //Nếu sách đã có thì là sửa
+            Sach objSachOld = sachService.layChiTiet(objSach.getMaSach());
 
-        if(ketQua)
-        {
-            return "redirect:/admin/sach";
+            if (objSachOld != null) {
+                isInsert = false;
+            }
+
+            boolean ketQua = false;
+
+            if (isInsert) {
+                objSach.setNgayTao(new Date());
+                objSach.setNgayCapNhat(new Date());
+
+                ketQua = sachService.themMoi(objSach);
+            } else {
+                objSach.setNgayCapNhat(new Date());
+
+                ketQua = sachService.capNhat(objSach);
+            }
+
+            if (ketQua) {
+                return "redirect:/admin/sach";
+            }
         }
 
         return "admin/SachAdd";
     }
 
     /**
-     * Lấy thông tin sách
+     * Xóa thông tin sách
      * @param id
      * @return
      */
-    @RequestMapping(value = "/admin/sach/sua/{id}")
+    @RequestMapping(value = "/admin/sach/xoa/{id}")
     public String xoaThongTinSach(@PathVariable("id") String id) {
 
         Sach objSach = sachService.layChiTiet(id);
@@ -120,7 +128,7 @@ public class SachController {
             }
         }
 
-        return "admin/SachAdd";
+        return "admin/QuanLySach";
     }
 
     /**

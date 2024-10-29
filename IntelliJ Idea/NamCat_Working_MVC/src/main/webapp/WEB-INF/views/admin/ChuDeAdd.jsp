@@ -24,6 +24,7 @@
 <c:url value="/admin/chude/themMoiCD" var="themMoiCD"/>
 <c:url value="/admin/chude" var="troVeDanhSach"/>
 <%--Khi object "chude" có thông tin, các trường đã khai báo trong lớp ChuDe cũng sẽ có thông tin --%>
+<%--@elvariable id="chude" type="com"--%>
 <form:form method="post" action="${themMoiCD}" modelAttribute="chude" acceptCharset="utf-8">
     <fieldset>
         <legend>Nhập thông tin chủ đề</legend>
@@ -49,10 +50,6 @@
                     &nbsp;
                     <a href="${troVeDanhSach}">Trở lại</a>
                 </div>
-            </div>
-            <div>
-                <label></label>
-                <div>${message}</div>
             </div>
         </div>
     </fieldset>

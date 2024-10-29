@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty;
 
 public class ChuDe {
 
-    @NotBlank(message = "Bạn phải nhập mã chủ để")
+    @NotBlank(message = "Bạn phải nhập mã chủ đề")
     private String maChuDe;
 
     @NotEmpty(message = "Bạn phải nhập tên chủ đề")

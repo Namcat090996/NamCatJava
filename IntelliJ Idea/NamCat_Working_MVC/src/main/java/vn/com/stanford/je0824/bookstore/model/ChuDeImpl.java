@@ -1,6 +1,7 @@
 package vn.com.stanford.je0824.bookstore.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import vn.com.stanford.je0824.bookstore.entities.ChuDe;
@@ -28,9 +29,17 @@ public class ChuDeImpl implements ChuDeDao {
 
     @Override
     public ChuDe getById(String maChuDe) {
-        String strDetail = "Select MaChuDe, TenChuDe from ChuDe where MaChuDe = ?";
+        try
+        {
+            String strDetail = "Select MaChuDe, TenChuDe from ChuDe where MaChuDe = ?";
 
-        return jdbcTemplate.queryForObject(strDetail, new ChuDeMapper(), maChuDe);
+            return jdbcTemplate.queryForObject(strDetail, new ChuDeMapper(), maChuDe);
+        }
+        catch(EmptyResultDataAccessException ex)
+        {
+            return null;
+        }
+
     }
 
     @Override

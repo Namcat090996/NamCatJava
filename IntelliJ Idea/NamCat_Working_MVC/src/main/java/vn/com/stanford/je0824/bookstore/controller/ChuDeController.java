@@ -28,7 +28,7 @@ public class ChuDeController {
 
         model.addAttribute("chuDe", lstChuDe);
 
-        return "DanhSachChuDe";
+        return "admin/DanhSachChuDe";
     }
 
     @RequestMapping(value = "/admin/chude/them", method = RequestMethod.GET)
@@ -49,7 +49,7 @@ public class ChuDeController {
         return "admin/ChuDeAdd";
     }
 
-    @RequestMapping(value = "/admin/themMoiCD", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/chude/themMoiCD", method = RequestMethod.POST)
     public String themMoiHoacSuaChuDe(@ModelAttribute("chude") @Valid ChuDe objCD, BindingResult result, Model model)
     {
         System.out.println("Mã chủ đề: " + objCD.getMaChuDe());
@@ -60,8 +60,56 @@ public class ChuDeController {
             model.addAttribute("message", "Bạn phải nhập đầy đủ thông tin cần thiết");
             //Giữ thông tin khi người dùng chưa nhập đầy đủ nhưng đã nhấn submit
             model.addAttribute("chude", objCD);
+
+            return "admin/ChuDeAdd";
+        }
+        else
+        {
+            boolean isInsert = true;
+
+            //Nếu chủ đề đã có thì là sửa
+            ChuDe chuDe = chuDeService.layChiTietCD(objCD.getMaChuDe());
+
+            if(chuDe != null)
+            {
+                isInsert = false;
+            }
+
+            boolean ketQua = false;
+
+            if(isInsert)
+            {
+                ketQua = chuDeService.themCD(objCD);
+            }
+            else
+            {
+                ketQua = chuDeService.capNhatCD(objCD);
+            }
+
+            if(ketQua)
+            {
+                return "redirect:/admin/chude";
+            }
         }
 
-        return null;
+        return "admin/ChuDeAdd";
+    }
+
+    @RequestMapping(value = "/admin/chude/xoa/{id}")
+    public String xoaChuDe(@PathVariable("id") String maCD, Model model)
+    {
+        ChuDe chuDe = chuDeService.layChiTietCD(maCD);
+
+        if(chuDe != null)
+        {
+            boolean ketQua = chuDeService.xoaCD(maCD);
+
+            if(ketQua)
+            {
+                return "redirect:/admin/chude";
+            }
+        }
+
+        return "admin/DanhSachChuDe";
     }
 }

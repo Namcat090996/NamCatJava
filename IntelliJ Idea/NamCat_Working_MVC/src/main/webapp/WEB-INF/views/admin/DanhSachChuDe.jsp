@@ -12,11 +12,14 @@
     <title>Quản lý thông tin chủ đề</title>
 </head>
 <body>
-<c:url value="/chude-them" var="urlSave"/>
-<c:url value="/chude-sua" var="urlUpdate"/>
-<c:url value="/xoaChuDe" var="urlDelete"/>
+<c:url value="/admin/chude/them" var="urlSave"/>
+<c:url value="/admin/chude/sua" var="urlUpdate"/>
+<c:url value="/admin/chude/xoa" var="urlDelete"/>
 <div style="width: 100%; text-align: center">
     <h2>Quản lý thông tin chủ đề</h2>
+</div>
+<div style="width: 100%; text-align: right">
+    <a href="${urlSave}">Thêm mới</a>
 </div>
 <table border="1" style="width:100%; border-collapse: collapse">
     <tr>

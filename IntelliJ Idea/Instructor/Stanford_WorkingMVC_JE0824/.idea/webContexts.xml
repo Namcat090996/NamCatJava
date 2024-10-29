@@ -4,7 +4,6 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/QuanLySach.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin" />
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/SachAdd.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin" />
       </map>
     </option>
   </component>

@@ -1,8 +1,14 @@
 package vn.com.stanford.je0824.bookstore.entities;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 public class ChuDe {
 
+    @NotBlank(message = "Bạn phải nhập mã chủ để")
     private String maChuDe;
+
+    @NotEmpty(message = "Bạn phải nhập tên chủ đề")
     private String tenChuDe;
 
     public String getMaChuDe() {

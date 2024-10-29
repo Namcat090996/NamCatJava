@@ -27,22 +27,43 @@ public class ChuDeImpl implements ChuDeDao {
     }
 
     @Override
-    public ChuDe getById(String id) {
-        return null;
+    public ChuDe getById(String maChuDe) {
+        String strDetail = "Select MaChuDe, TenChuDe from ChuDe where MaChuDe = ?";
+
+        return jdbcTemplate.queryForObject(strDetail, new ChuDeMapper(), maChuDe);
     }
 
     @Override
     public boolean add(ChuDe chuDe) {
-        return false;
+        String strAdd = "Insert into ChuDe(MaChuDe, TenChuDe) values(?,?)";
+
+        boolean ketQua = false;
+
+        ketQua = jdbcTemplate.update(strAdd, chuDe.getMaChuDe(), chuDe.getTenChuDe()) > 0;
+
+        return ketQua;
     }
 
     @Override
     public boolean update(ChuDe chuDe) {
-        return false;
+        String strUpdate = "Update ChuDe set TenChuDe = ? where MaChuDe = ?";
+
+        boolean ketQua = false;
+
+        ketQua = jdbcTemplate.update(strUpdate, chuDe.getTenChuDe(), chuDe.getMaChuDe()) > 0;
+
+        return ketQua;
     }
 
     @Override
-    public boolean delete(String id) {
-        return false;
+    public boolean delete(String maChuDe) {
+        String strDelete = "Delete from ChuDe where MaChuDe = ?";
+
+        boolean ketQua = false;
+
+        ketQua = jdbcTemplate.update(strDelete, maChuDe) > 0;
+
+        return ketQua;
+
     }
 }

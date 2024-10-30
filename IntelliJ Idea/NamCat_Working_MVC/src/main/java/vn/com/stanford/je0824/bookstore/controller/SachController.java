@@ -46,6 +46,7 @@ public class SachController {
     public String hienThiThemMoiSach(Model model)
     {
         model.addAttribute("sach", new Sach());
+        model.addAttribute("idCheck", "");
 
         return "admin/SachAdd";
     }

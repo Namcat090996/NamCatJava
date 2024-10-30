@@ -30,8 +30,7 @@
             <div>
                 <label>Mã sách:</label>
                 <div>
-                    <form:input path="maSach" disabled="${sach.maSach != null}"/><br>
-                    <form:hidden path="maSach"/>
+                    <form:input path="maSach"/><br>
                     <form:errors path="maSach" cssClass="errorinfo"/>
                     <input type="hidden" name="hSachId" value="${idCheck}">
                 </div>
@@ -60,6 +59,7 @@
                 <label>Giá sách:</label>
                 <div>
                     <form:input path="giaSach"/><br>
+                    <form:errors path="giaSach" cssClass="errorinfo"/>
                 </div>
             </div>
             <div>

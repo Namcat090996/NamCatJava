@@ -2,10 +2,7 @@ package vn.com.stanford.je0824.bookstore.entities;
 
 import org.hibernate.validator.constraints.UniqueElements;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 public class Sach {
@@ -17,7 +14,7 @@ public class Sach {
     private String moTa;
     private String anhSach;
     private String tacGia;
-    @NotNull(message = "Bạn cần phải nhp giá sách")
+    @Digits(integer = 10, fraction = 0, message = "Giá sách phải là số nguyên dương")
     @Min(value = 0, message = "Bạn phải nhập giá sách lớn hơn 0")
     private int giaSach;
     private Date ngayTao;

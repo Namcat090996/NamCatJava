@@ -9,6 +9,7 @@
 <%--Declare tag library of Spring MVC --%>
 <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <title>Quản lý thông tin sách</title>
@@ -43,8 +44,12 @@
                 <td>${s.maSach}</td>
                 <td>${s.tenSach}</td>
                 <td>${s.moTa}</td>
-                <td>${s.giaSach}</td>
-                <td>${s.ngayTao}</td>
+                <td>
+                    <fmt:formatNumber value="${s.giaSach}" pattern="#,##0.###"/>đ
+                </td>
+                <td>
+                    <fmt:formatDate value="${s.ngayTao}" pattern="dd-MM-yyyy"/>
+                </td>
                 <td>${s.tacGia}</td>
                 <td>${s.maChuDe}</td>
                 <td> <a href="${urlUpdate}/${s.maSach}">Sửa</a></td>

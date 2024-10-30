@@ -30,9 +30,12 @@
             <div>
                 <label>Mã sách:</label>
                 <div>
-                    <form:input path="maSach"/><br>
+                    <form:input path="maSach" disabled="${sach.maSach != null}"/><br>
+                    <form:hidden path="maSach"/>
                     <form:errors path="maSach" cssClass="errorinfo"/>
+                    <input type="hidden" name="hSachId" value="${idCheck}">
                 </div>
+                <div style="color: red">${sach_message}</div>
             </div>
             <div>
                 <label>Tên sách:</label>

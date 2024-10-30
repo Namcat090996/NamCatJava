@@ -1,5 +1,7 @@
 package vn.com.stanford.je0824.bookstore.entities;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;

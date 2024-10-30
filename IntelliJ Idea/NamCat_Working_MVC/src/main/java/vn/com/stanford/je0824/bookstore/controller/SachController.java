@@ -1,19 +1,19 @@
 package vn.com.stanford.je0824.bookstore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import vn.com.stanford.je0824.bookstore.entities.ChuDe;
 import vn.com.stanford.je0824.bookstore.entities.Sach;
 import vn.com.stanford.je0824.bookstore.service.ChuDeService;
 import vn.com.stanford.je0824.bookstore.service.SachService;
 
 import javax.naming.Binding;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +26,9 @@ public class SachController {
 
     @Autowired
     ChuDeService chuDeService;
+    @Qualifier("httpServletRequest")
+    @Autowired
+    private ServletRequest httpServletRequest;
 
     @RequestMapping(value = "/admin/sach", method = RequestMethod.GET)
     public String hienThiDanhSach(Model model)
@@ -53,15 +56,17 @@ public class SachController {
         Sach objSach = sachService.layChiTiet(maSach);
 
         model.addAttribute("sach", objSach);
+        model.addAttribute("idCheck", objSach.getMaSach());
 
         return "admin/SachAdd";
     }
 
     @RequestMapping(value = "/admin/sach/themMoiSach", method = RequestMethod.POST)
-    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, Model model)
+    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, Model model, @RequestParam("hSachId") String hSachId)
     {
         System.out.println("Mã sách: " + objSach.getMaSach());
         System.out.println("Tên sách: " + objSach.getTenSach());
+        System.out.println("Mã sách check: " + hSachId);
 
         if(result.hasErrors())
         {
@@ -74,13 +79,12 @@ public class SachController {
         {
             boolean isInsert = true;
 
-            //Nếu đã có sách thì là trường hợp sửa
-            Sach objSachOld = sachService.layChiTiet(objSach.getMaSach());
-
-            if(objSachOld != null)
+            if(!hSachId.isEmpty())
             {
                 isInsert = false;
             }
+
+            Sach objSachOld = sachService.layChiTiet(objSach.getMaSach());
 
             boolean ketQua = false;
 
@@ -88,7 +92,16 @@ public class SachController {
             {
                 objSach.setNgayTao(new Date());
                 objSach.setNgayCapNhat(new Date());
-                ketQua = sachService.themMoi(objSach);
+                if(objSachOld == null)
+                {
+                    ketQua = sachService.themMoi(objSach);
+                }
+                else
+                {
+                    model.addAttribute("sach_message", "Mã sách đã tồn tại");
+                    model.addAttribute("sach", objSach);
+                    return "admin/SachAdd";
+                }
             }
             else
             {

@@ -5,17 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import vn.com.stanford.je0824.bookstore.entities.ChuDe;
+import vn.com.stanford.je0824.bookstore.entities.SachModel;
 import vn.com.stanford.je0824.bookstore.model.SachDao;
 import vn.com.stanford.je0824.bookstore.entities.Sach;
 import vn.com.stanford.je0824.bookstore.service.ChuDeService;
 import vn.com.stanford.je0824.bookstore.service.SachService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -28,11 +30,12 @@ public class SachController {
     @Autowired
     ChuDeService chuDeService;
 
-    @RequestMapping(value = "/admin/sach", method = RequestMethod.GET)
-    public String hienThiDanhSach(Model model) {
+    @RequestMapping(value = "/admin/sach")
+    public String hienThiDanhSach(@ModelAttribute("sach") SachModel objSach, Model model) {
 
+        model.addAttribute("sach", objSach);
         //Lấy danh sách thông tin sách
-        List<Sach> lstSach = sachService.layDanhSach();
+        List<Sach> lstSach = sachService.timKiemThongTinSach(objSach.getTuKhoa(), objSach.getMaChuDe());
 
         //Đưa vào model để hiển thị ra view
         model.addAttribute("lstSach", lstSach);
@@ -65,7 +68,7 @@ public class SachController {
      * @return
      */
     @RequestMapping(value = "/admin/sach/themMoiSach", method = RequestMethod.POST)
-    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, Model model)
+    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, @RequestParam("fUpload")MultipartFile fUpload, HttpServletRequest request, Model model)
     {
         System.out.println("Mã sách: " + objSach.getMaSach());
         System.out.println("Tên sách: " + objSach.getTenSach());
@@ -80,13 +83,39 @@ public class SachController {
         else
         {
             boolean isInsert = true;
-
+            String tenAnh = "";
             //Nếu sách đã có thì là sửa
             Sach objSachOld = sachService.layChiTiet(objSach.getMaSach());
 
             if (objSachOld != null) {
                 isInsert = false;
+                tenAnh = objSachOld.getAnhSach();
             }
+
+            //Xử lý upload file
+            if(fUpload != null)
+            {
+                //Lấy tên ảnh
+                tenAnh = fUpload.getOriginalFilename();
+
+                //Lấy đường dẫn ảnh
+                String strDuongDan = request.getServletContext().getInitParameter("file-upload");
+
+                try
+                {
+                    //Tạo file
+                    File file = new File(strDuongDan, tenAnh);
+
+                    fUpload.transferTo(file);
+                }
+                catch (IOException ex)
+                {
+                    System.out.println("Có lỗi xảy ra khi upload file: " + ex.getMessage());
+                }
+            }
+
+            //Gán ảnh vào đối tượng để lưu  sb
+            objSach.setAnhSach(tenAnh);
 
             boolean ketQua = false;
 

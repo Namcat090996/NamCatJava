@@ -15,6 +15,29 @@ public class SachImpl implements SachDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    /**
+     * Tìm kiếm thông tin sách theo nhiều tiêu chí
+     * @param tuKhoa
+     * @param maCD
+     * @return
+     */
+    @Override
+    public List<Sach> timKiemSach(String tuKhoa, String maCD)
+    {
+        String strSQL = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, NgayTao, NgayCapNhat, TacGia, MaChuDe from Sach where 1=1";
+        if(tuKhoa!= null && !tuKhoa.isEmpty())
+        {
+            strSQL += " and (MaSach = '" + tuKhoa + "' OR TenSach like '%" + tuKhoa + "%' OR TacGia like '%" + tuKhoa + "%')";
+        }
+
+        if(maCD!= null && !maCD.isEmpty())
+        {
+            strSQL+= " and MaChuDe = '" + maCD + "'";
+        }
+
+        return jdbcTemplate.query(strSQL, new SachMapper());
+    }
+
     @Override
     public List<Sach> getList() {
 

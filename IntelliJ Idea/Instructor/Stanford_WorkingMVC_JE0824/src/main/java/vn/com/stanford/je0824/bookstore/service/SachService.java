@@ -13,6 +13,11 @@ public class SachService {
     @Autowired
     SachDao sachDao;
 
+    public List<Sach> timKiemThongTinSach(String tuKhoa, String maChuDe)
+    {
+        return  sachDao.timKiemSach(tuKhoa, maChuDe);
+    }
+
     public List<Sach> layDanhSach()
     {
         return  sachDao.getList();

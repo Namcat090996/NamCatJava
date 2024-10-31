@@ -30,7 +30,7 @@
             <div>
                 <label>Mã sách:</label>
                 <div>
-                    <form:input path="maSach"/><br>
+                    <form:input path="maSach" disabled="${not empty idCheck}"/><br>
                     <form:errors path="maSach" cssClass="errorinfo"/>
                     <input type="hidden" name="hSachId" value="${idCheck}">
                 </div>

@@ -6,22 +6,57 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>Quản lý thông tin sách</title>
+    <link rel="stylesheet" href='<c:url value="/resources/css/bootstrap.css"/>'>
+    <script type="text/javascript" src='<c:url value="/resources/js/jquery-3.7.1.js"/>'></script>
+    <script type="text/javascript" src='<c:url value="/resources/js/bootstrap.js"/>'></script>
+    <style type="text/css">
+        .custom-width {
+            width: 7%;
+        }
+    </style>
 </head>
 <body>
 <c:url value="/admin/sach/them" var="urlSave"/>
 <c:url value="/admin/sach/sua" var="urlUpdate"/>
 <c:url value="/admin/sach/xoa" var="urlDelete"/>
+<c:url value="/images/" var="urlImage"/>
+<c:url value="/admin/sach" var="urlTimKiem"/>
 <div style="width: 100%; text-align: center">
     <h2>Quản lý thông tin sách</h2>
 </div>
-<div style="width: 100%; text-align: right">
-    <a href="${urlSave}">Thêm mới</a>
-</div>
-<table border="1" style="width:100%; border-collapse: collapse">
+<form:form action="${urlTimKiem}" modelAttribute="sach" acceptCharset="utf-8">
+    <fieldset>
+        <legend>Nhập thông tin tìm kiếm</legend>
+        <div class="row">
+            <label class="custom-width d-flex align-items-center justify-content-center">Từ khóa:</label>
+            <div class="col-md-2">
+            <form:input path="tuKhoa" cssClass="form-control"/>
+            </div>
+            <label class="custom-width">Chủ đề:</label>
+            <div  class="col-md-2">
+                <form:select path="maChuDe" cssClass="form-control">
+                    <form:option value="">---Chọn chủ đề---</form:option>
+                    <c:forEach var="cd" items="${chuDeList}">
+                        <form:option value="${cd.maChuDe}">${cd.tenChuDe}</form:option>
+                    </c:forEach>
+                </form:select>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="Tìm kiếm" name="btnTimKiem" class="btn btn-primary"/>
+            </div>
+        </div>
+    </fieldset>
+</form:form>
+<div class="container-fluid">
+    <div style="width: 100%; text-align: right; padding-bottom: 5px;">
+        <a class="btn btn-primary" href="${urlSave}">Thêm mới</a>
+    </div>
+<table class="table table-striped table-bordered">
     <tr>
         <th>Ảnh sách</th>
         <th>Mã sách</th>
@@ -36,8 +71,8 @@
     </tr>
     <c:if test="${not empty lstSach}">
         <c:forEach var="s" items="${lstSach}">
-            <tr style="border: 1px black solid">
-                <td>${s.anhSach}</td>
+            <tr>
+                <td><img src="${urlImage}/${s.anhSach}" width="100" height="120" class="img-thumbnail"/> </td>
                 <td>${s.maSach}</td>
                 <td>${s.tenSach}</td>
                 <td>${s.moTa}</td>
@@ -45,11 +80,12 @@
                 <td>${s.ngayTao}</td>
                 <td>${s.tacGia}</td>
                 <td>${s.maChuDe}</td>
-                <td> <a href="${urlUpdate}/${s.maSach}">Sửa</a></td>
-                <td> <a href="${urlDelete}/${s.maSach}" onclick="return confirm('Bạn có chắc chắn muốn xóa thông tin này ?');">Xóa</a></td>
+                <td> <a class="btn btn-primary" href="${urlUpdate}/${s.maSach}">Sửa</a></td>
+                <td> <a class="btn btn-danger" href="${urlDelete}/${s.maSach}" onclick="return confirm('Bạn có chắc chắn muốn xóa thông tin này ?');">Xóa</a></td>
             </tr>
         </c:forEach>
     </c:if>
 </table>
+</div>
 </body>
 </html>

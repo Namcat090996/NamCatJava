@@ -11,7 +11,10 @@
 <html>
 <head>
     <title>Thêm mới hoặc sửa thông tin sách</title>
-    <style type="text/css">
+    <link rel="stylesheet" href='<c:url value="/resources/css/bootstrap.css"/>'>
+    <script type="text/javascript" src='<c:url value="/resources/js/jquery-3.7.1.js"/>'></script>
+    <script type="text/javascript" src='<c:url value="/resources/js/bootstrap.js"/>'></script>
+    <style>
         .errorfinfo
         {
             color: red;
@@ -22,73 +25,72 @@
 
 <c:url value="/admin/sach/themMoiSach" var="themMoiSach"/>
 <c:url value="/admin/sach" var="troVeDanhSach"/>
-<form:form method="post" action="${themMoiSach}" modelAttribute="sach" acceptCharset="utf-8">
+<form:form method="post" action="${themMoiSach}" modelAttribute="sach" acceptCharset="utf-8" enctype="multipart/form-data">
     <fieldset>
         <legend>Nhập thông tin sách</legend>
-        <div>
-            <div>
-                <label>Mã sách:</label>
-                <div>
-                    <form:input path="maSach"/><br>
+        <div class="container-fluid">
+            <div class="row">
+                <label class="col-md-2">Mã sách:</label>
+                <div class="col-md-6">
+                    <form:input path="maSach" cssClass="form-control"/><br>
                     <form:errors path="maSach" cssClass="errorfinfo"/>
                 </div>
             </div>
-            <div>
-                <label>Tên sách:</label>
-                <div>
-                    <form:input path="tenSach"/><br>
+            <div class="row">
+                <label class="col-md-2">Tên sách:</label>
+                <div class="col-md-10">
+                    <form:input path="tenSach" cssClass="form-control"/><br>
                     <form:errors path="tenSach" cssClass="errorfinfo"/>
                 </div>
             </div>
-            <div>
-                <label>Mô tả:</label>
-                <div>
-                    <form:textarea path="moTa" rows="5"/><br>
+            <div class="row">
+                <label class="col-md-2">Mô tả:</label>
+                <div class="col-md-10">
+                    <form:textarea path="moTa" rows="5" cssClass="form-control"/><br>
                 </div>
             </div>
-            <div>
-                <label>Ảnh sách:</label>
-                <div>
-                    <form:input path="anhSach"/><br>
+            <div class="row">
+                <label class="col-md-2">Ảnh sách:</label>
+                <div  class="col-md-10">
+                    <input type="file" name="fUpload"/>
                 </div>
             </div>
-            <div>
-                <label>Giá sách:</label>
-                <div>
-                    <form:input path="giaSach"/><br>
+            <div class="row">
+                <label  class="col-md-2">Giá sách:</label>
+                <div  class="col-md-6">
+                    <form:input path="giaSach" cssClass="form-control"/><br>
                     <form:errors path="giaSach" cssClass="errorfinfo"/>
                 </div>
             </div>
-            <div>
-                <label>Tác giả:</label>
-                <div>
-                    <form:input path="tacGia"/><br>
+            <div class="row">
+                <label  class="col-md-2">Tác giả:</label>
+                <div  class="col-md-10">
+                    <form:input path="tacGia" cssClass="form-control"/><br>
                 </div>
             </div>
-            <div>
-                <label>Mã CĐ:</label>
-                <div>
-                    <form:select path="maChuDe">
+            <div class="row">
+                <label class="col-md-2">Mã CĐ:</label>
+                <div  class="col-md-10">
+                    <form:select path="maChuDe" cssClass="form-control">
                         <form:option value="">---Chọn chủ đề---</form:option>
                         <c:forEach var="cd" items="${chuDeList}">
                             <form:option value="${cd.maChuDe}">${cd.tenChuDe}</form:option>
                         </c:forEach>
                     </form:select>
-                    <form:errors path="maChuDe" cssClass="errorfinfo"/>
                     <br>
                 </div>
             </div>
-            <div>
-                <label></label>
-                <div>
-                    <input type="submit" value="Cập nhật"/>
+            <div class="row">
+                <label  class="col-md-2"></label>
+                <div  class="col-md-10">
+                    <input type="submit" value="Cập nhật" class="btn btn-primary"/>
                     &nbsp;
-                    <a href="${troVeDanhSach}">Trở lại</a>
+                    <a href="${troVeDanhSach}" class="btn btn-dark">Trở lại</a>
                 </div>
             </div>
             <div>
                 <label></label>
-                <div>
+                <div><br>
                     ${message}
                 </div>
             </div>

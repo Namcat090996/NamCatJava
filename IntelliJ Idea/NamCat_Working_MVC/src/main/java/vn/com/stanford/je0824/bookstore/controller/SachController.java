@@ -57,7 +57,7 @@ public class SachController {
         Sach objSach = sachService.layChiTiet(maSach);
 
         model.addAttribute("sach", objSach);
-        model.addAttribute("idCheck", objSach.getMaSach());
+        model.addAttribute("idCheck", maSach);
 
         return "admin/SachAdd";
     }

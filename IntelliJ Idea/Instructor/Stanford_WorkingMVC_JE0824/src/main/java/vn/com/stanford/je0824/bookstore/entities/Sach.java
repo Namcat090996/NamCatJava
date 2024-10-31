@@ -67,7 +67,7 @@ public class Sach {
         this.ngayCapNhat = ngayCapNhat;
     }
 
-    @NotEmpty(message = "Bạn cần phải nhập mã chủ đề")
+
     private String maChuDe;
 
     public String getTenSach() {

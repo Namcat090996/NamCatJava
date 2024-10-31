@@ -45,7 +45,7 @@
     lstSach = sachDao.timKiemSach(tuKhoa, maChuDe);
 %>
 <body>
-    <div style="text-align: center">
+    <div style="text-align: center; padding-top: 5px">
         <h2 style="text-transform: uppercase">Quản lý thông tin sách</h2>
     </div>
     <form method="post">

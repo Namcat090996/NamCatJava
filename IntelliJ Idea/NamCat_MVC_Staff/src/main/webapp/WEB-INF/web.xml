@@ -29,4 +29,10 @@
     <servlet-name>springmvc</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  <context-param>
+    <param-name>file-upload</param-name>
+    <param-value>
+      C:\Users\dangb\IdeaProjects\Stanford_WorkingMVC_JE0824\src\main\webapp\WEB-INF\resources\images
+    </param-value>
+  </context-param>
 </web-app>

@@ -38,7 +38,7 @@
             <form:input path="tuKhoa" cssClass="form-control"/>
             </div>
             <label class="custom-width">Chủ đề:</label>
-            <div  class="col-md-2">
+            <div class="col-md-2">
                 <form:select path="maChuDe" cssClass="form-control">
                     <form:option value="">---Chọn chủ đề---</form:option>
                     <c:forEach var="cd" items="${chuDeList}">

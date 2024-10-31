@@ -438,5 +438,13 @@ public class NamCat_BaiTapCauTruc_JV01 {
         System.out.printf("6B. Giá trị N thỏa mãn là N = %d\n", N-1); 
         
         */
+        
+        int i = 5;
+
+        // Hậu tố (i++)
+        System.out.println(i++);  // In ra 5, sau đó i tăng lên 6
+
+        // Tiền tố (++i)
+        System.out.println(++i);  // i tăng lên 7 rồi in ra 7
     }
 }

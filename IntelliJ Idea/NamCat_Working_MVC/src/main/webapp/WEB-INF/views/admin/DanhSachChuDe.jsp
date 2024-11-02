@@ -39,5 +39,10 @@
         </c:forEach>
     </c:if>
 </table>
+<c:if test="${not empty error}">
+    <script>
+        alert("${error}");
+    </script>
+</c:if>
 </body>
 </html>

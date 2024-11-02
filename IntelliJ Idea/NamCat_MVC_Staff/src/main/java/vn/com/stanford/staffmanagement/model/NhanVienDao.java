@@ -8,5 +8,11 @@ import java.util.List;
 public interface NhanVienDao extends IHanhDong<NhanVien, String> {
 
     //Declare extension function if needed
-    List<NhanVienModel> danhSachTongLuongNV();
+
+    /**
+     * Function to get total salary list of staff
+     * @return
+     */
+    List<NhanVienModel> danhSachTongLuongNV(String tuKhoa, String maPhong, String maChucVu);
+
 }

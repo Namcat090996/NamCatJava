@@ -85,12 +85,11 @@ public class SachController {
                 isInsert = false;
             }
 
-            Sach objSachOld = sachService.layChiTiet(objSach.getMaSach());
-
             boolean ketQua = false;
 
             if(isInsert)
             {
+                Sach objSachOld = sachService.layChiTiet(objSach.getMaSach());
                 objSach.setNgayTao(new Date());
                 objSach.setNgayCapNhat(new Date());
                 if(objSachOld == null)

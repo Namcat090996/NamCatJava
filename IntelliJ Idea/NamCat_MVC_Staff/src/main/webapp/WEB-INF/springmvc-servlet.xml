@@ -16,8 +16,6 @@
             base-package="vn.com.stanford.staffmanagement" />
     <mvc:annotation-driven />
     <mvc:resources location="/WEB-INF/resources/" mapping="/resources/**" cache-period="31556926"/>
-    <mvc:resources mapping="/images/**" location="/WEB-INF/resources/images/"
-                   cache-period="31556926" />
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="26214400" />

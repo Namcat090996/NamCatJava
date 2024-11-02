@@ -16,11 +16,12 @@ public class NhanVienMapper implements RowMapper<NhanVien> {
      */
     @Override
     public NhanVien mapRow(ResultSet rs, int rowNum) throws SQLException {
+
         //Declare object
         NhanVien nhanVien = new NhanVien();
 
         //Get attributes for object
-        nhanVien.setMaNV(rs.getString("MaNhanVien"));
+        nhanVien.setMaNV(rs.getString("MaNV"));
         nhanVien.setHoTen(rs.getString("HoTen"));
         nhanVien.setGioiTinh(rs.getInt("GioiTinh"));
         nhanVien.setNgaySinh(rs.getDate("NgaySinh"));

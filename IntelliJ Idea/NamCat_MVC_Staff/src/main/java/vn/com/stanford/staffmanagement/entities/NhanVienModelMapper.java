@@ -21,19 +21,13 @@ public class NhanVienModelMapper implements RowMapper<NhanVienModel> {
         NhanVienModel nhanVienModel = new NhanVienModel();
 
         //Get attributes for object
-        nhanVienModel.setMaNV(rs.getString("MaNhanVien"));
+        nhanVienModel.setMaNV(rs.getString("MaNV"));
         nhanVienModel.setHoTen(rs.getString("HoTen"));
         nhanVienModel.setGioiTinh(rs.getInt("GioiTinh"));
         nhanVienModel.setNgaySinh(rs.getDate("NgaySinh"));
         nhanVienModel.setDienThoai(rs.getString("DienThoai"));
         nhanVienModel.setEmail(rs.getString("Email"));
         nhanVienModel.setDiaChi(rs.getString("DiaChi"));
-        nhanVienModel.setSoCMT(rs.getString("SoCMT"));
-        nhanVienModel.setNgayCap(rs.getDate("NgayCap"));
-        nhanVienModel.setNoiCap(rs.getString("NoiCap"));
-        nhanVienModel.setHeSoId(rs.getInt("HeSoId"));
-        nhanVienModel.setMaChucVu(rs.getString("MaChucVu"));
-        nhanVienModel.setMaPhong(rs.getString("MaPhong"));
         nhanVienModel.setTenPhong(rs.getString("TenPhong"));
         nhanVienModel.setTenChucVu(rs.getString("TenChucVu"));
         nhanVienModel.setTongLuong(rs.getInt("TongLuong"));

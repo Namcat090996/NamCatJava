@@ -1,6 +1,7 @@
 package vn.com.stanford.je0824.bookstore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -102,11 +103,18 @@ public class ChuDeController {
 
         if(chuDe != null)
         {
-            boolean ketQua = chuDeService.xoaCD(maCD);
+            try {
+                boolean ketQua = chuDeService.xoaCD(maCD);
 
-            if(ketQua)
-            {
-                return "redirect:/admin/chude";
+                if(ketQua)
+                {
+                    return "redirect:/admin/chude";
+                }
+            }
+            catch (DataIntegrityViolationException ex) {
+                List<ChuDe> lstChuDe = chuDeService.layDanhSach();
+                model.addAttribute("chuDe", lstChuDe);
+                model.addAttribute("error", "Fuck u");
             }
         }
 

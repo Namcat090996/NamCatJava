@@ -16,7 +16,20 @@
     <script type="text/javascript" src='<c:url value="/resources/js/bootstrap.js"/>'></script>
     <style type="text/css">
         .custom-width {
-            width: 7%;
+            width: 5%;
+            position: relative;
+            left: 20px;
+        }
+
+        .search {
+            position: relative;
+            left: 20px;
+        }
+
+        .legend {
+            position: relative;
+            left: 20px;
+            bottom: 5px;
         }
     </style>
 </head>
@@ -26,7 +39,7 @@
 <c:url value="/admin/sach/xoa" var="urlDelete"/>
 <c:url value="/images/" var="urlImage"/>
 <c:url value="/admin/sach" var="urlTimKiem"/>
-<div style="width: 100%; text-align: center">
+<div style="width: 100%; text-align: center; position: relative; top: 10px">
     <h2>Quản lý thông tin sách</h2>
 </div>
 <form:form action="${urlTimKiem}" modelAttribute="sach" acceptCharset="utf-8">
@@ -37,7 +50,7 @@
             <div class="col-md-2">
             <form:input path="tuKhoa" cssClass="form-control"/>
             </div>
-            <label class="custom-width">Chủ đề:</label>
+            <label class="custom-width d-flex align-items-center justify-content-center">Chủ đề:</label>
             <div class="col-md-2">
                 <form:select path="maChuDe" cssClass="form-control">
                     <form:option value="">---Chọn chủ đề---</form:option>
@@ -47,7 +60,7 @@
                 </form:select>
             </div>
             <div class="col-md-2">
-                <input type="submit" value="Tìm kiếm" name="btnTimKiem" class="btn btn-primary"/>
+                <input type="submit" value="Tìm kiếm" name="btnTimKiem" class="search btn btn-primary"/>
             </div>
         </div>
     </fieldset>

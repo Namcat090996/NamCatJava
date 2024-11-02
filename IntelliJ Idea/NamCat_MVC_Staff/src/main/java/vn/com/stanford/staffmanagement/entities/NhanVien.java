@@ -1,18 +1,26 @@
 package vn.com.stanford.staffmanagement.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 public class NhanVien {
 
     //Declare attributes
+    @NotBlank(message = "Bạn cần phải nhập mã nhân viên")
     private String maNV;
+    @NotEmpty(message = "Bạn cần phải nhập họ tên")
     private String hoTen;
     private int gioiTinh;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date ngaySinh;
     private String dienThoai;
     private String email;
     private String diaChi;
     private String soCMT;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date ngayCap;
     private String noiCap;
     private int heSoId;

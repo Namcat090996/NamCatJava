@@ -19,6 +19,11 @@
         {
             color: red;
         }
+
+        .custom-width
+        {
+            width: 5%;
+        }
     </style>
 </head>
 <body>
@@ -30,14 +35,14 @@
         <legend>Nhập thông tin sách</legend>
         <div class="container-fluid">
             <div class="row">
-                <label class="col-md-2">Mã sách:</label>
+                <label class="col-md-2 custom-width">Mã sách:</label>
                 <div class="col-md-6">
                     <form:input path="maSach" cssClass="form-control"/><br>
                     <form:errors path="maSach" cssClass="errorfinfo"/>
                 </div>
             </div>
             <div class="row">
-                <label class="col-md-2">Tên sách:</label>
+                <label class="col-md-2 custom-width">Tên sách:</label>
                 <div class="col-md-10">
                     <form:input path="tenSach" cssClass="form-control"/><br>
                     <form:errors path="tenSach" cssClass="errorfinfo"/>
@@ -56,14 +61,14 @@
                 </div>
             </div>
             <div class="row">
-                <label  class="col-md-2">Giá sách:</label>
+                <label class="col-md-2">Giá sách:</label>
                 <div  class="col-md-6">
                     <form:input path="giaSach" cssClass="form-control"/><br>
                     <form:errors path="giaSach" cssClass="errorfinfo"/>
                 </div>
             </div>
             <div class="row">
-                <label  class="col-md-2">Tác giả:</label>
+                <label class="col-md-2">Tác giả:</label>
                 <div  class="col-md-10">
                     <form:input path="tacGia" cssClass="form-control"/><br>
                 </div>
@@ -81,7 +86,7 @@
                 </div>
             </div>
             <div class="row">
-                <label  class="col-md-2"></label>
+                <label class="col-md-2"></label>
                 <div  class="col-md-10">
                     <input type="submit" value="Cập nhật" class="btn btn-primary"/>
                     &nbsp;

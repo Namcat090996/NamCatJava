@@ -23,7 +23,7 @@ public class ChuDeImpl implements ChuDeDao {
         //Declare SQL command
         String strList = "Select MaChuDe, TenChuDe from ChuDe";
 
-        //Execute the queries and return the result
+        //Execute the queries and return result
         return jdbcTemplate.query(strList, new ChuDeMapper());
     }
 

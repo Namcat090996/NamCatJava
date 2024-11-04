@@ -39,7 +39,7 @@
 <c:url value="/admin/sach/xoa" var="urlDelete"/>
 <c:url value="/images/" var="urlImage"/>
 <c:url value="/admin/sach" var="urlTimKiem"/>
-<div style="width: 100%; text-align: center; position: relative; top: 10px">
+<div style="width: 100%; text-align: center; margin-top: 10px">
     <h2>Quản lý thông tin sách</h2>
 </div>
 <form:form action="${urlTimKiem}" modelAttribute="sach" acceptCharset="utf-8">
@@ -66,7 +66,7 @@
     </fieldset>
 </form:form>
 <div class="container-fluid">
-    <div style="width: 100%; text-align: right; padding-bottom: 5px;">
+    <div style="width: 100%; text-align: right; margin-bottom: 5px">
         <a class="btn btn-primary" href="${urlSave}">Thêm mới</a>
     </div>
 <table class="table table-striped table-bordered">

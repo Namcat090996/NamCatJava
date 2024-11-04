@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.example</groupId>
-  <artifactId>NamCat_Working_MVC</artifactId>
+  <artifactId>NamCat_MVC_BookShop</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>NamCat_Working_MVC Maven Webapp</name>
+  <name>NamCat_MVC_BookShop Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
     <spring-version>5.3.39</spring-version>
@@ -60,6 +60,6 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>NamCat_Working_MVC</finalName>
+    <finalName>NamCat_MVC_BookShop</finalName>
   </build>
 </project>

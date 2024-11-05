@@ -4,14 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import vn.com.namcat.bookstore.entities.ChuDe;
 import vn.com.namcat.bookstore.entities.Sach;
 import vn.com.namcat.bookstore.service.ChuDeService;
 import vn.com.namcat.bookstore.service.SachService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -71,6 +74,7 @@ public class SachController {
         //Add to model if object is not null
         if(objSach != null) {
             model.addAttribute("sach", objSach);
+            model.addAttribute("hSachId", maSach);
         }
 
         //Return result
@@ -81,9 +85,10 @@ public class SachController {
      * Function to insert or update book
      * @return
      */
-    public String themMoiHoacSuaSach()
+    @RequestMapping(value = "/admin/sach/ThemMoiSach", method = RequestMethod.POST)
+    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, Model model)
     {
-
+        return "";
     }
 
     /**
@@ -102,9 +107,11 @@ public class SachController {
         //Execute the delete function
         if(objSach != null)
         {
+            //Use try-catch to avoid user deletes information that has been used (Foreign_Key)
             try {
                 ketQua = sachService.xoa(maSach);
 
+                //If ketQua is true
                 if(ketQua)
                 {
                     return "redirect:/admin/sach/";
@@ -112,14 +119,16 @@ public class SachController {
             }
             catch (DataIntegrityViolationException ex)
             {
+                //Add to model
+                model.addAttribute("error", "Không thể xóa thông tin này. Vui lòng chọn thông tin khác");
 
             }
         }
 
-
-
-        return "redirect:/admin/sach";
-
+        //Return to main page if deletion fails
+        List<Sach> lstSach = sachService.layDanhSach();
+        model.addAttribute("lstSach", lstSach);
+        return "admin/QuanLySach";
     }
 
     /**

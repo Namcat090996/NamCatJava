@@ -38,7 +38,7 @@
 <body>
 <c:url value="/admin/sach/themMoiSach" var="urlInsert"/>
 <c:url value="/admin/sach" var="urlList"/>
-<form:form>
+<form:form method="post" action="${urlInsert}" modelAttribute="sach" acceptCharset="utf-8" enctype="multipart/form-data">
     <fieldset>
         <legend>Nhập thông tin sách</legend>
         <div class="container-fluid">
@@ -47,6 +47,7 @@
                 <div class="col-md-6">
                     <form:input path="maSach" cssClass="form-control input-style"/><br>
                     <form:errors path="maSach" cssClass="errorInfo"/>
+                    <input type="hidden" value="${hSachId}" name="idCheck">
                 </div>
             </div>
             <div class="row row-wrapper">

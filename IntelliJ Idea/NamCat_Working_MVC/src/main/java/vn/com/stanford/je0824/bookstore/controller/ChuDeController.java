@@ -112,12 +112,13 @@ public class ChuDeController {
                 }
             }
             catch (DataIntegrityViolationException ex) {
-                List<ChuDe> lstChuDe = chuDeService.layDanhSach();
-                model.addAttribute("chuDe", lstChuDe);
+
+
                 model.addAttribute("error", "Fuck u");
             }
         }
-
+        List<ChuDe> lstChuDe = chuDeService.layDanhSach();
+        model.addAttribute("chuDe", lstChuDe);
         return "admin/DanhSachChuDe";
     }
 }

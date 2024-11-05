@@ -14,6 +14,17 @@ public class SachService {
     SachDao sachDao;
 
     /**
+     * Function to search book by keywords and object code
+     * @param tuKhoa
+     * @param maCD
+     * @return
+     */
+    public List<Sach> timKiemSach(String tuKhoa, String maCD)
+    {
+        return sachDao.timKiemSach(tuKhoa, maCD);
+    }
+
+    /**
      * Function to get list
      * @return
      */

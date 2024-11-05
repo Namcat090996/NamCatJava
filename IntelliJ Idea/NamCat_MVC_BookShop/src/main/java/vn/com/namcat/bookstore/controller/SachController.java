@@ -5,16 +5,19 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import vn.com.namcat.bookstore.entities.ChuDe;
 import vn.com.namcat.bookstore.entities.Sach;
+import vn.com.namcat.bookstore.entities.SachModel;
 import vn.com.namcat.bookstore.service.ChuDeService;
 import vn.com.namcat.bookstore.service.SachService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -32,10 +35,13 @@ public class SachController {
      * @return
      */
     @RequestMapping(value = "/admin/sach")
-    public String hienThiDanhSach(Model model)
+    public String hienThiDanhSach(@ModelAttribute("sach") SachModel objSach, Model model)
     {
+        //Keep user infomation which has typed
+        model.addAttribute("sach", objSach);
+
         //Declare list
-        List<Sach> lstSach = sachService.layDanhSach();
+        List<Sach> lstSach = sachService.timKiemSach(objSach.getTuKhoa(), objSach.getMaChuDe());
 
         //Add to model
         model.addAttribute("lstSach", lstSach);
@@ -85,10 +91,110 @@ public class SachController {
      * Function to insert or update book
      * @return
      */
-    @RequestMapping(value = "/admin/sach/ThemMoiSach", method = RequestMethod.POST)
-    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, Model model)
+    @RequestMapping(value = "/admin/sach/themMoiSach", method = RequestMethod.POST)
+    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, @RequestParam("fUpload") MultipartFile fUpload, HttpServletRequest request, Model model, @RequestParam("idCheck") String maSachCheck)
     {
-        return "";
+        if(result.hasErrors())
+        {
+            //Keep user infomation which has typed
+            model.addAttribute("sach", objSach);
+
+            //Keep current page
+            return "admin/SachAdd";
+        }
+        else
+        {
+            //Declare image name
+            String tenAnh = "";
+
+            //Declare boolean
+            boolean isInsert = true;
+            boolean ketQua = false;
+
+            //Get object by id
+            Sach objSachOld = sachService.layChiTiet(objSach.getMaSach());
+
+            //In case of updating information
+            if(objSachOld != null)
+            {
+                isInsert = false;
+                //Keep old book name if user don't upload image
+                tenAnh = objSachOld.getAnhSach();
+            }
+
+            //Process the upload file
+            if(!fUpload.isEmpty())
+            {
+                //Get book name
+                tenAnh = fUpload.getOriginalFilename();
+
+                //Get path from web.xml
+                String strDuongDan = request.getServletContext().getInitParameter("file-upload");
+
+                //Use try-catch if an error occurs during upload process
+                try
+                {
+                    //Create directory object with the path
+                    File directory = new File(strDuongDan);
+
+                    //Check if the directory has existed -> check if the path has existed
+                    if(!directory.exists())
+                    {
+                        //If the directory & pach have not existed, create the directory
+                        directory.mkdir();
+                    }
+
+                    //Create file object with directory & image name
+                    File file = new File(directory, tenAnh);
+
+                    //Save uploaded file into above directory
+                    fUpload.transferTo(file);
+                }
+                catch (IOException ex) {
+                    System.out.println("Có lỗi xảy ra khi upload file: " + ex.getMessage());
+                }
+            }
+
+            //Assign uploaded file to book object
+            objSach.setAnhSach(tenAnh);
+
+            //In case of insert a new book
+            if(isInsert)
+            {
+                //Use if-else to check if maSach is duplicated
+                if(!maSachCheck.equals(objSach.getMaSach()))
+                {
+                    //Insert a new book
+                    ketQua = sachService.themMoi(objSach);
+                    objSach.setNgayTao(new Date());
+                    objSach.setNgayCapNhat(new Date());
+                }
+                else
+                {
+                    //Add alert to model
+                    model.addAttribute("duplicateId", "Mã sách này đã tồn tại");
+
+                    //Keep user infomation which has typed
+                    model.addAttribute("sach", objSach);
+
+                    //Keep current page
+                    return "admin/SachAdd";
+                }
+            }
+            else //In case of update book information
+            {
+                //Update book information
+                ketQua = sachService.capNhat(objSach);
+                objSach.setNgayCapNhat(new Date());
+            }
+
+            if(ketQua)
+            {
+                return "redirect:/admin/sach";
+            }
+        }
+
+        return "admin/SachAdd";
     }
 
     /**
@@ -120,14 +226,18 @@ public class SachController {
             catch (DataIntegrityViolationException ex)
             {
                 //Add to model
-                model.addAttribute("error", "Không thể xóa thông tin này. Vui lòng chọn thông tin khác");
-
+                model.addAttribute("error", "Không thể xóa thông tin này. Vui lòng thử lại");
             }
         }
 
         //Return to main page if deletion fails
+        //Get list
         List<Sach> lstSach = sachService.layDanhSach();
+
+        //Add to model
         model.addAttribute("lstSach", lstSach);
+
+        //Return
         return "admin/QuanLySach";
     }
 

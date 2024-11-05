@@ -68,7 +68,7 @@ public class SachController {
      * @return
      */
     @RequestMapping(value = "/admin/sach/themMoiSach", method = RequestMethod.POST)
-    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, @RequestParam("fUpload")MultipartFile fUpload, HttpServletRequest request, Model model)
+    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, @RequestParam("fUpload") MultipartFile fUpload, HttpServletRequest request, Model model)
     {
         System.out.println("Mã sách: " + objSach.getMaSach());
         System.out.println("Tên sách: " + objSach.getTenSach());
@@ -93,7 +93,7 @@ public class SachController {
             }
 
             //Xử lý upload file
-            if(fUpload != null)
+            if(!fUpload.isEmpty())
             {
                 //Lấy tên ảnh
                 tenAnh = fUpload.getOriginalFilename();

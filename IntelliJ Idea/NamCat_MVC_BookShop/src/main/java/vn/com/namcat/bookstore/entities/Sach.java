@@ -1,27 +1,22 @@
 package vn.com.namcat.bookstore.entities;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 public class Sach {
 
     //Declare attributes
-    @NotBlank(message = "Bạn phải nhập mã sách")
+    @NotBlank(message = "Bạn phải chọn mã chủ đề")
     private String maSach;
-    @NotEmpty(message = "Bạn phải nhập tên sách")
+    @NotEmpty(message = "Bạn cần phải nhập tên sách")
     private String tenSach;
     private String moTa;
     private String anhSach;
     private String tacGia;
-    @Digits(integer = 10, fraction = 0, message = "Giá sách phải là số nguyên dương")
-    @Min(value = 0, message = "Bạn phải nhập giá sách lớn hơn không")
     private int giaSach;
     private Date ngayTao;
     private Date ngayCapNhat;
-    @NotEmpty(message = "Bạn phải chọn mã chủ đề")
+
     private String maChuDe;
     private int soLuong = 0;
 

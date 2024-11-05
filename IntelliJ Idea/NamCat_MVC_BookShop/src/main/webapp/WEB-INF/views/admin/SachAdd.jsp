@@ -11,9 +11,9 @@
 <html>
 <head>
     <title>Thêm mới hoặc sửa thông tin sách</title>
-    <link type="text/css" rel="stylesheet" href="<c:url value='resource/css/bootstrap.css'/>"/>
-    <script type="text/javascript" src="<c:url value='resource/js/jquery-3.7.1.js'/>"></script>
-    <script type="text/javascript" src="<c:url value='resource/js/bootstrap.js'/>"></script>
+    <link rel="stylesheet" href='<c:url value="/resources/css/bootstrap.css"/>'>
+    <script type="text/javascript" src='<c:url value="/resources/js/jquery-3.7.1.js"/>'></script>
+    <script type="text/javascript" src='<c:url value="/resources/js/bootstrap.js"/>'></script>
     <style type="text/css">
         .errorInfo {
             color: red;
@@ -27,7 +27,7 @@
         }
 
         .row-wrapper {
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .input-style {
@@ -45,7 +45,7 @@
             <div class="row row-wrapper">
                 <label class="col-md-1 label-width">Mã sách (*):</label>
                 <div class="col-md-6">
-                    <form:input path="maSach" cssClass="form-control input-style"/><br>
+                    <form:input path="maSach" cssClass="form-control input-style" readonly="${not empty hSachId}"/>
                     <form:errors path="maSach" cssClass="errorInfo"/>
                     <input type="hidden" value="${hSachId}" name="idCheck">
                 </div>
@@ -53,7 +53,7 @@
             <div class="row row-wrapper">
                 <label class="col-md-1 label-width">Tên sách (*):</label>
                 <div class="col-md-6">
-                    <form:input path="tenSach" cssClass="form-control input-style"/><br>
+                    <form:input path="tenSach" cssClass="form-control input-style"/>
                     <form:errors path="tenSach" cssClass="errorInfo"/>
                 </div>
             </div>
@@ -72,15 +72,13 @@
             <div class="row row-wrapper">
                 <label class="col-md-1 label-width">Giá sách:</label>
                 <div class="col-md-5 input-padding">
-                    <form:textarea path="giaSach" cssClass="form-control input-style"/><br>
-                    <form:errors path="giaSach" cssClass="errorInfo"/>
+                    <form:input path="giaSach" cssClass="form-control input-style"/><br>
                 </div>
             </div>
             <div class="row row-wrapper">
                 <label class="col-md-1 label-width">Tác giả:</label>
                 <div class="col-md-5 input-padding">
-                    <form:textarea path="tacGia" cssClass="form-control"/><br>
-                    <form:errors path="giaSach" cssClass="errorInfo"/>
+                    <form:input path="tacGia" cssClass="form-control"/><br>
                 </div>
             </div>
             <div class="row row-wrapper">
@@ -91,14 +89,16 @@
                         <c:forEach var="cd" items="${lstChuDe}">
                             <form:option value="${cd.maChuDe}">${cd.tenChuDe}</form:option>
                         </c:forEach>
-                    </form:select>
-                    <form:errors path="maChuDe" cssClass="errorInfo"/><br>
+                    </form:select><br>
                 </div>
             </div>
-            <div>
-                <input type="submit" value="Cập nhật" class="btn btn-primary"/>
-                &nbsp;
-                <a href="${urlList}" class="btn btn-dark">Trở lại</a>
+            <div class="row">
+                <label class="col-md-1"></label>
+                <div class="col-md-10">
+                    <input type="submit" value="Cập nhật" class="btn btn-primary"/>
+                    &nbsp;
+                    <a href="${urlList}" class="btn btn-dark">Trở lại</a>
+                </div>
             </div>
         </div>
     </fieldset>

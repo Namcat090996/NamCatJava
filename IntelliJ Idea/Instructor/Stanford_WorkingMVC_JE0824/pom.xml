@@ -63,7 +63,6 @@
       <artifactId>hibernate-validator</artifactId>
       <version>6.1.6.Final</version>
     </dependency>
-
   </dependencies>
   <build>
     <finalName>Stanford_WorkingMVC_JE0824</finalName>

@@ -18,11 +18,23 @@
         .errorfinfo
         {
             color: red;
+            font-family: Arial;
+            font-style: italic;
+            height: 20px;
         }
 
-        .custom-width
+        .label-width
         {
-            width: 5%;
+            width: 7%;
+            padding-right: 0px;
+        }
+
+        .input-width {
+            margin-top: 15px;
+        }
+
+        .input-width-2 {
+            margin-bottom: 3px;
         }
     </style>
 </head>
@@ -34,17 +46,17 @@
     <fieldset>
         <legend>Nhập thông tin sách</legend>
         <div class="container-fluid">
-            <div class="row">
-                <label class="col-md-1">Mã sách:</label>
+            <div class="row input-width">
+                <label class="col-md-1 label-width">Mã sách (*):</label>
                 <div class="col-md-6">
-                    <form:input path="maSach" cssClass="form-control"/><br>
+                    <form:input path="maSach" cssClass="form-control input-width-2"/>
                     <form:errors path="maSach" cssClass="errorfinfo"/>
                 </div>
             </div>
-            <div class="row">
-                <label class="col-md-2">Tên sách:</label>
-                <div class="col-md-10">
-                    <form:input path="tenSach" cssClass="form-control"/><br>
+            <div class="row input-width">
+                <label class="col-md-1 label-width">Tên sách:</label>
+                <div class="col-md-6">
+                    <form:input path="tenSach" cssClass="form-control input-width-2"/>
                     <form:errors path="tenSach" cssClass="errorfinfo"/>
                 </div>
             </div>

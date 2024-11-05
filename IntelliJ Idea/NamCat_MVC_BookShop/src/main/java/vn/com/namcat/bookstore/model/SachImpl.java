@@ -15,6 +15,25 @@ public class SachImpl implements SachDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Override
+    public List<Sach> timKiemSach(String tuKhoa, String maCD) {
+        //Declare SQL command
+        String strSearch = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, NgayTao, NgayCapNhat, TacGia, MaChuDe from Sach where 1=1";
+
+        if(tuKhoa != null && !tuKhoa.isEmpty())
+        {
+            strSearch += " and (MaSach = '" + tuKhoa + "' OR TenSach like '%" + tuKhoa + "%' OR TacGia like '%" + tuKhoa + "%')";
+        }
+
+        if(maCD != null && !maCD.isEmpty())
+        {
+            strSearch += " and MaChuDe = '" + maCD + "'";
+        }
+
+        //Execute the queries and return result
+        return jdbcTemplate.query(strSearch, new SachMapper());
+    }
+
     /**
      * Function to get list
      * @return

@@ -27,11 +27,17 @@
         }
 
         .row-wrapper {
-            margin-top: 10px;
+            margin-top: 25px;
         }
 
         .input-style {
             margin-bottom: 3px;
+        }
+
+        .legend {
+            position: relative;
+            left: 0.6%;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -40,7 +46,7 @@
 <c:url value="/admin/sach" var="urlList"/>
 <form:form method="post" action="${urlInsert}" modelAttribute="sach" acceptCharset="utf-8" enctype="multipart/form-data">
     <fieldset>
-        <legend>Nhập thông tin sách</legend>
+        <legend class="legend">Nhập thông tin sách</legend>
         <div class="container-fluid">
             <div class="row row-wrapper">
                 <label class="col-md-1 label-width">Mã sách (*):</label>
@@ -48,6 +54,7 @@
                     <form:input path="maSach" cssClass="form-control input-style" readonly="${not empty hSachId}"/>
                     <form:errors path="maSach" cssClass="errorInfo"/>
                     <input type="hidden" value="${hSachId}" name="idCheck">
+                    <div class="errorInfo">${duplicateId}</div>
                 </div>
             </div>
             <div class="row row-wrapper">
@@ -59,43 +66,44 @@
             </div>
             <div class="row row-wrapper">
                 <label class="col-md-1 label-width">Mô tả:</label>
-                <div class="col-md-5 input-padding">
+                <div class="col-md-6 input-padding">
                     <form:textarea path="moTa" cssClass="form-control"/><br>
                 </div>
             </div>
-            <div class="row row-wrapper">
+            <div class="row" style="margin-bottom: 25px">
                 <label class="col-md-1 label-width">Ảnh sách:</label>
-                <div class="col-md-5 input-padding">
+                <div class="col-md-6 input-padding">
                     <input type="file" name="fUpload"/><br>
                 </div>
             </div>
             <div class="row row-wrapper">
                 <label class="col-md-1 label-width">Giá sách:</label>
-                <div class="col-md-5 input-padding">
-                    <form:input path="giaSach" cssClass="form-control input-style"/><br>
+                <div class="col-md-6">
+                    <form:input path="giaSach" cssClass="form-control input-style" placeholder="Nhập số tiền"/>
                 </div>
             </div>
             <div class="row row-wrapper">
                 <label class="col-md-1 label-width">Tác giả:</label>
-                <div class="col-md-5 input-padding">
-                    <form:input path="tacGia" cssClass="form-control"/><br>
+                <div class="col-md-6">
+                    <form:input path="tacGia" cssClass="form-control input-style"/>
                 </div>
             </div>
             <div class="row row-wrapper">
                 <label class="col-md-1 label-width">Chủ đề:</label>
-                <div class="col-md-5 input-padding">
+                <div class="col-md-6">
                     <form:select path="maChuDe" cssClass="form-control input-style">
                         <form:option value="">--- Chọn chủ đề ---</form:option>
                         <c:forEach var="cd" items="${lstChuDe}">
                             <form:option value="${cd.maChuDe}">${cd.tenChuDe}</form:option>
                         </c:forEach>
-                    </form:select><br>
+                    </form:select>
+                    <form:errors path="maChuDe" cssClass="errorInfo"/>
                 </div>
             </div>
-            <div class="row">
-                <label class="col-md-1"></label>
+            <div class="row row-wrapper">
+                <label class="col-md-1 label-width"></label>
                 <div class="col-md-10">
-                    <input type="submit" value="Cập nhật" class="btn btn-primary"/>
+                    <input type="submit" value="Cập nhật" class="btn btn-primary input-padding"/>
                     &nbsp;
                     <a href="${urlList}" class="btn btn-dark">Trở lại</a>
                 </div>

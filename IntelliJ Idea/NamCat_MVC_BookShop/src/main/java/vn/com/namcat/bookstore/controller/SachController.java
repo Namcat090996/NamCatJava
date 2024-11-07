@@ -115,7 +115,7 @@ public class SachController {
             Sach objSachOld = sachService.layChiTiet(objSach.getMaSach());
 
             //In case of updating information
-            if(objSachOld != null)
+            if(!maSachCheck.isEmpty())
             {
                 isInsert = false;
                 //Keep old book name if user don't upload image
@@ -140,7 +140,7 @@ public class SachController {
                     //Check if the directory has existed -> check if the path has existed
                     if(!directory.exists())
                     {
-                        //If the directory & pach have not existed, create the directory
+                        //If the directory & path have not existed, create the directory
                         directory.mkdir();
                     }
 
@@ -162,7 +162,7 @@ public class SachController {
             if(isInsert)
             {
                 //Use if-else to check if maSach is duplicated
-                if(!maSachCheck.equals(objSach.getMaSach()))
+                if(objSachOld == null)
                 {
                     //Insert a new book
                     ketQua = sachService.themMoi(objSach);

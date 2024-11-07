@@ -6,17 +6,19 @@ import java.util.Date;
 public class Sach {
 
     //Declare attributes
-    @NotBlank(message = "Bạn phải chọn mã chủ đề")
+    @NotBlank(message = "Bạn phải chọn mã sách")
     private String maSach;
-    @NotEmpty(message = "Bạn cần phải nhập tên sách")
+    @NotEmpty(message = "Bạn phải nhập tên sách")
     private String tenSach;
     private String moTa;
     private String anhSach;
     private String tacGia;
+    @Digits(integer = 10, fraction = 0, message = "Giá sách phải là số nguyên dương")
+    @Min(value = 0, message = "Giá sách phải là số nguyên dương")
     private int giaSach;
     private Date ngayTao;
     private Date ngayCapNhat;
-
+    @NotEmpty(message = "Bạn phải chọn mã chủ đề")
     private String maChuDe;
     private int soLuong = 0;
 

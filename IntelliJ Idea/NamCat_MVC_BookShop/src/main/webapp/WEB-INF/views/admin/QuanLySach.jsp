@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri = "http://www.springframework.org/tags/form" prefix ="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <title>Quản lý thông tin sách</title>
@@ -16,17 +17,25 @@
     <script type="text/javascript" src='<c:url value="/resources/js/bootstrap.js"/>'></script>
     <style type="text/css">
         .custom-width {
-            width: 5%;
+            width: 6%;
+            padding-right: 0px;
+            padding-left: 1.7%;
         }
 
         .search {
             position: relative;
-            left: 5%;
+            left: 15%;
         }
 
         .legend {
             position: relative;
-            left: 2%;
+            left: 0.7%;
+            margin-bottom: 10px;
+        }
+
+        .row-wrapper {
+            position: relative;
+            left: 0.3%;
         }
     </style>
 </head>
@@ -39,15 +48,15 @@
 <div style="text-align: center; margin-top: 10px">
     <h2>Quản lý thông tin sách</h2>
 </div>
-<form:form action="${urlTimKiem}" modelAttribute="sach" acceptCharset="utf-8">
+<form:form action="${urlTimKiem}" modelAttribute="sach" acceptCharset="utf-8" cssStyle="margin-bottom: 10px">
     <fieldset>
         <legend class="legend">Nhập thông tin tìm kiếm</legend>
-        <div class="row">
-            <label class="custom-width d-flex align-items-center justify-content-center">Từ khóa:</label>
+        <div class="row row-wrapper align-items-center">
+            <label class="custom-width">Từ khóa:</label>
             <div class="col-md-2">
                 <form:input path="tuKhoa" cssClass="form-control"/>
             </div>
-            <label class="custom-width d-flex align-items-center justify-content-center">Chủ đề:</label>
+            <label class="custom-width">Chủ đề:</label>
             <div class="col-md-2">
                 <form:select path="maChuDe" cssClass="form-control">
                     <form:option value="">--- Chọn chủ đề ---</form:option>
@@ -88,8 +97,12 @@
                 <td>${s.maSach}</td>
                 <td>${s.tenSach}</td>
                 <td>${s.moTa}</td>
-                <td>${s.giaSach}</td>
-                <td>${s.ngayTao}</td>
+                <td>
+                    <fmt:formatNumber value="${s.giaSach}" pattern="#,##0.###"/>đ
+                </td>
+                <td>
+                    <fmt:formatDate value="${s.ngayTao}" pattern="dd-MM-yyyy"/>
+                </td>
                 <td>${s.tacGia}</td>
                 <td>${s.maChuDe}</td>
                 <td>

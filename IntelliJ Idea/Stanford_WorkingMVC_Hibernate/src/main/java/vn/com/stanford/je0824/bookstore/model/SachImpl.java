@@ -1,5 +1,8 @@
 package vn.com.stanford.je0824.bookstore.model;
 
+import jakarta.persistence.TypedQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -7,13 +10,14 @@ import org.springframework.stereotype.Repository;
 import vn.com.stanford.je0824.bookstore.entities.Sach;
 import vn.com.stanford.je0824.bookstore.entities.SachMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository("sachDao")
 public class SachImpl implements SachDao {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    JdbcTemplate jdbcTemplate;
 
     /**
      * Tìm kiếm thông tin sách theo nhiều tiêu chí
@@ -41,8 +45,19 @@ public class SachImpl implements SachDao {
     @Override
     public List<Sach> getList() {
 
-        String strSQL = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, NgayTao, NgayCapNhat, TacGia, MaChuDe from Sach";
-        return jdbcTemplate.query(strSQL, new SachMapper());
+        List<Sach> lstSach = new ArrayList<Sach>();
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Transaction tx = session.beginTransaction();
+
+        TypedQuery<Sach> query = session.createQuery("from Sach", Sach.class);
+
+        lstSach = query.getResultList();
+
+        tx.commit();
+
+        return lstSach;
     }
 
     @Override

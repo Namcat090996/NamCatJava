@@ -9,6 +9,7 @@
   <url>http://maven.apache.org</url>
   <properties>
     <spring-version>5.3.39</spring-version>
+    <hibernate-version>6.6.0.Final</hibernate-version>
   </properties>
   <dependencies>
     <dependency>
@@ -57,13 +58,22 @@
       <artifactId>validation-api</artifactId>
       <version>2.0.1.Final</version>
     </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-hikaricp</artifactId>
+      <version>${hibernate-version}</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>6.1.6.Final</version>
+      <version>8.0.0.Final</version>
     </dependency>
-
   </dependencies>
   <build>
     <finalName>Stanford_WorkingMVC_Hibernate</finalName>

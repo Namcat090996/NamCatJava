@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="vn.com.stanford.je0824.bookstore.entities">
 <class name="Sach" table="Sach">
-    <id name="maSach" type="string" length="10">
+    <id name="maSach" type="string">
         <column name="MaSach"/>
     </id>
     <property name="tenSach" column="TenSach" type="string" length="150"/>

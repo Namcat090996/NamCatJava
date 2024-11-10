@@ -53,6 +53,15 @@ public class Sach {
     private String moTa;
     private String anhSach;
     private String tacGia;
+    private int daDuyet = 0;
+
+    public int getDaDuyet() {
+        return daDuyet;
+    }
+
+    public void setDaDuyet(int daDuyet) {
+        this.daDuyet = daDuyet;
+    }
 
     @NotNull(message = "Bạn cần phải nhập giá sách")
     @Min(value = 0, message = "Bạn phải nhập giá sách lớn hơn 0")

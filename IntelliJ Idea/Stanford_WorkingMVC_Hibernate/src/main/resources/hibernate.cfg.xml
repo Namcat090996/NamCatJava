@@ -18,6 +18,5 @@
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
         <!--Khai báo các file ánh xạ-->
         <mapping resource="Sach.hbm.xml"/>
-        <mapping resource="ChuDe.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

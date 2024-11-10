@@ -28,7 +28,7 @@ public class SachImpl implements SachDao {
     @Override
     public List<Sach> timKiemSach(String tuKhoa, String maCD)
     {
-        String strSQL = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach, NgayTao, NgayCapNhat, TacGia, MaChuDe from Sach where 1=1";
+        String strSQL = "Select MaSach, TenSach, MoTa, AnhSach, GiaSach,DaDuyet, NgayTao, NgayCapNhat, TacGia, MaChuDe from Sach where 1=1";
         if(tuKhoa!= null && !tuKhoa.isEmpty())
         {
             strSQL += " and (MaSach = '" + tuKhoa + "' OR TenSach like '%" + tuKhoa + "%' OR TacGia like '%" + tuKhoa + "%')";
@@ -39,7 +39,22 @@ public class SachImpl implements SachDao {
             strSQL+= " and MaChuDe = '" + maCD + "'";
         }
 
-        return jdbcTemplate.query(strSQL, new SachMapper());
+        //Khai báo danh sách
+        List<Sach> lstSach = new ArrayList<>();
+
+        //Kết nối đến db qua hibernate
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        //Bắt đầu phiên làm việc
+        Transaction tx = session.beginTransaction();
+
+        TypedQuery<Sach> query = session.createNativeQuery(strSQL, Sach.class);
+
+        lstSach = query.getResultList();
+
+        tx.commit();
+
+        return lstSach;
     }
 
     @Override
@@ -65,48 +80,63 @@ public class SachImpl implements SachDao {
 
     @Override
     public Sach getById(String maSach) {
-        try
-        {
-            String strSQL = "Select * from Sach where MaSach = ?";
 
-            return jdbcTemplate.queryForObject(strSQL,new SachMapper(), maSach);
-        }
-        catch (EmptyResultDataAccessException ex)
-        {
-            return null;
-        }
+        Sach objSach = null;
+        //Kết nối đến db qua hibernate
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        //Bắt đầu phiên làm việc
+        Transaction tx = session.beginTransaction();
+
+        objSach = session.get(Sach.class, maSach);
+
+        tx.commit();
+
+        return objSach;
     }
 
     @Override
-    public boolean add(Sach obj) {
-
-        String strInsert = "Insert into Sach(MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, NgayTao, NgayCapNhat, MaChuDe) values(?,?,?,?,?,?,?,?,?)";
-
-        boolean ketQua = false;
-        ketQua = jdbcTemplate.update(strInsert, obj.getMaSach(), obj.getTenSach(), obj.getMoTa(), obj.getAnhSach(), obj.getGiaSach(), obj.getTacGia(), obj.getNgayTao(), obj.getNgayCapNhat(), obj.getMaChuDe()) > 0;
-
-        return ketQua;
+    public boolean add(Sach objSach) {
+        //Kết nối đến db qua hibernate
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Bắt đầu phiên làm việc
+        Transaction tx = session.beginTransaction();
+        Object obj = session.save(objSach);
+        tx.commit();
+        if(obj != null)
+            return  true;
+        return false;
     }
 
     @Override
     public boolean update(Sach obj) {
+        //Kết nối đến db qua hibernate
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Bắt đầu phiên làm việc
+        Transaction tx = session.beginTransaction();
+        session.update(obj);
+        tx.commit();
 
-        String strUpdate = "Update Sach set TenSach=?,MoTa=?,AnhSach=?,GiaSach=?,TacGia=?,NgayCapNhat=?,MaChuDe=? where MaSach = ?";
-
-        boolean ketQua = false;
-        ketQua = jdbcTemplate.update(strUpdate, obj.getTenSach(), obj.getMoTa(), obj.getAnhSach(), obj.getGiaSach(), obj.getTacGia(), obj.getNgayCapNhat(), obj.getMaChuDe(), obj.getMaSach()) > 0;
-
-        return ketQua;
+        return  true;
     }
 
     @Override
     public boolean delete(String id) {
 
-        String strDelete = "Delete from Sach where MaSach = ?";
+        //Kết nối đến db qua hibernate
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Bắt đầu phiên làm việc
+        Transaction tx = session.beginTransaction();
+        Sach objSach = session.get(Sach.class, id);
+        if(objSach != null)
+        {
+            session.delete(objSach);
 
-        boolean ketQua = false;
-        ketQua = jdbcTemplate.update(strDelete, id) > 0;
+            tx.commit();
 
-        return ketQua;
+            return true;
+        }
+
+        return false;
     }
 }

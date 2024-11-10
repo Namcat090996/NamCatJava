@@ -56,7 +56,7 @@ public class Sach {
 
     @NotNull(message = "Bạn cần phải nhập giá sách")
     @Min(value = 0, message = "Bạn phải nhập giá sách lớn hơn 0")
-    private int giaSach;
+    private double giaSach;
     private Date ngayTao;
     private Date ngayCapNhat;
     public Date getNgayCapNhat() {
@@ -94,10 +94,10 @@ public class Sach {
     public void setTacGia(String tacGia) {
         this.tacGia = tacGia;
     }
-    public int getGiaSach() {
+    public double getGiaSach() {
         return giaSach;
     }
-    public void setGiaSach(int giaSach) {
+    public void setGiaSach(double giaSach) {
         this.giaSach = giaSach;
     }
     public Date getNgayTao() {
@@ -122,4 +122,5 @@ public class Sach {
     public void setDaDuyet(int daDuyet) {
         this.daDuyet = daDuyet;
     }
+
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="vn.com.stanford.je0824.bookstore.entities">
+    <class name="ChuDe" table="chude">
+        <id name="maChuDe" type="string" length="10">
+            <column name="MaChuDe"/>
+        </id>
+        <property name="tenChuDe" column="TenChuDe" type="string" length="250"/>
+    </class>
+</hibernate-mapping>

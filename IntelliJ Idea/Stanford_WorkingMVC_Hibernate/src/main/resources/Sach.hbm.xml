@@ -16,6 +16,5 @@
         <property name="ngayCapNhat" column="MaSach" type="string" length="150"/>
         <property name="daDuyet" column="MaSach" type="string" length="150"/>
         <property name="maChuDe" column="MaSach" type="string" length="150"/>
-
     </class>
 </hibernate-mapping>

@@ -2,6 +2,7 @@ package vn.com.stanford.je0824.bookstore.model;
 
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -39,12 +40,23 @@ public class SachImpl implements SachDao {
             strSQL+= " and MaChuDe = '" + maCD + "'";
         }
 
-        return jdbcTemplate.query(strSQL, new SachMapper());
+        List<Sach> lstSach = new ArrayList<Sach>();
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Transaction tx = session.beginTransaction();
+
+        TypedQuery<Sach> query = session.createNativeQuery(strSQL, Sach.class);
+
+        lstSach = query.getResultList();
+
+        tx.commit();
+
+        return lstSach;
     }
 
     @Override
     public List<Sach> getList() {
-
         List<Sach> lstSach = new ArrayList<Sach>();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -62,38 +74,51 @@ public class SachImpl implements SachDao {
 
     @Override
     public Sach getById(String maSach) {
-        try
-        {
-            String strSQL = "Select * from Sach where MaSach = ?";
 
-            return jdbcTemplate.queryForObject(strSQL,new SachMapper(), maSach);
-        }
-        catch (EmptyResultDataAccessException ex)
-        {
-            return null;
-        }
+        Sach objSach = null;
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Transaction tx = session.beginTransaction();
+
+        objSach = session.get(Sach.class, maSach);
+
+        tx.commit();
+
+        return objSach;
     }
 
     @Override
     public boolean add(Sach obj) {
 
-        String strInsert = "Insert into Sach(MaSach, TenSach, MoTa, AnhSach, GiaSach, TacGia, NgayTao, NgayCapNhat, MaChuDe) values(?,?,?,?,?,?,?,?,?)";
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        boolean ketQua = false;
-        ketQua = jdbcTemplate.update(strInsert, obj.getMaSach(), obj.getTenSach(), obj.getMoTa(), obj.getAnhSach(), obj.getGiaSach(), obj.getTacGia(), obj.getNgayTao(), obj.getNgayCapNhat(), obj.getMaChuDe()) > 0;
+        Transaction tx = session.beginTransaction();
 
-        return ketQua;
+        Object objSach = session.save(obj);
+
+        tx.commit();
+
+        if(objSach != null)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     @Override
     public boolean update(Sach obj) {
 
-        String strUpdate = "Update Sach set TenSach=?,MoTa=?,AnhSach=?,GiaSach=?,TacGia=?,NgayCapNhat=?,MaChuDe=? where MaSach = ?";
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        boolean ketQua = false;
-        ketQua = jdbcTemplate.update(strUpdate, obj.getTenSach(), obj.getMoTa(), obj.getAnhSach(), obj.getGiaSach(), obj.getTacGia(), obj.getNgayCapNhat(), obj.getMaChuDe(), obj.getMaSach()) > 0;
+        Transaction tx = session.beginTransaction();
 
-        return ketQua;
+        session.update(obj);
+
+        tx.commit();
+
+        return true;
     }
 
     @Override

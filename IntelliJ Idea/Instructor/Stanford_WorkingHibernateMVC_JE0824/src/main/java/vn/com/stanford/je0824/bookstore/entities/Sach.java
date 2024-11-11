@@ -1,5 +1,8 @@
 package vn.com.stanford.je0824.bookstore.entities;
 
+import jakarta.persistence.Column;
+import org.springframework.lang.Nullable;
+
 import javax.validation.constraints.*;
 import java.util.Date;
 

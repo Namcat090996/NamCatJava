@@ -1,0 +1,17 @@
+package vn.com.namcat_bookstore_sbt.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class GioiThieuController {
+
+    @RequestMapping(value = "/hello")
+    public String hienThiLoiGioiThieu(Model model)
+    {
+        model.addAttribute("loiChao", "Hello world");
+
+        return "GioiThieu";
+    }
+}

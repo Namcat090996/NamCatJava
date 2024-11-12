@@ -1,29 +1,36 @@
-package vn.com.stanford.stanford_bookstore_sb_je0824.model;
+package vn.com.namcat_bookstore_sbt.model;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
+
+    //Declare variables
     private static SessionFactory sessionFactory;
 
-    /**
-     * Hàm tạo đối tượng kết noi trong Hibernate
-     * @return
-     */
+    //Function to build session factory from charged configuration
     private static SessionFactory buildSessionFactory() {
+
+        //Declare configuration
         Configuration config = new Configuration();
 
+        //Charge configuration from hibernate configuration file
         config.configure("hibernate.cfg.xml");
 
+        //Return result
         return config.buildSessionFactory();
     }
 
-    public static SessionFactory getSessionFactory() {
+    //Functon to get session factory (singleton)
+    public static SessionFactory getSessionFactory()
+    {
+        //If session factory didn't exist before
         if(sessionFactory == null)
         {
             sessionFactory = buildSessionFactory();
         }
 
+        //Return result
         return sessionFactory;
     }
 }

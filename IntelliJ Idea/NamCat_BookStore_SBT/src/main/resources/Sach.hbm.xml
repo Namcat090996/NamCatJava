@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="vn.com.namcat_bookstore_sbt.entities">
+    <class name="Sach" table="Sach">
+        <id name="maSach" type="string">
+            <column name="MaSach"/>
+        </id>
+        <property name="tenSach" column="TenSach" type="string" length="150"/>
+        <property name="moTa" column="MoTa" type="string" length="255"/>
+        <property name="anhSach" column="AnhSach" type="string" length="255"/>
+        <property name="tacGia" column="TacGia" type="string" length="30"/>
+        <property name="giaSach" column="GiaSach" type="double"/>
+        <property name="ngayTao" column="NgayTao" type="date"/>
+        <property name="ngayCapNhat" column="NgayCapNhat" type="date"/>
+        <property name="daDuyet" column="DaDuyet" type="int" not-null="false"/>
+        <property name="maChuDe" column="MaChuDe" type="string" length="10"/>
+    </class>
+
+</hibernate-mapping>

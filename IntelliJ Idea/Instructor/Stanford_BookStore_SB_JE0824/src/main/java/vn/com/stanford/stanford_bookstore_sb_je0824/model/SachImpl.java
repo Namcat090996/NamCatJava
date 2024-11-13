@@ -76,18 +76,23 @@ public class SachImpl implements SachDao{
     @Override
     public Sach getById(String maSach) {
 
+        //Declare an object
         Sach objSach = null;
-        //Kết nối đến db qua hibernate
-        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        //Bắt đầu phiên làm việc
-        Transaction tx = session.beginTransaction();
+        //Use try-catch to avoid errors related session
+        try(Session session = HibernateUtil.getSessionFactory().openSession())
+        {
+            //Get object by id
+            objSach = session.get(Sach.class, maSach);
+        }
+        catch (Exception ex)
+        {
+            //Print errors
+            ex.printStackTrace();
+        }
 
-        objSach = session.get(Sach.class, maSach);
-
-        tx.commit();
-
-        return objSach;
+        //Return result
+        return objSach == null ? new Sach() : objSach;
     }
 
     @Override

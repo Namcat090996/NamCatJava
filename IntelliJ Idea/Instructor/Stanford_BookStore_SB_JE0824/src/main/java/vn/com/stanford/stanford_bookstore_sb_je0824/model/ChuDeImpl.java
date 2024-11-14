@@ -13,42 +13,23 @@ import java.util.List;
 
 @Repository("chuDeDao")
 public class ChuDeImpl implements ChuDeDao {
+
+    ChuDeRepository chuDeRepository;
+
     /**
      * Hàm lấy danh sách chủ đề
      * @return
      */
     @Override
     public List<ChuDe> getList() {
-        //Khai báo danh sách
-        List<ChuDe> lstChuDe = new ArrayList<>();
-
-        //Kết nối đến db qua hibernate
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        //Bắt đầu phiên làm việc
-        Transaction tx = session.beginTransaction();
-
-        TypedQuery<ChuDe> query = session.createQuery("from ChuDe", ChuDe.class);
-
-        lstChuDe = query.getResultList();
-
-        tx.commit();
-
-        return lstChuDe;
+        return chuDeRepository.findAll();
     }
 
     @Override
-    public ChuDe getById(String id) {
+    public ChuDe getById(String maSach) {
         ChuDe objChuDe = null;
-        //Kết nối đến db qua hibernate
-        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        //Bắt đầu phiên làm việc
-        Transaction tx = session.beginTransaction();
-
-        objChuDe = session.get(ChuDe.class, id);
-
-        tx.commit();
+        objChuDe = chuDeRepository.findById(maSach).get();
 
         return objChuDe;
     }
@@ -56,46 +37,41 @@ public class ChuDeImpl implements ChuDeDao {
     @Override
     public boolean add(ChuDe objCD) {
 
-        //Kết nối đến db qua hibernate
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        //Bắt đầu phiên làm việc
-        Transaction tx = session.beginTransaction();
-        Object obj = session.save(objCD);
-        tx.commit();
-        if(obj != null)
-            return  true;
+        ChuDe objChuDe = chuDeRepository.save(objCD);
+
+        if(objCD != null)
+        {
+            return true;
+        }
+
         return false;
     }
 
     @Override
     public boolean update(ChuDe obj) {
 
-        //Kết nối đến db qua hibernate
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        //Bắt đầu phiên làm việc
-        Transaction tx = session.beginTransaction();
-        session.update(obj);
-        tx.commit();
+        ChuDe objCD = getById(obj.getMaChuDe());
 
-        return  true;
+        if(objCD != null)
+        {
+            //Gan lai gia tri
+            objCD.setTenChuDe(obj.getTenChuDe());
+            chuDeRepository.save(objCD);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
     public boolean delete(String id) {
         //Kết nối đến db qua hibernate
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        //Bắt đầu phiên làm việc
-        Transaction tx = session.beginTransaction();
-        ChuDe objCD = session.get(ChuDe.class, id);
+        ChuDe objCD = getById(id);
         if(objCD != null)
         {
-            session.delete(objCD);
-
-            tx.commit();
-
+            chuDeRepository.delete(objCD);
             return true;
         }
-
         return false;
     }
 }

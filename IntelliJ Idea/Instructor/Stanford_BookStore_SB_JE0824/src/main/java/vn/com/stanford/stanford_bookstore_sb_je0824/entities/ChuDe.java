@@ -1,8 +1,18 @@
 package vn.com.stanford.stanford_bookstore_sb_je0824.entities;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "ChuDe")
 public class ChuDe {
+    @Id
+    @Column(name = "MaChuDe", nullable = false, length = 10)
     private String maChuDe;
 
+    @Column(name = "TenChuDe", nullable = true, length = 255)
     private String tenChuDe;
 
     public String getTenChuDe() {

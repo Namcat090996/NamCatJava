@@ -1,5 +1,9 @@
 package vn.com.stanford.stanford_bookstore_sb_je0824.entities;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,6 +11,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "Sach")
 public class Sach {
     /**
      * Hàm khởi tạo không có đối số
@@ -41,6 +47,8 @@ public class Sach {
         this.giaSach = giaSach;
     }
 
+    @Id
+    @Column(name = "MaSach", nullable = false, length = 10)
     @NotBlank(message = "Bạn cần phải nhập mã sách")
     private String maSach;
 
@@ -52,16 +60,24 @@ public class Sach {
         this.maSach = maSach;
     }
 
+    @Column(name = "TenSach", nullable = true, length = 255)
     @NotEmpty(message = "Bạn cần phải nhập tên sách")
     private String tenSach;
+    @Column(name = "MoTa", nullable = true, length = 500)
     private String moTa;
+    @Column(name = "AnhSach", nullable = true, length = 50)
     private String anhSach;
+    @Column(name = "TacGia", nullable = true, length = 30)
     private String tacGia;
 
+    @Column(name = "GiaSach", nullable = true)
     @NotNull(message = "Bạn cần phải nhập giá sách")
     @Min(value = 0, message = "Bạn phải nhập giá sách lớn hơn 0")
     private double giaSach;
+
+    @Column(name = "NgayTao", nullable = true)
     private Date ngayTao;
+    @Column(name = "NgayCapNhat", nullable = true)
     private Date ngayCapNhat;
     public Date getNgayCapNhat() {
         return ngayCapNhat;
@@ -71,7 +87,7 @@ public class Sach {
         this.ngayCapNhat = ngayCapNhat;
     }
 
-
+    @Column(name = "MaChuDe", nullable = false)
     private String maChuDe;
 
     public String getTenSach() {

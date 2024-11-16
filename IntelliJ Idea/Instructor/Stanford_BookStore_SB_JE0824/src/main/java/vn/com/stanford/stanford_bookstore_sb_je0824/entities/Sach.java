@@ -63,21 +63,20 @@ public class Sach {
     @Column(name = "TenSach", nullable = true, length = 255)
     @NotEmpty(message = "Bạn cần phải nhập tên sách")
     private String tenSach;
-    @Column(name = "MoTa", nullable = true, length = 500)
+    @Column(name="MoTa", nullable = true, length = 500)
     private String moTa;
-    @Column(name = "AnhSach", nullable = true, length = 50)
+    @Column(name="AnhSach", nullable = true, length = 50)
     private String anhSach;
-    @Column(name = "TacGia", nullable = true, length = 30)
+    @Column(name="TacGia", nullable = true, length = 30)
     private String tacGia;
 
     @Column(name = "GiaSach", nullable = true)
     @NotNull(message = "Bạn cần phải nhập giá sách")
     @Min(value = 0, message = "Bạn phải nhập giá sách lớn hơn 0")
     private double giaSach;
-
-    @Column(name = "NgayTao", nullable = true)
+    @Column(name="NgayTao", nullable = true)
     private Date ngayTao;
-    @Column(name = "NgayCapNhat", nullable = true)
+    @Column(name="NgayCapNhat", nullable = true)
     private Date ngayCapNhat;
     public Date getNgayCapNhat() {
         return ngayCapNhat;
@@ -87,7 +86,7 @@ public class Sach {
         this.ngayCapNhat = ngayCapNhat;
     }
 
-    @Column(name = "MaChuDe", nullable = false)
+    @Column(name="MaChuDe", nullable = true, length = 10)
     private String maChuDe;
 
     public String getTenSach() {
@@ -133,6 +132,7 @@ public class Sach {
         this.maChuDe = maChuDe;
     }
 
+    @Column(name="DaDuyet", nullable = true)
     private int daDuyet = 0;
 
     public int getDaDuyet() {

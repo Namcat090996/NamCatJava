@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "ChuDe")
 public class ChuDe {
+
     @Id
     @Column(name = "MaChuDe", nullable = false, length = 10)
     private String maChuDe;

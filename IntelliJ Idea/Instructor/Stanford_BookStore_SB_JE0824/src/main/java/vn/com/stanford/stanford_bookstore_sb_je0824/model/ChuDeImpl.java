@@ -36,26 +36,15 @@ public class ChuDeImpl implements ChuDeDao {
 
     @Override
     public boolean add(ChuDe objCD) {
-
-        ChuDe objChuDe = chuDeRepository.save(objCD);
-
-        if(objCD != null)
+        if(objCD == null || objCD.getMaChuDe().trim().isEmpty())
         {
-            return true;
+            return false;
         }
 
-        return false;
-    }
+        boolean existed = chuDeRepository.existsById(objCD.getMaChuDe());
 
-    @Override
-    public boolean update(ChuDe obj) {
-
-        ChuDe objCD = getById(obj.getMaChuDe());
-
-        if(objCD != null)
+        if(!existed)
         {
-            //Gan lai gia tri
-            objCD.setTenChuDe(obj.getTenChuDe());
             chuDeRepository.save(objCD);
             return true;
         }
@@ -64,14 +53,33 @@ public class ChuDeImpl implements ChuDeDao {
     }
 
     @Override
-    public boolean delete(String id) {
-        //Kết nối đến db qua hibernate
-        ChuDe objCD = getById(id);
-        if(objCD != null)
+    public boolean update(ChuDe objCD) {
+        if(objCD == null || objCD.getMaChuDe().trim().isEmpty())
         {
-            chuDeRepository.delete(objCD);
+            return false;
+        }
+
+        boolean existed = chuDeRepository.existsById(objCD.getMaChuDe());
+
+        if(existed)
+        {
+            chuDeRepository.save(objCD);
             return true;
         }
+
+        return false;
+    }
+
+    @Override
+    public boolean delete(String maChuDe) {
+        boolean existed = chuDeRepository.existsById(maChuDe);
+
+        if(existed)
+        {
+            chuDeRepository.deleteById(maChuDe);
+            return true;
+        }
+
         return false;
     }
 }

@@ -76,37 +76,45 @@ public class SachImpl implements SachDao{
     public Sach getById(String maSach) {
 
         Sach objSach = null;
-
-        objSach = (Sach) entityManager.createQuery("FROM Sach s WHERE s.maSach = :ma")
-                .setParameter("ma", maSach)
-                .getSingleResult();
+        try {
+            objSach = (Sach) entityManager.createQuery("FROM Sach s WHERE s.maSach = :ma")
+                    .setParameter("ma", maSach)
+                    .getSingleResult();
+        }
+        catch(Exception ex)
+        {
+            objSach = null;
+        }
         return objSach;
     }
 
     @Override
     public boolean add(Sach objSach) {
 
-        entityManager.persist(objSach);
+        sachRepository.save(objSach);
 
         return false;
     }
 
     @Override
-    public boolean update(Sach objSach) {
-        if(objSach == null || objSach.getMaSach().trim().isEmpty())
-        {
-            return false;
-        }
+    public boolean update(Sach obj) {
+        Sach objSach = sachRepository.getById(obj.getMaSach());
 
-        boolean existed = sachRepository.existsById(objSach.getMaSach());
-
-        if(existed)
+        if(objSach != null)
         {
+            objSach.setTenSach(obj.getTenSach());
+            objSach.setMoTa(obj.getMoTa());
+            objSach.setAnhSach(obj.getAnhSach());
+            objSach.setGiaSach(obj.getGiaSach());
+            objSach.setTacGia(obj.getTacGia());
+            objSach.setNgayCapNhat(obj.getNgayCapNhat());
+            objSach.setMaChuDe(obj.getMaChuDe());
+
             sachRepository.save(objSach);
+
             return true;
         }
-
-        return false;
+        return  false;
     }
 
     @Override

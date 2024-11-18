@@ -3,10 +3,11 @@ package vn.com.stanford.stanford_bookstore_sb_je0824;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
 import vn.com.stanford.stanford_bookstore_sb_je0824.entities.ChuDe;
+import vn.com.stanford.stanford_bookstore_sb_je0824.entities.NguoiDung;
 import vn.com.stanford.stanford_bookstore_sb_je0824.entities.Sach;
-import vn.com.stanford.stanford_bookstore_sb_je0824.model.ChuDeDao;
-import vn.com.stanford.stanford_bookstore_sb_je0824.model.SachDao;
+import vn.com.stanford.stanford_bookstore_sb_je0824.model.*;
 import vn.com.stanford.stanford_bookstore_sb_je0824.service.ChuDeService;
 
 import java.util.List;
@@ -48,4 +49,16 @@ class StanfordBookStoreSbJe0824ApplicationTests {
         }
     }
 
+    @Autowired
+    NguoiDungDao nguoiDungDao;
+
+    @Test
+    void layTaiKhoanDangNhap() {
+
+        NguoiDung objUser = nguoiDungDao.layNguoiDungTheoTenDangNhap("admin");
+        if(objUser != null)
+        {
+            System.out.println("Tài khoản người dùng: " + objUser.getTenDangNhap());
+        }
+    }
 }

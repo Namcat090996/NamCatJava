@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{home/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>BookStore</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <th:block th:each="s,idx : ${lstSach}">
+  <div class="templatemo_product_box">
+    <h1>[[${s.tenSach}]]<span>([[${s.tacGia}]])</span></h1>
+    <img th:src="@{'/images/' + ${s.anhSach}}" width="100" height="150" alt="image" />
+    <div class="product_info">
+      <p th:text="${s.moTa}"></p>
+      <h3><span th:text="${#numbers.formatDecimal(s.giaSach, 0, 'COMMA', 0, 'POINT')}">100</span> </h3>
+      <div class="buy_now_button"><a href="#">Mua ngay</a></div>
+      <div class="detail_button"><a th:href="@{'/chi-tiet/' + ${s.maSach}}">Chi tiết</a></div>
+    </div>
+    <div class="cleaner">&nbsp;</div>
+  </div>
+
+  <div th:if="${idx.index%2 == 0}" class="cleaner_with_width">&nbsp;</div>
+  <div th:unless="${idx.index%2 == 0}" class="cleaner_with_height">&nbsp;</div>
+  </th:block>
+</div>
+</body>
+</html>

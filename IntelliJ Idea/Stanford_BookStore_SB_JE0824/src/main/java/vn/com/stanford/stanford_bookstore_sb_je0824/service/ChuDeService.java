@@ -21,4 +21,23 @@ public class ChuDeService {
     {
         return  chuDeDao.getList();
     }
+
+    public ChuDe layChiTiet(String maChuDe) {
+        return chuDeDao.getById(maChuDe);
+    }
+
+    public boolean themMoi(ChuDe objChuDe)
+    {
+        return chuDeDao.add(objChuDe);
+    }
+
+    public boolean capNhat(ChuDe objChuDe)
+    {
+        return chuDeDao.update(objChuDe);
+    }
+
+    public boolean xoa(String maChuDe)
+    {
+        return chuDeDao.delete(maChuDe);
+    }
 }

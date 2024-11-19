@@ -11,8 +11,9 @@ import vn.com.namcat_bookstore_sbt.entities.Sach;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-@Repository("sachDao")
+@Repository
 public class SachImpl implements SachDao {
 
     @Autowired
@@ -27,30 +28,75 @@ public class SachImpl implements SachDao {
     @Override
     public Sach getById(String maSach) {
         //Declare an object
-        Sach objSach = null;
+        Sach objSach;
 
-        //Get object by id
-        objSach = sachRepository.findById(maSach).get();
+        //Use try-catch if id not found
+        try {
+            //Get object by id
+            objSach = sachRepository.findById(maSach).get();
+        } catch (Exception ex) {
+            objSach = null;
+        }
 
-        //Return result
         return objSach;
+
+//        //Return result
+//        return sachRepository.findById(maSach).orElse(null);
     }
 
     @Override
     public boolean add(Sach objSach) {
-        if(objSach != null)
+        //Check if object is null
+        if(objSach == null)
         {
-            Sach obj = sachRepository.save(objSach);
+            return false;
         }
+
+        //Check if the object has already existed
+        boolean existed = sachRepository.existsById(objSach.getMaSach());
+
+        if(!existed)
+        {
+            //Add object to database
+            sachRepository.save(objSach);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
     public boolean update(Sach objSach) {
+        //Check if the object is null
+        if(objSach == null)
+        {
+            return false;
+        }
 
+        //Check if the object has already existed
+        boolean existed = sachRepository.existsById(objSach.getMaSach());
+
+        if(existed)
+        {
+            //Update object
+            sachRepository.save(objSach);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
     public boolean delete(String maSach) {
+        //Check if the object has already existed
+        boolean existed = sachRepository.existsById(maSach);
 
+        if(existed)
+        {
+            sachRepository.deleteById(maSach);
+            return true;
+        }
+
+        return false;
     }
 }

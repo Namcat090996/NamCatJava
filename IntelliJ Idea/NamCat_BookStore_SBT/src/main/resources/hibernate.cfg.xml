@@ -16,8 +16,10 @@
         <property name="hibernate.connection.characterEncoding">UTF-8</property>
         <property name="hibernate.connection.useUnicode">true</property>
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
-        <!-- Declare the mapping -->
-        <mapping resource="Sach.hbm.xml"/>
-        <mapping resource="ChuDe.hbm.xml"/>
+        <!-- JDBC connection pool, use Hibernate internal connection pool -->
+        <property name="connection.pool_size">10</property>
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
+        <mapping class="vn.com.namcat_bookstore_sbt.entities.ChuDe"/>
+        <mapping class="vn.com.namcat_bookstore_sbt.entities.Sach"/>
     </session-factory>
 </hibernate-configuration>

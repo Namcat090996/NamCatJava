@@ -15,7 +15,7 @@ public class SachService {
 
     public List<Sach> timKiemThongTinSach(String tuKhoa, String maChuDe)
     {
-        return  sachDao.timKiemSach(tuKhoa, maChuDe);
+        return sachDao.timKiemSach(tuKhoa, maChuDe);
     }
 
     public List<Sach> layDanhSach()

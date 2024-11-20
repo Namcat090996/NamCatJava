@@ -1,23 +1,27 @@
 package vn.com.namcat_bookstore_sbt.model;
 
-import jakarta.persistence.TypedQuery;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import vn.com.namcat_bookstore_sbt.entities.Sach;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Repository
 public class SachImpl implements SachDao {
 
     @Autowired
     SachRepository sachRepository;
+
+    @Override
+    public List<Sach> timKiemSach(String tuKhoa, String maChuDe) {
+        //Ternary operator
+
+
+        //Declare list
+        List<Sach> lstSach = sachRepository.timKiemSach(tuKhoa, maChuDe);
+
+        return lstSach;
+    }
 
     @Override
     public List<Sach> getList() {
@@ -28,14 +32,14 @@ public class SachImpl implements SachDao {
     @Override
     public Sach getById(String maSach) {
         //Declare an object
-        Sach objSach;
+        Sach objSach = null;
 
-        //Use try-catch if id not found
-        try {
-            //Get object by id
+        //Check if object has already existed
+        boolean existed = sachRepository.existsById(maSach);
+
+        if(existed)
+        {
             objSach = sachRepository.findById(maSach).get();
-        } catch (Exception ex) {
-            objSach = null;
         }
 
         return objSach;
@@ -76,25 +80,73 @@ public class SachImpl implements SachDao {
         //Check if the object has already existed
         boolean existed = sachRepository.existsById(objSach.getMaSach());
 
-        if(existed)
-        {
-            //Update object
-            sachRepository.save(objSach);
-            return true;
+        //Use try-catch if update fails (foreign key, constrain violations)
+        try {
+            if (existed) {
+                //Update object
+                sachRepository.save(objSach);
+                return true;
+            }
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return false;
+
+//        // Check if the object is null
+//        if (objSach == null) {
+//            return false;
+//        }
+//
+//        try {
+//            // Attempt to save the object
+//            sachRepository.save(objSach); //It can handle the ID violates constraints automatically
+//            return true;
+//        } catch (Exception ex) {
+//            // Handle cases where the ID violates constraints
+//            ex.printStackTrace();
+//            return false;
+//        }
     }
 
     @Override
     public boolean delete(String maSach) {
+//        //Declare an object
+//        Sach objSach;
+//
+//        //Use try-catch if id not found
+//        try {
+//            //Get object by ID to delete
+//            objSach = getById(maSach);
+//
+//            //Check if object is null
+//            if(objSach != null)
+//            {
+//                sachRepository.delete(objSach);
+//                return true;
+//            }
+//        }
+//        catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        return false;
+
         //Check if the object has already existed
         boolean existed = sachRepository.existsById(maSach);
 
-        if(existed)
+        //Use try-catch if deletion fails (foreign key, constrain violations)
+        try {
+            if(existed)
+            {
+                sachRepository.deleteById(maSach);
+                return true;
+            }
+        }
+        catch(Exception ex)
         {
-            sachRepository.deleteById(maSach);
-            return true;
+            ex.printStackTrace();
         }
 
         return false;

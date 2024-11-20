@@ -1,5 +1,8 @@
 package vn.com.namcat_bookstore_sbt.model;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import vn.com.namcat_bookstore_sbt.entities.Sach;
@@ -9,23 +12,58 @@ import java.util.List;
 @Repository
 public class SachImpl implements SachDao {
 
+    @PersistenceContext
+    EntityManager entityManager;
+
     @Autowired
     SachRepository sachRepository;
 
+    /**
+     * Function to find book by keyword and subject code
+     * @param tuKhoa
+     * @param maChuDe
+     * @return
+     */
+    public List<Sach> timKiemSach2(String tuKhoa, String maChuDe) {
+        //Declare SQL command
+        String sqlList = "Select * from Sach s where 1=1";
+
+        //Check if keyword and subject code is empty/null
+        if(tuKhoa != null && !tuKhoa.trim().isEmpty())
+        {
+            sqlList += " and (s.maSach = '" + tuKhoa + "' or s.tenSach like '%" + tuKhoa + "%' or s.tacGia like '%" + tuKhoa + "%')";
+        }
+
+        if(maChuDe != null && !maChuDe.trim().isEmpty())
+        {
+            sqlList += " and (s.maChuDe = '" + maChuDe + "'";
+        }
+
+        //Execute the query and return the list
+        TypedQuery<Sach> query = entityManager.createQuery(sqlList, Sach.class);
+
+        return query.getResultList();
+    }
+
+    /**
+     * Function to find book by keyword and subject code
+     * @param tuKhoa
+     * @param maChuDe
+     * @return
+     */
     @Override
     public List<Sach> timKiemSach(String tuKhoa, String maChuDe) {
-        //Ternary operator
+        //Ternary operator/Check if the keyword & subject code is null
+        tuKhoa = tuKhoa == null ? "" : tuKhoa;
+        maChuDe = maChuDe == null ? "" : maChuDe;
 
-
-        //Declare list
-        List<Sach> lstSach = sachRepository.timKiemSach(tuKhoa, maChuDe);
-
-        return lstSach;
+        //Return list
+        return sachRepository.timKiemSach(tuKhoa, maChuDe);
     }
 
     @Override
     public List<Sach> getList() {
-        //Return result
+        //Return list
         return sachRepository.findAll();
     }
 

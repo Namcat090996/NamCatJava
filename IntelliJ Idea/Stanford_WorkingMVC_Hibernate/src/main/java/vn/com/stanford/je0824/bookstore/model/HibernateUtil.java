@@ -5,23 +5,32 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
+    //Declare variables
     private static SessionFactory sessionFactory;
 
-    private static SessionFactory buildSessionFactory()
-    {
+    //Function to build session factory from charged configuration
+    private static SessionFactory buildSessionFactory() {
+
+        //Declare configuration
         Configuration config = new Configuration();
 
-        config.configure();
+        //Charge configuration from hibernate configuration file
+        config.configure("hibernate.cfg.xml");
 
+        //Return result
         return config.buildSessionFactory();
     }
 
-    public static SessionFactory getSessionFactory() {
+    //Functon to get session factory (singleton)
+    public static SessionFactory getSessionFactory()
+    {
+        //If session factory didn't exist before
         if(sessionFactory == null)
         {
             sessionFactory = buildSessionFactory();
         }
 
+        //Return result
         return sessionFactory;
     }
 }

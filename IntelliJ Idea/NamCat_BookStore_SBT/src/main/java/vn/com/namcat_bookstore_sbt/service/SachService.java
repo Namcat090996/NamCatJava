@@ -1,9 +1,9 @@
-package vn.com.stanford.stanford_bookstore_sb_je0824.service;
+package vn.com.namcat_bookstore_sbt.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vn.com.stanford.stanford_bookstore_sb_je0824.entities.Sach;
-import vn.com.stanford.stanford_bookstore_sb_je0824.model.SachDao;
+import vn.com.namcat_bookstore_sbt.entities.Sach;
+import vn.com.namcat_bookstore_sbt.model.SachDao;
 
 import java.util.List;
 
@@ -15,17 +15,17 @@ public class SachService {
 
     public List<Sach> timKiemThongTinSach(String tuKhoa, String maChuDe)
     {
-        return  sachDao.timKiemSach(tuKhoa, maChuDe);
+        return sachDao.timKiemSach(tuKhoa, maChuDe);
     }
 
     public List<Sach> layDanhSach()
     {
-        return  sachDao.getList();
+        return sachDao.getList();
     }
 
     public Sach layChiTiet(String maSach)
     {
-        return  sachDao.getById(maSach);
+        return sachDao.getById(maSach);
     }
 
     public boolean themMoi(Sach objSach)
@@ -42,5 +42,4 @@ public class SachService {
     {
         return sachDao.delete(maSach);
     }
-
 }

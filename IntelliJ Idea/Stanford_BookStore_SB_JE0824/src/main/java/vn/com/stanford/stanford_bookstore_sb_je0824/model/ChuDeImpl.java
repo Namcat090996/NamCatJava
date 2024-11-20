@@ -15,8 +15,8 @@ import java.util.List;
 
 @Repository("chuDeDao")
 public class ChuDeImpl implements ChuDeDao {
-    @PersistenceContext
-    EntityManager entityManager;
+    //@PersistenceContext
+    //EntityManager entityManager;
 
     @Autowired
     ChuDeRepository chuDeRepository;

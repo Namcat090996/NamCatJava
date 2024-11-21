@@ -2,6 +2,7 @@ package vn.com.namcat_bookstore_sbt.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -11,6 +12,7 @@ import jakarta.validation.constraints.NotEmpty;
 public class ChuDe {
 
     //Declare attribute
+    @Id
     @Column(name = "MaChuDe", nullable = false, length = 10)
     @NotBlank(message = "Ban phai nhap ma chu de")
     private String maChuDe;

@@ -5,15 +5,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import vn.com.namcat_bookstore_sbt.entities.ChuDe;
 import vn.com.namcat_bookstore_sbt.entities.Sach;
 import vn.com.namcat_bookstore_sbt.entities.SachModel;
 import vn.com.namcat_bookstore_sbt.service.ChuDeService;
 import vn.com.namcat_bookstore_sbt.service.SachService;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -32,7 +33,7 @@ public class SachController {
         model.addAttribute("sach", objSach);
 
         //Get list by keyword and subject code
-        List<Sach> lstSach = sachService.timKiemThongTinSach(objSach.getMaSach(), objSach.getMaChuDe());
+        List<Sach> lstSach = sachService.timKiemThongTinSach(objSach.getTuKhoa(), objSach.getMaChuDe());
 
         //Add to model and send to view
         model.addAttribute("lstSach", lstSach);
@@ -47,6 +48,8 @@ public class SachController {
         //Add to model and send to view (avoid error when object not found)
         model.addAttribute("sach", new Sach());
 
+        model.addAttribute("maSachCheck", "");
+
         //Return to page
         return "admin/SachAdd";
     }
@@ -60,15 +63,18 @@ public class SachController {
         //Keep user information which has typed
         model.addAttribute("sach", objSach);
 
+        model.addAttribute("maSachCheck", maSach);
+
         //Return to page
         return "admin/SachAdd";
     }
 
     //Get path to upload image
-    @Value("")
+    @Value("${fileupload.path}")
+    private String fileUploadPath;
 
     @RequestMapping(value = "/admin/sach/themMoiSach", method = RequestMethod.POST)
-    public String themMoiHoacSuaSach(Model model, BindingResult result, @ModelAttribute("sach") Sach objSach)
+    public String themMoiHoacSuaSach(Model model, BindingResult result, @ModelAttribute("sach") Sach objSach, MultipartFile fUpload)
     {
         if(result.hasErrors())
         {
@@ -82,11 +88,41 @@ public class SachController {
         {
             Sach objCheck = sachService.layChiTiet(objSach.getMaSach());
             boolean isInsert = true;
+            String tenAnh = "";
 
             if(objCheck != null)
             {
                 isInsert = false;
+                tenAnh = objSach.getAnhSach();
             }
+
+            String path = "";
+
+            if(fUpload != null && !fUpload.isEmpty())
+            {
+                tenAnh = fUpload.getOriginalFilename();
+
+                path = fileUploadPath;
+
+                try {
+                    File directory = new File(path);
+                    
+                    if(!directory.exists())
+                    {
+                        directory.mkdir();
+                    }
+                    
+                    File file = new File(directory, tenAnh);
+                    
+                    fUpload.transferTo(file);
+                }
+                catch (IOException ex)
+                {
+                    System.out.println("Co loi xay ra");
+                }
+            }
+
+
 
             boolean ketQua = false;
 
@@ -106,5 +142,18 @@ public class SachController {
         }
 
         return "admin/SachAdd";
+    }
+
+    /**
+     * Hiển thị danh sách chủ đề lên giao diện thêm, sửa sách
+     * @return
+     */
+    @ModelAttribute("lstChuDe")
+    public List<ChuDe> hienThiDanhSachChuDe()
+    {
+        //Lấy danh sách chủ đề
+        List<ChuDe> lstChuDe = chuDeService.layDanhSach();
+
+        return lstChuDe;
     }
 }

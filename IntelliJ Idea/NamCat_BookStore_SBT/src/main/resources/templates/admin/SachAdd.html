@@ -35,19 +35,61 @@
                                 <div class="row">
                                     <label class="col-md-2">Mã sách</label>
                                     <div class="col-md-4">
-                                        <input type="text" th:class="form-control" th:field="*{maSach}" />
+                                        <input type="text" class="form-control" th:field="*{maSach}"/>
                                         <td th:if="${#fields.hasErrors('maSach')}" th:errors="*{maSach}">Bạn phải nhập mã sách</td>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-md-2">Tên sách</label>
                                     <div class="col-md-6">
-                                        <input type="text" th:class="form-control" th:field="*{tenSach}" />
+                                        <input type="text" class="form-control" th:field="*{tenSach}"/>
                                         <td th:if="${#fields.hasErrors('tenSach')}" th:errors="*{tenSach}">Bạn phải nhập tên sách</td>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <label class="col-md-2">Mô tả</label>
+                                    <div class="col-md-6">
+                                        <textarea rows="4" class="form-control" th:field="*{moTa}"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Ảnh sách</label>
+                                    <div class="col-md-6">
+                                        <input type="file" name="fUpload" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Tác giả</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" th:field="*{tacGia}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Giá sách</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" th:field="*{giaSach}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Chủ đề</label>
+                                    <div class="col-md-6">
+                                        <select th:field="*{maChuDe}" class="form-control">
+                                            <option value="" label="Chọn chủ đề"></option>
+                                            <th:block th:each="c : ${lstChuDe}">
+                                                <option th:value="${c.maChuDe}">[[${c.tenChuDe}]]</option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-4">
+                                        <input type="submit" class="btn btn-primary" name="btnCapNhat" value="Cập nhật"/>
+                                        &nbsp;
+                                        <a th:href="@{/admin/sach}" class="btn btn-primary">Trở về</a>
+                                    </div>
+                                </div>
                             </div>
-
                         </fieldset>
                     </form>
                 </div>

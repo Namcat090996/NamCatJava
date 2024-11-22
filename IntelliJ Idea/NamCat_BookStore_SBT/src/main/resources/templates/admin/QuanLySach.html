@@ -10,13 +10,13 @@
 <div layout:fragment="content">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-th-list"></i> Data Table</h1>
-            <p>Table to display analytical data effectively</p>
+            <h1><i class="fa fa-th-list"></i> Quản lý sách</h1>
+            <p>Danh sách thông tin sách trong hệ thống</p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item">Tables</li>
-            <li class="breadcrumb-item active"><a href="#">Data Table</a></li>
+            <li class="breadcrumb-item">Book</li>
+            <li class="breadcrumb-item active"><a href="#">Book Management</a></li>
         </ul>
     </div>
     <div class="row">
@@ -46,10 +46,10 @@
                             </div>
                         </fieldset>
                     </form>
-                    <div style="text-align: right">
+                    <div style="text-align: right; padding-right: 5px">
                         <a th:href="@{/admin/sach/them}">Thêm mới</a>
                     </div>
-                    <table class="table table-striped table-bordered" id="sampleTable">
+                    <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                         <tr>
                             <th>Ảnh sách</th>
@@ -79,10 +79,10 @@
                                 [[${s.moTa}]]
                             </td>
                             <td>
-                                [[${s.giaSach}]]
+                                [[${#numbers.formatDecimal(s.giaSach, 0, 'POINT', 0, 'COMMA')}]]₫
                             </td>
                             <td>
-                                [[${s.ngayTao}]]
+                                [[${#dates.format(s.ngayTao, 'dd-MM-yyyy')}]]
                             </td>
                             <td>
                                 [[${s.tacGia}]]
@@ -91,10 +91,10 @@
                                 [[${s.maChuDe}]]
                             </td>
                             <td>
-                                <a class="btn btn-primary" th:href="@{'/admin/sach/sua/' + ${s.maSach}}">Sửa</a>
+                                <a style="margin-left: 3px" class="btn btn-primary" th:href="@{'/admin/sach/sua/' + ${s.maSach}}">Sửa</a>
                             </td>
                             <td>
-                                <a class="btn btn-danger" th:href="@{'/admin/sach/xoa/' + ${s.maSach}}" onclick="return confirm('Bạn có chắc chắc muốn xóa thông tin này ?')">Xóa</a>
+                                <a style="margin-left: 3px" class="btn btn-danger" th:href="@{'/admin/sach/xoa/' + ${s.maSach}}" onclick="return confirm('Bạn có chắc chắc muốn xóa thông tin này ?')">Xóa</a>
                             </td>
                         </tr>
                         </tbody>

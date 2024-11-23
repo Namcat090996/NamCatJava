@@ -192,9 +192,11 @@ public class SachController {
             {
                 return "redirect:/admin/sach";
             }
+            
+            return "admin/SachAdd";
         }
 
-        return "admin/SachAdd";
+        
     }
 
     /**

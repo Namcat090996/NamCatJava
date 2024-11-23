@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface NhanVienDao extends IHanhDong<NhanVien, String> {
     
+    //Declare extension function if needed
     /**
      *Function to get total salary list of staff
      * @param tuKhoa

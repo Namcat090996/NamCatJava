@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>vn.com</groupId>
-    <artifactId>NamCat_SPR</artifactId>
+    <artifactId>NamCat_SRB_Staff</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>NamCat_SPR_Staff</name>
-    <description>NamCat_SPR_Staff</description>
+    <name>NamCat_SRB_Staff</name>
+    <description>NamCat_SRB_Staff</description>
     <url/>
     <licenses>
         <license/>
@@ -63,7 +63,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>

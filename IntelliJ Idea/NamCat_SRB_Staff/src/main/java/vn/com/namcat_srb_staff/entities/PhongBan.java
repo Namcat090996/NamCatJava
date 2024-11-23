@@ -1,4 +1,4 @@
-package vn.com.namcat_spr.model;
+package vn.com.namcat_srb_staff.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

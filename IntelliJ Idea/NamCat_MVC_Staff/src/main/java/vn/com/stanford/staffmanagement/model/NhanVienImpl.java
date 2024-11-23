@@ -16,9 +16,12 @@ public class NhanVienImpl implements NhanVienDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
-
+    
     /**
      * Function to get total salary list of staff
+     * @param tuKhoa
+     * @param maPhong
+     * @param maChucVu
      * @return
      */
     @Override

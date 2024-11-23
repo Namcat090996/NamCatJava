@@ -26,7 +26,7 @@ public class SachImpl implements SachDao {
      */
     public List<Sach> timKiemSach2(String tuKhoa, String maChuDe) {
         //Declare SQL command
-        String sqlList = "Select * from Sach s where 1=1";
+        String sqlList = "Select s from Sach s where 1=1";
 
         //Check if keyword and subject code is empty/null
         if(tuKhoa != null && !tuKhoa.trim().isEmpty())

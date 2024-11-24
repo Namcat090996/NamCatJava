@@ -26,8 +26,8 @@
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item">Staff</li>
-            <li class="breadcrumb-item active"><a href="#">Staff information</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin/nhanvien}">Staff Management</a></li>
+            <li class="breadcrumb-item active">Staff information</li>
         </ul>
     </div>
     <div class="row">
@@ -71,7 +71,7 @@
                                 <div class="row">
                                     <label class="col-md-2">Ngày sinh</label>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" th:field="*{ngaySinh}" placeholder="dd/MM/yyyy"/>
+                                        <input type="text" id="demoDate1" class="form-control" th:field="*{ngaySinh}" placeholder="dd/MM/yyyy"/>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -101,7 +101,7 @@
                                 <div class="row">
                                     <label class="col-md-2">Ngày cấp</label>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" th:field="*{ngayCap}" placeholder="dd/MM/yyyy"/>
+                                        <input type="text" id="demoDate2" class="form-control" th:field="*{ngayCap}" placeholder="dd/MM/yyyy"/>
                                     </div>
                                 </div>
                                 <div class="row">

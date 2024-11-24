@@ -14,7 +14,6 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Data Table - Vali Admin</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,6 +60,7 @@
 <!-- Data table plugin-->
 <script type="text/javascript" th:src="@{/js/plugins/jquery.dataTables.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/plugins/dataTables.bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/bootstrap-datepicker.min.js}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -82,11 +82,42 @@
                 }
             }
         ]});
-    $('#sampleTable_filter').remove();
-    $('#sampleTable_length').remove();
+
+        //Remove search box
+        $('#sampleTable_filter').remove();
+        $('#sampleTable_length').remove();
+
+        //Change the position of datepicker modal
+        $('#demoDate1').datepicker({
+            format: "dd/mm/yyyy",
+            autoclose: true,
+            todayHighlight: true
+        }).on('show', function (e) {
+            // Get modal object of Datepicker
+            var datepicker1 = $('.datepicker');
+
+            //Change the position of model
+            datepicker1.css({
+                top: '109px',
+                left: '555px'
+            })
+        });
+
+        $('#demoDate2').datepicker({
+            format: "dd/mm/yyyy",
+            autoclose: true,
+            todayHighlight: true
+        }).on('show', function (e) {
+            // Get modal object of Datepicker
+            var datepicker2 = $('.datepicker');
+
+            //Change the position of model
+            datepicker2.css({
+                top: '343px',
+                left: '555px'
+            })
+        });
     });
 </script>
-
-
 </body>
 </html>

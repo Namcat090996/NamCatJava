@@ -46,8 +46,7 @@
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item">Staff</li>
-            <li class="breadcrumb-item active"><a href="#">Staff Management</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin/nhanvien}">Staff Management</a></li>
         </ul>
     </div>
     <div class="row">
@@ -87,7 +86,7 @@
                         </fieldset>
                     </form>
                     <div style="text-align: right; padding-right: 1px">
-                        <a th:href="@{/admin/nhanvien/them}">Thêm mới</a>
+                        <a th:href="@{/admin/nhanvien/them}" class="btn btn-primary">Thêm mới</a>
                     </div>
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>

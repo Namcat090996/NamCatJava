@@ -16,7 +16,7 @@
     <div class="app-title">
         <div>
             <h1><i class="fa fa-th-list"></i> Quản lý sách</h1>
-            <p>Danh sách thông tin sách trong hệ thống</p>
+            <p th:text="${#strings.isEmpty(maSachCheck) ? 'Thêm mới' : 'Sửa'}"></p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>

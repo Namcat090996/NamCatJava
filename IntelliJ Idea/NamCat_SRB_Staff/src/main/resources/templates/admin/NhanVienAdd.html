@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/home/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm mới hoặc sửa thông tin nhân viên</title>
+    <style>
+        .errorfinfo {
+            color: red;
+            padding-left: 2px;
+        }
+
+        .row {
+            padding-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i> Quản lý nhân viên</h1>
+            <p th:text="${#strings.isEmpty(maNVCheck) ? 'Thêm mới thông tin nhân viên' : 'Sửa thông tin nhân viên'}"></p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item">Staff</li>
+            <li class="breadcrumb-item active"><a href="#">Staff information</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <form method="post" th:action="@{/admin/nhanvien/themMoiNV}" th:object="${nhanvien}">
+                        <fieldset>
+                            <legend>Nhập thông tin nhân viên</legend>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <label class="col-md-2">Mã nhân viên</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" th:field="*{maNV}" th:attr="readonly=${not #strings.isEmpty(maNVCheck)}"/>
+                                        <input type="hidden" th:value="${maNVCheck}" name="idCheck"/>
+                                        <td th:if="${#fields.hasErrors('maNV')}">
+                                            <span th:errors="*{maNV}" th:class="errorfinfo"></span>
+                                        </td>
+                                        <div th:text="${duplicatedId}" class="errorfinfo"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Họ tên</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" th:field="*{hoTen}"/>
+                                        <td th:if="${#fields.hasErrors('hoTen')}">
+                                            <span th:errors="*{hoTen}" th:class="errorfinfo"></span>
+                                        </td>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Giới tính</label>
+                                    <div class="col-md-6 d-flex align-items-center">
+                                        <input type="radio" th:field="*{gioiTinh}" value="0" id="gioiTinhNam"/>
+                                        <span for="gioiTinhNam" style="padding-left: 6px; padding-right: 20px">Nam</span>
+                                        &nbsp;
+                                        <input type="radio" th:field="*{gioiTinh}" value="1" id="gioiTinhNu"/>
+                                        <span for="gioiTinhNu" style="padding-left: 8px">Nữ</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Ngày sinh</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" th:field="*{ngaySinh}" placeholder="dd/MM/yyyy"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Điện thoại</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" th:field="*{dienThoai}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Email</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" th:field="*{email}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Địa chỉ</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" th:field="*{diaChi}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Số CMT</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" th:field="*{soCMT}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Ngày cấp</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" th:field="*{ngayCap}" placeholder="dd/MM/yyyy"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Nơi cấp</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" th:field="*{noiCap}"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Chức vụ</label>
+                                    <div class="col-md-6">
+                                        <select th:field="*{maChucVu}" class="form-control">
+                                            <option value="" label="Chọn chức vụ"></option>
+                                            <th:block th:each="cv : ${lstChucVu}">
+                                                <option th:value="${cv.maChucVu}" th:text="${cv.tenChucVu}"></option>
+                                            </th:block>
+                                        </select>
+                                        <td th:if="${#fields.hasErrors('maChucVu')}">
+                                            <span th:errors="*{maChucVu}" th:class="errorfinfo"></span>
+                                        </td>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-md-2">Phòng ban</label>
+                                    <div class="col-md-6">
+                                        <select th:field="*{maPhong}" class="form-control">
+                                            <option value="" label="Chọn phòng ban"></option>
+                                            <th:block th:each="pb : ${lstPhongBan}">
+                                                <option th:value="${pb.maPhong}" th:text="${pb.tenPhong}"></option>
+                                            </th:block>
+                                        </select>
+                                        <td th:if="${#fields.hasErrors('maPhong')}">
+                                            <span th:errors="*{maPhong}" th:class="errorfinfo"></span>
+                                        </td>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">Hệ số lương</label>
+                                    <div class="col-md-6">
+                                        <select th:field="*{heSoId}" class="form-control">
+                                            <option value="-1" label="Chọn hệ số lương"></option>
+                                            <th:block th:each="hs : ${lstHSLuong}">
+                                                <option th:value="${hs.id}" th:text="${hs.heSo}"></option>
+                                            </th:block>
+                                        </select>
+                                        <td th:if="${#fields.hasErrors('heSoId')}">
+                                            <span th:errors="*{heSoId}" th:class="errorfinfo"></span>
+                                        </td>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-4">
+                                        <input type="submit" class="btn btn-primary" name="btnCapNhat" value="Cập nhật"/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a th:href="@{/admin/nhanvien}" class="btn btn-primary">Trở về</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

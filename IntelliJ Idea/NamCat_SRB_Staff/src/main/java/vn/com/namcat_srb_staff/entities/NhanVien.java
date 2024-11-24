@@ -4,8 +4,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -51,12 +54,15 @@ public class NhanVien {
     private String noiCap;
     
     @Column(name = "HeSoId", nullable = true)
+    @Min(value = 0, message = "Bạn phải chọn hệ số lương")
     private int heSoId;
     
     @Column(name = "MaChucVu", nullable = true, length = 10)
+    @NotEmpty(message = "Bạn phải chọn mã chức vụ")
     private String maChucVu;
     
     @Column(name = "MaPhong", nullable = true, length = 10)
+    @NotEmpty(message = "Bạn phải chọn mã phòng")
     private String maPhong;
     
     //Call the getter and setter function

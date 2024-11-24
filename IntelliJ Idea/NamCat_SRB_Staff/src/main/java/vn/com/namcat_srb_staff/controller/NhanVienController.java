@@ -1,5 +1,6 @@
 package vn.com.namcat_srb_staff.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -30,10 +31,10 @@ public class NhanVienController {
     HeSoLuongService heSoLuongService;
     
     @RequestMapping(value = "/admin/nhanvien")
-    public String hienThiDanhSachNV(@ModelAttribute("nhanVienSeach") NhanVienModel objNV, Model model)
+    public String hienThiDanhSachNV(@ModelAttribute("nhanvien") NhanVienModel objNV, Model model)
     {
         //Keep user information which has typed
-        model.addAttribute("nhanVienSeach", objNV);
+        model.addAttribute("nhanvien", objNV);
         
         //Get list and return page
         List<NhanVienModel> lstNV = nhanVienService.layBangLuongNhanVien(objNV.getTuKhoa(), objNV.getMaPhong(), objNV.getMaChucVu());
@@ -46,7 +47,7 @@ public class NhanVienController {
     @RequestMapping(value = "/admin/nhanvien/them")
     public String hienThiThemMoiNV(Model model)
     {
-        model.addAttribute("objNV", new NhanVien());
+        model.addAttribute("nhanvien", new NhanVien());
         model.addAttribute("maNVCheck", "");
         
         return "admin/NhanVienAdd";
@@ -58,25 +59,29 @@ public class NhanVienController {
         //Get object by id
         NhanVien objNV = nhanVienService.layChiTiet(maNV);
         
-        model.addAttribute("objNV", objNV);
+        model.addAttribute("nhanvien", objNV);
         model.addAttribute("maNVCheck", maNV);
         
         return "admin/NhanVienAdd";
     }
     
     @RequestMapping(value = "/admin/nhanvien/themMoiNV", method = RequestMethod.POST)
-    public String themMoiHoacSuaNhanVien(@ModelAttribute("objNV") NhanVien objNV, @RequestParam("idCheck") String idCheck, Model model, BindingResult result)
+    public String themMoiHoacSuaNhanVien(@ModelAttribute("nhanvien") @Valid NhanVien objNV, BindingResult result, @RequestParam("idCheck") String idCheck, Model model)
     {
         if(result.hasErrors())
         {
-            model.addAttribute("objNV", objNV);
+            model.addAttribute("nhanvien", objNV);
             return "admin/NhanVienAdd";
         }
         else
         {
             boolean isInsert = true;
             
-            NhanVien objNVCheck = nhanVienService.layChiTiet(objNV.getMaNV());
+            if(objNV.getHeSoId() == 0)
+            {
+                model.addAttribute("heSoError", "Bạn phải chọn hệ số lương");
+                return "admin/NhanVienAdd";
+            }
             
             if(!idCheck.isEmpty())
             {
@@ -87,6 +92,8 @@ public class NhanVienController {
             
             if(isInsert)
             {
+                NhanVien objNVCheck = nhanVienService.layChiTiet(objNV.getMaNV());
+                
                 if(objNVCheck == null)
                 {
                     ketQua = nhanVienService.themMoi(objNV);
@@ -94,7 +101,7 @@ public class NhanVienController {
                 else
                 {
                     model.addAttribute("duplicatedId", "Mã nhân viên này đã tồn tại");
-                    model.addAttribute("objNV", objNV);
+                    model.addAttribute("nhanvien", objNV);
                     return "admin/NhanVienAdd";
                 }
             }

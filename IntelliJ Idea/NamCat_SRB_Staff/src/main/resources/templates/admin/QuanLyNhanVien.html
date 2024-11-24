@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/home/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý thông tin nhân viên</title>
+    <style type="text/css">
+        .custom-width {
+            padding-left: 30px;
+            padding-right: 0px;
+        }
+
+        .input {
+            padding-left: 0px;
+        }
+
+        .search {
+            transition: background-color 0.6s ease;
+            position: relative;
+            left: 40px;
+        }
+
+        .search:hover {
+            background-color: #3ebf9a;
+        }
+
+        .btn-secondary {
+            border: none;
+        }
+
+        .legend {
+            position: relative;
+            left: 15px;
+            bottom: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i> Quản lý thông viên nhân viên</h1>
+            <p>Danh sách thông tin nhân viên trong hệ thống</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item">Staff</li>
+            <li class="breadcrumb-item active"><a href="#">Staff Management</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <form method="post" th:action="@{/admin/nhanvien}" th:object="${nhanvien}">
+                        <fieldset>
+                            <legend class="legend">Nhập thông tin tìm kiếm</legend>
+                            <div class="row">
+                                <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Từ khóa:</div>
+                                <div class="input col-md-2">
+                                    <input type="text" th:field="*{tuKhoa}" th:class="form-control"/>
+                                </div>
+                                <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Phòng ban:</div>
+                                <div class="input col-md-2">
+                                    <select th:field="*{maPhong}" th:class="form-control">
+                                        <option value="" label="Chọn phòng ban"></option>
+                                        <th:block th:each="p : ${lstPhongBan}">
+                                            <option th:value="${p.maPhong}" th:text="${p.tenPhong}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                                <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Chức vụ:</div>
+                                <div class="input col-md-2">
+                                    <select th:field="*{maChucVu}" th:class="form-control">
+                                        <option value="" label="Chọn chức vụ"></option>
+                                        <th:block th:each="c : ${lstChucVu}">
+                                            <option th:value="${c.maChucVu}" th:text="${c.tenChucVu}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                                <div th:class="col-md-2">
+                                    <button type="submit" class="search btn btn-secondary">Tìm kiếm</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <div style="text-align: right; padding-right: 1px">
+                        <a th:href="@{/admin/nhanvien/them}">Thêm mới</a>
+                    </div>
+                    <table class="table table-hover table-bordered" id="sampleTable">
+                        <thead>
+                            <tr>
+                                <th>Mã nhân viên</th>
+                                <th>Họ tên</th>
+                                <th>Giới tính</th>
+                                <th>Ngày sinh</th>
+                                <th>Điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Phòng ban</th>
+                                <th>Chức vụ</th>
+                                <th>Lương/tháng</th>
+                                <th style="width:40px;"></th>
+                                <th style="width:40px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="s : ${lstNV}">
+                                <td th:text="${s.maNV}"></td>
+                                <td th:text="${s.hoTen}"></td>
+                                <td th:text="${s.gioiTinh == 1 ? 'Nữ' : 'Nam'}"></td>
+                                <td th:text="${#dates.format(s.ngaySinh, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${s.dienThoai}"></td>
+                                <td th:text="${s.diaChi}"></td>
+                                <td th:text="${s.tenPhong}"></td>
+                                <td th:text="${s.tenChucVu}"></td>
+                                <td th:text="${#numbers.formatDecimal(s.tongLuong, 0, 'POINT', 0, 'COMMA') + 'đ'}" th:data-raw="${s.tongLuong}" th:data-sort="${s.tongLuong}"></td>
+                                <td>
+                                    <a style="margin-left: 3px" class="btn btn-primary" th:href="@{'/admin/nhanvien/sua/' + ${s.maNV}}">Sửa</a>
+                                </td>
+                                <td>
+                                    <a style="margin-left: 3px" class="btn btn-danger" th:href="@{'/admin/nhanvien/xoa/' + ${s.maNV}}" onclick="return confirm('Bạn có chắc chắc muốn xóa thông tin này ?')">Xóa</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

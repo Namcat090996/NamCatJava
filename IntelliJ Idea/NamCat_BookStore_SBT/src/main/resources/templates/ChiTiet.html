@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{home/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>[[${sach.tenSach}]]<span>(by [[${sach.tacGia}]])</span></h1>
+    <p>
+        <img th:src="@{'/images/' + ${sach.anhSach}}"  alt="image" />
+    </p>
+    <p>[[${sach.MoTa}]]</p>
+    <p style="width: 100%; text-align: right">[[${#numbers.formatDecimal(sach.giaSach, 0, 'COMMA', 0, 'POINT')}]] đồng</p>
+</div>
+</body>
+</html>

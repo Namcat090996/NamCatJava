@@ -9,30 +9,31 @@
     <link th:href="@{/css/templatemo_style.css}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<!-- Templates from www.stanford.com.vn -->
-<div id="templatemo_container">
-    <div th:replace="home/menu :: menu"></div>
-   <!-- end of menu -->
+    <!-- Templates from www.stanford.com.vn -->
+    <div id="templatemo_container">
+        <div th:replace="home/menu :: menu"></div>
+       <!-- end of menu -->
 
-    <div th:replace="home/header :: header"></div> <!-- end of header -->
+        <div th:replace="home/header :: header"></div> <!-- end of header -->
 
-    <div id="templatemo_content">
+        <div id="templatemo_content">
 
-        <div id="templatemo_content_left">
-            <div th:replace="home/nav :: nav"></div>
-        </div> <!-- end of content left -->
+            <div id="templatemo_content_left">
+                <div th:replace="home/nav :: nav"></div>
+            </div> <!-- end of content left -->
 
-        <div id="templatemo_content_right">
-            <div layout:fragment="content">
-            </div>
+            <div id="templatemo_content_right">
+                <div layout:fragment="content">
+                </div>
 
-            <a href="#"><img th:src="@{'/images/templatemo_ads.jpg'}" alt="ads" /></a>
-        </div> <!-- end of content right -->
+                <a href="#"><img th:src="@{'/images/templatemo_ads.jpg'}" alt="ads" /></a>
+            </div> <!-- end of content right -->
 
-        <div class="cleaner_with_height">&nbsp;</div>
-    </div> <!-- end of content -->
+            <div class="cleaner_with_height">&nbsp;</div>
+        </div> <!-- end of content -->
 
-    <div th:replace="home/footer :: footer"></div>
-</div> <!-- end of container -->
-<div align=center>This template  downloaded form <a href='http://www.stanford.com.vn'>Stanford.com.vn</a></div></body>
+        <div th:replace="home/footer :: footer"></div>
+    </div> <!-- end of container -->
+    <div align=center>This template  downloaded form <a href='http://www.stanford.com.vn'>Stanford.com.vn</a></div>
+</body>
 </html>

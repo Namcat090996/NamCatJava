@@ -38,6 +38,9 @@ public class SanPham {
     @Column(name = "image", nullable = true, length = 255)
     private String anhSanPham;
     
+    @Column(name = "description", nullable = true, length = 1000)
+    private String moTa;
+    
     public int getId() {
         return id;
     }
@@ -84,5 +87,13 @@ public class SanPham {
     
     public void setAnhSanPham(String anhSanPham) {
         this.anhSanPham = anhSanPham;
+    }
+    
+    public String getMoTa() {
+        return moTa;
+    }
+    
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
     }
 }

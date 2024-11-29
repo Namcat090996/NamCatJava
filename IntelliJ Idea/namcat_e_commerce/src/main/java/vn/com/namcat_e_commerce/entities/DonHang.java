@@ -18,7 +18,6 @@ public class DonHang {
     private int id;
     
     @Column(name = "username", nullable = false, length = 50)
-    @NotNull
     private String tenNguoiDung;
     
     @Column(name = "create", nullable = false)

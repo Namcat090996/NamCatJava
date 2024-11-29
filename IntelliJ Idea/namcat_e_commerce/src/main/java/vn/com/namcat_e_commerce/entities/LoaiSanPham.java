@@ -19,9 +19,6 @@ public class LoaiSanPham {
     @NotBlank(message = "Bạn phải nhập tên sản phẩm")
     private String tenSanPham;
     
-    @Column(name = "description", nullable = true, length = 1000)
-    private String moTa;
-    
     public String getLoaiSanPham() {
         return loaiSanPham;
     }
@@ -38,11 +35,4 @@ public class LoaiSanPham {
         this.tenSanPham = tenSanPham;
     }
     
-    public String getMoTa() {
-        return moTa;
-    }
-    
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
 }

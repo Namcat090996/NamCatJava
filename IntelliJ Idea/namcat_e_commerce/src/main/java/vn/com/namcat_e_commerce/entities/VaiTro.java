@@ -13,18 +13,18 @@ public class VaiTro {
     @Id
     @Column(name = "role", nullable = false, unique = true, length = 20)
     @NotBlank(message = "Bạn phải nhập mã vai trò")
-    private String vaiTro;
+    private String maVaiTro;
     
     @Column(name = "name", nullable = false, unique = true, length = 200)
     @NotBlank(message = "Bạn phải nhập tên vai trò")
     private String tenVaiTro;
     
-    public String getVaiTro() {
-        return vaiTro;
+    public String getMaVaiTro() {
+        return maVaiTro;
     }
     
-    public void setVaiTro(String vaiTro) {
-        this.vaiTro = vaiTro;
+    public void setMaVaiTro(String maVaiTro) {
+        this.maVaiTro = maVaiTro;
     }
     
     public String getTenVaiTro() {

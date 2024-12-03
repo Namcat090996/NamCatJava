@@ -8,8 +8,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
-@Table
-@Entity(name = "order")
+@Entity
+@Table(name = "order")
 public class DonHang {
     
     @Id

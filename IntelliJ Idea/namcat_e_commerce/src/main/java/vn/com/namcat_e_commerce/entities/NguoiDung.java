@@ -6,8 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.*;
 
-@Table
-@Entity(name = "user")
+@Entity
+@Table(name = "user")
 public class NguoiDung {
     
     @Id
@@ -40,7 +40,7 @@ public class NguoiDung {
     @NotEmpty(message = "Bạn phải chọn vai trò cho người dùng")
     private String vaiTro;
     
-    @Column(name = "role", nullable = false, length = 20)
+    @Column(name = "address", nullable = false, length = 300)
     @NotEmpty(message = "Bạn phải nhập địa chỉ")
     private String diaChi;
     

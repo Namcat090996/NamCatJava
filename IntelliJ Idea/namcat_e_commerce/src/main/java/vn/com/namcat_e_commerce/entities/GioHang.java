@@ -2,8 +2,8 @@ package vn.com.namcat_e_commerce.entities;
 
 import jakarta.persistence.*;
 
-@Table
-@Entity(name = "cart")
+@Entity
+@Table(name = "cart")
 public class GioHang {
     
     @Id

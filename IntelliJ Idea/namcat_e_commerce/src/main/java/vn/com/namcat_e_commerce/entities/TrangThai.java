@@ -6,8 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
-@Table
-@Entity(name = "status")
+@Entity
+@Table(name = "status")
 public class TrangThai {
 
     @Id

@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface SanPhamRepository extends JpaRepository<SanPham, Integer> {
     
-    @Query(value = "")
-    public List<SanPham> timkiemSP(@Param("keyword") String tuKhoa, @Param("keyword") String tuKhoa)
+    public List<SanPham> findByTenSanPhamLike(String tuKhoa);
+    
 }

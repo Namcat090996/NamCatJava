@@ -70,7 +70,7 @@ public class SachController {
      * @return
      */
     @RequestMapping(value = "/admin/sach/themMoiSach", method = RequestMethod.POST)
-    public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, @RequestParam("fUpload") MultipartFile fUpload, HttpServletRequest request, Model model)
+        public String themMoiHoacSuaSach(@ModelAttribute("sach") @Valid Sach objSach, BindingResult result, @RequestParam("fUpload") MultipartFile fUpload, HttpServletRequest request, Model model)
     {
         System.out.println("Mã sách: " + objSach.getMaSach());
         System.out.println("Tên sách: " + objSach.getTenSach());
@@ -101,6 +101,7 @@ public class SachController {
             {
                 //Lấy tên ảnh
                 tenAnh = fUpload.getOriginalFilename();
+                System.out.println(tenAnh);
                 String strPath = fileUploadPath;
                 try
                 {

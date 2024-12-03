@@ -6,8 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
-@Table
-@Entity(name = "category")
+@Entity
+@Table(name = "category")
 public class LoaiSanPham {
     
     @Id

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/home/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm mới/ sửa văn bản</title>
+    <style type="text/css">
+        .errorfinfo {
+            color: red;
+            padding-left: 2px;
+        }
+
+        .row {
+            padding-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <form method="post" th:action="@{/admin/vanban/themmoiVB}" th:object="${vanban}" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Nhập thông tin văn bản</legend>
+            <div class="container-fluid">
+                <div class="row">
+                    <label class="col-md-2">Mã văn bản</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" th:field="*{maVanBan}" th:attr="readonly=${not #strings.isEmpty(maVBCheck)}"/>
+                        <input type="hidden" th:value="${maVBCheck}" name="idCheck"/>
+                        <td th:if="${#fields.hasErrors('maVanBan')}">
+                            <span th:errors="*{maVanBan}" th:class="errorfinfo"></span>
+                        </td>
+                        <div th:text="${duplicatedId}" class="errorfinfo"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-2">Tiêu đề</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" th:field="*{tieuDe}"/>
+                        <td th:if="${#fields.hasErrors('tieuDe')}">
+                            <span th:errors="*{tieuDe}" th:class="errorfinfo"></span>
+                        </td>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-2">Mô tả</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" th:field="*{moTa}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-2">Nội dung</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" th:field="*{noiDung}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-2">Ngày tạo</label>
+                    <div class="col-md-6">
+                        <input type="text" id="demoDate" class="form-control" th:field="*{ngayTao}" placeholder="dd/MM/yyyy"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-2">File</label>
+                    <div class="col-md-6">
+                        <input type="file" class="form-control" name="fUpload"/>
+                        <div th:text="${upload}" class="errorfinfo"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-2">Loại văn bản:</label>
+                    <div class="col-md-6">
+                        <select th:field="*{loaiVanBan}" class="form-control">
+                            <option value="" label="Chọn loại văn bản"></option>
+                            <th:block th:each="pb : ${lstLoaiVB}">
+                                <option th:value="${pb.tenLoaiVanban}" th:text="${pb.tenLoaiVanban}"></option>
+                            </th:block>
+                        </select>
+                        <td th:if="${#fields.hasErrors('loaiVanBan')}">
+                            <span th:errors="*{loaiVanBan}" th:class="errorfinfo"></span>
+                        </td>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-md-2">Đơn vị:</label>
+                    <div class="col-md-6">
+                        <select th:field="*{donVi}" class="form-control">
+                            <option value="" label="Chọn đơn vị"></option>
+                            <th:block th:each="pb : ${lstDonVi}">
+                                <option th:value="${pb.maDonVi}" th:text="${pb.tenDonVi}"></option>
+                            </th:block>
+                        </select>
+                        <td th:if="${#fields.hasErrors('donVi')}">
+                            <span th:errors="*{donVi}" th:class="errorfinfo"></span>
+                        </td>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <input type="submit" class="btn btn-primary" name="btnCapNhat" value="Cập nhật"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a th:href="@{/admin/vanban}" class="btn btn-primary">Trở về</a>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <!-- PAGE CONTENT ENDS -->
+</div>
+</body>
+</html>

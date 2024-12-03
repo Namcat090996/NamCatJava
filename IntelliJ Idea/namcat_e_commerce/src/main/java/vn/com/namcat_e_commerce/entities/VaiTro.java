@@ -6,8 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
-@Table
-@Entity(name = "role")
+@Entity
+@Table(name = "role")
 public class VaiTro {
     
     @Id

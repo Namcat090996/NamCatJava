@@ -2,8 +2,8 @@ package vn.com.namcat_e_commerce.entities;
 
 import jakarta.persistence.*;
 
-@Table
-@Entity(name = "order_detail")
+@Entity
+@Table(name = "order_detail")
 public class DonHangChiTiet {
     
     @Id

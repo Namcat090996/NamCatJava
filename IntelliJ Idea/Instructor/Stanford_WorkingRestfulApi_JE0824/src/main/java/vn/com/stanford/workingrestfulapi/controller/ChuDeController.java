@@ -8,6 +8,6 @@ public class ChuDeController {
 
     @GetMapping("/admin/chude")
     public String hienThiDanhSachChuDe() {
-        return "ChuDeCallApi";
+        return "admin/ChuDeCallAPI";
     }
 }

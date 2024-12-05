@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/home/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý văn bản</title>
+    <style type="text/css">
+        .custom-width {
+            padding-left: 65px;
+            padding-top: 7px;
+        }
+
+        .input {
+            padding-left: 0px;
+        }
+
+        .search {
+            position: relative;
+            left: 40px;
+        }
+
+        .btn-secondary {
+            border: none;
+        }
+
+        .legend {
+            position: relative;
+            left: 15px;
+            bottom: 5px;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        .title {
+            color: #707070;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <form style="margin-bottom: 20px" method="post" th:action="@{/admin/vanban}" th:object="${vanban}">
+                <fieldset>
+                    <legend class="legend">Nhập thông tin tìm kiếm</legend>
+                    <div class="row">
+                        <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Từ khóa:</div>
+                        <div class="input col-md-2">
+                            <input type="text" th:field="*{tuKhoa}" th:class="form-control"/>
+                        </div>
+                        <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Loại VB:</div>
+                        <div class="input col-md-2">
+                            <select th:field="*{loaiVanBan}" th:class="form-control">
+                                <option value="" label="Chọn loại văn bản"></option>
+                                <th:block th:each="p : ${lstLoaiVB}">
+                                    <option th:value="${p.tenLoaiVanban}" th:text="${p.tenLoaiVanban}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Đơn vị:</div>
+                        <div class="input col-md-2">
+                            <select th:field="*{donVi}" th:class="form-control">
+                                <option value="" label="Chọn đơn vị"></option>
+                                <th:block th:each="c : ${lstDonVi}">
+                                    <option th:value="${c.maDonVi}" th:text="${c.tenDonVi}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div th:class="col-md-2">
+                            <button type="submit" class="search btn btn-secondary" style="border-radius: 5px">Tìm kiếm</button>
+                        </div>
+                    </div>
+                    <div style="height: 20px"></div>
+                    <div class="row">
+                        <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Từ ngày:</div>
+                        <div class="input col-md-2">
+                            <input type="date" th:field="*{tuNgay}" th:class="form-control" placeholder="dd/MM/YYYY"/>
+                        </div>
+                        <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Đến ngày:</div>
+                        <div class="input col-md-2">
+                            <input type="date" th:field="*{denNgay}" th:class="form-control" placeholder="dd/MM/YYYY"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div style="text-align: right">
+                <a class="blue btn btn-info2" th:href="@{/admin/vanban/them}" style="font-size: 13px; border-radius: 5px">
+                    <i class="ace-icon fa fa-search-plus bigger-130">&nbsp; Thêm mới</i>
+                </a>
+            </div>
+            <div style="height: 15px"></div>
+            <div class="table-header">
+                Results for "Latest Registered Domains"
+            </div>
+
+            <!-- div.table-responsive -->
+
+            <!-- div.dataTables_borderWrap -->
+            <div>
+                <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Mã VB</th>
+                        <th style="color: #707070">Tiêu đề</th>
+                        <th style="color: #707070">Mô tả</th>
+                        <th>
+                            <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                            Ngày tạo
+                        </th>
+                        <th style="color: #707070">Số trang</th>
+                        <th style="color: #707070">Định dạng</th>
+                        <th style="color: #707070">Loại văn bản</th>
+                        <th style="color: #707070">File</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="s : ${lstVB}">
+                        <td style="text-align: center" th:text="${s.maVanBan}">
+                        </td>
+                        <td th:text="${s.tieuDe}"></td>
+                        <td th:text="${s.moTa}"></td>
+                        <td th:text="${#temporals.format(s.ngayTao, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${s.soTrang}"></td>
+                        <td th:text="${s.dinhDang}"></td>
+                        <td th:text="${s.loaiVanBan}"></td>
+
+                        <td class="hidden-480">
+                            <a th:href="@{'/admin/vanban/files/' + ${s.tenFile}}" target="_blank">Download</a>
+                        </td>
+
+                        <td>
+                            <div class="hidden-sm hidden-xs action-buttons">
+                                <a class="green" th:href="@{'/admin/vanban/sua/' + ${s.maVanBan}}">
+                                    <i class="ace-icon fa fa-pencil bigger-130"></i>
+                                </a>
+
+                                <a class="red" th:href="@{'/admin/vanban/xoa/' + ${s.maVanBan}}"
+                                   onclick="return confirm('Bạn có chắc chắn muốn xóa thông tin này ?');">
+                                    <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                </a>
+                            </div>
+
+                            <div class="hidden-md hidden-lg">
+                                <div class="inline pos-rel">
+                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                        <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+                                    </button>
+
+                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                        <li>
+                                            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+																				<span class="blue">
+																					<i class="ace-icon fa fa-search-plus bigger-120"></i>
+																				</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+																				<span class="green">
+																					<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																				</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+																				<span class="red">
+																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																				</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

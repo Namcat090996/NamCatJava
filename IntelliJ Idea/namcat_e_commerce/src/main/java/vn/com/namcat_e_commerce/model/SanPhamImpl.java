@@ -26,6 +26,7 @@ public class SanPhamImpl implements SanPhamDao {
     
     @Override
     public List<SanPham> timSPTheoLoai(String loaiSanPham, String order) {
+        
         String strSQL = "Select s from SanPham s where 1=1";
         
         if(loaiSanPham!= null && !loaiSanPham.isEmpty())
@@ -42,6 +43,8 @@ public class SanPhamImpl implements SanPhamDao {
         {
             strSQL += " order by s.giaSanPham DESC";
         }
+        
+        
         
         //Khai báo danh sách
         List<SanPham> lstSP = new ArrayList<>();

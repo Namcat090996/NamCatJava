@@ -20,5 +20,35 @@ public class GioHang {
     @Column(name = "quantity", nullable = false)
     private int soLuong;
     
+    public int getId() {
+        return id;
+    }
     
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public String getTenNguoiDung() {
+        return tenNguoiDung;
+    }
+    
+    public void setTenNguoiDung(String tenNguoiDung) {
+        this.tenNguoiDung = tenNguoiDung;
+    }
+    
+    public int getMaSanPham() {
+        return maSanPham;
+    }
+    
+    public void setMaSanPham(int maSanPham) {
+        this.maSanPham = maSanPham;
+    }
+    
+    public int getSoLuong() {
+        return soLuong;
+    }
+    
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
 }

@@ -17,7 +17,7 @@ public class LoaiSanPham {
     
     @Column(name = "name", nullable = false, unique = true, length = 200)
     @NotBlank(message = "Bạn phải nhập tên sản phẩm")
-    private String tenSanPham;
+    private String tenLoai;
     
     public String getLoaiSanPham() {
         return loaiSanPham;
@@ -28,11 +28,11 @@ public class LoaiSanPham {
     }
     
     public String getTenSanPham() {
-        return tenSanPham;
+        return tenLoai;
     }
     
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
+    public void setTenSanPham(String tenLoai) {
+        this.tenLoai = this.tenLoai;
     }
     
 }

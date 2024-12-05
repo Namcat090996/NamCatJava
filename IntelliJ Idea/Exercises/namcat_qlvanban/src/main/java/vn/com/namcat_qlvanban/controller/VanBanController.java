@@ -34,9 +34,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class VanBanController {
@@ -462,6 +460,113 @@ public class VanBanController {
             } else {
                 errors.add(new ErrorDetail("general", "Không thể cập nhật văn bản"));
                 return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+    }
+    
+    
+    @RestController
+    @RequestMapping("/api/vanban")
+    public class VanBanController {
+        
+        @Value("${fileupload.path}")
+        private String fUploadPath;
+        
+        @Autowired
+        private VanBanService vanBanService;
+        
+        @PostMapping("/upload")
+        public ResponseEntity<?> uploadFile(@RequestParam("fUpload") MultipartFile fUpload) {
+            if (fUpload.isEmpty()) {
+                return new ResponseEntity<>(new Message("fUpload", "Vui lòng tải lên 01 tệp"), HttpStatus.BAD_REQUEST);
+            }
+            
+            String tenFile = fUpload.getOriginalFilename();
+            String loaiFile = "";
+            int soTrang = 0;
+            
+            try {
+                Path directory = Paths.get(fUploadPath);
+                
+                if (!Files.exists(directory)) {
+                    Files.createDirectories(directory);
+                }
+                
+                Path filePath = directory.resolve(tenFile);
+                fUpload.transferTo(filePath.toFile());
+                
+                if (tenFile.contains(".") && tenFile.lastIndexOf(".") != 0) {
+                    loaiFile = tenFile.substring(tenFile.lastIndexOf(".") + 1).toLowerCase();
+                }
+                
+                if (tenFile.endsWith(".doc")) {
+                    soTrang = getDOCPageCount(filePath.toFile());
+                } else if (tenFile.endsWith(".docx")) {
+                    soTrang = getDOCXPageCount(filePath.toFile());
+                } else if (tenFile.endsWith(".pdf")) {
+                    soTrang = getPDFPageCount(filePath.toFile());
+                }
+                
+                Map<String, Object> fileDetails = new HashMap<>();
+                fileDetails.put("tenFile", tenFile);
+                fileDetails.put("loaiFile", loaiFile);
+                fileDetails.put("soTrang", soTrang);
+                
+                return new ResponseEntity<>(fileDetails, HttpStatus.OK);
+                
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return new ResponseEntity<>(new Message("fileError", "Có lỗi xảy ra khi tải lên file"), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        
+        @PostMapping("/them-moi")
+        public ResponseEntity<?> themMoiVanBan(@Valid @RequestBody VanBan objVB, BindingResult result) {
+            if (result.hasErrors()) {
+                List<Message> errors = new ArrayList<>();
+                for (FieldError fieldError : result.getFieldErrors()) {
+                    errors.add(new Message(fieldError.getField(), fieldError.getDefaultMessage()));
+                }
+                return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+            }
+            
+            VanBan existingVanBan = vanBanService.layChiTiet(objVB.getMaVanBan());
+            if (existingVanBan != null) {
+                return new ResponseEntity<>(new Message("maVanBan", "Mã văn bản này đã tồn tại"), HttpStatus.BAD_REQUEST);
+            }
+            
+            objVB.setNgayCapNhat(LocalDate.now());
+            boolean success = vanBanService.themVanBan(objVB);
+            
+            if (success) {
+                return new ResponseEntity<>(objVB, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(new Message("general", "Không thể thêm văn bản"), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        
+        @PutMapping("/cap-nhat/{id}")
+        public ResponseEntity<?> suaVanBan(@PathVariable("id") String id, @Valid @RequestBody VanBan objVB, BindingResult result) {
+            if (result.hasErrors()) {
+                List<Message> errors = new ArrayList<>();
+                for (FieldError fieldError : result.getFieldErrors()) {
+                    errors.add(new Message(fieldError.getField(), fieldError.getDefaultMessage()));
+                }
+                return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+            }
+            
+            VanBan existingVanBan = vanBanService.layChiTiet(id);
+            if (existingVanBan == null) {
+                return new ResponseEntity<>(new Message("maVanBan", "Mã văn bản không tồn tại"), HttpStatus.NOT_FOUND);
+            }
+            
+            objVB.setNgayCapNhat(LocalDate.now());
+            boolean success = vanBanService.suaVanban(objVB);
+            
+            if (success) {
+                return new ResponseEntity<>(objVB, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(new Message("general", "Không thể cập nhật văn bản"), HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
     }

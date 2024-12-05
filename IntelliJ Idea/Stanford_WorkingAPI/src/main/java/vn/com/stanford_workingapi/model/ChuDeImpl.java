@@ -54,10 +54,15 @@ public class ChuDeImpl implements ChuDeDao {
 
     @Override
     public ChuDe getById(String id) {
-        ChuDe objChuDe = null;
-
-        objChuDe = chuDeRepository.findById(id).get();
-
+        ChuDe objChuDe;
+        
+        try {
+            objChuDe = chuDeRepository.findById(id).get();
+        }
+        catch (Exception e) {
+            objChuDe = null;
+        }
+        
         return objChuDe;
     }
 

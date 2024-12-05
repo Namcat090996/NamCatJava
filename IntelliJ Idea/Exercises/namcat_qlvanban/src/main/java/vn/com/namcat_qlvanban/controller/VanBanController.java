@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.com.namcat_qlvanban.entities.DonVi;
@@ -344,6 +345,124 @@ public class VanBanController {
         } catch (Exception e) { //When appear any exceptions (file error, invalid file path ...)
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    @RestController
+    @RequestMapping("/api/admin/vanban")
+    public class VanBanController {
+        
+        @Autowired
+        private VanBanService vanBanService;
+        
+        private static final String fUploadPath = "C:/uploads/";
+        
+        // API xử lý upload file
+        @PostMapping("/upload")
+        public ResponseEntity<?> uploadFile(@RequestParam("fUpload") MultipartFile fUpload) {
+            List<ErrorDetail> errors = new ArrayList<>();
+            String tenFile = "", loaiFile = "";
+            int soTrang = 0;
+            
+            if (fUpload == null || fUpload.isEmpty()) {
+                errors.add(new ErrorDetail("fUpload", "Vui lòng tải lên một tệp"));
+                return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+            }
+            
+            try {
+                // Lấy tên file
+                tenFile = fUpload.getOriginalFilename();
+                Path directory = Paths.get(fUploadPath);
+                
+                // Tạo thư mục nếu chưa tồn tại
+                if (!Files.exists(directory)) {
+                    Files.createDirectory(directory);
+                }
+                
+                // Lưu file vào thư mục
+                Path filePath = directory.resolve(tenFile);
+                fUpload.transferTo(filePath.toFile());
+                
+                // Lấy thông tin định dạng và số trang
+                loaiFile = tenFile.substring(tenFile.lastIndexOf(".") + 1).toLowerCase();
+                if (tenFile.endsWith(".doc")) {
+                    soTrang = getDOCPageCount(filePath.toFile());
+                } else if (tenFile.endsWith(".docx")) {
+                    soTrang = getDOCXPageCount(filePath.toFile());
+                } else if (tenFile.endsWith(".pdf")) {
+                    soTrang = getPDFPageCount(filePath.toFile());
+                }
+                
+            } catch (Exception ex) {
+                errors.add(new ErrorDetail("fileUpload", "Có lỗi xảy ra khi tải lên file"));
+                return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("fileName", tenFile);
+            response.put("fileType", loaiFile);
+            response.put("numPages", soTrang);
+            
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        
+        // API thêm văn bản mới
+        @PostMapping("/themmoi")
+        public ResponseEntity<?> addVanBan(@Valid @RequestBody VanBan objVB, BindingResult result, @RequestParam("fUpload") MultipartFile fUpload) {
+            List<ErrorDetail> errors = new ArrayList<>();
+            
+            if (result.hasErrors()) {
+                for (FieldError fieldError : result.getFieldErrors()) {
+                    errors.add(new ErrorDetail(fieldError.getField(), fieldError.getDefaultMessage()));
+                }
+                return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+            }
+            
+            // Kiểm tra nếu đã tồn tại mã văn bản
+            VanBan objVBCheck = vanBanService.layChiTiet(objVB.getMaVanBan());
+            if (objVBCheck != null) {
+                errors.add(new ErrorDetail("maVanBan", "Mã văn bản này đã tồn tại"));
+                return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+            }
+            
+            // Kiểm tra và xử lý upload file
+            if (fUpload.isEmpty()) {
+                errors.add(new ErrorDetail("fUpload", "Vui lòng tải lên 01 tệp"));
+                return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+            }
+            
+            // Tiến hành lưu văn bản
+            objVB.setNgayCapNhat(LocalDate.now());
+            boolean ketQua = vanBanService.themVanBan(objVB);
+            if (ketQua) {
+                return new ResponseEntity<>(objVB, HttpStatus.CREATED);
+            } else {
+                errors.add(new ErrorDetail("general", "Không thể thêm văn bản"));
+                return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        
+        // API cập nhật văn bản
+        @PutMapping("/capnhat")
+        public ResponseEntity<?> updateVanBan(@Valid @RequestBody VanBan objVB, BindingResult result, @RequestParam("fUpload") MultipartFile fUpload) {
+            List<ErrorDetail> errors = new ArrayList<>();
+            
+            if (result.hasErrors()) {
+                for (FieldError fieldError : result.getFieldErrors()) {
+                    errors.add(new ErrorDetail(fieldError.getField(), fieldError.getDefaultMessage()));
+                }
+                return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+            }
+            
+            // Tiến hành cập nhật văn bản
+            objVB.setNgayCapNhat(LocalDate.now());
+            boolean ketQua = vanBanService.suaVanban(objVB);
+            if (ketQua) {
+                return new ResponseEntity<>(objVB, HttpStatus.OK);
+            } else {
+                errors.add(new ErrorDetail("general", "Không thể cập nhật văn bản"));
+                return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
     }
 }

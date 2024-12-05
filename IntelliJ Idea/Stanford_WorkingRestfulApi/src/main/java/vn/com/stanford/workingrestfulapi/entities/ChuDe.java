@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 public class ChuDe {
     @Id
     @Column(name="MaChuDe", nullable = false, length = 10)
+
     private String maChuDe;
     
     @Column(name="TenChuDe", nullable = true, length = 255)

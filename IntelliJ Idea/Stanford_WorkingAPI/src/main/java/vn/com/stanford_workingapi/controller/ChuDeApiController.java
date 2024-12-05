@@ -1,13 +1,19 @@
 package vn.com.stanford_workingapi.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.View;
 import vn.com.stanford_workingapi.entities.ChuDe;
 import vn.com.stanford_workingapi.entities.Message;
 import vn.com.stanford_workingapi.service.ChuDeService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,92 +22,67 @@ public class ChuDeApiController {
 
     @Autowired
     ChuDeService chuDeService;
+    @Autowired
+    private View error;
     
     @GetMapping("/chude")
     public ResponseEntity<List<ChuDe>> layDanhSach() {
-        
-        //Lấy danh sách
         List<ChuDe> lstChuDe = chuDeService.layDanhSach();
         
         return new ResponseEntity<List<ChuDe>>(lstChuDe, HttpStatus.OK);
     }
     
     @GetMapping("/chude/{id}")
-    public ResponseEntity<?> layChiTietTheoMa(@PathVariable("id") String id)
-    {
-        ChuDe objCD = chuDeService.layChiTiet(id);
+    public ResponseEntity<?> layChiTiet(@PathVariable("id") String id) {
+        ChuDe chuDe = chuDeService.layChiTiet(id);
         
-        if(objCD != null)
+        if(chuDe != null)
         {
-            return new ResponseEntity<ChuDe>(objCD, HttpStatus.OK);
+            return new ResponseEntity<ChuDe>(chuDe, HttpStatus.OK);
         }
         else
         {
-            Message err = new Message("Không tìm thấy chủ đề có mã: " + id);
+            Message err = new Message("Khong tim thay chu de co ma: " + id);
             return new ResponseEntity<Message>(err, HttpStatus.NOT_FOUND);
         }
     }
     
     @PostMapping("/chude")
-    public ResponseEntity<?> themMoiChuDe(@RequestBody ChuDe objCD)
-    {
-        boolean kq = chuDeService. themMoi(objCD);
-        if(kq)
+    public ResponseEntity<?> themMoiChuDe(@Valid @RequestBody ChuDe chuDe, BindingResult result, @RequestParam("fUpload") MultipartFile fUpload) {
+        
+        List<Message> msg = new ArrayList<Message>();
+        
+        if(result.hasErrors())
         {
-            return new ResponseEntity<ChuDe>(objCD, HttpStatus.OK);
+            for(FieldError fieldError : result.getFieldErrors())
+            {
+                msg.add(new Message(fieldError.getField(), fieldError.getDefaultMessage()));
+            }
+            
+            return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
         }
         
-        Message msg = new Message("Không thể thêm mới chủ đề");
-        return new ResponseEntity<Message>(msg, HttpStatus.NOT_FOUND);
-    }
-    
-    @PutMapping("/chude/{id}")
-    public ResponseEntity<?> capNhatChuDe(@PathVariable("id") String id, @RequestBody ChuDe objCD)
-    {
-        ChuDe objCD2 = chuDeService.layChiTiet(id);
+        ChuDe objCD = chuDeService.layChiTiet(chuDe.getMaChuDe());
         
+        if(objCD != null)
+        {
+            msg.add(new Message("maChuDe", "Ma chu de nay da ton tai"));
+            return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
+        }
         
-        if(objCD2 == null)
-        {
-            Message msg = new Message("Không thể tìm thấy chủ đề có mã: " + id);
-            return new ResponseEntity<Message>(msg, HttpStatus.NOT_FOUND);
+        if(fUpload.isEmpty()) {
+            msg.add(new Message("fUpload", "Vui lòng tải lên 01 tệp"));
+            return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
         }
-        {
-            boolean kq = chuDeService.capNhat(objCD);
-            if(kq)
-            {
-                return new ResponseEntity<ChuDe>(objCD, HttpStatus.OK);
-            }
-            else
-            {
-                Message msg = new Message("Không cập nhật được chủ đề có mã: " + id);
-                return new ResponseEntity<Message>(msg, HttpStatus.NOT_MODIFIED);
-            }
-        }
-    }
-    
-    @DeleteMapping("/chude/{id}")
-    public ResponseEntity<?> xoaChuDe(@PathVariable("id") String id)
-    {
-        ChuDe objCD = chuDeService.layChiTiet(id);
         
-        if(objCD == null)
-        {
-            Message msg = new Message("Không thể tìm thấy chủ đề có mã: " + id);
-            return new ResponseEntity<Message>(msg, HttpStatus.NOT_FOUND);
+        boolean ketQua = chuDeService.themMoi(chuDe);
+        
+        if(ketQua) {
+            return new ResponseEntity<>(objCD, HttpStatus.CREATED);
         }
-        {
-            boolean kq = chuDeService.xoa(id);
-            if(kq)
-            {
-                Message msg = new Message("Xóa chủ đề có mã: " + id + " thành công");
-                return new ResponseEntity<Message>(msg, HttpStatus.OK);
-            }
-            else
-            {
-                Message msg = new Message("Không xóa được chủ đề có mã: " + id);
-                return new ResponseEntity<Message>(msg, HttpStatus.NOT_FOUND);
-            }
+        else {
+            msg.add(new Message("general", "Không thể thêm văn bản"));
+            return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
         }
     }
 }

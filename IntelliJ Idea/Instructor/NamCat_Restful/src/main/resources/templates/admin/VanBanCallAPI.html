@@ -9,6 +9,7 @@
     <script type="text/javascript" th:src="@{/js/jquery.validate.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/chude.js}"></script>
     <script type="text/javascript">
+
         function suaThongTin(maVB)
         {
             //Hiển thị thông tin chi tiết
@@ -91,6 +92,11 @@
         .title {
             color: #707070;
         }
+
+        .modal-dialog {
+            width: 700px !important;
+            max-width: none !important;
+        }
     </style>
 </head>
 <body>
@@ -107,7 +113,7 @@
             </div>
             <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Loại VB:</div>
             <div class="input col-md-2">
-                <select th:field="*{loaiVanBan}" th:class="form-control">
+                <select id="loaiVB" name="loaiVB" th:field="*{loaiVanBan}" th:class="form-control">
                     <option value="" label="Chọn loại văn bản"></option>
                     <th:block th:each="p : ${lstLoaiVB}">
                         <option th:value="${p.tenLoaiVanban}" th:text="${p.tenLoaiVanban}"></option>
@@ -116,7 +122,7 @@
             </div>
             <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Đơn vị:</div>
             <div class="input col-md-2">
-                <select th:field="*{donVi}" th:class="form-control">
+                <select id="DV" name="DV" th:field="*{donVi}" th:class="form-control">
                     <option value="" label="Chọn đơn vị"></option>
                     <th:block th:each="c : ${lstDonVi}">
                         <option th:value="${c.maDonVi}" th:text="${c.tenDonVi}"></option>
@@ -131,11 +137,11 @@
         <div class="row">
             <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Từ ngày:</div>
             <div class="input col-md-2">
-                <input type="date" th:field="*{tuNgay}" th:class="form-control" placeholder="dd/MM/YYYY"/>
+                <input type="date" th:field="*{tuNgay}" th:class="form-control"/>
             </div>
             <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Đến ngày:</div>
             <div class="input col-md-2">
-                <input type="date" th:field="*{denNgay}" th:class="form-control" placeholder="dd/MM/YYYY"/>
+                <input type="date" th:field="*{denNgay}" th:class="form-control"/>
             </div>
         </div>
     </fieldset>
@@ -163,7 +169,7 @@
         <td th:text="${s.maVanBan}"></td>
         <td th:text="${s.tieuDe}"></td>
         <td th:text="${s.moTa}"></td>
-        <td th:text="${#temporals.format(s.ngayTao, 'dd/MM/yyyy')}"></td>
+        <td th:text="${s.ngayTao}"></td>
         <td th:text="${s.soTrang}"></td>
         <td th:text="${s.dinhDang}"></td>
         <td th:text="${s.loaiVanBan}"></td>
@@ -183,6 +189,54 @@
 </table>
 <!--Thiết kế giao diện nhân viên dạng modal-->
 <form id="modalVanBan" method="post" class="modal fade" tabindex="-1" aria-labelledby="Thêm văn bản" aria-hidden="true">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <!-- Essential javascripts for application to work-->
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script th:src="@{/js/plugins/pace.min.js}"></script>
+    <!-- Page specific javascripts-->
+    <!-- Data table plugin-->
+    <script type="text/javascript" th:src="@{/js/plugins/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/plugins/dataTables.bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/plugins/bootstrap-datepicker.min.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            //Change the position of datepicker modal
+            $('#demoDate').datepicker({
+                format: "dd/mm/yyyy",
+                autoclose: true,
+                todayHighlight: true
+            }).on('show', function () {
+                // Lưu giá trị hiện tại của input khi Datepicker được mở
+                $(this).data('last-value', $(this).val());
+            }).on('hide', function () {
+                // Nếu input không có giá trị sau khi đóng, khôi phục lại giá trị ban đầu
+                if (!$(this).val()) {
+                    $(this).val($(this).data('last-value'));
+                }
+            }).on('changeDate', function () {
+                // Cập nhật giá trị khi người dùng chọn ngày
+                $(this).data('last-value', $(this).val());
+            });
+
+            // Khi modal được hiển thị
+            $('#modalVanBan').on('show.bs.modal', function () {
+                // Tìm modal-dialog
+                var modalDialog = $(this).find('.modal-dialog');
+
+                // Thay đổi vị trí
+                modalDialog.css({
+                    'top': '100px', // Cách đỉnh trang 100px
+                    'left': '50px', // Cách bên trái 50px
+                });
+            });
+        });
+    </script>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -204,11 +258,47 @@
 
                     <div class="form-group row">
                         <label class="col-md-3">
-                            Tiêu đề:
+                            Files:
                         </label>
                         <div class="col-md-9">
-                            <input id="tieuDe" name="tieuDe" type="text" class="form-control"
-                                   placeholder="Nhập tiêu đề"/>
+                            <input id="fUpload" name="fUpload" type="file" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3">
+                            Ngày tạo:
+                        </label>
+                        <div class="col-md-9">
+                            <input id="demoDate" name="ngayTao" type="text" class="form-control" placeholder="dd/MM/yyyy"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3">
+                            Loại văn bản:
+                        </label>
+                        <div class="col-md-9">
+                            <select id="loaiVanBan" name="loaiVanBan" class="form-control">
+                                <option value="" label="Chọn loại văn bản"></option>
+                                <th:block th:each="pb : ${lstLoaiVB}">
+                                    <option th:value="${pb.tenLoaiVanban}" th:text="${pb.tenLoaiVanban}"></option>
+                                </th:block>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3">
+                            Đơn vị:
+                        </label>
+                        <div class="col-md-9">
+                            <select th:value="STF1" id="donVi" name="donVi" class="form-control">
+                                <option value="" label="Chọn đơn vị"></option>
+                                <th:block th:each="pb : ${lstDonVi}">
+                                    <option th:value="${pb.maDonVi}" th:text="${pb.tenDonVi}"></option>
+                                </th:block>
+                            </select>
                         </div>
                     </div>
 

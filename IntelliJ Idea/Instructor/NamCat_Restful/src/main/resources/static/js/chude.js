@@ -55,11 +55,15 @@ function thongTinChiTiet(maVB) {
         contentType: "application/json; charset=utf-8",
         async: true,
         success: function (data) {
+            console.log(data.ngayTao);
             //Hiển thị lên giao diện
             $("#modalTitle").text("Sửa thông tin văn bản");
             $("#hVanBanId").val(data.maVanBan);
             $("#maVanBan").val(data.maVanBan);
             $("#tieuDe").val(data.tieuDe);
+            $("#loaiVanBan").val(data.loaiVanBan);
+            $("#donVi").val(data.donVi);
+            $("#demoDate").val(data.ngayTao);
         }
     });
 }
@@ -73,7 +77,7 @@ function thucHienXoa() {
         dataType: "json",
         type: "DELETE",
         success: function (data) {
-            if (data.name != null) {
+            if (data[0].name != null) {
                 $("#modalXoa").modal("hide")
                 //Reload lại trang
                 window.location.reload();

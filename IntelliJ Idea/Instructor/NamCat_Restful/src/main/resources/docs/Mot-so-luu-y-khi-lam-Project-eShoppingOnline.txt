@@ -1,0 +1,12 @@
+﻿* Một số lưu ý khi thực hiện dự án eShoppingOnline:
+- Đặt tên form:
++ Với danh sách thì lấy tên bảng tương ứng + từ khóa List
++ Với form thêm mới, sửa thì lấy tên bảng tương ứng + Add
+- Đặt tên các lớp
++ Với lớp Business thì đặt tên bảng tương ứng + Business trong thư mục BLL
++ Với lớp DataAccess thì đặt tên bảng tương ứng + DataAccess
+- Các viết các hàm
++ Viết thành các hàm theo ví dụ đã làm bằng việc tổ chức các hàm giống như trong Interface
++ Đặt tên hàm ngắn gọn nhưng mô tả được ý nghĩa công việc
++ Ghi chú và comment các hàm, sự kiện làm trên các form được giao việc.
+- Sử dụng validation các trường thông tin bắt buộc cần phải có trên từng form.

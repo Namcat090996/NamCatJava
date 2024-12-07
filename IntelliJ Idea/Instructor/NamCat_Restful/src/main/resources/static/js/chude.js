@@ -10,23 +10,34 @@ function xuLyThemMoi() {
         methodType = "PUT";
     }
 
-    var maVB = $("#maVanBan").val();
-    var tieuDe = $("#tieuDe").val();
+    let formData = new FormData();
 
-    //Khai báo mảng
-    var formData = {}
-    formData["maVanBan"] = maVB;
-    formData["tieuDe"] = tieuDe;
+    // Thêm thông tin vào FormData
+    formData.append("maVanBan", $("#maVanBan").val());
+    formData.append("tieuDe", $("#tieuDe").val());
+    formData.append("ngayTao", $("#demoDate").val());
+    formData.append("loaiVanBan", $("#loaiVanBan").val());
+    formData.append("donVi", $("#donVi").val());
+
+    // Thêm file nếu người dùng chọn
+    const file = $("#fUpload")[0].files[0];
+    if (file) {
+        formData.append("fUpload", file);
+    }
+
+    console.log(formData);
 
     $.ajax({
         url: urlPost,
-        contentType: "application/json; charset=utf-8;",
-        dataType: "json",
-        data: JSON.stringify(formData),
         type: methodType,
+        data: formData,
+        processData: false, // Không xử lý dữ liệu
+        contentType: false, // Không đặt loại nội dung
         success: function (data) {
-            if (data.maChuDe != null) {
-                $("#modalChuDe").modal("hide")
+            console.log(data)
+            if (data.maVanBan != null) {
+                console.log()
+                $("#modalVanBan").modal("hide")
                 //Reload lại trang
                 window.location.reload();
             } else {
@@ -36,7 +47,7 @@ function xuLyThemMoi() {
             }
         },
         error: function (error) {
-            alert("Có lỗi xảy ra " + error.name);
+            alert("Có lỗi xảy ra rồi " + error.responseJSON[0].message);
         }
     });
 }
@@ -55,7 +66,6 @@ function thongTinChiTiet(maVB) {
         contentType: "application/json; charset=utf-8",
         async: true,
         success: function (data) {
-            console.log(data.ngayTao);
             //Hiển thị lên giao diện
             $("#modalTitle").text("Sửa thông tin văn bản");
             $("#hVanBanId").val(data.maVanBan);

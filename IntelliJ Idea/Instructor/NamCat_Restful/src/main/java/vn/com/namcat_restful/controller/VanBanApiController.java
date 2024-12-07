@@ -23,8 +23,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -131,7 +135,7 @@ public class VanBanApiController {
         }
     }
     
-    @PostMapping("/vanban/themmoi")
+    @PostMapping(value = "/vanban/themmoi", consumes = {"multipart/form-data"})
     public ResponseEntity<?> themMoi(@Valid @RequestBody VanBan objVB, BindingResult result, @RequestParam("fUpload") MultipartFile fUpload) {
         
         List<Message> msg1 = new ArrayList<Message>();
@@ -161,7 +165,7 @@ public class VanBanApiController {
                 int soTrang = 0;
                 
                 //Xu ly upload file
-                if(fUpload != null && !fUpload.isEmpty())
+                if(!fUpload.isEmpty())
                 {
                     try {
                         String fileUpload = xuLyUploadFile(fUpload);
@@ -202,65 +206,79 @@ public class VanBanApiController {
         }
     }
     
-    @PutMapping("/vanban/capnhat/{id}")
-    public ResponseEntity<?> capNhat(@PathVariable("id") String id, @Valid @RequestBody VanBan objVB, BindingResult result, @RequestParam("fUpload") MultipartFile fUpload) {
+    @PutMapping(value = "/vanban/capnhat/{id}", consumes = {"multipart/form-data"})
+    public ResponseEntity<?> capNhat(@PathVariable("id") String id,
+                                     @RequestParam Map<String, String> vanban,
+                                     @RequestParam(value = "fUpload", required = false) MultipartFile fUpload) {
         
-        List<Message> msg2 = new ArrayList<Message>();
+        List<Message> msg2 = new ArrayList<>();
         
-        if(result.hasErrors())
-        {
-            for(FieldError fieldError : result.getFieldErrors())
-            {
-                msg2.add(new Message(fieldError.getField(), fieldError.getDefaultMessage()));
-            }
-            
-            return new ResponseEntity<List<Message>>(msg2, HttpStatus.BAD_REQUEST);
+        //Lấy mã văn bản đầu vào
+        String maVanBan = vanban.get("maVanBan");
+        
+        if(!maVanBan.matches("^SF\\d{4,}$")) {
+            msg2.add(new Message("maVanBan", "Mã văn bản phải bắt đầu bằng 'SF' và theo sau ít nhất 04 chữ số"));
         }
-        else
-        {
-            VanBan objVBCheck = vanBanService.layChiTiet(id);
-            if(objVBCheck == null)
-            {
-                msg2.add(new Message("maCapNhat", "Khong tim thay van ban voi ma " + id));
-                return new ResponseEntity<List<Message>>(msg2, HttpStatus.NOT_FOUND);
-            }
-            else
-            {
-                String tenFile = objVBCheck.getTenFile();
-                String loaiFile = objVBCheck.getDinhDang();
-                int soTrang = objVBCheck.getSoTrang();
-                
-                //Xu ly upload file
-                if(fUpload != null && !fUpload.isEmpty())
-                {
-                    try {
-                        String fileUpload = xuLyUploadFile(fUpload);
-                        
-                        String[] uploadInfo = fileUpload.split(",");
-                        
-                        tenFile = uploadInfo[0];
-                        loaiFile = uploadInfo[1];
-                        soTrang = Integer.parseInt(uploadInfo[2]);
-                    }
-                    catch (Exception ex) {
-                        msg2.add(new Message("fileThemLoi", "Co loi khi tai len tep" + ex.getMessage()));
-                        return new ResponseEntity<List<Message>>(msg2, HttpStatus.INTERNAL_SERVER_ERROR);
-                    }
-                }
-                
-                objVB.setTenFile(tenFile);
-                objVB.setDinhDang(loaiFile);
-                objVB.setSoTrang(soTrang);
-                objVB.setNgayCapNhat(LocalDate.now());
-                
-                boolean ketQua = vanBanService.suaVanban(objVB);
-                
-                if (ketQua) {
-                    return new ResponseEntity<VanBan>(objVB, HttpStatus.OK);
-                } else {
-                    msg2.add(new Message("capNhatVBLoi", "Khong the cap nhat van ban"));
+        
+        VanBan objVB = vanBanService.layChiTiet(maVanBan);
+        
+        if (objVB == null) {
+            msg2.add(new Message("maCapNhat", "Khong tim thay van ban voi ma " + id));
+            return new ResponseEntity<List<Message>>(msg2, HttpStatus.NOT_FOUND);
+        } else {
+            String tenFile = objVB.getTenFile();
+            String loaiFile = objVB.getDinhDang();
+            int soTrang = objVB.getSoTrang();
+            
+            //Xu ly upload file
+            if (fUpload != null && !fUpload.isEmpty()) {
+                try {
+                    String fileUpload = xuLyUploadFile(fUpload);
+                    
+                    String[] uploadInfo = fileUpload.split(",");
+                    
+                    tenFile = uploadInfo[0];
+                    loaiFile = uploadInfo[1];
+                    soTrang = Integer.parseInt(uploadInfo[2]);
+                } catch (Exception ex) {
+                    msg2.add(new Message("fileThemLoi", "Co loi khi tai len tep" + ex.getMessage()));
                     return new ResponseEntity<List<Message>>(msg2, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
+            }
+            
+            // Xử lý ngày tạo
+            LocalDate ngayTao;
+            try {
+                String ngayTaoStr = vanban.get("ngayTao");
+                if (ngayTaoStr != null && !ngayTaoStr.isEmpty()) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    ngayTao = LocalDate.parse(ngayTaoStr, formatter);
+                } else {
+                    ngayTao = objVB.getNgayTao(); // Giữ nguyên giá trị cũ nếu không có giá trị mới
+                }
+            } catch (DateTimeParseException ex) {
+                msg2.add(new Message("ngayTao", "Ngày tạo không đúng định dạng (phải là yyyy-MM-dd)"));
+                return new ResponseEntity<>(msg2, HttpStatus.BAD_REQUEST);
+            }
+            
+            objVB.setTieuDe(vanban.get("tieuDe"));
+            objVB.setMoTa(vanban.get("moTa"));
+            objVB.setNoiDung(vanban.get("noiDung"));
+            objVB.setNgayTao(ngayTao);
+            objVB.setNgayCapNhat(LocalDate.now());
+            objVB.setTenFile(tenFile);
+            objVB.setDinhDang(loaiFile);
+            objVB.setSoTrang(soTrang);
+            objVB.setLoaiVanBan(vanban.get("loaiVanBan"));
+            objVB.setDonVi(vanban.get("donVi"));
+            
+            boolean ketQua = vanBanService.suaVanban(objVB);
+            
+            if (ketQua) {
+                return new ResponseEntity<VanBan>(objVB, HttpStatus.OK);
+            } else {
+                msg2.add(new Message("capNhatVBLoi", "Khong the cap nhat van ban"));
+                return new ResponseEntity<List<Message>>(msg2, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
     }
@@ -281,7 +299,7 @@ public class VanBanApiController {
         {
             boolean ketQua = vanBanService.xoaVanBan(id);
             
-            if(ketQua)
+            if(!ketQua)
             {
                 msg3.add(new Message("xoaThanhCong", "Xoa thanh cong van ban voi ma " + id));
                 return new ResponseEntity<List<Message>>(msg3, HttpStatus.OK);

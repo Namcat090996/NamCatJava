@@ -20,12 +20,10 @@ function xuLyThemMoi() {
     formData.append("donVi", $("#donVi").val());
 
     // Thêm file nếu người dùng chọn
-    const file = $("#fUpload")[0].files[0];
+    const file = $("#fUpload")[0]?.files[0];
     if (file) {
         formData.append("fUpload", file);
     }
-
-    console.log(formData);
 
     $.ajax({
         url: urlPost,
@@ -34,7 +32,6 @@ function xuLyThemMoi() {
         processData: false, // Không xử lý dữ liệu
         contentType: false, // Không đặt loại nội dung
         success: function (data) {
-            console.log(data)
             if (data.maVanBan != null) {
                 $("#modalVanBan").modal("hide")
                 //Reload lại trang
@@ -42,7 +39,20 @@ function xuLyThemMoi() {
             }
         },
         error: function (error) {
+            $("#dinhDang").text("");
+            $("#tonTai").text("");
+            $("#thieuFile").text("");
+            $("#fileLoi").text("");
+            $("#vanBan").text("");
 
+             // Xóa lỗi cũ
+            const errors = error.responseJSON;
+            errors.forEach(err => {
+                const name = err.name;
+                const message = err.message;
+
+                $(`#${name}`).text(message);// Chèn lỗi vào đúng trường
+            });
         }
     });
 }
@@ -62,6 +72,9 @@ function thongTinChiTiet(maVB) {
         async: true,
         success: function (data) {
             //Hiển thị lên giao diện
+
+            $("#maVanBan").prop("disabled", true);
+
             $("#modalTitle").text("Sửa thông tin văn bản");
             $("#hVanBanId").val(data.maVanBan);
             $("#maVanBan").val(data.maVanBan);
@@ -69,6 +82,8 @@ function thongTinChiTiet(maVB) {
             $("#loaiVanBan").val(data.loaiVanBan);
             $("#donVi").val(data.donVi);
             $("#demoDate").val(data.ngayTao);
+
+
         }
     });
 }
@@ -87,14 +102,13 @@ function thucHienXoa() {
                 //Reload lại trang
                 window.location.reload();
             } else {
-                $('#title-delete').nextAll(".spanError").remove();
-                $('#title-delete').after('<div class="alert alert-dismissible alert-danger spanError">' + data[0].name + '</div>')
+                $("#title-delete").nextAll(".spanError").remove();
+                $("#title-delete").after('<div class="alert alert-dismissible alert-danger spanError">' + data[0].message + '</div>')
 
             }
         },
         error: function (error) {
-            alert("Có lỗi xảy ra rồi " + error.responseJSON[0].message);
-            console.log(error.responseJSON[0].message)
+            alert("Không thể xóa văn bản: " + error.responseJSON[0].message);
         }
     });
 }

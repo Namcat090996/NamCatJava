@@ -139,14 +139,14 @@ public class VanBanApiController {
         String maVanBan = vanban.get("maVanBan");
         
         if(!maVanBan.matches("^SF\\d{4,}$")) {
-            msg1.add(new Message("maVanBan", "Mã văn bản phải bắt đầu bằng 'SF' và theo sau ít nhất 04 chữ số"));
+            msg1.add(new Message("dinhDang", "Mã văn bản phải bắt đầu bằng 'SF' và theo sau ít nhất 04 chữ số"));
             return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
         }
         
         VanBan objVBCheck = vanBanService.layChiTiet(maVanBan);
         
         if (objVBCheck != null) {
-            msg1.add(new Message("maTonTai", "Mã văn bản này đã tồn tại "));
+            msg1.add(new Message("tonTai", "Mã văn bản này đã tồn tại "));
             return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
         } else {
             String tenFile = "";
@@ -164,13 +164,13 @@ public class VanBanApiController {
                     loaiFile = uploadInfo[1];
                     soTrang = Integer.parseInt(uploadInfo[2]);
                 } catch (Exception ex) {
-                    msg1.add(new Message("fileThemLoi", "Co loi khi tai len tep" + ex.getMessage()));
+                    msg1.add(new Message("fileLoi", "Co loi khi tai len tep" + ex.getMessage()));
                     return new ResponseEntity<List<Message>>(msg1, HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }
             else
             {
-                msg1.add(new Message("fileThemRong", "Vui long tai len 1 tep"));
+                msg1.add(new Message("thieuFile", "Vui long tai len 1 tep"));
                 return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
             }
             
@@ -185,7 +185,7 @@ public class VanBanApiController {
                     ngayTao = LocalDate.now(); // Nếu người dùng không điền ngày sẽ tự động lấy ngày hôm nay
                 }
             } catch (DateTimeParseException ex) {
-                msg1.add(new Message("ngayTao", "Ngày tạo không đúng định dạng (yyyy-MM-dd)"));
+                msg1.add(new Message("dinhDangNgay", "Ngày tạo không đúng định dạng (yyyy-MM-dd)"));
                 return new ResponseEntity<>(msg1, HttpStatus.BAD_REQUEST);
             }
             
@@ -208,7 +208,7 @@ public class VanBanApiController {
             if (ketQua) {
                 return new ResponseEntity<VanBan>(objVB, HttpStatus.OK);
             } else {
-                msg1.add(new Message("themMoiVBLoi", "Khong the them moi van ban"));
+                msg1.add(new Message("vanBan", "Khong the them moi van ban"));
                 return new ResponseEntity<List<Message>>(msg1, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }

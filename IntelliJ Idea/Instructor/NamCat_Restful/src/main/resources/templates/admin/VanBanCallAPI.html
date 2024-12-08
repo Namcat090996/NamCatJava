@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}">
+    <style type="text/css">
+        label.error {
+            color: red;
+            padding-bottom: 0px;
+            margin-bottom: -5px;
+        }
+
+        .error-message {
+            margin-left: 5px;
+        }
+
+    </style>
     <script type="text/javascript" th:src="@{/js/jquery-3.7.1.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
     <script type="text/javascript">
@@ -39,10 +51,16 @@
                 rules:{
                     maVanBan: "required",
                     tieuDe: "required",
+                    fUpload: "required",
+                    loaiVanBan: "required",
+                    donVi: "required",
                 },
                 messages:{
                     maVanBan: "&nbsp;&nbsp;Bạn cần phải nhập mã văn bản",
                     tieuDe: "&nbsp;&nbsp;Bạn cần phải nhập tiêu đề",
+                    fUpload: "&nbsp;&nbsp;Bạn phải tải lên 1 file",
+                    loaiVanBan: "&nbsp;&nbsp;Bạn phải chọn loại văn bản",
+                    donVi: "&nbsp;&nbsp;Bạn phải chọn đơn vị",
                 },
                 submitHandler: function(){
                     if(form.valid())
@@ -297,6 +315,7 @@
                         <div class="col-md-9">
                             <input type="text" id="maVanBan" name="maVanBan" class="form-control"
                                    placeholder="Nhập mã văn bản"/>
+                            <div class="error-message text-danger"></div>
                             <input type="hidden" id="hVanBanId" name="hVanBanId">
                         </div>
                     </div>
@@ -348,7 +367,7 @@
                             Đơn vị:
                         </label>
                         <div class="col-md-9">
-                            <select th:value="STF1" id="donVi" name="donVi" class="form-control">
+                            <select id="donVi" name="donVi" class="form-control">
                                 <option value="" label="Chọn đơn vị"></option>
                                 <th:block th:each="pb : ${lstDonVi}">
                                     <option th:value="${pb.maDonVi}" th:text="${pb.tenDonVi}"></option>

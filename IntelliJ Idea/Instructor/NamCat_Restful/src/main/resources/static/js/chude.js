@@ -36,18 +36,13 @@ function xuLyThemMoi() {
         success: function (data) {
             console.log(data)
             if (data.maVanBan != null) {
-                console.log()
                 $("#modalVanBan").modal("hide")
                 //Reload lại trang
                 window.location.reload();
-            } else {
-                $('#tile-body').nextAll(".spanError").remove();
-                $('#tile-body').after('<div class="alert alert-dismissible alert-danger spanError">' + data.name + '</div>')
-
             }
         },
         error: function (error) {
-            alert("Có lỗi xảy ra rồi " + error.responseJSON[0].message);
+
         }
     });
 }

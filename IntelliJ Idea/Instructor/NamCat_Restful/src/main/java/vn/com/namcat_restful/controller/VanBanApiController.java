@@ -1,6 +1,5 @@
 package vn.com.namcat_restful.controller;
 
-import jakarta.validation.Valid;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -8,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.com.namcat_restful.entities.Message;
@@ -26,7 +23,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -117,7 +113,6 @@ public class VanBanApiController {
             
             //Get data properties from above document and get page number
             return document.getProperties().getExtendedProperties().getPages();
-            
         }
     }
     
@@ -136,72 +131,85 @@ public class VanBanApiController {
     }
     
     @PostMapping(value = "/vanban/themmoi", consumes = {"multipart/form-data"})
-    public ResponseEntity<?> themMoi(@Valid @RequestBody VanBan objVB, BindingResult result, @RequestParam("fUpload") MultipartFile fUpload) {
+    public ResponseEntity<?> themMoi(@RequestParam Map<String, String> vanban, @RequestParam(value = "fUpload", required = false) MultipartFile fUpload) {
         
-        List<Message> msg1 = new ArrayList<Message>();
+        List<Message> msg1 = new ArrayList<>();
         
-        if(result.hasErrors())
-        {
-            for(FieldError fieldError : result.getFieldErrors())
-            {
-                msg1.add(new Message(fieldError.getField(), fieldError.getDefaultMessage()));
-            }
-            
+        //Lấy mã văn bản đầu vào
+        String maVanBan = vanban.get("maVanBan");
+        
+        if(!maVanBan.matches("^SF\\d{4,}$")) {
+            msg1.add(new Message("maVanBan", "Mã văn bản phải bắt đầu bằng 'SF' và theo sau ít nhất 04 chữ số"));
             return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
         }
-        else
-        {
-
-            VanBan objVBCheck = vanBanService.layChiTiet(objVB.getMaVanBan());
+        
+        VanBan objVBCheck = vanBanService.layChiTiet(maVanBan);
+        
+        if (objVBCheck != null) {
+            msg1.add(new Message("maTonTai", "Mã văn bản này đã tồn tại "));
+            return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
+        } else {
+            String tenFile = "";
+            String loaiFile = "";
+            int soTrang =0;
             
-            if(objVBCheck != null)
-            {
-                msg1.add(new Message("maThem", "Ma van ban nay da ton tai"));
-                return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
+            //Xu ly upload file
+            if (fUpload != null && !fUpload.isEmpty()) {
+                try {
+                    String fileUpload = xuLyUploadFile(fUpload);
+                    
+                    String[] uploadInfo = fileUpload.split(",");
+                    
+                    tenFile = uploadInfo[0];
+                    loaiFile = uploadInfo[1];
+                    soTrang = Integer.parseInt(uploadInfo[2]);
+                } catch (Exception ex) {
+                    msg1.add(new Message("fileThemLoi", "Co loi khi tai len tep" + ex.getMessage()));
+                    return new ResponseEntity<List<Message>>(msg1, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
             }
             else
             {
-                String tenFile = "", loaiFile = "";
-                int soTrang = 0;
-                
-                //Xu ly upload file
-                if(!fUpload.isEmpty())
-                {
-                    try {
-                        String fileUpload = xuLyUploadFile(fUpload);
-                        
-                        String[] uploadInfo = fileUpload.split(",");
-                        
-                        tenFile = uploadInfo[0];
-                        loaiFile = uploadInfo[1];
-                        soTrang = Integer.parseInt(uploadInfo[2]);
-                    }
-                    catch (Exception ex) {
-                        msg1.add(new Message("fileThemLoi", "Co loi khi tai len tep" + ex.getMessage()));
-                        return new ResponseEntity<List<Message>>(msg1, HttpStatus.INTERNAL_SERVER_ERROR);
-                    }
+                msg1.add(new Message("fileThemRong", "Vui long tai len 1 tep"));
+                return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
+            }
+            
+            // Xử lý ngày tạo
+            LocalDate ngayTao;
+            try {
+                String ngayTaoStr = vanban.get("ngayTao");
+                if (ngayTaoStr != null && !ngayTaoStr.isEmpty()) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    ngayTao = LocalDate.parse(ngayTaoStr, formatter);
+                } else {
+                    ngayTao = LocalDate.now(); // Nếu người dùng không điền ngày sẽ tự động lấy ngày hôm nay
                 }
-                else
-                {
-                    msg1.add(new Message("fileThemRong", "Vui long tai len 1 tep"));
-                    return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
-                }
-                
-                objVB.setTenFile(tenFile);
-                objVB.setDinhDang(loaiFile);
-                objVB.setSoTrang(soTrang);
-                objVB.setNgayCapNhat(LocalDate.now());
-                
-                boolean ketQua = vanBanService.themVanBan(objVB);
-                
-                if(ketQua)
-                {
-                    return new ResponseEntity<VanBan>(objVB, HttpStatus.CREATED);
-                }
-                
-                msg1.add(new Message("themVBLoi", "Khong the them moi van ban"));
+            } catch (DateTimeParseException ex) {
+                msg1.add(new Message("ngayTao", "Ngày tạo không đúng định dạng (yyyy-MM-dd)"));
+                return new ResponseEntity<>(msg1, HttpStatus.BAD_REQUEST);
+            }
+            
+            VanBan objVB = new VanBan();
+            
+            objVB.setMaVanBan(maVanBan);
+            objVB.setTieuDe(vanban.get("tieuDe"));
+            objVB.setMoTa(vanban.get("moTa"));
+            objVB.setNoiDung(vanban.get("noiDung"));
+            objVB.setNgayTao(ngayTao);
+            objVB.setNgayCapNhat(LocalDate.now());
+            objVB.setTenFile(tenFile);
+            objVB.setDinhDang(loaiFile);
+            objVB.setSoTrang(soTrang);
+            objVB.setLoaiVanBan(vanban.get("loaiVanBan"));
+            objVB.setDonVi(vanban.get("donVi"));
+            
+            boolean ketQua = vanBanService.themVanBan(objVB);
+            
+            if (ketQua) {
+                return new ResponseEntity<VanBan>(objVB, HttpStatus.OK);
+            } else {
+                msg1.add(new Message("themMoiVBLoi", "Khong the them moi van ban"));
                 return new ResponseEntity<List<Message>>(msg1, HttpStatus.INTERNAL_SERVER_ERROR);
-                
             }
         }
     }
@@ -257,7 +265,7 @@ public class VanBanApiController {
                     ngayTao = objVB.getNgayTao(); // Giữ nguyên giá trị cũ nếu không có giá trị mới
                 }
             } catch (DateTimeParseException ex) {
-                msg2.add(new Message("ngayTao", "Ngày tạo không đúng định dạng (phải là yyyy-MM-dd)"));
+                msg2.add(new Message("ngayTao", "Ngày tạo không đúng định dạng (yyyy-MM-dd)"));
                 return new ResponseEntity<>(msg2, HttpStatus.BAD_REQUEST);
             }
             
@@ -299,7 +307,7 @@ public class VanBanApiController {
         {
             boolean ketQua = vanBanService.xoaVanBan(id);
             
-            if(!ketQua)
+            if(ketQua)
             {
                 msg3.add(new Message("xoaThanhCong", "Xoa thanh cong van ban voi ma " + id));
                 return new ResponseEntity<List<Message>>(msg3, HttpStatus.OK);

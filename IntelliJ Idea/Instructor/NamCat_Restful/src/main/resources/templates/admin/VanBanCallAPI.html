@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -15,9 +15,14 @@
     <script type="text/javascript" th:src="@{/js/jquery-3.7.1.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
     <script type="text/javascript">
-
         function suaThongTin(maVB)
         {
+            //Reset lỗi
+            $(".form-control").nextAll(".error").remove();
+            $("#dinhDang").text("");
+            $("#tonTai").text("");
+            $("#thieuFile").text("");
+            $("#fileLoi").text("");
             //Hiển thị thông tin chi tiết
             thongTinChiTiet(maVB);
         }
@@ -29,14 +34,22 @@
 
         function hienThiThemMoi()
         {
+            //Reset lỗi
+            $(".form-control").nextAll(".error").remove();
+            $("#dinhDang").text("");
+            $("#tonTai").text("");
+            $("#thieuFile").text("");
+            $("#fileLoi").text("");
+            //Ngăn không cho thao tác với mã văn bản khi sửa
             $("#maVanBan").prop("disabled", false);
+            //Hiển thị modal thêm mới
             $("#modalTitle").text("Thêm mới thông tin văn bản");
             $("#maVanBan").val("");
             $("#tieuDe").val("");
             $("#loaiVanBan").val("");
             $("#donVi").val("");
             $("#demoDate").val("");
-            $("#hVanBanId").text("");
+            $("#hVanBanId").val("");
         }
 
         /*
@@ -70,10 +83,10 @@
                 }
             });
         }
+
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-
             //Change the position of datepicker modal
             $('#demoDate1').datepicker({
                 format: "yyyy-mm-dd",
@@ -109,8 +122,6 @@
                 // Cập nhật giá trị khi người dùng chọn ngày
                 $(this).data('last-value', $(this).val());
             });
-
-
         });
     </script>
     <style type="text/css">
@@ -227,7 +238,7 @@
         </td>
 
         <td>
-            <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalVanBan" href="#" th:onclick="suaThongTin([[${s.maVanBan}]])" title="Sửa văn bản">Sửa
+            <a class="btn btn-secondary" id="sua_button" data-bs-toggle="modal" data-bs-target="#modalVanBan" href="#" th:onclick="suaThongTin([[${s.maVanBan}]])" title="Sửa văn bản">Sửa
             </a>
 
             <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalXoa" href="#" th:onclick="xoaThongTin([[${s.maVanBan}]])" title="Xóa văn bản">Xóa
@@ -256,7 +267,6 @@
     <script type="text/javascript" th:src="@{/js/plugins/bootstrap-datepicker.min.js}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-
             //Change the position of datepicker modal
             $('#demoDate').datepicker({
                 format: "yyyy-mm-dd",

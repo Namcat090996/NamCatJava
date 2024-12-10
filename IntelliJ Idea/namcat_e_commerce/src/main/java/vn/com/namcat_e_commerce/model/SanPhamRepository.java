@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface SanPhamRepository extends JpaRepository<SanPham, Integer> {
     
+    
     public List<SanPham> findByTenSanPhamLike(String tuKhoa);
     
 }

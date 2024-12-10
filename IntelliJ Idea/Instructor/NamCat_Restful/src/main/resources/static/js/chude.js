@@ -39,13 +39,14 @@ function xuLyThemMoi() {
             }
         },
         error: function (error) {
+            // Xóa lỗi cũ
             $("#dinhDang").text("");
             $("#tonTai").text("");
             $("#thieuFile").text("");
             $("#fileLoi").text("");
             $("#vanBan").text("");
 
-             // Xóa lỗi cũ
+
             const errors = error.responseJSON;
             errors.forEach(err => {
                 const name = err.name;
@@ -71,10 +72,9 @@ function thongTinChiTiet(maVB) {
         contentType: "application/json; charset=utf-8",
         async: true,
         success: function (data) {
+
             //Hiển thị lên giao diện
-
             $("#maVanBan").prop("disabled", true);
-
             $("#modalTitle").text("Sửa thông tin văn bản");
             $("#hVanBanId").val(data.maVanBan);
             $("#maVanBan").val(data.maVanBan);
@@ -82,8 +82,6 @@ function thongTinChiTiet(maVB) {
             $("#loaiVanBan").val(data.loaiVanBan);
             $("#donVi").val(data.donVi);
             $("#demoDate").val(data.ngayTao);
-
-
         }
     });
 }

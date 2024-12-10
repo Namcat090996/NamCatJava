@@ -44,8 +44,6 @@ public class SanPhamImpl implements SanPhamDao {
             strSQL += " order by s.giaSanPham DESC";
         }
         
-        
-        
         //Khai báo danh sách
         List<SanPham> lstSP = new ArrayList<>();
         

@@ -4,11 +4,31 @@ public class SanPhamModel {
     
     private String tuKhoa;
     
-    private String tenLoaiSP;
+    private String loaiSP;
+    
+    private String order;
+    
+    private String mauSac;
     
     private double tuGia = 0;
     
     private double denGia = 0;
+    
+    public String getMauSac() {
+        return mauSac;
+    }
+    
+    public void setMauSac(String mauSac) {
+        this.mauSac = mauSac;
+    }
+    
+    public String getOrder() {
+        return order;
+    }
+    
+    public void setOrder(String order) {
+        this.order = order;
+    }
     
     public String getTuKhoa() {
         return tuKhoa;
@@ -18,12 +38,12 @@ public class SanPhamModel {
         this.tuKhoa = tuKhoa;
     }
     
-    public String getTenLoaiSP() {
-        return tenLoaiSP;
+    public String getLoaiSP() {
+        return loaiSP;
     }
     
-    public void setTenLoaiSP(String tenLoaiSP) {
-        this.tenLoaiSP = tenLoaiSP;
+    public void setLoaiSP(String loaiSP) {
+        this.loaiSP = loaiSP;
     }
     
     public double getTuGia() {

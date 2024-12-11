@@ -22,7 +22,9 @@ class NamcatECommerceApplicationTests {
     @Test
     void contextLoads() {
         
-        List<SanPham> lstSP = sanPhamDao.timSPTheoTenVaLoai("", "");
+        List<SanPham> lstSP = sanPhamDao.timSPTheoLoai("","","", 0, 0);
+        
+        SanPham SP = sanPhamDao.findById(1);
         
         List<SanPham> lstSP2 = sanPhamDao.timSPTheoTen("Máy");
         

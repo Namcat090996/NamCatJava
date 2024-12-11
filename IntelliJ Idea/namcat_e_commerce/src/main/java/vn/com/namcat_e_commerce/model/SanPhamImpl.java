@@ -54,6 +54,8 @@ public class SanPhamImpl implements SanPhamDao {
             strSQL += " and s.giaSanPham <= :denGia";
         }
         
+        strSQL += " and s.daDuyet = 1";
+        
         if (order != null) {
             if (order.equals("ASC")) {
                 strSQL += " order by s.giaSanPham ASC";
@@ -63,7 +65,6 @@ public class SanPhamImpl implements SanPhamDao {
             }
         }
         
-        strSQL += " s.daDuyet = 1";
         
         //Khai báo danh sách
         List<SanPham> lstSP = new ArrayList<>();

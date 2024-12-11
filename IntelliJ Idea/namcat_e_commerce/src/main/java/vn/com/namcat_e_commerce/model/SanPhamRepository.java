@@ -15,7 +15,6 @@ public interface SanPhamRepository extends JpaRepository<SanPham, Integer> {
             " and sp.daDuyet = 1 ORDER BY sp.giaSanPham ASC")
     public List<SanPham> timTheoTenSanPham(@Param("tuKhoa") String tuKhoa);
     
-    
     @Query(value = "Select sp from SanPham sp where" +
             " (length(:tuKhoa) = 0 or (length(:tuKhoa) > 0 and sp.tenSanPham like %:tuKhoa%)) and" +
             " (length(:loaiSP) = 0 or (length(:loaiSP) > 0 and sp.loaiSanPham like %:loaiSP%))" +

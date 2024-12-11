@@ -20,12 +20,17 @@ public class SanPhamImpl implements SanPhamDao {
     SanPhamRepository sanPhamRepository;
     
     @Override
-    public List<SanPham> timSPTheoTen(String tuKhoa) {
-        return sanPhamRepository.findByTenSanPhamLike(tuKhoa);
+    public List<SanPham> hienThiSanPhamDaDuyet() {
+        return sanPhamRepository.hienThiSPDaDuyet();
     }
     
     @Override
-    public List<SanPham> timSPTheoLoai(String loaiSanPham, String order) {
+    public List<SanPham> timSPTheoTen(String tuKhoa) {
+        return sanPhamRepository.timTheoTenSanPham(tuKhoa);
+    }
+    
+    @Override
+    public List<SanPham> timSPTheoLoai(String loaiSanPham, String order, String mauSac, int tuGia, int denGia) {
         
         String strSQL = "Select s from SanPham s where 1=1";
         
@@ -34,14 +39,28 @@ public class SanPhamImpl implements SanPhamDao {
             strSQL += " and s.loaiSanPham = :loaiSanPham";
         }
         
-        if(order != null && order.equals("ASC"))
+        if(mauSac != null && !mauSac.isEmpty())
         {
-            strSQL += " order by s.giaSanPham ASC";
+            strSQL += " and s.mauSac like :mauSac";
         }
         
-        if(order != null && order.equals("DSC"))
+        if(tuGia > 0)
         {
-            strSQL += " order by s.giaSanPham DESC";
+            strSQL += " and s.giaSanPham >= :tuGia";
+        }
+        
+        if(denGia > 0)
+        {
+            strSQL += " and s.giaSanPham <= :denGia";
+        }
+        
+        if (order != null) {
+            if (order.equals("ASC")) {
+                strSQL += " order by s.giaSanPham ASC";
+                
+            } else if (order.equals("DSC")) {
+                strSQL += " order by s.giaSanPham DESC";
+            }
         }
         
         //Khai báo danh sách
@@ -52,6 +71,21 @@ public class SanPhamImpl implements SanPhamDao {
         if(loaiSanPham!= null && !loaiSanPham.isEmpty())
         {
             query.setParameter("loaiSanPham",loaiSanPham);
+        }
+        
+        if(mauSac != null && !mauSac.isEmpty())
+        {
+            query.setParameter("mauSac", "%" + mauSac + "%");
+        }
+        
+        if(tuGia > 0)
+        {
+            query.setParameter("tuGia",tuGia);
+        }
+        
+        if(denGia > 0)
+        {
+            query.setParameter("denGia",denGia);
         }
         
         lstSP = query.getResultList();

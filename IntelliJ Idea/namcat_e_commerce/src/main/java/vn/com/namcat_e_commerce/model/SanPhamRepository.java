@@ -5,11 +5,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import vn.com.namcat_e_commerce.entities.SanPham;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface SanPhamRepository extends JpaRepository<SanPham, Integer> {
     
+    @Query(value = "Select sp from SanPham sp where " +
+            "((length(:tuKhoa) = 0 or (length(:tuKhoa) > 0 and sp.tenSanPham like %:tuKhoa%))) " +
+            "ORDER BY sp.giaSanPham ASC")
+    public List<SanPham> timTheoTenSanPham(@Param("tuKhoa") String tuKhoa);
     
-    public List<SanPham> findByTenSanPhamLike(String tuKhoa);
-    
+    @Query(value = "Select sp from SanPham sp where sp.daDuyet = 1 ORDER BY sp.giaSanPham ASC")
+    public List<SanPham> hienThiSPDaDuyet();
 }

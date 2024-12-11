@@ -6,9 +6,9 @@ public class SanPhamModel {
     
     private String tenLoaiSP;
     
-    private double tuGia;
+    private double tuGia = 0;
     
-    private double denGia;
+    private double denGia = 0;
     
     public String getTuKhoa() {
         return tuKhoa;

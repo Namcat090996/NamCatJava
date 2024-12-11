@@ -2,52 +2,52 @@ package vn.com.namcat_e_commerce.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import vn.com.namcat_e_commerce.entities.NguoiDung;
+import vn.com.namcat_e_commerce.entities.LoaiSanPham;
 
 import java.util.List;
 
 @Repository
-public class NguoiDungImpl implements NguoiDungDao {
+public class LoaiSPImpl implements LoaiSPDao {
     
     @Autowired
-    NguoiDungRepository nguoiDungRepository;
+    LoaiSPRepository loaiSPRepository;
     
     @Override
-    public List<NguoiDung> getList() {
-        return nguoiDungRepository.findAll();
+    public List<LoaiSanPham> getList() {
+        return loaiSPRepository.findAll();
     }
     
     @Override
-    public NguoiDung findById(String id) {
+    public LoaiSanPham findById(String id) {
         //Declare object
-        NguoiDung objND = null;
+        LoaiSanPham objLSP = null;
         
         //Check if object has already existed
-        boolean existed = nguoiDungRepository.existsById(id);
+        boolean existed = loaiSPRepository.existsById(id);
         
         if(existed)
         {
-            objND = nguoiDungRepository.findById(id).get();
+            objLSP = loaiSPRepository.findById(id).get();
         }
         
-        return objND;
+        return objLSP;
     }
     
     @Override
-    public boolean add(NguoiDung objND) {
+    public boolean add(LoaiSanPham objLSP) {
         //Check if object is null
-        if(objND == null)
+        if(objLSP == null)
         {
             return false;
         }
         
         //Check if object has already existed
-        boolean existed = nguoiDungRepository.existsById(objND.getTenNguoiDung());
+        boolean existed = loaiSPRepository.existsById(objLSP.getLoaiSanPham());
         
         if(!existed)
         {
             //Add object to db
-            nguoiDungRepository.save(objND);
+            loaiSPRepository.save(objLSP);
             return true;
         }
         
@@ -55,22 +55,22 @@ public class NguoiDungImpl implements NguoiDungDao {
     }
     
     @Override
-    public boolean update(NguoiDung objND) {
+    public boolean update(LoaiSanPham objLSP) {
         //Check if object is null
-        if(objND == null)
+        if(objLSP == null)
         {
             return false;
         }
         
         //Check if object has already existed
-        boolean existed = nguoiDungRepository.existsById(objND.getTenNguoiDung());
+        boolean existed = loaiSPRepository.existsById(objLSP.getLoaiSanPham());
         
         //Use try-catch if update fails (foreign key, constraint violations)
         try {
             if(existed)
             {
                 //Update object
-                nguoiDungRepository.save(objND);
+                loaiSPRepository.save(objLSP);
                 return true;
             }
         }
@@ -85,19 +85,19 @@ public class NguoiDungImpl implements NguoiDungDao {
     @Override
     public boolean delete(String id) {
         //Declare object
-        NguoiDung objND;
+        LoaiSanPham objLSP;
         
         //Use try-catch if delete fails (foreign key, constraint violations) or object hasn't existed
         try {
             
             //Get object by id
-            objND = findById(id);
+            objLSP = findById(id);
             
             //Check if
-            if(objND != null)
+            if(objLSP != null)
             {
                 //Update object
-                nguoiDungRepository.delete(objND);
+                loaiSPRepository.delete(objLSP);
                 return true;
             }
         }

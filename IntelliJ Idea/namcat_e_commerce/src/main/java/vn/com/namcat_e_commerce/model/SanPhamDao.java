@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface SanPhamDao extends IHanhDong<SanPham, Integer> {
     
+    public List<SanPham> hienThiSanPhamDaDuyet();
+    
     public List<SanPham> timSPTheoTen(String tuKhoa);
     
-    public List<SanPham> timSPTheoLoai(String loaiSanPham, String order);
+    public List<SanPham> timSPTheoLoai(String loaiSanPham, String order, String mauSac, int tuGia, int denGia);
 }

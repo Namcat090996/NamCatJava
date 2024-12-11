@@ -65,6 +65,17 @@ public class SanPham {
     @Column(name = "approved", nullable = true)
     private int daDuyet = 0;
     
+    @Column(name = "color", nullable = true, length = 50)
+    private String mauSac;
+    
+    public String getMauSac() {
+        return mauSac;
+    }
+    
+    public void setMauSac(String mauSac) {
+        this.mauSac = mauSac;
+    }
+    
     public int getId() {
         return id;
     }

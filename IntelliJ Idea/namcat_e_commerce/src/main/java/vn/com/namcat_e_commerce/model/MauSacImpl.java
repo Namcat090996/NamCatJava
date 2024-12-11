@@ -1,53 +1,54 @@
 package vn.com.namcat_e_commerce.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Repository;
-import vn.com.namcat_e_commerce.entities.NguoiDung;
+import vn.com.namcat_e_commerce.entities.MauSac;
 
 import java.util.List;
 
 @Repository
-public class NguoiDungImpl implements NguoiDungDao {
-    
+public class MauSacImpl implements MauSacDao {
+
     @Autowired
-    NguoiDungRepository nguoiDungRepository;
+    MauSacRepository mauSacRepository;
     
     @Override
-    public List<NguoiDung> getList() {
-        return nguoiDungRepository.findAll();
+    public List<MauSac> getList() {
+        return mauSacRepository.findAll();
     }
     
     @Override
-    public NguoiDung findById(String id) {
+    public MauSac findById(Integer id) {
         //Declare object
-        NguoiDung objND = null;
+        MauSac objMS = null;
         
         //Check if object has already existed
-        boolean existed = nguoiDungRepository.existsById(id);
+        boolean existed = mauSacRepository.existsById(id);
         
         if(existed)
         {
-            objND = nguoiDungRepository.findById(id).get();
+            objMS = mauSacRepository.findById(id).get();
         }
         
-        return objND;
+        return objMS;
     }
     
     @Override
-    public boolean add(NguoiDung objND) {
+    public boolean add(MauSac objMS) {
         //Check if object is null
-        if(objND == null)
+        if(objMS == null)
         {
             return false;
         }
         
         //Check if object has already existed
-        boolean existed = nguoiDungRepository.existsById(objND.getTenNguoiDung());
+        boolean existed = mauSacRepository.existsById(objMS.getId());
         
         if(!existed)
         {
             //Add object to db
-            nguoiDungRepository.save(objND);
+            mauSacRepository.save(objMS);
             return true;
         }
         
@@ -55,22 +56,22 @@ public class NguoiDungImpl implements NguoiDungDao {
     }
     
     @Override
-    public boolean update(NguoiDung objND) {
+    public boolean update(MauSac objMS) {
         //Check if object is null
-        if(objND == null)
+        if(objMS == null)
         {
             return false;
         }
         
         //Check if object has already existed
-        boolean existed = nguoiDungRepository.existsById(objND.getTenNguoiDung());
+        boolean existed = mauSacRepository.existsById(objMS.getId());
         
         //Use try-catch if update fails (foreign key, constraint violations)
         try {
             if(existed)
             {
                 //Update object
-                nguoiDungRepository.save(objND);
+                mauSacRepository.save(objMS);
                 return true;
             }
         }
@@ -83,21 +84,21 @@ public class NguoiDungImpl implements NguoiDungDao {
     }
     
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Integer id) {
         //Declare object
-        NguoiDung objND;
+        MauSac objMS;
         
         //Use try-catch if delete fails (foreign key, constraint violations) or object hasn't existed
         try {
             
             //Get object by id
-            objND = findById(id);
+            objMS = findById(id);
             
             //Check if
-            if(objND != null)
+            if(objMS != null)
             {
                 //Update object
-                nguoiDungRepository.delete(objND);
+                mauSacRepository.delete(objMS);
                 return true;
             }
         }

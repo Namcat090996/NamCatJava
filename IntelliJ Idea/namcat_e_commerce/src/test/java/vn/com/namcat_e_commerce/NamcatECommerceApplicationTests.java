@@ -22,20 +22,12 @@ class NamcatECommerceApplicationTests {
     @Test
     void contextLoads() {
         
-        List<SanPham> lstSP = sanPhamDao.timSPTheoLoai("", "ASC", "", -1, -1);
+        List<SanPham> lstSP = sanPhamDao.timSPTheoTenVaLoai("", "");
         
         List<SanPham> lstSP2 = sanPhamDao.timSPTheoTen("Máy");
         
-        List<SanPham> lstSP3 = sanPhamDao.hienThiSanPhamDaDuyet();
-        
         NguoiDung nguoiDung = nguoiDungDao.findById("admin");
         
-        System.out.println(nguoiDung.getTenNguoiDung());
-        
-        for(SanPham sp : lstSP3)
-        {
-            System.out.println(sp.getTenSanPham() + "-----" + sp.getGiaSanPham() + "-----" + sp.getLoaiSanPham());
-        }
     }
     
 }

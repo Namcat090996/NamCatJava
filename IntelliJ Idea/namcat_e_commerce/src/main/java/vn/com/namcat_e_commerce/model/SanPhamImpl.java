@@ -20,8 +20,8 @@ public class SanPhamImpl implements SanPhamDao {
     SanPhamRepository sanPhamRepository;
     
     @Override
-    public List<SanPham> hienThiSanPhamDaDuyet() {
-        return sanPhamRepository.hienThiSPDaDuyet();
+    public List<SanPham> timSPTheoTenVaLoai(String tuKhoa, String loaiSP) {
+        return sanPhamRepository.timSPTheoTenVaLoai(tuKhoa, loaiSP);
     }
     
     @Override
@@ -62,6 +62,8 @@ public class SanPhamImpl implements SanPhamDao {
                 strSQL += " order by s.giaSanPham DESC";
             }
         }
+        
+        strSQL += " s.daDuyet = 1";
         
         //Khai báo danh sách
         List<SanPham> lstSP = new ArrayList<>();

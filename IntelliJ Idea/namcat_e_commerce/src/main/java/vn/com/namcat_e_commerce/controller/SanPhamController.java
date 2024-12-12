@@ -46,4 +46,10 @@ public class SanPhamController {
         return lstLoaiSP;
     }
     
+    @RequestMapping(value = "/admin/login")
+    public String login()
+    {
+        return "Login";
+    }
+    
 }

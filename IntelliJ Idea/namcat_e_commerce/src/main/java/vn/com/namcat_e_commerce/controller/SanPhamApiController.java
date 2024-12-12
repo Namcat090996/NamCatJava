@@ -124,72 +124,72 @@ public class SanPhamApiController {
             return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
         }
         
+//        String tenFile = "";
+//        String loaiFile = "";
+//
+//        //Xu ly upload file
+//        if (fUpload != null && !fUpload.isEmpty()) {
+//            try {
+//                String fileUpload = xuLyUploadFile(fUpload);
+//
+//                String[] uploadInfo = fileUpload.split(",");
+//
+//                tenFile = uploadInfo[0];
+//                loaiFile = uploadInfo[1];
+//
+//                if(!loaiFile.equals("img") && !loaiFile.equals("png"))
+//                {
+//                    msg1.add(new Message("dinhDang", "Chỉ cho phép tải file ảnh img hoặc png"));
+//                    return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
+//                }
+//            } catch (Exception ex) {
+//                msg1.add(new Message("anhLoi", "Có lỗi khi tải ảnh"));
+//                return new ResponseEntity<List<Message>>(msg1, HttpStatus.INTERNAL_SERVER_ERROR);
+//            }
+//        } else {
+//            msg1.add(new Message("thieuAnh", "Vui lòng tải lên ảnh sản phẩm"));
+//            return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
+//        }
+//
+//        // Xử lý ngày tạo
+//        LocalDate ngayTao;
+//        try {
+//            String ngayTaoStr = vanban.get("ngayTao");
+//            if (ngayTaoStr != null && !ngayTaoStr.isEmpty()) {
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//                ngayTao = LocalDate.parse(ngayTaoStr, formatter);
+//            } else {
+//                ngayTao = LocalDate.now(); // Nếu người dùng không điền ngày sẽ tự động lấy ngày hôm nay
+//            }
+//        } catch (DateTimeParseException ex) {
+//            msg1.add(new Message("dinhDangNgay", "Ngày tạo không đúng định dạng (yyyy-MM-dd)"));
+//            return new ResponseEntity<>(msg1, HttpStatus.BAD_REQUEST);
+//        }
+//
+//        VanBan objVB = new VanBan();
+//
+//        objVB.setMaVanBan(maVanBan);
+//        objVB.setTieuDe(vanban.get("tieuDe"));
+//        objVB.setMoTa(vanban.get("moTa"));
+//        objVB.setNoiDung(vanban.get("noiDung"));
+//        objVB.setNgayTao(ngayTao);
+//        objVB.setNgayCapNhat(LocalDate.now());
+//        objVB.setTenFile(tenFile);
+//        objVB.setDinhDang(loaiFile);
+//        objVB.setSoTrang(soTrang);
+//        objVB.setLoaiVanBan(vanban.get("loaiVanBan"));
+//        objVB.setDonVi(vanban.get("donVi"));
+//
+//        boolean ketQua = vanBanService.themVanBan(objVB);
+//
+//        if (ketQua) {
+//            return new ResponseEntity<VanBan>(objVB, HttpStatus.OK);
+//        } else {
+//            msg1.add(new Message("vanBan", "Khong the them moi van ban"));
+//            return new ResponseEntity<List<Message>>(msg1, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
         
-        
-        String tenFile = "";
-        String loaiFile = "";
-        
-        //Xu ly upload file
-        if (fUpload != null && !fUpload.isEmpty()) {
-            try {
-                String fileUpload = xuLyUploadFile(fUpload);
-                
-                String[] uploadInfo = fileUpload.split(",");
-                
-                tenFile = uploadInfo[0];
-                loaiFile = uploadInfo[1];
-                
-                if(!loaiFile.equals("img") && !loaiFile.equals("png"))
-                {
-                    msg1.add(new Message("dinhDang", "Chỉ cho phép tải file ảnh img hoặc png"));
-                    return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
-                }
-            } catch (Exception ex) {
-                msg1.add(new Message("anhLoi", "Có lỗi khi tải ảnh"));
-                return new ResponseEntity<List<Message>>(msg1, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        } else {
-            msg1.add(new Message("thieuAnh", "Vui lòng tải lên ảnh sản phẩm"));
-            return new ResponseEntity<List<Message>>(msg1, HttpStatus.BAD_REQUEST);
-        }
-        
-        // Xử lý ngày tạo
-        LocalDate ngayTao;
-        try {
-            String ngayTaoStr = vanban.get("ngayTao");
-            if (ngayTaoStr != null && !ngayTaoStr.isEmpty()) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                ngayTao = LocalDate.parse(ngayTaoStr, formatter);
-            } else {
-                ngayTao = LocalDate.now(); // Nếu người dùng không điền ngày sẽ tự động lấy ngày hôm nay
-            }
-        } catch (DateTimeParseException ex) {
-            msg1.add(new Message("dinhDangNgay", "Ngày tạo không đúng định dạng (yyyy-MM-dd)"));
-            return new ResponseEntity<>(msg1, HttpStatus.BAD_REQUEST);
-        }
-        
-        VanBan objVB = new VanBan();
-        
-        objVB.setMaVanBan(maVanBan);
-        objVB.setTieuDe(vanban.get("tieuDe"));
-        objVB.setMoTa(vanban.get("moTa"));
-        objVB.setNoiDung(vanban.get("noiDung"));
-        objVB.setNgayTao(ngayTao);
-        objVB.setNgayCapNhat(LocalDate.now());
-        objVB.setTenFile(tenFile);
-        objVB.setDinhDang(loaiFile);
-        objVB.setSoTrang(soTrang);
-        objVB.setLoaiVanBan(vanban.get("loaiVanBan"));
-        objVB.setDonVi(vanban.get("donVi"));
-        
-        boolean ketQua = vanBanService.themVanBan(objVB);
-        
-        if (ketQua) {
-            return new ResponseEntity<VanBan>(objVB, HttpStatus.OK);
-        } else {
-            msg1.add(new Message("vanBan", "Khong the them moi van ban"));
-            return new ResponseEntity<List<Message>>(msg1, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return null;
         
     }
     

@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `approved`
+--
+
+DROP TABLE IF EXISTS `approved`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `approved` (
+  `id` int NOT NULL,
+  `approved` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `daDuyet_UNIQUE` (`id`),
+  UNIQUE KEY `approved_UNIQUE` (`approved`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `approved`
+--
+
+LOCK TABLES `approved` WRITE;
+/*!40000 ALTER TABLE `approved` DISABLE KEYS */;
+INSERT INTO `approved` VALUES (0,'Chưa duyệt'),(1,'Đã duyệt');
+/*!40000 ALTER TABLE `approved` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cart`
 --
 
@@ -128,7 +154,7 @@ CREATE TABLE `order` (
   `username` varchar(50) NOT NULL,
   `create` date NOT NULL,
   `status` varchar(20) NOT NULL,
-  `total_price` double NOT NULL,
+  `total_price` int NOT NULL,
   `order_code` varchar(50) NOT NULL,
   `order_name` varchar(255) DEFAULT NULL,
   `description` varchar(300) DEFAULT NULL,
@@ -194,7 +220,7 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `price` double NOT NULL,
+  `price` int NOT NULL,
   `stock` int NOT NULL,
   `category` varchar(50) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
@@ -205,13 +231,15 @@ CREATE TABLE `product` (
   `update` date DEFAULT NULL,
   `approved_date` date DEFAULT NULL,
   `user_approved` varchar(50) NOT NULL,
-  `approved` int DEFAULT NULL,
+  `approved` int NOT NULL,
   `color` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_user_create_idx` (`user_create`),
   KEY `fk_user_approved_idx` (`user_approved`),
   KEY `fk_color_idx` (`color`),
   KEY `fk_category_idx` (`category`),
+  KEY `fk_approved_idx` (`approved`),
+  CONSTRAINT `fk_approved` FOREIGN KEY (`approved`) REFERENCES `approved` (`id`),
   CONSTRAINT `fk_category` FOREIGN KEY (`category`) REFERENCES `category` (`name`),
   CONSTRAINT `fk_color` FOREIGN KEY (`color`) REFERENCES `color` (`color`),
   CONSTRAINT `fk_user_approved` FOREIGN KEY (`user_approved`) REFERENCES `user` (`username`),
@@ -225,7 +253,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Samsung Galaxy S24 Ultra 12GB 512GB',7500000,10,'Điện thoại',NULL,'Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.',NULL,NULL,'admin',NULL,NULL,'admin',0,'Đỏ'),(2,'Laptop MSI Prestige 14 AI Studio C1UDXG-058VN',5000000,5,'Laptop',NULL,'Laptop MSI Prestige 14 AI Studio C1UDXG-058VN là một mẫu laptop MSI Prestige cao cấp, được thiết kế để phục vụ các chuyên gia sáng tạo nội dung với hiệu suất mạnh mẽ và thiết kế thanh lịch. Máy nổi bật với bộ vi xử lý Intel Core thế hệ 13 cùng card đồ họa NVIDIA GeForce RTX, mang lại sức mạnh xử lý tốt cho cả những công việc yêu cầu khả năng đồ họa cao. ',NULL,NULL,'admin',NULL,NULL,'admin',0,'Đỏ'),(3,'Máy tính bảng Amazon Fire 7 tablet HD7 IPS 1GB 16GB Đen',6400000,10,'Máy tính bảng',NULL,'Sản phẩm máy tính bảng Amazon Kindle HD Fire 7 không chỉ là chiếc máy tính bảng nhỏ gọn, giá cả phải chăng nhưng vẫn tích hợp đầy đủ ứng dụng công nghệ hiện đại, mà còn là một một lựa chọn thay thế iPad hoặc các dòng tablet đắt tiền khác trên thị trường.',NULL,NULL,'admin',NULL,NULL,'admin',1,'Đỏ'),(4,'Tai nghe Bluetooth True Wireless Anker Soundcore R50i A3949',12000000,7,'Tai nghe',NULL,'Tai nghe không dây Anker Soundcore R50I-A3949 là mẫu tai nghe Anker mới được trang bị nhiều tính năng nổi bật. Sản phẩm tai nghe không dây này với tạo hình hiện đại, chất lượng âm thanh xuất sắc cùng nhiều tính năng đột phá, Anker Soundcore R50I dễ dàng làm hài lòng ngay cả những người dùng yêu âm nhạc khó tính nhất',NULL,NULL,'admin',NULL,NULL,'admin',1,'Vàng'),(5,'Màn hình LG UltraWide 29WQ600 29 inch',10500000,3,'Màn hình',NULL,'Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ',NULL,NULL,'admin',NULL,NULL,'admin',1,'Tím'),(6,'Màn hình MSI UltraWide 29 inch',11500000,5,'Điện thoại',NULL,'Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ',NULL,NULL,'admin',NULL,NULL,'admin',0,'Đỏ'),(7,'Máy tính bảng Amazon Fire 7 tablet HD7 IPS 1GB 16GB Đen',9500000,5,'Máy tính bảng',NULL,'Sản phẩm máy tính bảng Amazon Kindle HD Fire 7 không chỉ là chiếc máy tính bảng nhỏ gọn, giá cả phải chăng nhưng vẫn tích hợp đầy đủ ứng dụng công nghệ hiện đại, mà còn là một một lựa chọn thay thế iPad hoặc các dòng tablet đắt tiền khác trên thị trường.',NULL,NULL,'admin',NULL,NULL,'admin',1,'Vàng');
+INSERT INTO `product` VALUES (1,'Samsung Galaxy S24 Ultra 12GB 512GB',7500000,1000,'Điện thoại',NULL,'Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.',NULL,NULL,'admin',NULL,NULL,'admin',0,'Đỏ'),(2,'Laptop MSI Prestige 14 AI Studio C1UDXG-058VN',5000000,5,'Laptop',NULL,'Laptop MSI Prestige 14 AI Studio C1UDXG-058VN là một mẫu laptop MSI Prestige cao cấp, được thiết kế để phục vụ các chuyên gia sáng tạo nội dung với hiệu suất mạnh mẽ và thiết kế thanh lịch. Máy nổi bật với bộ vi xử lý Intel Core thế hệ 13 cùng card đồ họa NVIDIA GeForce RTX, mang lại sức mạnh xử lý tốt cho cả những công việc yêu cầu khả năng đồ họa cao. ',NULL,NULL,'admin',NULL,NULL,'admin',0,'Đỏ'),(3,'Máy tính bảng Amazon Fire 7 tablet HD7 IPS 1GB 16GB Đen',6400000,10,'Máy tính bảng',NULL,'Sản phẩm máy tính bảng Amazon Kindle HD Fire 7 không chỉ là chiếc máy tính bảng nhỏ gọn, giá cả phải chăng nhưng vẫn tích hợp đầy đủ ứng dụng công nghệ hiện đại, mà còn là một một lựa chọn thay thế iPad hoặc các dòng tablet đắt tiền khác trên thị trường.',NULL,NULL,'admin',NULL,NULL,'admin',1,'Đỏ'),(4,'Tai nghe Bluetooth True Wireless Anker Soundcore R50i A3949',12000000,7,'Tai nghe',NULL,'Tai nghe không dây Anker Soundcore R50I-A3949 là mẫu tai nghe Anker mới được trang bị nhiều tính năng nổi bật. Sản phẩm tai nghe không dây này với tạo hình hiện đại, chất lượng âm thanh xuất sắc cùng nhiều tính năng đột phá, Anker Soundcore R50I dễ dàng làm hài lòng ngay cả những người dùng yêu âm nhạc khó tính nhất',NULL,NULL,'admin',NULL,NULL,'admin',1,'Vàng'),(5,'Màn hình LG UltraWide 29WQ600 29 inch',10500000,3,'Màn hình',NULL,'Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ',NULL,NULL,'admin',NULL,NULL,'admin',1,'Tím'),(6,'Màn hình MSI UltraWide 29 inch',11500000,5,'Điện thoại',NULL,'Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ',NULL,NULL,'admin',NULL,NULL,'admin',0,'Đỏ'),(7,'Máy tính bảng Amazon Fire 7 tablet HD7 IPS 1GB 16GB Đen',9500000,5,'Máy tính bảng',NULL,'Sản phẩm máy tính bảng Amazon Kindle HD Fire 7 không chỉ là chiếc máy tính bảng nhỏ gọn, giá cả phải chăng nhưng vẫn tích hợp đầy đủ ứng dụng công nghệ hiện đại, mà còn là một một lựa chọn thay thế iPad hoặc các dòng tablet đắt tiền khác trên thị trường.',NULL,NULL,'admin',NULL,NULL,'admin',1,'Vàng');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -329,4 +357,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-13 16:25:10
+-- Dump completed on 2024-12-13 23:13:27

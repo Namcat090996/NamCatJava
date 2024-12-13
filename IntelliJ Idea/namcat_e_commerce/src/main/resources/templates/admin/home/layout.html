@@ -25,7 +25,7 @@
 </head>
 <body class="app sidebar-mini rtl">
 <!-- Navbar-->
-<header class="app-header"><a class="app-header__logo" href="index.html">Vali</a>
+<header class="app-header"><a class="app-header__logo" th:href="@{/admin/sanpham}">Product&nbsp;Management</a>
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
@@ -62,17 +62,30 @@
 <script type="text/javascript" th:src="@{/js/admin/plugins/jquery.dataTables.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/admin/plugins/dataTables.bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/admin/plugins/bootstrap-datepicker.min.js}"></script>
-<script type="text/javascript">$('#sampleTable').DataTable();</script>
-<!-- Google analytics script-->
 <script type="text/javascript">
-    if(document.location.hostname == 'pratikborsadiya.in') {
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-72504830-1', 'auto');
-        ga('send', 'pageview');
-    }
+    $('#sampleTable').DataTable({
+        <!--Disable the ascending/descending order in option column-->
+        "columnDefs": [
+            {
+                "targets": [0, 1, 4, 5, 6, 7, 8, 9, 10, 11],
+                "orderable": false
+            },
+            {
+                "targets": [2, 3],  //Column need to sort
+                "orderable": true,  //Ensure this colum is sortable
+                "type": "num",  //Itentify data type is number
+                "createdCell": function(cell) {
+                    //Get raw data from data-raw (in view) to order
+                    var rawValue = $(cell).attr('data-raw');
+                    $(cell).attr('data-sort', rawValue);  //Save unformatted (raw data) values to data-sort
+                }
+            }
+        ],
+        "order": [], //Disable default order of DataTables to delete the sort of [0] column
+        "language": {
+            "search": "Quick search:", // Thay đổi text của hộp tìm kiếm tại đây
+        }
+    });
 </script>
 </body>
 </html>

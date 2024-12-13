@@ -9,7 +9,9 @@ public interface SanPhamDao extends IHanhDong<SanPham, Integer> {
     
     public List<SanPham> timSPTheoTen(String tuKhoa);
     
-    public List<SanPham> timSPTheoLoai(String loaiSanPham, String order, String mauSac, int tuGia, int denGia);
+    public List<SanPham> timSPTheoLoaiVaGia(String loaiSanPham, String order, String mauSac, int tuGia, int denGia);
+    
+    public List<SanPham> timSPTheoLoaiVaGiaKhongDuyet(String loaiSanPham, String order, String mauSac, int tuGia, int denGia, int daDuyet);
     
     public List<SanPham> timSPTheoTenVaLoai(String tuKhoa, String loaiSP, String mauSac);
 }

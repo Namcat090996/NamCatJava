@@ -28,7 +28,7 @@ public class DonHang {
     private String trangThai;
     
     @Column(name = "total_price", nullable = false)
-    private double tongTien;
+    private int tongTien = 0;
     
     @Column(name = "order_code", nullable = false, length = 50, unique = true)
     private String maDonHang;
@@ -74,11 +74,11 @@ public class DonHang {
         this.trangThai = trangThai;
     }
     
-    public double getTongTien() {
+    public int getTongTien() {
         return tongTien;
     }
     
-    public void setTongTien(double tongTien) {
+    public void setTongTien(int tongTien) {
         this.tongTien = tongTien;
     }
     

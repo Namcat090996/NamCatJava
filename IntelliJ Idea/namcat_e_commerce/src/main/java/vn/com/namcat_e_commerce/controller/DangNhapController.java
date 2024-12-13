@@ -8,8 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import vn.com.namcat_e_commerce.entities.MauSac;
 import vn.com.namcat_e_commerce.entities.NguoiDung;
 import vn.com.namcat_e_commerce.model.NguoiDungDao;
+
+import java.util.List;
 
 @Controller
 public class DangNhapController {
@@ -66,6 +69,5 @@ public class DangNhapController {
             model.addAttribute("login_fail", "Tài khoản không tồn tại hoặc không có quyền truy cập");
             return "Login";
         }
-
     }
 }

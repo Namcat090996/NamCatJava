@@ -1,12 +1,10 @@
 package vn.com.namcat_e_commerce.service;
 
-import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.com.namcat_e_commerce.entities.SanPham;
 import vn.com.namcat_e_commerce.model.SanPhamDao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,9 +22,14 @@ public class SanPhamService {
         return sanPhamDao.timSPTheoTen(tuKhoa);
     }
     
-    public List<SanPham> timSPTheoLoai(String loaiSanPham, String order, String mauSac, int tuGia, int denGia) {
+    public List<SanPham> timSPTheoLoaiVaGia(String loaiSanPham, String order, String mauSac, int tuGia, int denGia) {
         
-        return sanPhamDao.timSPTheoLoai(loaiSanPham, order, mauSac, tuGia, denGia);
+        return sanPhamDao.timSPTheoLoaiVaGia(loaiSanPham, order, mauSac, tuGia, denGia);
+    }
+    
+    public List<SanPham> timSPTheoLoaiVaGiaKhongDuyet(String loaiSanPham, String order, String mauSac, int tuGia, int denGia, int daDuyet) {
+        
+        return sanPhamDao.timSPTheoLoaiVaGiaKhongDuyet(loaiSanPham, order, mauSac, tuGia, denGia, daDuyet);
     }
     
     public List<SanPham> getList() {

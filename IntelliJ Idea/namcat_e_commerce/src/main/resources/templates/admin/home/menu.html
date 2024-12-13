@@ -8,10 +8,10 @@
 <div th:fragment="menu">
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-        <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hinhnen.jpg" width="60" height="60" alt="User Image">
+        <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/admin/hinhnen.jpg" width="70" height="60" alt="User Image">
             <div style="padding-left: 3px">
-                <p class="app-sidebar__user-name">Nam Cat Huynh</p>
-                <p class="app-sidebar__user-designation">Developer</p>
+                <p class="app-sidebar__user-name">User Online</p>
+                <p class="app-sidebar__user-designation" style="text-transform: uppercase" th:text="${Online_User}"></p>
             </div>
         </div>
         <ul class="app-menu">

@@ -26,7 +26,7 @@ public class SanPham {
     @NotBlank(message = "Bạn phải nhập giá sản phẩm")
     @Digits(integer = 10, fraction = 0, message = "Giá sản phẩm phải là số nguyên dương")
     @Min(value = 1, message = "Giá sản phẩm phải là số nguyên dương")
-    private double giaSanPham;
+    private int giaSanPham;
     
     @Column(name = "stock", nullable = false)
     @NotBlank(message = "Bạn phải nhập số lượng hàng còn lại trong kho")
@@ -92,11 +92,11 @@ public class SanPham {
         this.tenSanPham = tenSanPham;
     }
     
-    public double getGiaSanPham() {
+    public int getGiaSanPham() {
         return giaSanPham;
     }
     
-    public void setGiaSanPham(double giaSanPham) {
+    public void setGiaSanPham(int giaSanPham) {
         this.giaSanPham = giaSanPham;
     }
     

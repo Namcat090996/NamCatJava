@@ -33,6 +33,7 @@
             position: relative;
             left: 15px;
             bottom: 5px;
+            margin-bottom: 20px;
         }
 
     </style>
@@ -49,53 +50,124 @@
             <li class="breadcrumb-item"><a th:href="@{/admin/sanpham}">Product Management</a></li>
         </ul>
     </div>
+    <div class="row justify-content-center" style="margin: 0px">
+        <div class="col-md-12">
+            <div class="tile" style="height: 200px">
+                <form method="post" th:action="@{/admin/sanpham}" th:object="${sanpham}">
+                    <fieldset>
+                        <legend class="legend">Nhập thông tin tìm kiếm</legend>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Từ khóa:</div>
+                            <div class="input col-md-2">
+                                <input type="text" th:field="*{tuKhoa}" th:class="form-control"/>
+                            </div>
+                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Loại SP:</div>
+                            <div class="input col-md-2">
+                                <select th:field="*{loaiSP}" th:class="form-control">
+                                    <option value="" label="Chọn loại sản phẩm"></option>
+                                    <th:block th:each="lsp : ${lstLoaiSP}">
+                                        <option th:value="${lsp.loaiSanPham}" th:text="${lsp.loaiSanPham}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Màu sắc:</div>
+                            <div class="input col-md-2">
+                                <select th:field="*{mauSac}" th:class="form-control">
+                                    <option value="" label="Chọn màu sắc"></option>
+                                    <th:block th:each="ms : ${lstMauSac}">
+                                        <option th:value="${ms.mauSac}" th:text="${ms.mauSac}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div th:class="col-md-2">
+                                <button type="submit" class="search btn btn-secondary">Tìm kiếm</button>
+                            </div>
+                        </div>
+                        <div style="height: 20px"></div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Từ giá:</div>
+                            <div class="input col-md-2">
+                                <select th:field="*{tuGia}" th:class="form-control">
+                                    <option value="0" label="Chọn giá tiền"></option>
+                                    <th:block th:each="s : ${lstGiaTien}">
+                                        <option th:value="${s.giaTien}" th:text="${s.giaTien}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Đến giá:</div>
+                            <div class="input col-md-2">
+                                <select th:field="*{denGia}" th:class="form-control">
+                                    <option value="-1" label="Chọn giá tiền"></option>
+                                    <th:block th:each="s : ${lstGiaTien}">
+                                        <option th:value="${s.giaTien}" th:text="${s.giaTien}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Duyệt SP:</div>
+                            <div class="input col-md-2">
+                                <select th:field="*{daDuyet}" th:class="form-control">
+                                    <th:block th:each="dd : ${lstDaDuyet}">
+                                        <option th:value="${dd.id}" th:text="${dd.daDuyetName}"></option>
+                                    </th:block>
+                                    <option value="-1" label="Đã duyệt & Chưa Duyệt"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class=""></div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
-                    <form method="post" th:action="@{/admin/sanpham}" th:object="${sanpham}">
-                        <fieldset>
-                            <legend class="legend">Nhập thông tin tìm kiếm</legend>
-                            <div class="row">
-                                <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Từ khóa:</div>
-                                <div class="input col-md-2">
-                                    <input type="text" th:field="*{tuKhoa}" th:class="form-control"/>
-                                </div>
-                                <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Phòng ban:</div>
-                                <div class="input col-md-2">
-                                    <select th:field="*{loaiSP}" th:class="form-control">
-                                        <option value="" label="Chọn phòng ban"></option>
-                                        <th:block th:each="lsp : ${lstLoaiSP}">
-                                            <option th:value="${lsp.loaiSanPham}" th:text="${lsp.loaiSanPham}"></option>
-                                        </th:block>
-                                    </select>
-                                </div>
-                                <div class="custom-width col-md-1 d-flex align-items-center justify-content-center">Chức vụ:</div>
-                                <div class="input col-md-2">
-                                    <select th:field="*{mauSac}" th:class="form-control">
-                                        <option value="" label="Chọn chức vụ"></option>
-                                        <th:block th:each="ms : ${lstMauSac}">
-                                            <option th:value="${ms.mauSac}" th:text="${ms.mauSac}"></option>
-                                        </th:block>
-                                    </select>
-                                </div>
-                                <div th:class="col-md-2">
-                                    <button type="submit" class="search btn btn-secondary">Tìm kiếm</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                         <tr>
-                            <th>Mã nhân viên</th>
-                            <th>Họ tên</th>
+                            <th></th>
+                            <th style="width: 160px">Name</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Category</th>
+                            <th>Created Date</th>
+                            <th>Creator</th>
+                            <th>Updated Date</th>
+                            <th>Approved Date</th>
+                            <th>Reviewer</th>
+                            <th>Approved</th>
+                            <th style="width: 120px; text-align: center; font-size: 15px">
+                                <a href="#" onclick="hienThiThemMoi()" id="themMoi" data-bs-toggle="modal" data-bs-target="#modalVanBan">Thêm
+                                    mới</a>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="sp : ${lstSP}">
+                            <td  style="text-align: center">
+                                <img th:src="@{'/images/' + ${sp.anhSanPham}}" width="100" height="120"/>
+                            </td>
                             <td th:text="${sp.tenSanPham}"></td>
-                            <td th:text="${sp.giaSanPham}"></td>
+                            <td th:text="${#numbers.formatDecimal(sp.giaSanPham, 0, 'POINT', 0, 'COMMA') + 'đ'}" th:data-raw="${sp.giaSanPham}" th:data-sort="${sp.giaSanPham}"></td>
+                            <td th:text="${#numbers.formatDecimal(sp.tonKho, 0, 'POINT', 0, 'COMMA')}" th:data-raw="${sp.tonKho}" th:data-sort="${sp.tonKho}"></td>
+                            <td th:text="${sp.loaiSanPham}"></td>
+                            <td th:text="${#dates.format(sp.ngayTao, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${sp.tenNguoiTao}"></td>
+                            <td th:text="${#dates.format(sp.ngayCapNhap, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${#dates.format(sp.ngayDuyet, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${sp.tenNguoiDuyet}"></td>
+                            <td th:text="${sp.daDuyet == 1 ? 'Đã duyệt' : 'Chưa duyệt'}"></td>
+                            <td style="text-align: center">
+                                <a style="margin-left: 3px" class="btn btn-primary"
+                                   th:href="@{'/admin/sanpham/sua/' + ${sp.id}}">Sửa</a>
+                                <a style="margin-left: 3px; display: inline-block" class="btn btn-danger"
+                                   th:href="@{'/admin/sanpham/xoa/' + ${sp.id}}"
+                                   onclick="return confirm('Bạn có chắc chắc muốn xóa thông tin này ?')">Xóa</a>
+                            </td>
+
                         </tr>
                         </tbody>
                     </table>

@@ -10,9 +10,11 @@ public class SanPhamModel {
     
     private String mauSac;
     
-    private double tuGia = 0;
+    private int tuGia;
     
-    private double denGia = 0;
+    private int denGia;
+    
+    private int daDuyet;
     
     public String getMauSac() {
         return mauSac;
@@ -46,19 +48,27 @@ public class SanPhamModel {
         this.loaiSP = loaiSP;
     }
     
-    public double getTuGia() {
+    public int getTuGia() {
         return tuGia;
     }
     
-    public void setTuGia(double tuGia) {
+    public void setTuGia(int tuGia) {
         this.tuGia = tuGia;
     }
     
-    public double getDenGia() {
+    public int getDenGia() {
         return denGia;
     }
     
-    public void setDenGia(double denGia) {
+    public void setDenGia(int denGia) {
         this.denGia = denGia;
+    }
+    
+    public int getDaDuyet() {
+        return daDuyet;
+    }
+    
+    public void setDaDuyet(int daDuyet) {
+        this.daDuyet = daDuyet;
     }
 }

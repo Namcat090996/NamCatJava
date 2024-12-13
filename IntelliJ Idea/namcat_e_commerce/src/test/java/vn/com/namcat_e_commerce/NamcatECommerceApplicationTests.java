@@ -3,8 +3,10 @@ package vn.com.namcat_e_commerce;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import vn.com.namcat_e_commerce.entities.GiaTien;
 import vn.com.namcat_e_commerce.entities.NguoiDung;
 import vn.com.namcat_e_commerce.entities.SanPham;
+import vn.com.namcat_e_commerce.model.GiaTienDao;
 import vn.com.namcat_e_commerce.model.NguoiDungDao;
 import vn.com.namcat_e_commerce.model.SanPhamDao;
 import vn.com.namcat_e_commerce.model.SanPhamRepository;
@@ -23,10 +25,15 @@ class NamcatECommerceApplicationTests {
     @Autowired
     SanPhamRepository sanPhamRepository;
     
+    @Autowired
+    GiaTienDao giaTienDao;
+    
     @Test
     void contextLoads() {
         
-        List<SanPham> lstSP = sanPhamDao.timSPTheoLoai("","","", 0, 0);
+        List<SanPham> lstSP = sanPhamDao.timSPTheoLoaiVaGia("","","", 0, 0);
+        
+        List<GiaTien> lstGT = giaTienDao.getList();
         
         SanPham SP = sanPhamDao.findById(1);
         

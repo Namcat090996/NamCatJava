@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +8,17 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/admin/main.css}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Login</title>
+    <title>Quản lý sản phẩm</title>
+    <style type="text/css">
+        .errorfinfo {
+            color: red;
+            padding-left: 2px;
+        }
+
+        .login-box {
+            height: 420px;
+        }
+    </style>
 </head>
 <body>
 <section class="material-half-bg">
@@ -17,20 +26,22 @@
 </section>
 <section class="login-content">
     <div class="logo">
-        <h1>Management Page</h1>
+        <h1>Login Page</h1>
     </div>
     <div class="login-box">
-        <form class="login-form" action="index.html">
+        <form class="login-form" th:action="@{/submit}" th:object="${nguoidung}" method="post">
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
             <div class="form-group">
                 <label class="control-label">USERNAME</label>
-                <input class="form-control" type="text" placeholder="Username" autofocus>
+                <input class="form-control" type="text" th:field="*{tenNguoiDung}" placeholder="Username" autofocus>
             </div>
+
             <div class="form-group">
                 <label class="control-label">PASSWORD</label>
-                <input class="form-control" type="password" placeholder="Password">
+                <input class="form-control" th:field="*{matKhau}" type="password" placeholder="Password">
             </div>
-            <div class="form-group">
+
+            <div class="form-group" style="margin-bottom: 1px">
                 <div class="utility">
                     <div class="animated-checkbox">
                         <label>
@@ -40,8 +51,9 @@
                     <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
                 </div>
             </div>
+            <div th:text="${login_fail}" class="errorfinfo"></div>
             <div class="form-group btn-container">
-                <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 10px"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
             </div>
         </form>
         <form class="forget-form" action="index.html">

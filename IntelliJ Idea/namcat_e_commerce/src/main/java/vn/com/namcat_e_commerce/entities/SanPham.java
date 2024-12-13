@@ -34,7 +34,7 @@ public class SanPham {
     @Min(value = 1, message = "Số lượng hàng trong kho phải là số nguyên dương")
     private int tonKho;
     
-    @Column(name = "category", nullable = false, length = 20)
+    @Column(name = "category", nullable = false, length = 50)
     @NotEmpty(message = "Bạn phải chọn loại sản phẩm")
     private String loaiSanPham;
     

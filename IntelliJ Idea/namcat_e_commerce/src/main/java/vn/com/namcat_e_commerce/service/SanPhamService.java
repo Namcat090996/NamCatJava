@@ -15,9 +15,9 @@ public class SanPhamService {
     @Autowired
     SanPhamDao sanPhamDao;
     
-    public List<SanPham> timSPTheoTenVaLoai(String tuKhoa, String loaiSP)
+    public List<SanPham> timSPTheoTenVaLoai(String tuKhoa, String loaiSP, String mauSac)
     {
-        return sanPhamDao.timSPTheoTenVaLoai(tuKhoa, loaiSP);
+        return sanPhamDao.timSPTheoTenVaLoai(tuKhoa, loaiSP, mauSac);
     }
     
     public List<SanPham> timSPTheoTen(String tuKhoa) {

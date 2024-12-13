@@ -1,14 +1,14 @@
 package vn.com.namcat_e_commerce.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import vn.com.namcat_e_commerce.entities.LoaiSanPham;
-import vn.com.namcat_e_commerce.entities.SanPham;
-import vn.com.namcat_e_commerce.entities.SanPhamModel;
+import vn.com.namcat_e_commerce.entities.*;
 import vn.com.namcat_e_commerce.service.LoaiSPService;
+import vn.com.namcat_e_commerce.service.MauSacService;
 import vn.com.namcat_e_commerce.service.SanPhamService;
 
 import java.util.List;
@@ -22,18 +22,21 @@ public class SanPhamController {
     @Autowired
     LoaiSPService loaiSPService;
     
+    @Autowired
+    MauSacService mauSacService;
+    
     @RequestMapping(value = "/admin/sanpham")
     public String hienThiSPTheoTenVaLoai(@ModelAttribute("sanpham") SanPhamModel objSP, Model model)
     {
         //Get list and return page
-        List<SanPham> lstSP = sanPhamService.timSPTheoTenVaLoai(objSP.getTuKhoa(), objSP.getLoaiSP());
-        
+        List<SanPham> lstSP = sanPhamService.timSPTheoTenVaLoai(objSP.getTuKhoa(), objSP.getLoaiSP(), objSP.getMauSac());
+
         //Keep user information which has typed
         model.addAttribute("vanban", objSP);
-        
+
         model.addAttribute("lstSP", lstSP);
-        
-        return "admin/SanPhamCallAPI";
+
+        return "admin/QuanLySanPham";
     }
     
     @ModelAttribute("lstLoaiSP")
@@ -46,10 +49,19 @@ public class SanPhamController {
         return lstLoaiSP;
     }
     
-    @RequestMapping(value = "/admin/login")
-    public String login()
+    @ModelAttribute("lstMauSac")
+    public List<MauSac> layDanhSachMauSac()
     {
-        return "Login";
+        //Get list
+        List<MauSac> lstMauSac = mauSacService.getList();
+        
+        //Return result
+        return lstMauSac;
     }
     
+    @RequestMapping(value = "/sp")
+    public String hienThiLayout()
+    {
+        return "admin/home/layout";
+    }
 }

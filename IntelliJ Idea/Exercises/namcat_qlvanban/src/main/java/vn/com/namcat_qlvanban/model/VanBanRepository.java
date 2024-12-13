@@ -18,9 +18,9 @@ public interface VanBanRepository extends JpaRepository<VanBan, String> {
     public List<VanBan> timKiemVanBan(@Param("tuKhoa") String tuKhoa, @Param("loaiVanBan") String loaiVanBan, @Param("donVi") String donVi);
     
     @Query(value = "Select vb from VanBan vb where " +
-            "((length(:tuKhoa) = 0 or (length(:tuKhoa) > 0 and (vb.maVanBan like %:tuKhoa% or vb.tieuDe like %:tuKhoa%))) and " +
-            "(length(:loaiVanBan) = 0 or (length(:loaiVanBan) > 0 and vb.loaiVanBan = :loaiVanBan)) and" +
-            "(length(:donVi) = 0 or (length(:donVi) > 0 and vb.donVi = :donVi)) and " +
+            "((:tuKhoa is null or length(:tuKhoa) = 0 or vb.maVanBan = :tuKhoa or vb.tieuDe like %:tuKhoa%) and " +
+            "(:loaiVanBan is null or length(:loaiVanBan) = 0 or vb.loaiVanBan = :loaiVanBan) and" +
+            "(:donVi is null or length(:donVi) = 0 or vb.donVi = :donVi) and " +
             "(:tuNgay is null or vb.ngayTao >= :tuNgay) and " +
             "(:denNgay is null or vb.ngayTao <= :denNgay)) " +
             "ORDER BY CAST(SUBSTRING(vb.maVanBan, 3) AS int) ASC")

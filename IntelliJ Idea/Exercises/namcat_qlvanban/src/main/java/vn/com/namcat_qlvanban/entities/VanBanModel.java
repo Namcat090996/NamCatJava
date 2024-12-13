@@ -3,7 +3,6 @@ package vn.com.namcat_qlvanban.entities;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class VanBanModel {
     

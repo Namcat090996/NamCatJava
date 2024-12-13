@@ -55,6 +55,8 @@ public class VanBanController {
         //Get list and return page
         List<VanBan> lstVB = vanBanService.timKiemVanBanTheoNgay(objVB.getTuKhoa(), objVB.getLoaiVanBan(), objVB.getDonVi(), objVB.getTuNgay(), objVB.getDenNgay());
         
+        String tuKhoa = objVB.getTuKhoa();
+        
         //Keep user information which has typed
         model.addAttribute("vanban", objVB);
         

@@ -7,6 +7,7 @@ import vn.com.namcat_e_commerce.entities.NguoiDung;
 import vn.com.namcat_e_commerce.entities.SanPham;
 import vn.com.namcat_e_commerce.model.NguoiDungDao;
 import vn.com.namcat_e_commerce.model.SanPhamDao;
+import vn.com.namcat_e_commerce.model.SanPhamRepository;
 
 import java.util.List;
 
@@ -18,6 +19,9 @@ class NamcatECommerceApplicationTests {
     
     @Autowired
     NguoiDungDao nguoiDungDao;
+    
+    @Autowired
+    SanPhamRepository sanPhamRepository;
     
     @Test
     void contextLoads() {

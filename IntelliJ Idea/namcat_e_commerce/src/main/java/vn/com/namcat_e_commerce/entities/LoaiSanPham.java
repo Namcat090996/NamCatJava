@@ -11,13 +11,9 @@ import jakarta.validation.constraints.NotBlank;
 public class LoaiSanPham {
     
     @Id
-    @Column(name = "categoryid", nullable = false, unique = true, length = 20)
-    @NotBlank(message = "Bạn phải nhập mã sản phẩm")
+    @Column(name = "name", nullable = false, unique = true, length = 50)
+    @NotBlank(message = "Bạn phải nhập loại sản phẩm")
     private String loaiSanPham;
-    
-    @Column(name = "name", nullable = false, unique = true, length = 200)
-    @NotBlank(message = "Bạn phải nhập tên sản phẩm")
-    private String tenLoai;
     
     public String getLoaiSanPham() {
         return loaiSanPham;
@@ -25,14 +21,6 @@ public class LoaiSanPham {
     
     public void setLoaiSanPham(String loaiSanPham) {
         this.loaiSanPham = loaiSanPham;
-    }
-    
-    public String getTenSanPham() {
-        return tenLoai;
-    }
-    
-    public void setTenSanPham(String tenLoai) {
-        this.tenLoai = this.tenLoai;
     }
     
 }

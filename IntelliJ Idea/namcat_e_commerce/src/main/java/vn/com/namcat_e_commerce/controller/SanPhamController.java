@@ -30,13 +30,13 @@ public class SanPhamController {
     DaDuyetService daDuyetService;
     
     @RequestMapping(value = "/admin/sanpham")
-    public String hienThiSPTheoTenVaLoai(@ModelAttribute("sanpham") SanPhamModel objSP, Model model)
+    public String hienThiSPTheoTenVaLoai(@ModelAttribute("sanpham") SanPhamModel objSP, Model model, HttpSession session)
     {
         //Get list and return page
         List<SanPham> lstSP = sanPhamService.timSPTheoLoaiVaGiaKhongDuyet(objSP.getTuKhoa(), objSP.getLoaiSP(), objSP.getMauSac(), objSP.getTuGia(), objSP.getDenGia(), objSP.getDaDuyet());
 
         //Keep user information which has typed
-        model.addAttribute("vanban", objSP);
+        model.addAttribute("sanpham", objSP);
 
         model.addAttribute("lstSP", lstSP);
 

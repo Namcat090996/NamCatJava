@@ -2,6 +2,7 @@ package vn.com.namcat_e_commerce.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -12,28 +13,18 @@ public class SanPham {
     
     @Id
     @Column(name = "product_id", nullable = false, unique = true, length = 50)
-    @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Mã sản phẩm chỉ bao gồm các kí tự chữ cái và số")
-    @NotBlank(message = "Bạn phải nhập mã sản phẩm")
     private String maSanPham;
     
     @Column(name = "name", nullable = false, unique = true, length = 255)
-    @NotBlank(message = "Bạn phải nhập tên sản phẩm")
     private String tenSanPham;
     
     @Column(name = "price", nullable = false)
-    @NotBlank(message = "Bạn phải nhập giá sản phẩm")
-    @Digits(integer = 10, fraction = 0, message = "Giá sản phẩm phải là số nguyên dương")
-    @Min(value = 1, message = "Giá sản phẩm phải là số nguyên dương")
     private int giaSanPham;
     
     @Column(name = "stock", nullable = false)
-    @NotBlank(message = "Bạn phải nhập số lượng hàng còn lại trong kho")
-    @Digits(integer = 10, fraction = 0, message = "Số lượng hàng trong kho phải là số nguyên dương")
-    @Min(value = 0, message = "Số lượng hàng trong kho phải là số nguyên dương")
     private int tonKho;
     
     @Column(name = "category", nullable = false, length = 50)
-    @NotEmpty(message = "Bạn phải chọn loại sản phẩm")
     private String loaiSanPham;
     
     @Column(name = "image", nullable = true, length = 255)
@@ -42,25 +33,28 @@ public class SanPham {
     @Column(name = "description", nullable = true, length = 500)
     private String moTa;
     
-    @Column(name = "content", nullable = true, length = 1000)
+    @Column(name = "p_content", nullable = true, length = 1000)
     private String noiDung;
     
-    @Column(name = "create", nullable = true)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "create_day", nullable = true)
     private LocalDate ngayTao;
     
     @Column(name = "user_create", nullable = true, length = 50)
     private String tenNguoiTao;
     
-    @Column(name = "update", nullable = true)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "update_date", nullable = true)
     private LocalDate ngayCapNhap;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "approved_date", nullable = true)
     private LocalDate ngayDuyet;
     
     @Column(name = "user_approved", nullable = true, length = 50)
     private String tenNguoiDuyet;
     
-    @Column(name = "approved", nullable = true)
+    @Column(name = "p_approved", nullable = true)
     private int daDuyet = 0;
     
     @Column(name = "color", nullable = true, length = 50)

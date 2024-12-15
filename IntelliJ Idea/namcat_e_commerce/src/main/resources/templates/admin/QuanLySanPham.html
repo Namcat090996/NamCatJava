@@ -8,20 +8,42 @@
     <script type="text/javascript" th:src="@{/js/admin/bootstrap.js}"></script>
     <!--JS cho modal-->
     <script type="text/javascript">
-        function suaThongTin(maVB)
+        function suaThongTin(maSP)
         {
+            //Reset lỗi
+            $(".form-control").nextAll(".error").remove();
+            $("#er_maSanPham").text("");
+            $("#er_giaSanPham").text("");
+            $("#er_tonKho").text("");
+            $("#er_image").text("");
+            $("#er_sanPham").text("");
             //Hiển thị thông tin chi tiết
-            thongTinChiTiet(maVB);
+            thongTinChiTiet(maSP);
         }
 
-        function xoaThongTin(maVB)
+        function xoaThongTin(maSP)
         {
-            $("#hVanBanId").val(maVB);
+            $("#hSanPhamId").val(maSP);
+        }
+
+        function duyetThongTin(maSP)
+        {
+            $("#hSanPhamId").val(maSP);
         }
 
         function hienThiThemMoi()
         {
+            //Reset lỗi
+            $(".form-control").nextAll(".error").remove();
+            $("#er_maSanPham").text("");
+            $("#er_giaSanPham").text("");
+            $("#er_tonKho").text("");
+            $("#er_image").text("");
+            $("#er_sanPham").text("");
+            //Ngăn không cho thao tác với mã văn bản khi sửa
+            $("#maSanPham").prop("disabled", false);
             //Hiển thị modal thêm mới
+            $("#modalTitle").text("Thêm mới thông tin sản phẩm");
             $("#maSanPham").val("");
             $("#tenSanPham").val("");
             $("#giaSanPham").val("");
@@ -34,26 +56,25 @@
             $("#hSanPhamId").val("");
         }
 
-        /*
-        Ham xu ly them moi hoac cap nhat
-         */
         function themMoiHoacCapNhat()
         {
             // Tùy chỉnh validate
             let rules = {
-                maVanBan: "required",
-                tieuDe: "required",
-                loaiVanBan: "required",
-                donVi: "required",
+                maSanPham: "required",
+                tenSanPham: "required",
+                giaSanPham: "required",
+                tonKho: "required",
+                loaiSanPham: "required",
             };
 
             let form = $("#modalSanPham").validate({
                 rules: rules,
                 messages: {
-                    maVanBan: "&nbsp;&nbsp;Bạn cần phải nhập mã văn bản",
-                    tieuDe: "&nbsp;&nbsp;Bạn cần phải nhập tiêu đề",
-                    loaiVanBan: "&nbsp;&nbsp;Bạn phải chọn loại văn bản",
-                    donVi: "&nbsp;&nbsp;Bạn phải chọn đơn vị",
+                    maSanPham: "&nbsp;&nbsp;Bạn phải nhập mã sản phẩm",
+                    tenSanPham: "&nbsp;&nbsp;Bạn phải nhập tên sản phẩm",
+                    giaSanPham: "&nbsp;&nbsp;Bạn phải nhập giá sản phẩm",
+                    tonKho: "&nbsp;&nbsp;Bạn phải nhập số lượng hàng trong kho",
+                    loaiSanPham: "&nbsp;&nbsp;Bạn phải chọn loại sản phẩm",
                 },
 
                 submitHandler: function(){
@@ -65,45 +86,6 @@
                 }
             });
         }
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            //Change the position of datepicker modal
-            $('#demoDate1').datepicker({
-                format: "yyyy-mm-dd",
-                autoclose: true,
-                todayHighlight: true
-            }).on('show', function () {
-                // Lưu giá trị hiện tại của input khi Datepicker được mở
-                $(this).data('last-value', $(this).val());
-            }).on('hide', function () {
-                // Nếu input không có giá trị sau khi đóng, khôi phục lại giá trị ban đầu
-                if (!$(this).val()) {
-                    $(this).val($(this).data('last-value'));
-                }
-            }).on('changeDate', function () {
-                // Cập nhật giá trị khi người dùng chọn ngày
-                $(this).data('last-value', $(this).val());
-            });
-
-            //Change the position of datepicker modal
-            $('#demoDate2').datepicker({
-                format: "yyyy-mm-dd",
-                autoclose: true,
-                todayHighlight: true
-            }).on('show', function () {
-                // Lưu giá trị hiện tại của input khi Datepicker được mở
-                $(this).data('last-value', $(this).val());
-            }).on('hide', function () {
-                // Nếu input không có giá trị sau khi đóng, khôi phục lại giá trị ban đầu
-                if (!$(this).val()) {
-                    $(this).val($(this).data('last-value'));
-                }
-            }).on('changeDate', function () {
-                // Cập nhật giá trị khi người dùng chọn ngày
-                $(this).data('last-value', $(this).val());
-            });
-        });
     </script>
     <style type="text/css">
         label.error {
@@ -138,7 +120,7 @@
         }
 
         .modal-dialog {
-            width: 700px !important;
+            width: 730px !important;
             max-width: none !important;
         }
     </style>
@@ -163,11 +145,11 @@
                         <legend class="legend">Nhập thông tin tìm kiếm</legend>
                         <div class="row">
                             <div class="col-md-1"></div>
-                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-end">Từ khóa:</div>
+                            <div class="col-md-1 d-flex align-items-center justify-content-end">Từ khóa:</div>
                             <div class="input col-md-2">
                                 <input type="text" th:field="*{tuKhoa}" th:class="form-control"/>
                             </div>
-                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-end">Loại SP:</div>
+                            <div class="col-md-1 d-flex align-items-center justify-content-end">Loại SP:</div>
                             <div class="input col-md-2">
                                 <select id="LSP" name="LSP" th:field="*{loaiSP}" th:class="form-control">
                                     <option value="" label="Chọn loại sản phẩm"></option>
@@ -176,7 +158,7 @@
                                     </th:block>
                                 </select>
                             </div>
-                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-end">Màu sắc:</div>
+                            <div class="col-md-1 d-flex align-items-center justify-content-end">Màu sắc:</div>
                             <div class="input col-md-2">
                                 <select id="MS" name="MS" th:field="*{mauSac}" th:class="form-control">
                                     <option value="" label="Chọn màu sắc"></option>
@@ -192,7 +174,7 @@
                         <div style="height: 20px"></div>
                         <div class="row">
                             <div class="col-md-1"></div>
-                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-end">Từ giá:</div>
+                            <div class="col-md-1 d-flex align-items-center justify-content-end">Từ giá:</div>
                             <div class="input col-md-2">
                                 <select id="TG" name="TG" th:field="*{tuGia}" th:class="form-control">
                                     <option value="0" label="Chọn giá tiền"></option>
@@ -201,7 +183,7 @@
                                     </th:block>
                                 </select>
                             </div>
-                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-end">Đến giá:</div>
+                            <div class="col-md-1 d-flex align-items-center justify-content-end">Đến giá:</div>
                             <div class="input col-md-2">
                                 <select id="DG" name="DG" th:field="*{denGia}" th:class="form-control">
                                     <option value="-1" label="Chọn giá tiền"></option>
@@ -210,7 +192,7 @@
                                     </th:block>
                                 </select>
                             </div>
-                            <div class="custom-width col-md-1 d-flex align-items-center justify-content-end">Duyệt SP:</div>
+                            <div class="col-md-1 d-flex align-items-center justify-content-end">Duyệt SP:</div>
                             <div class="input col-md-2">
                                 <select th:field="*{daDuyet}" th:class="form-control">
                                     <th:block th:each="dd : ${lstDaDuyet}">
@@ -221,7 +203,6 @@
                             </div>
                         </div>
                     </fieldset>
-                    <div class=""></div>
                 </form>
             </div>
         </div>
@@ -244,7 +225,7 @@
                             <th>Approved Date</th>
                             <th>Reviewer</th>
                             <th>Approved</th>
-                            <th style="width: 120px; text-align: center; font-size: 15px">
+                            <th style="text-align: center; font-size: 15px">
                                 <a href="#" onclick="hienThiThemMoi()" id="themMoi" data-bs-toggle="modal" data-bs-target="#modalSanPham">Thêm
                                     mới</a>
                             </th>
@@ -259,18 +240,17 @@
                             <td th:text="${#numbers.formatDecimal(sp.giaSanPham, 0, 'POINT', 0, 'COMMA') + 'đ'}" th:data-raw="${sp.giaSanPham}" th:data-sort="${sp.giaSanPham}"></td>
                             <td th:text="${#numbers.formatDecimal(sp.tonKho, 0, 'POINT', 0, 'COMMA')}" th:data-raw="${sp.tonKho}" th:data-sort="${sp.tonKho}"></td>
                             <td th:text="${sp.loaiSanPham}"></td>
-                            <td th:text="${#dates.format(sp.ngayTao, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${#temporals.format(sp.ngayTao, 'dd/MM/yyyy')}"></td>
                             <td th:text="${sp.tenNguoiTao}"></td>
-                            <td th:text="${#dates.format(sp.ngayCapNhap, 'dd/MM/yyyy')}"></td>
-                            <td th:text="${#dates.format(sp.ngayDuyet, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${#temporals.format(sp.ngayCapNhap, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${#temporals.format(sp.ngayDuyet, 'dd/MM/yyyy')}"></td>
                             <td th:text="${sp.tenNguoiDuyet}"></td>
                             <td th:text="${sp.daDuyet == 1 ? 'Đã duyệt' : 'Chưa duyệt'}"></td>
                             <td style="text-align: center; padding: 12px 0px 12px 0px">
-                                <a class="btn btn-primary"
-                                   th:href="@{'/admin/sanpham/sua/' + ${sp.maSanPham}}">Sửa</a>&nbsp;&nbsp;
-                                <a class="btn btn-danger"
-                                   th:href="@{'/admin/sanpham/xoa/' + ${sp.maSanPham}}"
-                                   onclick="return confirm('Bạn có chắc chắc muốn xóa thông tin này ?')">Xóa</a>
+                                <a class="btn btn-success" th:if="${sp.daDuyet == 0}" data-bs-toggle="modal" data-bs-target="#modalDuyet" href="#" th:onclick="duyetThongTin([[${sp.maSanPham}]])" title="Duyệt sản phẩm">Duyệt</a>&nbsp;
+                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSanPham" href="#" th:onclick="suaThongTin([[${sp.maSanPham}]])" title="Sửa sản phẩm">Sửa</a>&nbsp;
+                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalXoa" href="#" th:onclick="xoaThongTin([[${sp.maSanPham}]])" title="Xóa sản phẩm">Xóa
+                                </a>
                             </td>
                         </tr>
                         </tbody>
@@ -280,11 +260,11 @@
         </div>
     </div>
     <!--Thiết kế giao diện sản phẩm dạng modal-->
-    <form id="modalSanPham" method="post" class="modal fade" tabindex="-1" aria-labelledby="Thêm văn bản" aria-hidden="true" enctype="multipart/form-data">
+    <form id="modalSanPham" method="post" class="modal fade" tabindex="-1" aria-labelledby="Thêm sản phẩm" aria-hidden="true" enctype="multipart/form-data">
         <!-- Main CSS-->
         <link rel="stylesheet" type="text/css" th:href="@{/css/admin/main.css}">
         <!-- Essential javascripts for application to work-->
-        <script th:src="@{/js/admin/jquery-3.2.1.min.js}"></script>
+        <script th:src="@{/js/admin/jquery-3.7.1.min.js}"></script>
         <script th:src="@{/js/admin/popper.min.js}"></script>
         <script th:src="@{/js/admin/bootstrap.min.js}"></script>
         <script th:src="@{/js/admin/main.js}"></script>
@@ -304,7 +284,16 @@
                     format: "yyyy-mm-dd",
                     autoclose: true,
                     todayHighlight: true
-                }).on('show', function () {
+                // Xử lý việc khi bấm vào datepicker mà không chọn ngày sẽ tự động gán cho input bằng rỗng
+                }).on('show', function (e) {
+                    // Get modal object of Datepicker
+                    var datepicker1 = $('.datepicker');
+
+                    //Change the position of model
+                    datepicker1.css({
+                        top: '690px',
+                        left: '732px',
+                    })
                     // Lưu giá trị hiện tại của input khi Datepicker được mở
                     $(this).data('last-value', $(this).val());
                 }).on('hide', function () {
@@ -324,11 +313,11 @@
 
                     // Thay đổi vị trí
                     modalDialog.css({
-                        'top': '100px', // Cách đỉnh trang 100px
-                        'left': '50px', // Cách bên trái 50px
+                        'top': '50px', // Cách đỉnh trang 100px
                     });
                 });
 
+                // Xử lý khi nhấn submit thì nó sẽ bind dữ liệu vào phần tìm kiếm
                 $(document).ready(function() {
                     $('#modalSanPham').on('submit', function(e) {
                         e.preventDefault(); // Ngăn chặn hành vi submit mặc định
@@ -340,38 +329,37 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle"  style="font-family: -apple-system"></h5>
+                    <h3 class="modal-title" id="modalTitle" style="font-family: 'Times New Roman' !important;"></h3>
                 </div>
                 <div class="modal-body">
                     <div class="tile-body" id="tile-body">
                         <div class="form-group row">
-                            <label class="col-md-2">
+                            <label class="col-md-2 d-flex align-items-center justify-content-center">
                                 Mã sản phẩm:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-7">
                                 <input type="text" id="maSanPham" name="maSanPham" class="form-control"
-                                       placeholder="Nhập mã sản phẩm"/>
+                                       placeholder="Nhập mã sản phẩm (SPxx)"/>
                                 <div id="er_maSanPham" style="padding-left: 6px; color: red"></div>
                                 <input type="hidden" id="hSanPhamId" name="hSanPhamId">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">
+                            <label class="col-md-2 d-flex align-items-center justify-content-center">
                                 Tên sản phẩm:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input type="text" id="tenSanPham" name="tenSanPham" class="form-control"
                                        placeholder="Nhập tên sản phẩm"/>
-                                <div id="er_tenSanPham" style="padding-left: 6px; color: red"></div>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Giá sản phẩm:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input type="text" id="giaSanPham" name="giaSanPham" class="form-control"
                                        placeholder="Nhập giá sản phẩm"/>
                                 <div id="er_giaSanPham" style="padding-left: 6px; color: red"></div>
@@ -379,10 +367,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Tồn kho:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input type="text" id="tonKho" name="tonKho" class="form-control"
                                        placeholder="Nhập số lượng hàng trong kho"/>
                                 <div id="er_tonKho" style="padding-left: 6px; color: red"></div>
@@ -390,10 +378,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Loại sản phẩm:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <select id="loaiSanPham" name="loaiSanPham" class="form-control">
                                     <option value="" label="Chọn loại sản phẩm"></option>
                                     <th:block th:each="lsp : ${lstLoaiSP}">
@@ -404,49 +392,49 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Ảnh sản phẩm:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input id="fUpload" name="fUpload" type="file" class="form-control"/>
                                 <div id="er_image" style="padding-left: 6px; color: red"></div>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Mô tả:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input type="text" id="moTa" name="moTa" class="form-control"
-                                       placeholder="Nhập giá sản phẩm"/>
+                                       placeholder="Nhập mô tả về sản phẩm"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Nội dung:
                             </label>
-                            <div class="col-md-9">
-                                <input type="text" id="noiDung" name="noiDung" class="form-control"
-                                       placeholder="Nhập giá sản phẩm"/>
+                            <div class="col-md-10">
+                                <textarea type="text" rows="5" id="noiDung" name="noiDung" class="form-control"
+                                          placeholder="Nhập nội dung chi tiết cho sản phẩm"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Ngày tạo:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input id="demoDate" name="ngayTao" type="text" class="form-control" placeholder="yyyy-MM-dd"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Màu sắc:
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <select id="mauSac" name="mauSac" class="form-control">
                                     <option value="" label="Chọn màu sắc sản phẩm"></option>
                                     <th:block th:each="ms : ${lstMauSac}">
@@ -466,6 +454,44 @@
             </div>
         </div>
     </form>
+    <!--Form modal hỏi xoá thông tin-->
+    <fieldset id="modalXoa" class="modal fade" tabindex="-1" aria-labelledby="Xóa sản phẩm" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" style="font-family: 'Times New Roman' !important;">Thông báo xoá</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="tile-body" id="title-delete">
+                        <h4 style="font-family: 'Times New Roman' !important">Bạn có chắc chắn muốn xoá thông tin này không ? </h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" onclick="thucHienXoa()" class="btn btn-danger">Đồng ý</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <!--Form modal hỏi duyệt thông tin-->
+    <fieldset id="modalDuyet" class="modal fade" tabindex="-1" aria-labelledby="Duyệt sản phẩm" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" style="font-family: 'Times New Roman' !important;">Thông báo duyệt</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="tile-body" id="title-approved">
+                        <h4 style="font-family: 'Times New Roman' !important">Bạn có chắc chắn muốn duyệt sản phẩm này không ? </h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" onclick="thucHienDuyet()" class="btn btn-success">Đồng ý</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
 </div>
 </body>
 </html>

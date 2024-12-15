@@ -25,19 +25,19 @@ public class SanPhamImpl implements SanPhamDao {
     }
     
     @Override
-    public boolean kiemTraTenDaTonTai(String tenSanPham) {
-        return sanPhamRepository.findByTenSanPham(tenSanPham) != null;
-    }
-    
-    @Override
     public List<SanPham> timSPTheoTen(String tuKhoa) {
         return sanPhamRepository.timTheoTenSanPham(tuKhoa);
     }
     
     @Override
-    public List<SanPham> timSPTheoLoaiVaGiaKhongDuyet(String loaiSanPham, String order, String mauSac, int tuGia, int denGia, int daDuyet) {
+    public List<SanPham> timSPTheoLoaiVaGiaKhongDuyet(String tuKhoa, String loaiSanPham, String mauSac, int tuGia, int denGia, int daDuyet) {
         
         String strSQL = "Select s from SanPham s where 1=1";
+        
+        if(tuKhoa!= null && !tuKhoa.isEmpty())
+        {
+            strSQL += " and (s.tenSanPham like :tuKhoa or s.moTa like :tuKhoa)";
+        }
         
         if(loaiSanPham!= null && !loaiSanPham.isEmpty())
         {
@@ -69,19 +69,15 @@ public class SanPhamImpl implements SanPhamDao {
             strSQL += " and s.daDuyet = 0";
         }
         
-        if (order != null) {
-            if (order.equals("ASC")) {
-                strSQL += " order by s.giaSanPham ASC";
-                
-            } else if (order.equals("DSC")) {
-                strSQL += " order by s.giaSanPham DESC";
-            }
-        }
-        
         //Khai báo danh sách
         List<SanPham> lstSP = new ArrayList<>();
         
         TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
+        
+        if(tuKhoa!= null && !tuKhoa.isEmpty())
+        {
+            query.setParameter("tuKhoa","%" + tuKhoa + "%");
+        }
         
         if(loaiSanPham!= null && !loaiSanPham.isEmpty())
         {

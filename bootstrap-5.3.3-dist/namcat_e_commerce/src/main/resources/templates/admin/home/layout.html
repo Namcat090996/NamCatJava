@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vali Admin">
+    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
+    <title>Data Table - Vali Admin</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/main.css}">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="app sidebar-mini rtl">
+<!-- Navbar-->
+<header class="app-header"><a class="app-header__logo" th:href="@{/admin/sanpham}">Product&nbsp;Management</a>
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+        <li class="app-search">
+            <input class="app-search__input" type="search" placeholder="Search">
+            <button class="app-search__button"><i class="fa fa-search"></i></button>
+        </li>
+        <!--Notification Menu-->
+        <div th:replace="admin/home/notification ::notification"></div>
+        <!-- User Menu-->
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+            <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
+                <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+                <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+</header>
+<!-- Sidebar menu-->
+<div th:replace="admin/home/menu ::menu"></div>
+<main class="app-content">
+    <div layout:fragment="content"></div>
+</main>
+<!-- Essential javascripts for application to work-->
+<script th:src="@{/js/admin/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/admin/popper.min.js}"></script>
+<script th:src="@{/js/admin/bootstrap.min.js}"></script>
+<script th:src="@{/js/admin/main.js}"></script>
+<script th:src="@{/js/admin/sanpham.js}"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script th:src="@{/js/admin/plugins/pace.min.js}"></script>
+<!-- Page specific javascripts-->
+<!-- Data table plugin-->
+<script type="text/javascript" th:src="@{/js/admin/plugins/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/admin/plugins/dataTables.bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/admin/plugins/bootstrap-datepicker.min.js}"></script>
+<script type="text/javascript">
+    $('#sampleTable').DataTable({
+        <!--Disable the ascending/descending order in option column-->
+        "columnDefs": [
+            {
+                "targets": [0, 1, 4, 5, 6, 7, 8, 9, 10, 11],
+                "orderable": false
+            },
+            {
+                "targets": [2, 3],  //Column need to sort
+                "orderable": true,  //Ensure this colum is sortable
+                "type": "num",  //Itentify data type is number
+                "createdCell": function(cell) {
+                    //Get raw data from data-raw (in view) to order
+                    var rawValue = $(cell).attr('data-raw');
+                    $(cell).attr('data-sort', rawValue);  //Save unformatted (raw data) values to data-sort
+                }
+            }
+        ],
+        "order": [], //Disable default order of DataTables to delete the sort of [0] column
+        "language": {
+            "search": "Quick search:", // Thay đổi text của hộp tìm kiếm tại đây
+        }
+    });
+</script>
+</body>
+</html>

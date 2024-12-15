@@ -30,7 +30,7 @@ public class SanPhamController {
     DaDuyetService daDuyetService;
     
     @RequestMapping(value = "/admin/sanpham")
-    public String hienThiSPTheoTenVaLoai(@ModelAttribute("sanpham") SanPhamModel objSP, Model model, HttpSession session)
+    public String hienThiSPTheoTenVaLoai(@ModelAttribute("sanpham") SanPhamModel objSP, Model model)
     {
         //Get list and return page
         List<SanPham> lstSP = sanPhamService.timSPTheoLoaiVaGiaKhongDuyet(objSP.getTuKhoa(), objSP.getLoaiSP(), objSP.getMauSac(), objSP.getTuGia(), objSP.getDenGia(), objSP.getDaDuyet());

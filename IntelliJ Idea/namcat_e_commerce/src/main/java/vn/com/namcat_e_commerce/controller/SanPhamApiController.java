@@ -81,7 +81,7 @@ public class SanPhamApiController {
         
         List<Message> msg = new ArrayList<Message>();
         
-        //Lấy mã văn bản đầu vào
+        //Lấy mã sản phẩm đầu vào
         String maSanPham = sanpham.get("maSanPham");
         
         if(!maSanPham.matches("^SP\\d{2,}$")) {

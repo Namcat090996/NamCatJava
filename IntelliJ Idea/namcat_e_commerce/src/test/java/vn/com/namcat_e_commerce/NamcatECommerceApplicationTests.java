@@ -43,6 +43,10 @@ class NamcatECommerceApplicationTests {
         
         NguoiDung nguoiDung = nguoiDungDao.findById("admin");
         
+        String dienThoai = "070303994888";
+        
+        boolean b_dienThoai = dienThoai.matches("\\d{10}");
+        
     }
     
 }

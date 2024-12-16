@@ -1,16 +1,59 @@
 package vn.com.namcat_e_commerce.model;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import vn.com.namcat_e_commerce.entities.NguoiDung;
+import vn.com.namcat_e_commerce.entities.SanPham;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class NguoiDungImpl implements NguoiDungDao {
     
+    @PersistenceContext
+    EntityManager entityManager;
+    
     @Autowired
     NguoiDungRepository nguoiDungRepository;
+    
+    @Override
+    public boolean kiemTraEmailTonTai(String emai) {
+        return nguoiDungRepository.findByEmail(emai) != null;
+    }
+    
+    @Override
+    public boolean kiemTraSDTTonTai(String dienThoai) {
+        return nguoiDungRepository.findByDienThoai(dienThoai) != null;
+    }
+    
+    @Override
+    public List<NguoiDung> timNguoiDung(String tuKhoa) {
+        
+        String strSQL = "Select nd from NguoiDung nd where 1=1";
+        
+        if(tuKhoa!= null && !tuKhoa.isEmpty())
+        {
+            strSQL += " and (nd.tenNguoiDung like :tuKhoa or nd.email like :tuKhoa or nd.hoTen like :tuKhoa or nd.dienThoai like :tuKhoa)";
+        }
+        
+        //Khai báo danh sách
+        List<NguoiDung> lstND = new ArrayList<>();
+        
+        TypedQuery<NguoiDung> query = entityManager.createQuery(strSQL, NguoiDung.class);
+        
+        if(tuKhoa!= null && !tuKhoa.isEmpty())
+        {
+            query.setParameter("tuKhoa","%" + tuKhoa + "%");
+        }
+        
+        lstND = query.getResultList();
+        
+        return lstND;
+    }
     
     @Override
     public List<NguoiDung> getList() {

@@ -48,7 +48,7 @@ public class NguoiDungApiController {
         List<Message> msg = new ArrayList<Message>();
         
         //Lấy tên người dùng đầu vào
-        String tenNguoiDung = nguoidung.get("tenNguoiDung");
+        String tenNguoiDung = objND.getTenNguoiDung();
         
         if(!tenNguoiDung.matches("^[A-Za-z0-9+_.-]+$")) {
             msg.add(new Message("er_tenNguoiDung", "Tên người dùng không được chứa các kí tự đặc biệt"));
@@ -62,7 +62,7 @@ public class NguoiDungApiController {
         }
         
         //Kiểm tra email
-        String email = nguoidung.get("email");
+        String email = objND.getEmail();
         boolean b_email = nguoiDungSevice.kiemTraEmailTonTai(email);
         
         if(b_email)
@@ -75,15 +75,15 @@ public class NguoiDungApiController {
         }
         
         //Kiểm tra họ tên
-        String hoTen = nguoidung.get("hoTen");
+        String hoTen = objND.getHoTen();
         
         if(!hoTen.matches("^[A-Za-zÀ-ÿ]+(\\s[A-Za-zÀ-ÿ]+)*$")) {
             msg.add(new Message("er_hoTen", "Họ tên người dùng không hợp lệ"));
         }
         
         //Kiểm tra số điện thoại
-        String dienThoai = nguoidung.get("dienThoai");
-        boolean b_dienThoai = nguoiDungSevice.kiemTraSDTTonTai(nguoidung.get("dienThoai"));
+        String dienThoai = objND.getDienThoai();
+        boolean b_dienThoai = nguoiDungSevice.kiemTraSDTTonTai(dienThoai);
         
         if(b_dienThoai)
         {
@@ -99,17 +99,9 @@ public class NguoiDungApiController {
         }
         
         //Mã hóa mật khẩu
-        String matKhauMH = BCrypt.hashpw(nguoidung.get("matKhau"), BCrypt.gensalt());
+        String matKhauMH = BCrypt.hashpw(objND.getMatKhau(), BCrypt.gensalt());
         
-        NguoiDung objND = new NguoiDung();
-        
-        objND.setTenNguoiDung(tenNguoiDung);
         objND.setMatKhau(matKhauMH);
-        objND.setEmail(email);
-        objND.setDienThoai(dienThoai);
-        objND.setHoTen(hoTen);
-        objND.setVaiTro(nguoidung.get("vaiTro"));
-        objND.setDiaChi(nguoidung.get("diaChi"));
         
         boolean ketQua = nguoiDungSevice.add(objND);
 
@@ -122,24 +114,27 @@ public class NguoiDungApiController {
     }
     
     @PutMapping(value = "/nguoidung/capnhat/{id}")
-    public ResponseEntity<?> capNhat(@PathVariable("id") String tenNguoiDung, @RequestParam Map<String, String> nguoidung) {
+    public ResponseEntity<?> capNhat(@PathVariable("id") String tenNguoiDung, @RequestBody NguoiDung objND) {
         
         List<Message> msg = new ArrayList<Message>();
         
-        NguoiDung objND = nguoiDungSevice.findById(tenNguoiDung);
+        NguoiDung objNDCheck = nguoiDungSevice.findById(tenNguoiDung);
         
-        if(objND == null) {
+        if(objNDCheck == null) {
             Message msg1 = new Message("er_tenNguoiDung", "Không tìm thấy người dùng với mã: " + tenNguoiDung);
             return new ResponseEntity<Message>(msg1, HttpStatus.BAD_REQUEST);
         }
         
         //Kiểm tra email
-        String email = nguoidung.get("email");
+        String email = objND.getEmail();
         boolean b_email = nguoiDungSevice.kiemTraEmailTonTai(email);
         
-        if(b_email)
+        if(!email.equals(objNDCheck.getEmail()))
         {
-            msg.add(new Message("er_email", "Địa chỉ email này đã tồn tại"));
+            if(b_email)
+            {
+                msg.add(new Message("er_email", "Địa chỉ email này đã tồn tại"));
+            }
         }
         
         if(!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,}$")) {
@@ -147,20 +142,24 @@ public class NguoiDungApiController {
         }
         
         //Kiểm tra họ tên
-        String hoTen = nguoidung.get("hoTen");
+        String hoTen = objND.getHoTen();
         
         if(!hoTen.matches("^[A-Za-zÀ-ÿ]+(\\s[A-Za-zÀ-ÿ]+)*$")) {
             msg.add(new Message("er_hoTen", "Họ tên người dùng không hợp lệ"));
         }
         
         //Kiểm tra số điện thoại
-        String dienThoai = nguoidung.get("dienThoai");
-        boolean b_dienThoai = nguoiDungSevice.kiemTraSDTTonTai(nguoidung.get("dienThoai"));
+        String dienThoai = objND.getDienThoai();
+        boolean b_dienThoai = nguoiDungSevice.kiemTraSDTTonTai(dienThoai);
         
-        if(b_dienThoai)
+        if(!dienThoai.equals(objNDCheck.getDienThoai()))
         {
-            msg.add(new Message("er_dienThoai", "Số điện thoại này đã tồn tại"));
+            if(b_dienThoai)
+            {
+                msg.add(new Message("er_dienThoai", "Số điện thoại này đã tồn tại"));
+            }
         }
+
         
         if(!dienThoai.matches("\\d{10}")) {
             msg.add(new Message("er_dienThoai", "Số điện thoại người dùng chỉ được bao gồm 10 chữ số"));
@@ -171,13 +170,13 @@ public class NguoiDungApiController {
         }
         
         //Mã hóa mật khẩu
-        String matKhau = nguoidung.get("matKhau");
+        String matKhau = objND.getMatKhau();
         String matKhauMH = "";
         
         //So sánh nếu mật khẩu không đổi thì lấy lại mk cũ, đổi thì mã hõa mk mới
-        if(BCrypt.checkpw(matKhau, objND.getMatKhau()))
+        if(matKhau.equals(objNDCheck.getMatKhau()))
         {
-            matKhauMH = objND.getMatKhau();
+            matKhauMH = objNDCheck.getMatKhau();
         }
         else
         {
@@ -185,11 +184,6 @@ public class NguoiDungApiController {
         }
         
         objND.setMatKhau(matKhauMH);
-        objND.setEmail(email);
-        objND.setDienThoai(dienThoai);
-        objND.setHoTen(hoTen);
-        objND.setVaiTro(nguoidung.get("vaiTro"));
-        objND.setDiaChi(nguoidung.get("diaChi"));
         
         boolean ketQua = nguoiDungSevice.update(objND);
         

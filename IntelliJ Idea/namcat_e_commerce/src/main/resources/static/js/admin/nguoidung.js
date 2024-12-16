@@ -73,7 +73,7 @@ function thongTinChiTiet_ND(maND) {
             $("#hoTen").val(data.hoTen);
             $("#dienThoai").val(data.dienThoai);
             $("#diaChi").val(data.diaChi);
-            $("#vaiTro").val(data.diaChi);
+            $("#vaiTro").val(data.vaiTro);
         }
     });
 }

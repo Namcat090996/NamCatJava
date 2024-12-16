@@ -150,7 +150,7 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `order_code` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `create` date NOT NULL,
+  `create_date` date NOT NULL,
   `status` varchar(50) NOT NULL,
   `total_price` int NOT NULL,
   `order_name` varchar(255) DEFAULT NULL,
@@ -172,7 +172,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES ('OD001','admin','2024-12-14','PENDING',7500000,'Electronics',NULL,'admin');
+INSERT INTO `order` VALUES ('OD001','admin','2024-12-14','PENDING',7500000,'Electronics',NULL,'admin'),('OD002','customer','2024-12-15','PENDING',15000000,'Tablet',NULL,'admin');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,4 +348,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-15 23:36:49
+-- Dump completed on 2024-12-16 22:06:35

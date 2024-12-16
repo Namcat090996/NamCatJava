@@ -147,7 +147,7 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-1 d-flex align-items-center justify-content-end">Từ khóa:</div>
                             <div class="input col-md-2">
-                                <input type="text" th:field="*{tuKhoa}" th:class="form-control"/>
+                                <input type="text" th:field="*{tuKhoa}" th:class="form-control" placeholder="Nhập từ khóa tìm kiếm"/>
                             </div>
                             <div class="col-md-1 d-flex align-items-center justify-content-end">Loại SP:</div>
                             <div class="input col-md-2">
@@ -283,17 +283,10 @@
                 $('#demoDate').datepicker({
                     format: "yyyy-mm-dd",
                     autoclose: true,
-                    todayHighlight: true
+                    todayHighlight: true,
+                    container: '#demoDate-parent',
                 // Xử lý việc khi bấm vào datepicker mà không chọn ngày sẽ tự động gán cho input bằng rỗng
                 }).on('show', function (e) {
-                    // Get modal object of Datepicker
-                    var datepicker1 = $('.datepicker');
-
-                    //Change the position of model
-                    datepicker1.css({
-                        top: '690px',
-                        left: '732px',
-                    })
                     // Lưu giá trị hiện tại của input khi Datepicker được mở
                     $(this).data('last-value', $(this).val());
                 }).on('hide', function () {
@@ -334,7 +327,7 @@
                 <div class="modal-body">
                     <div class="tile-body" id="tile-body">
                         <div class="form-group row">
-                            <label class="col-md-2 d-flex align-items-center justify-content-center">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Mã sản phẩm:
                             </label>
                             <div class="col-md-7">
@@ -346,7 +339,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-2 d-flex align-items-center justify-content-center">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Tên sản phẩm:
                             </label>
                             <div class="col-md-10">
@@ -425,7 +418,7 @@
                             <label class="col-md-2 d-flex align-items-center justify-content-start">
                                 Ngày tạo:
                             </label>
-                            <div class="col-md-10">
+                            <div class="col-md-10" id="demoDate-parent" style="position: relative">
                                 <input id="demoDate" name="ngayTao" type="text" class="form-control" placeholder="yyyy-MM-dd"/>
                             </div>
                         </div>

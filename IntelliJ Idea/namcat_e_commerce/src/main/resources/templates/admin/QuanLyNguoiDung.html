@@ -8,80 +8,77 @@
     <script type="text/javascript" th:src="@{/js/admin/bootstrap.js}"></script>
     <!--JS cho modal-->
     <script type="text/javascript">
-        function suaThongTin(maSP)
+        function suaThongTin_ND(tenND)
         {
             //Reset lỗi
             $(".form-control").nextAll(".error").remove();
-            $("#er_maSanPham").text("");
-            $("#er_giaSanPham").text("");
-            $("#er_tonKho").text("");
-            $("#er_image").text("");
-            $("#er_sanPham").text("");
+            $("#er_tenNguoiDung").text("");
+            $("#er_email").text("");
+            $("#er_hoTen").text("");
+            $("#er_dienThoai").text("");
+            $("#er_nguoiDung").text("");
             //Hiển thị thông tin chi tiết
-            thongTinChiTiet(maSP);
+            thongTinChiTiet_ND(tenND);
         }
 
-        function xoaThongTin(maSP)
+        function xoaThongTin_ND(tenND)
         {
-            $("#hSanPhamId").val(maSP);
+            $("#hNguoiDungId").val(tenND);
         }
 
-        function duyetThongTin(maSP)
-        {
-            $("#hSanPhamId").val(maSP);
-        }
-
-        function hienThiThemMoi()
+        function hienThiThemMoi_ND()
         {
             //Reset lỗi
             $(".form-control").nextAll(".error").remove();
-            $("#er_maSanPham").text("");
-            $("#er_giaSanPham").text("");
-            $("#er_tonKho").text("");
-            $("#er_image").text("");
-            $("#er_sanPham").text("");
+            $("#er_tenNguoiDung").text("");
+            $("#er_email").text("");
+            $("#er_hoTen").text("");
+            $("#er_dienThoai").text("");
+            $("#er_nguoiDung").text("");
             //Ngăn không cho thao tác với mã văn bản khi sửa
-            $("#maSanPham").prop("disabled", false);
+            $("#tenNguoiDung").prop("disabled", false);
             //Hiển thị modal thêm mới
-            $("#modalTitle").text("Thêm mới thông tin sản phẩm");
-            $("#maSanPham").val("");
-            $("#tenSanPham").val("");
-            $("#giaSanPham").val("");
-            $("#tonKho").val("");
-            $("#loaiSanPham").val("");
-            $("#moTa").val("");
-            $("#noiDung").val("");
-            $("#demoDate").val("");
-            $("#mauSac").val("");
-            $("#hSanPhamId").val("");
+            $("#modalTitle").text("Thêm mới thông tin người dùng");
+            $("#tenNguoiDung").val("");
+            $("#matKhau").val("");
+            $("#email").val("");
+            $("#hoTen").val("");
+            $("#dienThoai").val("");
+            $("#vaiTro").val("");
+            $("#diaChi").val("");
+            $("#hNguoiDungId").val("");
         }
 
-        function themMoiHoacCapNhat()
+        function themMoiHoacCapNhat_ND()
         {
             // Tùy chỉnh validate
             let rules = {
-                maSanPham: "required",
-                tenSanPham: "required",
-                giaSanPham: "required",
-                tonKho: "required",
-                loaiSanPham: "required",
+                tenNguoiDung: "required",
+                matKhau: "required",
+                email: "required",
+                hoTen: "required",
+                dienThoai: "required",
+                vaiTro: "required",
+                diaChi: "required",
             };
 
-            let form = $("#modalSanPham").validate({
+            let form = $("#modalNguoiDung").validate({
                 rules: rules,
                 messages: {
-                    maSanPham: "&nbsp;&nbsp;Bạn phải nhập mã sản phẩm",
-                    tenSanPham: "&nbsp;&nbsp;Bạn phải nhập tên sản phẩm",
-                    giaSanPham: "&nbsp;&nbsp;Bạn phải nhập giá sản phẩm",
-                    tonKho: "&nbsp;&nbsp;Bạn phải nhập số lượng hàng trong kho",
-                    loaiSanPham: "&nbsp;&nbsp;Bạn phải chọn loại sản phẩm",
+                    tenNguoiDung: "&nbsp;&nbsp;Bạn phải nhập tên người dùng",
+                    matKhau: "&nbsp;&nbsp;Bạn phải nhập mật khẩu đăng nhập",
+                    email: "&nbsp;&nbsp;Bạn phải nhập email",
+                    hoTen: "&nbsp;&nbsp;Bạn phải nhập họ tên người dùng",
+                    dienThoai: "&nbsp;&nbsp;Bạn phải nhập số điện thoại người dùng",
+                    vaiTro: "&nbsp;&nbsp;Bạn phải chọn vai trò người dùng",
+                    diaChi: "&nbsp;&nbsp;Bạn phải nhập địa chỉ người dùng",
                 },
 
                 submitHandler: function(){
                     if(form.valid())
                     {
                         //Gọi hàm thêm mới hoặc sửa
-                        xuLyThemMoi();
+                        xuLyThemMoi_ND();
                     }
                 }
             });
@@ -129,77 +126,27 @@
 <div layout:fragment="content">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-th-list"></i> Quản lý thông tin sản phẩm</h1>
-            <p>Danh sách thông tin sản phẩm trong hệ thống</p>
+            <h1><i class="fa fa-th-list"></i> Quản lý thông tin người dùng</h1>
+            <p>Danh sách thông tin người dùng trong hệ thống</p>
         </div>
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a th:href="@{/admin/sanpham}">Product Management</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin/nguoidung}">User Management</a></li>
         </ul>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <div class="tile" style="height: 200px">
-                <form method="post" th:action="@{/admin/sanpham}" th:object="${sanpham}">
+        <div class="col-md-6">
+            <div class="tile" style="height: 150px">
+                <form method="get" th:action="@{/admin/nguoidung}">
                     <fieldset>
                         <legend class="legend">Nhập thông tin tìm kiếm</legend>
                         <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-1 d-flex align-items-center justify-content-end">Từ khóa:</div>
-                            <div class="input col-md-2">
-                                <input type="text" th:field="*{tuKhoa}" th:class="form-control"/>
-                            </div>
-                            <div class="col-md-1 d-flex align-items-center justify-content-end">Loại SP:</div>
-                            <div class="input col-md-2">
-                                <select id="LSP" name="LSP" th:field="*{loaiSP}" th:class="form-control">
-                                    <option value="" label="Chọn loại sản phẩm"></option>
-                                    <th:block th:each="lsp : ${lstLoaiSP}">
-                                        <option th:value="${lsp.loaiSanPham}" th:text="${lsp.loaiSanPham}"></option>
-                                    </th:block>
-                                </select>
-                            </div>
-                            <div class="col-md-1 d-flex align-items-center justify-content-end">Màu sắc:</div>
-                            <div class="input col-md-2">
-                                <select id="MS" name="MS" th:field="*{mauSac}" th:class="form-control">
-                                    <option value="" label="Chọn màu sắc"></option>
-                                    <th:block th:each="ms : ${lstMauSac}">
-                                        <option th:value="${ms.mauSac}" th:text="${ms.mauSac}"></option>
-                                    </th:block>
-                                </select>
+                            <div class="col-md-2 d-flex align-items-center justify-content-end">Từ khóa:</div>
+                            <div class="input col-md-6">
+                                <input type="text" name="tuKhoa" th:value="${tuKhoa}" th:class="form-control" placeholder="Nhập từ khóa tìm kiếm"/>
                             </div>
                             <div th:class="col-md-2">
                                 <button type="submit" class="search btn btn-secondary">Tìm kiếm</button>
-                            </div>
-                        </div>
-                        <div style="height: 20px"></div>
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-1 d-flex align-items-center justify-content-end">Từ giá:</div>
-                            <div class="input col-md-2">
-                                <select id="TG" name="TG" th:field="*{tuGia}" th:class="form-control">
-                                    <option value="0" label="Chọn giá tiền"></option>
-                                    <th:block th:each="s : ${lstGiaTien}">
-                                        <option th:value="${s.giaTien}" th:text="${s.giaTien}"></option>
-                                    </th:block>
-                                </select>
-                            </div>
-                            <div class="col-md-1 d-flex align-items-center justify-content-end">Đến giá:</div>
-                            <div class="input col-md-2">
-                                <select id="DG" name="DG" th:field="*{denGia}" th:class="form-control">
-                                    <option value="-1" label="Chọn giá tiền"></option>
-                                    <th:block th:each="s : ${lstGiaTien}">
-                                        <option th:value="${s.giaTien}" th:text="${s.giaTien}"></option>
-                                    </th:block>
-                                </select>
-                            </div>
-                            <div class="col-md-1 d-flex align-items-center justify-content-end">Duyệt SP:</div>
-                            <div class="input col-md-2">
-                                <select th:field="*{daDuyet}" th:class="form-control">
-                                    <th:block th:each="dd : ${lstDaDuyet}">
-                                        <option th:value="${dd.id}" th:text="${dd.daDuyetName}"></option>
-                                    </th:block>
-                                    <option value="-1" label="Tất cả"></option>
-                                </select>
                             </div>
                         </div>
                     </fieldset>
@@ -211,45 +158,32 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
-                    <table class="table table-hover table-bordered" id="sampleTable">
+                    <table class="table table-hover table-bordered" id="sampleTable1">
                         <thead>
                         <tr>
-                            <th></th>
-                            <th style="width: 160px">Name</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Category</th>
-                            <th>Created Date</th>
-                            <th>Creator</th>
-                            <th>Updated Date</th>
-                            <th>Approved Date</th>
-                            <th>Reviewer</th>
-                            <th>Approved</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Full Name</th>
+                            <th>Phone Number</th>
+                            <th>Role</th>
+                            <th>Address</th>
                             <th style="text-align: center; font-size: 15px">
-                                <a href="#" onclick="hienThiThemMoi()" id="themMoi" data-bs-toggle="modal" data-bs-target="#modalSanPham">Thêm
+                                <a href="#" onclick="hienThiThemMoi_ND()" id="themMoi" data-bs-toggle="modal" data-bs-target="#modalNguoiDung">Thêm
                                     mới</a>
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="sp : ${lstSP}">
-                            <td  style="text-align: center">
-                                <img th:src="@{'/images/' + ${sp.anhSanPham}}" width="100" height="120"/>
-                            </td>
-                            <td th:text="${sp.tenSanPham}"></td>
-                            <td th:text="${#numbers.formatDecimal(sp.giaSanPham, 0, 'POINT', 0, 'COMMA') + 'đ'}" th:data-raw="${sp.giaSanPham}" th:data-sort="${sp.giaSanPham}"></td>
-                            <td th:text="${#numbers.formatDecimal(sp.tonKho, 0, 'POINT', 0, 'COMMA')}" th:data-raw="${sp.tonKho}" th:data-sort="${sp.tonKho}"></td>
-                            <td th:text="${sp.loaiSanPham}"></td>
-                            <td th:text="${#temporals.format(sp.ngayTao, 'dd/MM/yyyy')}"></td>
-                            <td th:text="${sp.tenNguoiTao}"></td>
-                            <td th:text="${#temporals.format(sp.ngayCapNhap, 'dd/MM/yyyy')}"></td>
-                            <td th:text="${#temporals.format(sp.ngayDuyet, 'dd/MM/yyyy')}"></td>
-                            <td th:text="${sp.tenNguoiDuyet}"></td>
-                            <td th:text="${sp.daDuyet == 1 ? 'Đã duyệt' : 'Chưa duyệt'}"></td>
+                        <tr th:each="nd : ${lstND}">
+                            <td th:text="${nd.tenNguoiDung}"></td>
+                            <td th:text="${nd.email}"></td>
+                            <td th:text="${nd.hoTen}"></td>
+                            <td th:text="${nd.dienThoai}"></td>
+                            <td th:text="${nd.vaiTro}"></td>
+                            <td th:text="${nd.diaChi}"></td>
                             <td style="text-align: center; padding: 12px 0px 12px 0px">
-                                <a class="btn btn-success" th:if="${sp.daDuyet == 0}" data-bs-toggle="modal" data-bs-target="#modalDuyet" href="#" th:onclick="duyetThongTin([[${sp.maSanPham}]])" title="Duyệt sản phẩm">Duyệt</a>&nbsp;
-                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSanPham" href="#" th:onclick="suaThongTin([[${sp.maSanPham}]])" title="Sửa sản phẩm">Sửa</a>&nbsp;
-                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalXoa" href="#" th:onclick="xoaThongTin([[${sp.maSanPham}]])" title="Xóa sản phẩm">Xóa
+                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNguoiDung" href="#" th:onclick="suaThongTin_ND([[${nd.tenNguoiDung}]])" title="Sửa người dùng">Sửa</a>&nbsp;
+                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalXoa" href="#" th:onclick="xoaThongTin_ND([[${nd.tenNguoiDung}]])" title="Xóa người dùng">Xóa
                                 </a>
                             </td>
                         </tr>
@@ -259,8 +193,8 @@
             </div>
         </div>
     </div>
-    <!--Thiết kế giao diện sản phẩm dạng modal-->
-    <form id="modalSanPham" method="post" class="modal fade" tabindex="-1" aria-labelledby="Thêm sản phẩm" aria-hidden="true" enctype="multipart/form-data">
+    <!--Thiết kế giao diện người dùng dạng modal-->
+    <form id="modalNguoiDung" method="post" class="modal fade" tabindex="-1" aria-labelledby="Thêm người dùng" aria-hidden="true">
         <!-- Main CSS-->
         <link rel="stylesheet" type="text/css" th:href="@{/css/admin/main.css}">
         <!-- Essential javascripts for application to work-->
@@ -269,7 +203,7 @@
         <script th:src="@{/js/admin/bootstrap.min.js}"></script>
         <script th:src="@{/js/admin/main.js}"></script>
         <script type="text/javascript" th:src="@{/js/admin/jquery.validate.min.js}"></script>
-        <script type="text/javascript" th:src="@{/js/admin/sanpham.js}"></script>
+        <script type="text/javascript" th:src="@{/js/admin/nguoidung.js}"></script>
         <!-- The javascript plugin to display page loading on top-->
         <script th:src="@{/js/admin/plugins/pace.min.js}"></script>
         <!-- Page specific javascripts-->
@@ -279,35 +213,8 @@
         <script type="text/javascript" th:src="@{/js/admin/plugins/bootstrap-datepicker.min.js}"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                //Change the position of datepicker modal
-                $('#demoDate').datepicker({
-                    format: "yyyy-mm-dd",
-                    autoclose: true,
-                    todayHighlight: true
-                    // Xử lý việc khi bấm vào datepicker mà không chọn ngày sẽ tự động gán cho input bằng rỗng
-                }).on('show', function (e) {
-                    // Get modal object of Datepicker
-                    var datepicker1 = $('.datepicker');
-
-                    //Change the position of model
-                    datepicker1.css({
-                        top: '690px',
-                        left: '732px',
-                    })
-                    // Lưu giá trị hiện tại của input khi Datepicker được mở
-                    $(this).data('last-value', $(this).val());
-                }).on('hide', function () {
-                    // Nếu input không có giá trị sau khi đóng, khôi phục lại giá trị ban đầu
-                    if (!$(this).val()) {
-                        $(this).val($(this).data('last-value'));
-                    }
-                }).on('changeDate', function () {
-                    // Cập nhật giá trị khi người dùng chọn ngày
-                    $(this).data('last-value', $(this).val());
-                });
-
                 // Khi modal được hiển thị
-                $('#modalSanPham').on('show.bs.modal', function () {
+                $('#modalNguoiDung').on('show.bs.modal', function () {
                     // Tìm modal-dialog
                     var modalDialog = $(this).find('.modal-dialog');
 
@@ -319,9 +226,9 @@
 
                 // Xử lý khi nhấn submit thì nó sẽ bind dữ liệu vào phần tìm kiếm
                 $(document).ready(function() {
-                    $('#modalSanPham').on('submit', function(e) {
+                    $('#modalNguoiDung').on('submit', function(e) {
                         e.preventDefault(); // Ngăn chặn hành vi submit mặc định
-                        themMoiHoacCapNhat(); // Gọi hàm xử lý
+                        themMoiHoacCapNhat_ND(); // Gọi hàm xử lý
                     });
                 });
             });
@@ -334,58 +241,69 @@
                 <div class="modal-body">
                     <div class="tile-body" id="tile-body">
                         <div class="form-group row">
-                            <label class="col-md-2 d-flex align-items-center justify-content-center">
-                                Mã sản phẩm:
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
+                                Tên ND:
                             </label>
                             <div class="col-md-7">
-                                <input type="text" id="maSanPham" name="maSanPham" class="form-control"
-                                       placeholder="Nhập mã sản phẩm (SPxx)"/>
-                                <div id="er_maSanPham" style="padding-left: 6px; color: red"></div>
-                                <input type="hidden" id="hSanPhamId" name="hSanPhamId">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-2 d-flex align-items-center justify-content-center">
-                                Tên sản phẩm:
-                            </label>
-                            <div class="col-md-10">
-                                <input type="text" id="tenSanPham" name="tenSanPham" class="form-control"
-                                       placeholder="Nhập tên sản phẩm"/>
+                                <input type="text" id="tenNguoiDung" name="tenNguoiDung" class="form-control"
+                                       placeholder="Nhập tên người dùng (không chứa kí tự đặc biệt)"/>
+                                <div id="er_tenNguoiDung" style="padding-left: 6px; color: red"></div>
+                                <input type="hidden" id="hNguoiDungId" name="hNguoiDungId">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 d-flex align-items-center justify-content-start">
-                                Giá sản phẩm:
+                                Mật khẩu:
                             </label>
                             <div class="col-md-10">
-                                <input type="text" id="giaSanPham" name="giaSanPham" class="form-control"
-                                       placeholder="Nhập giá sản phẩm"/>
-                                <div id="er_giaSanPham" style="padding-left: 6px; color: red"></div>
+                                <input type="password" id="matKhau" name="matKhau" class="form-control"
+                                       placeholder="Nhập mật khẩu người dùng"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 d-flex align-items-center justify-content-start">
-                                Tồn kho:
+                                Email:
                             </label>
                             <div class="col-md-10">
-                                <input type="text" id="tonKho" name="tonKho" class="form-control"
-                                       placeholder="Nhập số lượng hàng trong kho"/>
-                                <div id="er_tonKho" style="padding-left: 6px; color: red"></div>
+                                <input type="text" id="email" name="email" class="form-control"
+                                       placeholder="Nhập email người dùng"/>
+                                <div id="er_email" style="padding-left: 6px; color: red"></div>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-2 d-flex align-items-center justify-content-start">
-                                Loại sản phẩm:
+                                Họ tên:
                             </label>
                             <div class="col-md-10">
-                                <select id="loaiSanPham" name="loaiSanPham" class="form-control">
-                                    <option value="" label="Chọn loại sản phẩm"></option>
-                                    <th:block th:each="lsp : ${lstLoaiSP}">
-                                        <option th:value="${lsp.loaiSanPham}" th:text="${lsp.loaiSanPham}"></option>
+                                <input type="text" id="hoTen" name="hoTen" class="form-control"
+                                       placeholder="Nhập họ tên người dùng"/>
+                                <div id="er_hoTen" style="padding-left: 6px; color: red"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
+                                Điện thoại:
+                            </label>
+                            <div class="col-md-10">
+                                <input type="text" id="dienThoai" name="dienThoai" class="form-control"
+                                       placeholder="Nhập số điện thoại người dùng"/>
+                                <div id="er_dienThoai" style="padding-left: 6px; color: red"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 d-flex align-items-center justify-content-start">
+                                Vai trò:
+                            </label>
+                            <div class="col-md-10">
+                                <select id="vaiTro" name="vaiTro" class="form-control">
+                                    <option value="" label="Chọn vai trò người dùng"></option>
+                                    <th:block th:each="vt : ${lstVaiTro}">
+                                        <option th:value="${vt.tenVaiTro}" th:text="${vt.tenVaiTro}"></option>
                                     </th:block>
                                 </select>
                             </div>
@@ -393,69 +311,26 @@
 
                         <div class="form-group row">
                             <label class="col-md-2 d-flex align-items-center justify-content-start">
-                                Ảnh sản phẩm:
+                                Địa chỉ:
                             </label>
                             <div class="col-md-10">
-                                <input id="fUpload" name="fUpload" type="file" class="form-control"/>
-                                <div id="er_image" style="padding-left: 6px; color: red"></div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-2 d-flex align-items-center justify-content-start">
-                                Mô tả:
-                            </label>
-                            <div class="col-md-10">
-                                <input type="text" id="moTa" name="moTa" class="form-control"
-                                       placeholder="Nhập mô tả về sản phẩm"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-2 d-flex align-items-center justify-content-start">
-                                Nội dung:
-                            </label>
-                            <div class="col-md-10">
-                                <textarea type="text" rows="5" id="noiDung" name="noiDung" class="form-control"
-                                          placeholder="Nhập nội dung chi tiết cho sản phẩm"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-2 d-flex align-items-center justify-content-start">
-                                Ngày tạo:
-                            </label>
-                            <div class="col-md-10">
-                                <input id="demoDate" name="ngayTao" type="text" class="form-control" placeholder="yyyy-MM-dd"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-2 d-flex align-items-center justify-content-start">
-                                Màu sắc:
-                            </label>
-                            <div class="col-md-10">
-                                <select id="mauSac" name="mauSac" class="form-control">
-                                    <option value="" label="Chọn màu sắc sản phẩm"></option>
-                                    <th:block th:each="ms : ${lstMauSac}">
-                                        <option th:value="${ms.mauSac}" th:text="${ms.mauSac}"></option>
-                                    </th:block>
-                                </select>
+                                <input type="text" id="diaChi" name="diaChi" class="form-control"
+                                       placeholder="Nhập địa chỉ người dùng"/>
                             </div>
                         </div>
 
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" onclick="themMoiHoacCapNhat()" class="btn btn-primary">Cập nhật</button>
+                    <button type="submit" onclick="themMoiHoacCapNhat_ND()" class="btn btn-primary">Cập nhật</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 </div>
-                <div id="er_sanPham" style="padding-left: 6px; color: red"></div>
+                <div id="er_nguoiDung" style="padding-left: 6px; color: red"></div>
             </div>
         </div>
     </form>
     <!--Form modal hỏi xoá thông tin-->
-    <fieldset id="modalXoa" class="modal fade" tabindex="-1" aria-labelledby="Xóa sản phẩm" aria-hidden="true">
+    <fieldset id="modalXoa" class="modal fade" tabindex="-1" aria-labelledby="Xóa người dùng" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -467,26 +342,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" onclick="thucHienXoa()" class="btn btn-danger">Đồng ý</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                </div>
-            </div>
-        </div>
-    </fieldset>
-    <!--Form modal hỏi duyệt thông tin-->
-    <fieldset id="modalDuyet" class="modal fade" tabindex="-1" aria-labelledby="Duyệt sản phẩm" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" style="font-family: 'Times New Roman' !important;">Thông báo duyệt</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="tile-body" id="title-approved">
-                        <h4 style="font-family: 'Times New Roman' !important">Bạn có chắc chắn muốn duyệt sản phẩm này không ? </h4>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" onclick="thucHienDuyet()" class="btn btn-success">Đồng ý</button>
+                    <button type="submit" onclick="thucHienXoa_ND()" class="btn btn-danger">Đồng ý</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </div>

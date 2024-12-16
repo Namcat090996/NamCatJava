@@ -199,7 +199,8 @@ public class SanPhamApiController {
         SanPham objSP = sanPhamService.findById(maSanPham);
         
         if(objSP == null) {
-            msg.add(new Message("er_maSanPham", "Không tìm thấy sản phẩm với mã: " + maSanPham));
+            Message msg1 = new Message("er_maSanPham", "Không tìm thấy sản phẩm với mã: " + maSanPham);
+            return new ResponseEntity<Message>(msg1, HttpStatus.BAD_REQUEST);
         }
         
         int giaSanPham = 1000, tonKho = 0;
@@ -287,8 +288,8 @@ public class SanPhamApiController {
             return new ResponseEntity<SanPham>(objSP, HttpStatus.OK);
         }
         
-        Message msg1 = new Message("er_sanPham", "Cập nhật sản phẩm thất bại");
-        return new ResponseEntity<Message>(msg1, HttpStatus.INTERNAL_SERVER_ERROR);
+        Message msg2 = new Message("er_sanPham", "Cập nhật sản phẩm thất bại");
+        return new ResponseEntity<Message>(msg2, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
     @DeleteMapping("/sanpham/xoa/{id}")

@@ -5,7 +5,7 @@ function xuLyThemMoi() {
     var urlPost = '/api/sanpham/themmoi';
     var methodType = "POST";
     //TH sửa
-    if (maSP.length > 0) {
+    if (maSP != null && maSP.length > 0) {
         urlPost = '/api/sanpham/capnhat/' + maSP;
         methodType = "PUT";
     }
@@ -35,7 +35,7 @@ function xuLyThemMoi() {
         processData: false, // Không xử lý dữ liệu
         contentType: false, // Không đặt loại nội dung
         success: function (data) {
-            if (data.maSanPham != null) {
+            if (data != null && data.maSanPham != null) {
                 $("#modalSanPham").modal("hide")
                 //Reload lại trang
                 window.location.reload();

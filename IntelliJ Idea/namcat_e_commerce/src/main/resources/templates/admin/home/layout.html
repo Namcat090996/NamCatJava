@@ -74,6 +74,19 @@
             "search": "Quick search:", // Thay đổi text của hộp tìm kiếm tại đây
         }
     });
+
+    $('#sampleTable1').DataTable({
+        <!--Disable the ascending/descending order in option column-->
+        "columnDefs": [
+            {
+                "targets": [0, 1, 2, 3, 4, 5, 6],
+                "orderable": false
+            }],
+        "order": [], //Disable default order of DataTables to delete the sort of [0] column
+        "language": {
+            "search": "Quick search:", // Thay đổi text của hộp tìm kiếm tại đây
+        }
+    });
 </script>
 </body>
 </html>

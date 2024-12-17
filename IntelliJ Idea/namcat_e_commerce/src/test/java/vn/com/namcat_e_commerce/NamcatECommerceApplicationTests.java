@@ -31,7 +31,7 @@ class NamcatECommerceApplicationTests {
     @Test
     void contextLoads() {
         
-        List<SanPham> lstSP = sanPhamDao.timSPTheoLoaiVaGiaKhongDuyet("","","", 0, 0, -1);
+        List<SanPham> lstSP = sanPhamDao.getList();
         
         List<DonHang> lstDH = donHangDao.timDonHang("", "PENDING");
     }

@@ -50,19 +50,6 @@
 <main class="app-content">
     <div layout:fragment="content"></div>
 </main>
-<!-- Essential javascripts for application to work-->
-<script th:src="@{/js/admin/jquery-3.2.1.min.js}"></script>
-<script th:src="@{/js/admin/popper.min.js}"></script>
-<script th:src="@{/js/admin/bootstrap.min.js}"></script>
-<script th:src="@{/js/admin/main.js}"></script>
-<script th:src="@{/js/admin/sanpham.js}"></script>
-<!-- The javascript plugin to display page loading on top-->
-<script th:src="@{/js/admin/plugins/pace.min.js}"></script>
-<!-- Page specific javascripts-->
-<!-- Data table plugin-->
-<script type="text/javascript" th:src="@{/js/admin/plugins/jquery.dataTables.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/admin/plugins/dataTables.bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/admin/plugins/bootstrap-datepicker.min.js}"></script>
 <script type="text/javascript">
     $('#sampleTable').DataTable({
         <!--Disable the ascending/descending order in option column-->
@@ -82,6 +69,19 @@
                 }
             }
         ],
+        "order": [], //Disable default order of DataTables to delete the sort of [0] column
+        "language": {
+            "search": "Quick search:", // Thay đổi text của hộp tìm kiếm tại đây
+        }
+    });
+
+    $('#sampleTable1').DataTable({
+        <!--Disable the ascending/descending order in option column-->
+        "columnDefs": [
+            {
+                "targets": [0, 1, 2, 3, 4, 5, 6],
+                "orderable": false
+            }],
         "order": [], //Disable default order of DataTables to delete the sort of [0] column
         "language": {
             "search": "Quick search:", // Thay đổi text của hộp tìm kiếm tại đây

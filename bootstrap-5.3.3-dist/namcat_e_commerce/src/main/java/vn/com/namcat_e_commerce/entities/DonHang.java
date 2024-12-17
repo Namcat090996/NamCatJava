@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "order")
+@Table(name = "p_order")
 public class DonHang {
     
     @Id
@@ -22,7 +22,7 @@ public class DonHang {
     private String tenNguoiDung;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "create", nullable = false)
+    @Column(name = "create_date", nullable = false)
     private LocalDate ngayTao;
     
     @Column(name = "status", nullable = false, length = 50)

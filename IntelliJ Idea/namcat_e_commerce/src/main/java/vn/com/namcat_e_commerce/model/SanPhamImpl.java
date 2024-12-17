@@ -172,7 +172,17 @@ public class SanPhamImpl implements SanPhamDao {
     
     @Override
     public List<SanPham> getList() {
-        return sanPhamRepository.findAll();
+        
+        String strSQL = "Select s from SanPham s where s.daDuyet = 1";
+        
+        //Khai báo danh sách
+        List<SanPham> lstSP = new ArrayList<>();
+        
+        TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
+        
+        lstSP = query.getResultList();
+        
+        return lstSP;
     }
     
     @Override

@@ -27,13 +27,9 @@ public class SanPhamService {
         return sanPhamDao.timSPTheoLoaiVaGia(loaiSanPham, order, mauSac, tuGia, denGia);
     }
     
-    public List<SanPham> timSPTheoLoaiVaGiaKhongDuyet(String loaiSanPham, String order, String mauSac, int tuGia, int denGia, int daDuyet) {
+    public List<SanPham> timSPTheoLoaiVaGiaKhongDuyet(String tuKhoa, String loaiSanPham, String mauSac, int tuGia, int denGia, int daDuyet) {
         
-        return sanPhamDao.timSPTheoLoaiVaGiaKhongDuyet(loaiSanPham, order, mauSac, tuGia, denGia, daDuyet);
-    }
-    
-    public boolean kiemTraTenDaTonTai(String tenSanPham) {
-        return sanPhamDao.kiemTraTenDaTonTai(tenSanPham);
+        return sanPhamDao.timSPTheoLoaiVaGiaKhongDuyet(tuKhoa, loaiSanPham, mauSac, tuGia, denGia, daDuyet);
     }
     
     public List<SanPham> getList() {

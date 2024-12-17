@@ -31,7 +31,9 @@ class NamcatECommerceApplicationTests {
     @Test
     void contextLoads() {
         
-        List<SanPham> lstSP = sanPhamDao.getList();
+        List<SanPham> lstSP = sanPhamDao.layDSHangHot();
+        
+        List<SanPham> lstSP2 = sanPhamDao.layDSHangMoi();
         
         List<DonHang> lstDH = donHangDao.timDonHang("", "PENDING");
     }

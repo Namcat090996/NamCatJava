@@ -36,6 +36,14 @@ public class SanPhamService {
         return sanPhamDao.getList();
     }
     
+    public List<SanPham> layDSHot() {
+        return sanPhamDao.layDSHangHot();
+    }
+    
+    public List<SanPham> layDSNew() {
+        return sanPhamDao.layDSHangMoi();
+    }
+    
     public SanPham findById(String id) {
         return sanPhamDao.findById(id);
     }

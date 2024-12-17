@@ -20,6 +20,40 @@ public class SanPhamImpl implements SanPhamDao {
     SanPhamRepository sanPhamRepository;
     
     @Override
+    public List<SanPham> layDSHangMoi() {
+        
+        String strSQL = "Select s from SanPham s where s.daDuyet = 1 order by s.tonKho desc";
+        
+        //Khai báo danh sách
+        List<SanPham> lstSP = new ArrayList<>();
+        
+        TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
+        
+        query.setMaxResults(6);
+        
+        lstSP = query.getResultList();
+        
+        return lstSP;
+    }
+    
+    @Override
+    public List<SanPham> layDSHangHot() {
+        
+        String strSQL = "Select s from SanPham s where s.daDuyet = 1 order by s.tonKho asc";
+        
+        //Khai báo danh sách
+        List<SanPham> lstSP = new ArrayList<>();
+        
+        TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
+        
+        query.setMaxResults(6);
+        
+        lstSP = query.getResultList();
+        
+        return lstSP;
+    }
+    
+    @Override
     public List<SanPham> timSPTheoTenVaLoai(String tuKhoa, String loaiSP, String mauSac) {
         return sanPhamRepository.timSPTheoTenVaLoai(tuKhoa, loaiSP, mauSac);
     }

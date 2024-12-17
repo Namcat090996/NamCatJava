@@ -60,6 +60,16 @@ public class SanPham {
     @Column(name = "color", nullable = true, length = 50)
     private String mauSac;
     
+    private String giaTienFormat;
+    
+    public String getGiaTienFormat() {
+        return giaTienFormat;
+    }
+    
+    public void setGiaTienFormat(String giaTienFormat) {
+        this.giaTienFormat = giaTienFormat;
+    }
+    
     public String getMaSanPham() {
         return maSanPham;
     }

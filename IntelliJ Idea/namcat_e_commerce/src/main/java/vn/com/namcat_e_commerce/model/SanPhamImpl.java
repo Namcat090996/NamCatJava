@@ -29,7 +29,7 @@ public class SanPhamImpl implements SanPhamDao {
         
         TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
         
-        query.setMaxResults(6);
+        query.setMaxResults(3);
         
         lstSP = query.getResultList();
         
@@ -46,7 +46,7 @@ public class SanPhamImpl implements SanPhamDao {
         
         TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
         
-        query.setMaxResults(6);
+        query.setMaxResults(3);
         
         lstSP = query.getResultList();
         

@@ -40,8 +40,17 @@
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
     <!-- Responsive CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}">
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
     <!-- Modernizr js -->
     <script th:src="@{/js/vendor/modernizr-2.8.3.min.js}"></script>
+    <!--JS cho modal-->
+    <script type="text/javascript">
+        function xemThongTin_QV(maSP)
+        {
+            thongTinChiTiet_QV(maSP);
+        }
+
+    </script>
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -430,45 +439,20 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="slider-area">
                         <div class="slider-active owl-carousel">
-                            <!-- Begin Single Slide Area -->
-                            <div class="single-slide align-center-left  animation-style-01 bg-1">
-                                <div class="slider-progress"></div>
-                                <div class="slider-content">
-                                    <h5>Sale Offer <span>-20% Off</span> This Week</h5>
-                                    <h2>Chamcham Galaxy S9 | S9+</h2>
-                                    <h3>Starting at <span>$1209.00</span></h3>
-                                    <div class="default-btn slide-btn">
-                                        <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
+                            <th:block th:each="s, idx : ${lstDSNew}">
+                                <div th:class="'single-slide align-center-left animation-style-01 bg-' + ${idx.index + 1}">
+                                    <div class="slider-progress"></div>
+                                    <div class="slider-content">
+                                        <h5>Sale Offer <span>-20% Off</span> This Week</h5>
+                                        <h2>Chamcham Galaxy S9 | S9+</h2>
+                                        <h3>Starting at <span>$1209.00</span></h3>
+                                        <div class="default-btn slide-btn">
+                                            <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Single Slide Area End Here -->
-                            <!-- Begin Single Slide Area -->
-                            <div class="single-slide align-center-left animation-style-02 bg-2">
-                                <div class="slider-progress"></div>
-                                <div class="slider-content">
-                                    <h5>Sale Offer <span>Black Friday</span> This Week</h5>
-                                    <h2>Work Desk Surface Studio 2018</h2>
-                                    <h3>Starting at <span>$824.00</span></h3>
-                                    <div class="default-btn slide-btn">
-                                        <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Slide Area End Here -->
-                            <!-- Begin Single Slide Area -->
-                            <div class="single-slide align-center-left animation-style-01 bg-3">
-                                <div class="slider-progress"></div>
-                                <div class="slider-content">
-                                    <h5>Sale Offer <span>-10% Off</span> This Week</h5>
-                                    <h2>Phantom 4 Pro+ Obsidian</h2>
-                                    <h3>Starting at <span>$1849.00</span></h3>
-                                    <div class="default-btn slide-btn">
-                                        <a class="links" href="shop-left-sidebar.html">Shopping Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Slide Area End Here -->
+                            </th:block>
+
                         </div>
                     </div>
                 </div>
@@ -545,7 +529,7 @@
                                                 <form method="get">
                                                     <ul class="add-actions-link">
                                                         <li class="add-cart active" style="width: 150px"><a href="#">Add to cart</a></li>
-                                                        <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
+                                                        <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter" th:onclick="xemThongTin_QV([[${spn.maSanPham}]])"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                 </form>
                                             </div>
@@ -2543,31 +2527,43 @@
                             <div class="product-details-left">
                                 <div class="product-details-images slider-navigation-1">
                                     <div class="lg-image">
-                                        <img src="images/product/large-size/1.jpg" alt="product image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
                                     </div>
                                     <div class="lg-image">
-                                        <img src="images/product/large-size/2.jpg" alt="product image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
                                     </div>
                                     <div class="lg-image">
-                                        <img src="images/product/large-size/3.jpg" alt="product image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
                                     </div>
                                     <div class="lg-image">
-                                        <img src="images/product/large-size/4.jpg" alt="product image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
                                     </div>
                                     <div class="lg-image">
-                                        <img src="images/product/large-size/5.jpg" alt="product image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
                                     </div>
                                     <div class="lg-image">
-                                        <img src="images/product/large-size/6.jpg" alt="product image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
                                     </div>
                                 </div>
                                 <div class="product-details-thumbs slider-thumbs-1">
-                                    <div class="sm-image"><img src="images/product/small-size/1.jpg" alt="product image thumb"></div>
-                                    <div class="sm-image"><img src="images/product/small-size/2.jpg" alt="product image thumb"></div>
-                                    <div class="sm-image"><img src="images/product/small-size/3.jpg" alt="product image thumb"></div>
-                                    <div class="sm-image"><img src="images/product/small-size/4.jpg" alt="product image thumb"></div>
-                                    <div class="sm-image"><img src="images/product/small-size/5.jpg" alt="product image thumb"></div>
-                                    <div class="sm-image"><img src="images/product/small-size/6.jpg" alt="product image thumb"></div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
+                                    </div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
+                                    </div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
+                                    </div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
+                                    </div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
+                                    </div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
+                                    </div>
                                 </div>
                             </div>
                             <!--// Product Details Left -->
@@ -2576,40 +2572,29 @@
                         <div class="col-lg-7 col-md-6 col-sm-6">
                             <div class="product-details-view-content pt-60">
                                 <div class="product-info">
-                                    <h2>Today is a good day</h2>
-                                    <span class="product-details-ref">Reference: demo_15</span>
+                                    <h2 id="tenSanPham_QV"></h2>
+                                    <span class="product-details-ref" id="moTa_QV">Description of product</span>
                                     <div class="rating-box pt-20">
                                         <ul class="rating rating-with-review-item">
                                             <li><i class="fa fa-star-o"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
-                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
                                             <li class="review-item"><a href="#">Read Review</a></li>
                                             <li class="review-item"><a href="#">Write Review</a></li>
                                         </ul>
                                     </div>
                                     <div class="price-box pt-20">
-                                        <span class="new-price new-price-2">$57.98</span>
+                                        <span class="new-price new-price-2" id="giaSanPham_QV">Price of product</span>
                                     </div>
                                     <div class="product-desc">
                                         <p>
-                                                    <span>100% cotton double printed dress. Black and white striped top and orange high waisted skater skirt bottom. Lorem ipsum dolor sit amet, consectetur adipisicing elit. quibusdam corporis, earum facilis et nostrum dolorum accusamus similique eveniet quia pariatur.
-                                                    </span>
+                                            <span id="noiDung_QV"></span>
                                         </p>
                                     </div>
-                                    <div class="product-variants">
-                                        <div class="produt-variants-size">
-                                            <label>Dimension</label>
-                                            <select class="nice-select">
-                                                <option value="1" title="S" selected="selected">40x60cm</option>
-                                                <option value="2" title="M">60x90cm</option>
-                                                <option value="3" title="L">80x120cm</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                     <div class="single-add-to-cart">
-                                        <form action="#" class="cart-quantity">
+                                        <form action="#" class="cart-quantity" style="margin-top: 10px">
                                             <div class="quantity">
                                                 <label>Quantity</label>
                                                 <div class="cart-plus-minus">
@@ -2622,7 +2607,6 @@
                                         </form>
                                     </div>
                                     <div class="product-additional-info pt-25">
-                                        <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a>
                                         <div class="product-social-sharing pt-25">
                                             <ul>
                                                 <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>

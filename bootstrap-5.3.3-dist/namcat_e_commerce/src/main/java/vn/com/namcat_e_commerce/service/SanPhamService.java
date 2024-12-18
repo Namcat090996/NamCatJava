@@ -13,6 +13,22 @@ public class SanPhamService {
     @Autowired
     SanPhamDao sanPhamDao;
     
+    public List<SanPham> layDSLaptop() {
+        return sanPhamDao.layDSLaptop();
+    }
+    
+    public List<SanPham> layDSManHinh() {
+        return sanPhamDao.layDSManHinh();
+    }
+    
+    public List<SanPham> layDSDienThoai() {
+        return sanPhamDao.layDSDienThoai();
+    }
+    
+    public List<SanPham> layDSSlider() {
+        return sanPhamDao.layDSSlider();
+    }
+    
     public List<SanPham> timSPTheoTenVaLoai(String tuKhoa, String loaiSP, String mauSac)
     {
         return sanPhamDao.timSPTheoTenVaLoai(tuKhoa, loaiSP, mauSac);
@@ -34,6 +50,14 @@ public class SanPhamService {
     
     public List<SanPham> getList() {
         return sanPhamDao.getList();
+    }
+    
+    public List<SanPham> layDSHot() {
+        return sanPhamDao.layDSHangHot();
+    }
+    
+    public List<SanPham> layDSNew() {
+        return sanPhamDao.layDSHangMoi();
     }
     
     public SanPham findById(String id) {

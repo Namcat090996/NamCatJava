@@ -6,19 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import vn.com.namcat_e_commerce.entities.Message;
 import vn.com.namcat_e_commerce.entities.NguoiDung;
-import vn.com.namcat_e_commerce.entities.SanPham;
 import vn.com.namcat_e_commerce.service.NguoiDungSevice;
-import vn.com.namcat_e_commerce.service.SanPhamService;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 @CrossOrigin
 @RestController

@@ -45,6 +45,7 @@ function xuLyThemMoi() {
             // Xóa lỗi cũ
             $("#er_maSanPham").text("");
             $("#er_giaSanPham").text("");
+            $("#er_moTa").text("");
             $("#er_tonKho").text("");
             $("#er_image").text("");
             $("#er_sanPham").text("");

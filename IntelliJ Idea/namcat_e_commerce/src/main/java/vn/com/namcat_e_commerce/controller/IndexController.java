@@ -38,18 +38,4 @@ public class IndexController {
         return "index";
     }
     
-    @RequestMapping(value = "/sanpham/xemnhanh", method = RequestMethod.GET)
-    public String hienThiModalXemNhanh(@RequestParam(value = "maXemNhanh", required = false) String maSP, Model model)
-    {
-        //Get object
-        SanPham objSP = sanPhamService.findById(maSP);
-        
-        model.addAttribute("objSPQuick", objSP);
-        
-        return "index :: modalContent";
-    }
-    
-    
-    
-    
 }

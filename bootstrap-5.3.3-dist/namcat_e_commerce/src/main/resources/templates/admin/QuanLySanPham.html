@@ -15,6 +15,7 @@
             $("#er_maSanPham").text("");
             $("#er_giaSanPham").text("");
             $("#er_tonKho").text("");
+            $("#er_moTa").text("");
             $("#er_image").text("");
             $("#er_sanPham").text("");
             //Hiển thị thông tin chi tiết
@@ -40,6 +41,7 @@
             $("#er_tonKho").text("");
             $("#er_image").text("");
             $("#er_sanPham").text("");
+            $("#er_moTa").text("");
             //Ngăn không cho thao tác với mã văn bản khi sửa
             $("#maSanPham").prop("disabled", false);
             //Hiển thị modal thêm mới
@@ -234,7 +236,7 @@
                         <tbody>
                         <tr th:each="sp : ${lstSP}">
                             <td  style="text-align: center">
-                                <img th:src="@{'/images/' + ${sp.anhSanPham}}" width="100" height="120"/>
+                                <img th:src="@{'/images/' + ${sp.anhSanPham}}" width="120" height="120"/>
                             </td>
                             <td th:text="${sp.tenSanPham}"></td>
                             <td th:text="${#numbers.formatDecimal(sp.giaSanPham, 0, 'POINT', 0, 'COMMA') + 'đ'}" th:data-raw="${sp.giaSanPham}" th:data-sort="${sp.giaSanPham}"></td>
@@ -401,6 +403,7 @@
                             <div class="col-md-10">
                                 <input type="text" id="moTa" name="moTa" class="form-control"
                                        placeholder="Nhập mô tả về sản phẩm"/>
+                                <div id="er_moTa" style="padding-left: 6px; color: red"></div>
                             </div>
                         </div>
 

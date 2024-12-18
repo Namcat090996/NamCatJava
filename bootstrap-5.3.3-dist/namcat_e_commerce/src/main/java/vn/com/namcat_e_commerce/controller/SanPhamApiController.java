@@ -158,6 +158,13 @@ public class SanPhamApiController {
             ngayTao = LocalDate.now();
         }
         
+        String moTa = sanpham.get("moTa");
+        
+        if(moTa.length() > 20)
+        {
+            msg.add(new Message("er_moTa", "Mô tả sản phẩm chỉ được tối đa 20 kí tự"));
+        }
+        
         if (!msg.isEmpty()) {
             return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
         }
@@ -173,7 +180,7 @@ public class SanPhamApiController {
         objSP.setTonKho(tonKho);
         objSP.setLoaiSanPham(sanpham.get("loaiSanPham"));
         objSP.setAnhSanPham(tenFile);
-        objSP.setMoTa(sanpham.get("moTa"));
+        objSP.setMoTa(moTa);
         objSP.setNoiDung(sanpham.get("noiDung"));
         objSP.setNgayTao(ngayTao);
         objSP.setTenNguoiTao(tenNguoiTao);
@@ -270,6 +277,8 @@ public class SanPhamApiController {
         if (!msg.isEmpty()) {
             return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
         }
+        
+        
         
         objSP.setTenSanPham(sanpham.get("tenSanPham"));
         objSP.setGiaSanPham(giaSanPham);

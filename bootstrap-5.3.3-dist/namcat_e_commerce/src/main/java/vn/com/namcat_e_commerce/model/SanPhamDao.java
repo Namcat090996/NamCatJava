@@ -14,5 +14,17 @@ public interface SanPhamDao extends IHanhDong<SanPham, String> {
     public List<SanPham> timSPTheoLoaiVaGiaKhongDuyet(String tuKhoa, String loaiSanPham, String mauSac, int tuGia, int denGia, int daDuyet);
     
     public List<SanPham> timSPTheoTenVaLoai(String tuKhoa, String loaiSP, String mauSac);
+    
+    public List<SanPham> layDSHangMoi();
+    
+    public List<SanPham> layDSHangHot();
+    
+    public List<SanPham> layDSSlider();
+    
+    public List<SanPham> layDSDienThoai();
+    
+    public List<SanPham> layDSManHinh();
+    
+    public List<SanPham> layDSLaptop();
 
 }

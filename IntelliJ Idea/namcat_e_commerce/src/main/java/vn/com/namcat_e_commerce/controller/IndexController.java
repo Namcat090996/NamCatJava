@@ -25,9 +25,15 @@ public class IndexController {
         //Get list and return page
         List<SanPham> lstSPHot = sanPhamService.layDSHot();
         List<SanPham> lstSPNew = sanPhamService.layDSNew();
+        List<SanPham> lstSlider = sanPhamService.layDSSlider();
+        List<SanPham> lstDienThoai = sanPhamService.layDSDienThoai();
+        List<SanPham> lstManHinh = sanPhamService.layDSManHinh();
         
         model.addAttribute("lstSPHot", lstSPHot);
         model.addAttribute("lstDSNew", lstSPNew);
+        model.addAttribute("lstSlider", lstSlider);
+        model.addAttribute("lstDienThoai", lstDienThoai);
+        model.addAttribute("lstManHinh", lstManHinh);
         
         return "index";
     }

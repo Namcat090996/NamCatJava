@@ -18,5 +18,13 @@ public interface SanPhamDao extends IHanhDong<SanPham, String> {
     public List<SanPham> layDSHangMoi();
     
     public List<SanPham> layDSHangHot();
+    
+    public List<SanPham> layDSSlider();
+    
+    public List<SanPham> layDSDienThoai();
+    
+    public List<SanPham> layDSManHinh();
+    
+    public List<SanPham> layDSLaptop();
 
 }

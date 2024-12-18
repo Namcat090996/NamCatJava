@@ -20,7 +20,58 @@ public class SanPhamImpl implements SanPhamDao {
     SanPhamRepository sanPhamRepository;
     
     @Override
-    public List<SanPham> layDSHangMoi() {
+    public List<SanPham> layDSManHinh() {
+        
+        String strSQL = "Select s from SanPham s where s.daDuyet = 1 and s.loaiSanPham = :loaiSP";
+        
+        //Khai báo danh sách
+        List<SanPham> lstSP = new ArrayList<>();
+        
+        TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
+        
+        query.setParameter("loaiSP", "Màn hình");
+        
+        lstSP = query.getResultList();
+        
+        return lstSP;
+    }
+    
+    @Override
+    public List<SanPham> layDSLaptop() {
+        
+        String strSQL = "Select s from SanPham s where s.daDuyet = 1 and s.loaiSanPham = :loaiSP";
+        
+        //Khai báo danh sách
+        List<SanPham> lstSP = new ArrayList<>();
+        
+        TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
+        
+        query.setParameter("loaiSP", "Laptop");
+        
+        lstSP = query.getResultList();
+        
+        return lstSP;
+    }
+    
+    @Override
+    public List<SanPham> layDSDienThoai() {
+        
+        String strSQL = "Select s from SanPham s where s.daDuyet = 1 and s.loaiSanPham = :loaiSP";
+        
+        //Khai báo danh sách
+        List<SanPham> lstSP = new ArrayList<>();
+        
+        TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
+
+        query.setParameter("loaiSP", "Điện thoại");
+        
+        lstSP = query.getResultList();
+        
+        return lstSP;
+    }
+    
+    @Override
+    public List<SanPham> layDSSlider() {
         
         String strSQL = "Select s from SanPham s where s.daDuyet = 1 order by s.tonKho desc";
         
@@ -37,6 +88,23 @@ public class SanPhamImpl implements SanPhamDao {
     }
     
     @Override
+    public List<SanPham> layDSHangMoi() {
+        
+        String strSQL = "Select s from SanPham s where s.daDuyet = 1 order by s.tonKho desc";
+        
+        //Khai báo danh sách
+        List<SanPham> lstSP = new ArrayList<>();
+        
+        TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
+        
+        query.setMaxResults(6);
+        
+        lstSP = query.getResultList();
+        
+        return lstSP;
+    }
+    
+    @Override
     public List<SanPham> layDSHangHot() {
         
         String strSQL = "Select s from SanPham s where s.daDuyet = 1 order by s.tonKho asc";
@@ -46,7 +114,7 @@ public class SanPhamImpl implements SanPhamDao {
         
         TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
         
-        query.setMaxResults(3);
+        query.setMaxResults(6);
         
         lstSP = query.getResultList();
         

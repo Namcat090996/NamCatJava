@@ -90,8 +90,8 @@
                 <div class="col-lg-7 col-md-6">
                     <div class="product-details-view-content pt-60">
                         <div class="product-info">
-                            <h2 class="tenSanPham_QV"></h2>
-                            <span class="product-details-ref moTa_QV">Description of product</span>
+                            <h2 th:text="${objSP.tenSanPham}">Name Of Product</h2>
+                            <span class="product-details-ref" th:text="${objSP.moTa}">Description Of Product</span>
                             <div class="rating-box pt-20">
                                 <ul class="rating rating-with-review-item">
                                     <li><i class="fa fa-star-o"></i></li>
@@ -104,11 +104,11 @@
                                 </ul>
                             </div>
                             <div class="price-box pt-20">
-                                <span class="new-price new-price-2 giaSanPham_QV">Price of product</span>
+                                <span class="new-price new-price-2" th:text="${#numbers.formatDecimal(objSP.giaSanPham, 0, 'POINT', 0, 'COMMA') + 'đ'}">Price Of Product</span>
                             </div>
                             <div class="product-desc">
                                 <p>
-                                    <span class="noiDung_QV"></span>
+                                    <span th:text="${objSP.noiDung}"></span>
                                 </p>
                             </div>
                             <div class="single-add-to-cart">
@@ -187,16 +187,14 @@
             <div class="tab-content">
                 <div id="description" class="tab-pane active show" role="tabpanel">
                     <div class="product-description">
-                        <span>The best is yet to come! Give your walls a voice with a framed poster. This aesthethic, optimistic poster will look great in your desk or in an open-space office. Painted wooden frame with passe-partout for more depth.</span>
+                        <span th:text="${objSP.noiDung}"></span>
                     </div>
                 </div>
                 <div id="product-details" class="tab-pane" role="tabpanel">
                     <div class="product-details-manufacturer">
                         <a href="#">
-                            <img src="images/product-details/1.jpg" alt="Product Manufacturer Image">
+                            <img th:src="@{/images/product-details/1.jpg}" alt="Product Manufacturer Image">
                         </a>
-                        <p><span>Reference</span> demo_7</p>
-                        <p><span>Reference</span> demo_7</p>
                     </div>
                 </div>
                 <div id="reviews" class="tab-pane" role="tabpanel">
@@ -232,11 +230,11 @@
                                             <div class="modal-inner-area row">
                                                 <div class="col-lg-6">
                                                     <div class="li-review-product">
-                                                        <img src="images/product/large-size/3.jpg" alt="Li's Product">
+                                                        <img th:src="@{'/images/' + ${objSP.anhSanPham}}" alt="Product Image">
                                                         <div class="li-review-product-desc">
-                                                            <p class="li-product-name">Today is a good day Framed poster</p>
+                                                            <p class="li-product-name" th:text="${objSP.tenSanPham}"></p>
                                                             <p>
-                                                                <span>Beach Camera Exclusive Bundle - Includes Two Samsung Radiant 360 R3 Wi-Fi Bluetooth Speakers. Fill The Entire Room With Exquisite Sound via Ring Radiator Technology. Stream And Control R3 Speakers Wirelessly With Your Smartphone. Sophisticated, Modern Design </span>
+                                                                <span th:text="${objSP.noiDung}"></span>
                                                             </p>
                                                         </div>
                                                     </div>

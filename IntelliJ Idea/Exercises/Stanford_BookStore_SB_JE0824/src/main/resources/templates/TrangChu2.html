@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{home2/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Du lịch</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <!-- Carousel Start -->
+    <div th:replace="home2/banner :: banner"></div>
+    <!-- Carousel End -->
+    <!-- Booking Start -->
+    <div th:replace="home2/booking :: booking"></div>
+    <!-- Booking End -->
+    <!-- About Start -->
+    <div th:replace="home2/about :: about"></div>
+    <!-- About End -->
+
+    <!-- Feature Start -->
+    <div th:replace="home2/feature :: feature"></div>
+    <!-- Feature End -->
+
+    <!-- Destination Start -->
+    <div th:replace="home2/destination :: destination"></div>
+    <!-- Destination Start -->
+
+    <!-- Service Start -->
+    <div th:replace="home2/service :: service"></div>
+    <!-- Service End -->
+
+    <!-- Packages Start -->
+    <div th:replace="home2/packages :: package"></div>
+    <!-- Packages End -->
+
+
+    <!-- Registration Start -->
+    <div th:replace="home2/registration :: registration"></div>
+    <!-- Registration End -->
+
+
+    <!-- Team Start -->
+    <div th:replace="home2/team :: team"></div>
+    <!-- Team End -->
+
+</div>
+</body>
+</html>

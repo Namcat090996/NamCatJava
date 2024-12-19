@@ -1,6 +1,5 @@
 package vn.com.namcat_e_commerce.controller;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -25,6 +24,7 @@ import java.util.Map;
 @CrossOrigin
 @RestController
 @RequestMapping("api")
+@SessionAttributes("Online_User")
 public class SanPhamApiController {
     
     @Autowired
@@ -75,9 +75,8 @@ public class SanPhamApiController {
     }
     
     @PostMapping(value = "/sanpham/themmoi", consumes = {"multipart/form-data"})
-    public ResponseEntity<?> themMoi(@RequestParam Map<String, String> sanpham,
-                                     @RequestParam(value = "fUpload", required = false) MultipartFile fUpload,
-                                     HttpSession session) {
+    public ResponseEntity<?> themMoi(@ModelAttribute("Online_User") String onlineUser, @RequestParam Map<String, String> sanpham,
+                                     @RequestParam(value = "fUpload", required = false) MultipartFile fUpload) {
         
         List<Message> msg = new ArrayList<Message>();
         
@@ -169,9 +168,6 @@ public class SanPhamApiController {
             return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
         }
         
-        //Lấy tên người tạo
-        String tenNguoiTao = (String) session.getAttribute("userOnline");
-        
         SanPham objSP = new SanPham();
         
         objSP.setMaSanPham(maSanPham);
@@ -183,7 +179,7 @@ public class SanPhamApiController {
         objSP.setMoTa(moTa);
         objSP.setNoiDung(sanpham.get("noiDung"));
         objSP.setNgayTao(ngayTao);
-        objSP.setTenNguoiTao(tenNguoiTao);
+        objSP.setTenNguoiTao(onlineUser);
         objSP.setDaDuyet(0);
         objSP.setMauSac(sanpham.get("mauSac"));
         
@@ -278,8 +274,6 @@ public class SanPhamApiController {
             return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
         }
         
-        
-        
         objSP.setTenSanPham(sanpham.get("tenSanPham"));
         objSP.setGiaSanPham(giaSanPham);
         objSP.setTonKho(tonKho);
@@ -327,7 +321,7 @@ public class SanPhamApiController {
     }
     
     @PutMapping(value = "/sanpham/duyet/{id}")
-    public ResponseEntity<?> duyetSanPham(@PathVariable("id") String maSanPham, HttpSession session) {
+    public ResponseEntity<?> duyetSanPham(@ModelAttribute("Online_User") String onlineUser, @PathVariable("id") String maSanPham) {
         
         SanPham objSP = sanPhamService.findById(maSanPham);
         
@@ -338,11 +332,8 @@ public class SanPhamApiController {
         }
         else
         {
-            //Lấy tên người duyệt
-            String tenNguoiDuyet = (String) session.getAttribute("userOnline");
-            
             objSP.setNgayDuyet(LocalDate.now());
-            objSP.setTenNguoiDuyet(tenNguoiDuyet);
+            objSP.setTenNguoiDuyet(onlineUser);
             objSP.setDaDuyet(1);
             
             boolean ketQua = sanPhamService.update(objSP);

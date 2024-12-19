@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách chủ đề</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery-3.7.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/chude.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            layDanhSachChuDe();
+        });
+
+        function hienThiThemMoi() {
+            $("#modalTitle").text("Thêm mới thông tin chủ đề");
+            $("#hChuDeId").val("");
+            $("#tenChuDe").val("");
+            $("#maChuDe").val("");
+
+            $("#maChuDe").focus();
+        }
+
+        function themMoiHoacCapNhat() {
+            //alert("Hello");
+            let form = $("#modalChuDe").validate({
+                rules: {
+                    tenChuDe: "required",
+                    maChuDe: {
+                        required: true,
+                        minlength: 3
+                    }
+                },
+                messages: {
+                    tenChuDe: "Bạn cần phải nhập tên chủ đề",
+                    maChuDe: {
+                        required: "Bạn cần phải nhập tên chủ đề",
+                        minlength: "Bạn cần nhập mã chủ đề từ 3 kí tự trở lên"
+                    }
+                },
+                submitHandler: function () {
+                    if (form.valid()) {
+                        xuLyThemMoi();
+                    }
+                }
+
+            });
+        }
+
+        /*
+         * Hàm sửa thông tin chủ đề theo mã
+         */
+        function suaThongTin(maCD) {
+            //Lấy thông tin chi tiết của chủ đề cần sửa
+            thongTinChiTiet(maCD);
+        }
+
+        function xoaThongTin(ma) {
+
+            $("#hChuDeId").val(ma);
+        };
+    </script>
+</head>
+<body>
+<div style="text-align: center; width: 100%">
+    <h2>Danh sách chủ đề</h2>
+</div>
+<div style="width: 100%; text-align: right;">
+    <a href="#" onclick="hienThiThemMoi()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalChuDe">Thêm
+        mới</a>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Mã chủ đề</th>
+        <th>Tên chủ đề</th>
+        <th style="width:100px;"></th>
+    </tr>
+    </thead>
+    <tbody id="dsChuDe">
+    </tbody>
+</table>
+<!--Thiết kế giao diện nhân viên dạng modal-->
+<form id="modalChuDe" method="post" class="modal fade" tabindex="-1" aria-labelledby="Thêm chủ đề" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm mới thông tin chủ đề</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="tile-body" id="tile-body">
+                    <div class="form-group row">
+                        <label class="col-md-3">
+                            Mã chủ đề:
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" id="maChuDe" name="maChuDe" class="form-control"
+                                   placeholder="Nhập mã chủ đề"/>
+                            <input type="hidden" id="hChuDeId" name="hChuDeId">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3">
+                            Tên chủ đề:
+                        </label>
+                        <div class="col-md-9">
+                            <input id="tenChuDe" name="tenChuDe" type="text" class="form-control"
+                                   placeholder="Nhập tên chủ đề"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" onclick="themMoiHoacCapNhat()" class="btn btn-primary">Cập nhật</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</form>
+<!--Form modal hỏi xoá chủ đề-->
+<fieldset id="modalXoa" class="modal fade" tabindex="-1" aria-labelledby="Xóa chủ đề" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Thông báo xoá</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="tile-body" id="title-delete">
+
+                    <h3>Bạn có chắc chắn muốn xoá thông tin này không ? </h3>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" onclick="thucHienXoa()" class="btn btn-primary">Đồng ý</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</fieldset>
+</body>
+</html>

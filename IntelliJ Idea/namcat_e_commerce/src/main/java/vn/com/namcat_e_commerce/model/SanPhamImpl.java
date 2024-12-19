@@ -359,7 +359,6 @@ public class SanPhamImpl implements SanPhamDao {
         
         //Use try-catch if delete fails (foreign key, constraint violations) or object hasn't existed
         try {
-            
             //Get object by id
             objSP = findById(id);
             

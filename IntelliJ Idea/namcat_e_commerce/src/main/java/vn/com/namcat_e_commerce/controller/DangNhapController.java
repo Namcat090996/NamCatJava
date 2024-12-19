@@ -8,11 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import vn.com.namcat_e_commerce.entities.NguoiDung;
 import vn.com.namcat_e_commerce.model.NguoiDungDao;
 
-
 @Controller
+@SessionAttributes("Online_User")
 public class DangNhapController {
     
     @Autowired
@@ -53,6 +54,7 @@ public class DangNhapController {
             {
                 //Lưu vào session
                 session.setAttribute("userOnline", taiKhoan);
+                model.addAttribute("Online_User", taiKhoan);
                 
                 return "redirect:/admin/sanpham";
             }
@@ -67,5 +69,10 @@ public class DangNhapController {
             model.addAttribute("login_fail", "Tài khoản không tồn tại hoặc không có quyền truy cập");
             return "Login";
         }
+    }
+    
+    @ModelAttribute("Online_User")
+    public String layThongTinUserOnline(HttpSession session) {
+        return (String) session.getAttribute("userOnline");
     }
 }

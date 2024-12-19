@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/home/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách chủ đề</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i> Quản lý chủ đề</h1>
+            <p>Danh sách thông tin chủ đề sách trong hệ thống</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item">Tables</li>
+            <li class="breadcrumb-item active"><a href="#">Data Table</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <div class="row">
+                        <div style="width:100%; text-align:right;margin-bottom:5px;">
+                            <a th:href="@{/admin/chude/them}" class="btn btn-primary">Thêm mới</a>
+                        </div>
+                                    <table class="table table-bordered table-striped" id="sampleTable">
+                                        <thead>
+                                        <tr>
+                                            <th>Mã chủ đề</th>
+                                            <th>Tên chủ đề</th>
+                                            <th style="width:150px;"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="c : ${lstChuDe}">
+
+                                            <td>[[${c.maChuDe}]]</td>
+                                            <td>[[${c.tenChuDe}]]</td>
+                                            <td>
+                                                <a class="btn btn-xs btn-info"
+                                                   th:href="@{'/admin/chude/sua/' + ${c.maChuDe}}">Sửa</a>
+                                                &nbsp;
+                                                <a onclick="return confirm('Bạn có chắc chắn muốn xóa thông tin này ?');"
+                                                   class="btn btn-xs btn-danger"
+                                                   th:href="@{'/admin/chude/xoa/' + ${c.maChuDe}}">Xóa</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

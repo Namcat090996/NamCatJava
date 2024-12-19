@@ -1,17 +1,18 @@
 package vn.com.namcat_e_commerce.controller;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import vn.com.namcat_e_commerce.entities.*;
 import vn.com.namcat_e_commerce.service.*;
 
 import java.util.List;
 
 @Controller
+@SessionAttributes("Online_User")
 public class SanPhamController {
     
     @Autowired
@@ -30,15 +31,15 @@ public class SanPhamController {
     DaDuyetService daDuyetService;
     
     @RequestMapping(value = "/admin/sanpham")
-    public String hienThiSPTheoTenVaLoai(@ModelAttribute("sanpham") SanPhamModel objSP, Model model)
+    public String hienThiSPTheoTenVaLoai(@ModelAttribute("Online_User") String onlineUser, @ModelAttribute("sanpham") SanPhamModel objSP, Model model)
     {
         //Get list and return page
         List<SanPham> lstSP = sanPhamService.timSPTheoLoaiVaGiaKhongDuyet(objSP.getTuKhoa(), objSP.getLoaiSP(), objSP.getMauSac(), objSP.getTuGia(), objSP.getDenGia(), objSP.getDaDuyet());
 
         //Keep user information which has typed
         model.addAttribute("sanpham", objSP);
-
         model.addAttribute("lstSP", lstSP);
+        model.addAttribute("Online_User", onlineUser);
 
         return "admin/QuanLySanPham";
     }
@@ -81,11 +82,5 @@ public class SanPhamController {
 
         //Return result
         return lstGiaTien;
-    }
-    
-    @ModelAttribute("Online_User")
-    public String layThongTinUserOnline(HttpSession session)
-    {
-        return (String) session.getAttribute("userOnline");
     }
 }

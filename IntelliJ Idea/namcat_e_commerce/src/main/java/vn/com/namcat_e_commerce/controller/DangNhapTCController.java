@@ -13,32 +13,31 @@ import vn.com.namcat_e_commerce.entities.NguoiDung;
 import vn.com.namcat_e_commerce.model.NguoiDungDao;
 
 @Controller
-@SessionAttributes("Online_User")
-public class DangNhapController {
+public class DangNhapTCController {
     
     @Autowired
     NguoiDungDao nguoiDungDao;
     
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login2")
     public String showLoginForm(Model model)
     {
-        model.addAttribute("nguoidung", new NguoiDung());
-        return "admin/Login";
+        model.addAttribute("user", new NguoiDung());
+        return "dangnhap_register";
     }
     
-    @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public String loginProcess(@ModelAttribute("nguoidung") NguoiDung objND, Model model, HttpSession session)
+    @RequestMapping(value = "/submit2", method = RequestMethod.POST)
+    public String loginProcess(@ModelAttribute("user") NguoiDung objND, Model model, HttpSession session)
     {
         String taiKhoan = objND.getTenNguoiDung();
         String matKhau = objND.getMatKhau();
         
         //Giữ thông tin người dùng sau khi nhập
-        model.addAttribute("nguoidung", objND);
+        model.addAttribute("user", objND);
         
         //Kiểm tra field nhập
         if (taiKhoan == null || matKhau == null || taiKhoan.isEmpty() || matKhau.isEmpty()) {
             model.addAttribute("login_fail", "Tên đăng nhập và mật khẩu không được để trống");
-            return "admin/Login";
+            return "dangnhap_register";
         }
         
         NguoiDung objNDCheck = nguoiDungDao.findById(taiKhoan);
@@ -53,26 +52,20 @@ public class DangNhapController {
             if(BCrypt.checkpw(matKhau, objNDCheck.getMatKhau()))
             {
                 //Lưu vào session
-                session.setAttribute("userOnline", taiKhoan);
-                model.addAttribute("Online_User", taiKhoan);
+                session.setAttribute("user_Online", taiKhoan);
                 
-                return "redirect:/admin/sanpham";
+                return "redirect:/trangchu";
             }
             else
             {
                 model.addAttribute("login_fail", "Tài khoản hoặc mật khẩu không chính xác");
-                return "admin/Login";
+                return "dangnhap_register";
             }
         }
         else
         {
             model.addAttribute("login_fail", "Tài khoản không tồn tại hoặc không có quyền truy cập");
-            return "admin/Login";
+            return "dangnhap_register";
         }
-    }
-    
-    @ModelAttribute("Online_User")
-    public String layThongTinUserOnline(HttpSession session) {
-        return (String) session.getAttribute("userOnline");
     }
 }

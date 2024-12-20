@@ -26,16 +26,8 @@ class NamcatECommerceApplicationTests {
     @Autowired
     DonHangDao donHangDao;
     
-    
-    
     @Test
     void contextLoads() {
-        
-        List<SanPham> lstSP = sanPhamDao.layDSDienThoai();
-        
-        List<SanPham> lstSP2 = sanPhamDao.layDSManHinh();
-        
-        List<SanPham> lstSP3 = sanPhamDao.layDSLaptop();
         
         List<DonHang> lstDH = donHangDao.timDonHang("", "PENDING");
     }

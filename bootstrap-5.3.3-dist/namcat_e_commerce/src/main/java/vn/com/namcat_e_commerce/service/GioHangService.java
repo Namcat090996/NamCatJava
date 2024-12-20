@@ -1,5 +1,8 @@
 package vn.com.namcat_e_commerce.service;
 
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.NonUniqueResultException;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.com.namcat_e_commerce.entities.GioHang;
@@ -39,5 +42,15 @@ public class GioHangService {
         }
         
         return gioHangDao.add(objGH);
+    }
+    
+    public boolean kiemTraGH_TND_MSP(String tenNguoiDung, String maSanPham)
+    {
+        return gioHangDao.kiemTraGH_TND_MSP(tenNguoiDung, maSanPham);
+    }
+    
+    public GioHang layChiTietGH_TND_MSP(String tenNguoiDung, String maSanPham)
+    {
+        return gioHangDao.layChiTietGH_TND_MSP(tenNguoiDung, maSanPham);
     }
 }

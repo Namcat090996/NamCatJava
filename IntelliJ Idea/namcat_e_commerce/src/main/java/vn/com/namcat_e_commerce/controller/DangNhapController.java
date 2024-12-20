@@ -13,7 +13,7 @@ import vn.com.namcat_e_commerce.entities.NguoiDung;
 import vn.com.namcat_e_commerce.model.NguoiDungDao;
 
 @Controller
-@SessionAttributes("Online_User")
+@SessionAttributes({"Online_User", "Online_User_VaiTro"})
 public class DangNhapController {
     
     @Autowired
@@ -54,7 +54,10 @@ public class DangNhapController {
             {
                 //Lưu vào session
                 session.setAttribute("userOnline", taiKhoan);
+                session.setAttribute("vaiTroUserOnline", objND.getVaiTro());
+                
                 model.addAttribute("Online_User", taiKhoan);
+                model.addAttribute("Online_User_VaiTro", objND.getVaiTro());
                 
                 return "redirect:/admin/sanpham";
             }

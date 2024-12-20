@@ -8,6 +8,7 @@ function thongTinChiTiet_QV(maSP) {
         async: true,
         success: function (data) {
             //Hiển thị lên giao diện
+            $("#maSP").text(data.maSanPham);
             $(".tenSanPham_QV").text(data.tenSanPham);
             $(".anhSanPham_QV1").attr("src", "/images/" + data.anhSanPham);
             $(".moTa_QV").text(data.moTa);

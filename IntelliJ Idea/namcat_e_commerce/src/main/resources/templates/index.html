@@ -22,6 +22,18 @@
             GH_them(maSP);
         }
 
+        function themVaoGioHang_Modal()
+        {
+            let maSP = $("#maSP").text();
+
+            if(maSP) {
+                themVaoGioHang(maSP);
+            }
+            else {
+                alert("Không thể thêm sản phẩm vào giỏ hàng")
+            }
+        }
+
     </script>
     <style>
         #GH_TBDangNhap, #GH_TBThanhCong {
@@ -36,6 +48,10 @@
             display: inline-block;
             font-style: italic;
             font-size: 19px !important;
+        }
+
+        .btn-outline-warning:hover {
+            background-color: #fed700 !important;
         }
     </style>
     <script type="text/javascript" th:src="@{/js/index.js}"></script>
@@ -165,8 +181,7 @@
                                             <div class="add-actions">
                                                 <form method="get">
                                                     <ul class="add-actions-link">
-                                                        <li class="add-cart active" style="width: 150px"><a style="cursor: pointer" th:onclick="themVaoGioHang([[${spn.maSanPham}]])">Add
-                                                            to cart</a></li>
+                                                        <li class="add-cart active" style="width: 150px"><a style="cursor: pointer" th:onclick="themVaoGioHang([[${spn.maSanPham}]])">Add to cart</a></li>
                                                         <li><a href="#" title="quick view" class="quick-view-btn"
                                                                data-toggle="modal" data-target="#exampleModalCenter"
                                                                th:onclick="xemThongTin_QV([[${spn.maSanPham}]])"><i
@@ -1696,17 +1711,8 @@
                                         </p>
                                     </div>
                                     <div class="single-add-to-cart">
-                                        <form action="#" class="cart-quantity" style="margin-top: 10px">
-                                            <div class="quantity">
-                                                <label>Quantity</label>
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" value="1" type="text">
-                                                    <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                                    <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                                </div>
-                                            </div>
-                                            <button class="add-to-cart" type="submit">Add to cart</button>
-                                        </form>
+                                            <input type="hidden" id="maSP">
+                                            <a style="cursor: pointer" onclick="themVaoGioHang_Modal()" class="btn btn-outline-warning">Add to cart</a>
                                     </div>
                                     <div class="product-additional-info pt-25">
                                         <div class="product-social-sharing pt-25">
@@ -1772,10 +1778,8 @@
                                     <div style="height: 7px"></div>
                                     <h2 class="thongBao">Hãy đăng nhập để mua sắm nhé!</h2>&nbsp;&nbsp;<i class="fa fa-smile-o"></i>
                                     <div style="height: 7px"></div>
-                                    <a class="btn btn-primary" href="#">Add to
-                                        cart</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a class="btn btn-primary" href="#">Add to
-                                        cart</a>
+                                    <a class="btn btn-primary" th:href="@{/login2}">Login/Register</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a class="btn btn-warning" href="#" data-dismiss="modal" aria-label="Close">Close</a>
                                 </div>
                             </div>
                         </div>

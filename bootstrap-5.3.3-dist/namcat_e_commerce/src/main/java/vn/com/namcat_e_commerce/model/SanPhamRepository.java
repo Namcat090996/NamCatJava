@@ -21,4 +21,6 @@ public interface SanPhamRepository extends JpaRepository<SanPham, String> {
             " ORDER BY sp.giaSanPham ASC")
     public List<SanPham> timSPTheoTenVaLoai(@Param("tuKhoa") String tuKhoa, @Param("loaiSP") String loaiSP, @Param("mauSac") String mauSac);
     
+    public List<SanPham> findByLoaiSanPham(String tuKhoa);
+    
 }

@@ -8,15 +8,17 @@ function thongTinChiTiet_QV(maSP) {
         async: true,
         success: function (data) {
             //Hiển thị lên giao diện
-            $("#tenSanPham_QV").text(data.tenSanPham);
+            $("#maSP").text(data.maSanPham);
+            $(".tenSanPham_QV").text(data.tenSanPham);
             $(".anhSanPham_QV1").attr("src", "/images/" + data.anhSanPham);
-            $("#moTa_QV").text(data.moTa);
-            $("#giaSanPham_QV").text(data.giaTienFormat);
-            $("#noiDung_QV").text(data.noiDung);
+            $(".moTa_QV").text(data.moTa);
+            $(".giaSanPham_QV").text(data.giaTienFormat);
+            $(".noiDung_QV").text(data.noiDung);
         },
         error: function (xhr, status, error) {
             console.error("Lỗi khi lấy thông tin sản phẩm:", error);
         }
     });
 }
+
 

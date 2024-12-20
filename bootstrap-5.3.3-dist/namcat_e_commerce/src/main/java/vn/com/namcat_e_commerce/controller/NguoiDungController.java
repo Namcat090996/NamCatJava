@@ -1,12 +1,10 @@
 package vn.com.namcat_e_commerce.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import vn.com.namcat_e_commerce.entities.*;
 import vn.com.namcat_e_commerce.service.GiaTienService;
 import vn.com.namcat_e_commerce.service.NguoiDungSevice;
@@ -15,6 +13,7 @@ import vn.com.namcat_e_commerce.service.VaiTroService;
 import java.util.List;
 
 @Controller
+@SessionAttributes("Online_User")
 public class NguoiDungController {
     
     @Autowired
@@ -24,13 +23,14 @@ public class NguoiDungController {
     VaiTroService vaiTroService;
     
     @RequestMapping(value = "/admin/nguoidung", method = RequestMethod.GET)
-    public String timKiemNguoiDung(@RequestParam(value = "tuKhoa", required = false) String tuKhoa, Model model)
+    public String timKiemNguoiDung(@ModelAttribute("Online_User") String onlineUser, @RequestParam(value = "tuKhoa", required = false) String tuKhoa, Model model)
     {
         //Get list and return page
         List<NguoiDung> lstND = nguoiDungSevice.timNguoiDung(tuKhoa);
         
         model.addAttribute("tuKhoa", tuKhoa);
         model.addAttribute("lstND", lstND);
+        model.addAttribute("Online_User", onlineUser);
         
         return "admin/QuanLyNguoiDung";
     }

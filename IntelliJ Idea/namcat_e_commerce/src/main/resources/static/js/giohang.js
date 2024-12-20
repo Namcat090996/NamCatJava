@@ -1,4 +1,4 @@
-function themHangVaoGio(maSanPham) {
+function GH_them(maSanPham) {
     $.ajax({
         type: "POST",
         url: "/api/giohang/them/" + maSanPham,
@@ -7,12 +7,20 @@ function themHangVaoGio(maSanPham) {
         contentType: "application/json; charset=utf-8;",
         success: function (data) {
             if(data.name === "GH_success") {
-                // Hiển thị thông báo trong vài giây
-                $("#GH_TBThanhCong").modal("show").fadeIn().delay(2000).fadeOut();
+                //Hiển thị thông báo thêm vào giỏ thành công trong 1s
+                $("#GH_TBThanhCong").modal("show");
+                setTimeout(function () {
+                    $("#GH_TBThanhCong").modal("hide");
+                }, 1000);
 
                 //Cập nhật số lượng giỏ hàng được thêm trên trang chủ
-                let currentCount = parseInt($("#soLuongGioHang").text()) || 0;
-                $("#soLuongGioHang").text(currentCount + 1);
+                if($("#User_Online").val()) {
+                    let GH_SoLuong = parseInt($("#GH_SoLuong").text()) || 0;//Nếu GH_SoLuong không phải số thì trả về 0
+                    $("#GH_SoLuong").text(GH_SoLuong + 1);
+                }
+                else {
+                    $("#GH_SoLuong").text(0);
+                }
             }
         },
         error: function (error) {
@@ -29,3 +37,4 @@ function themHangVaoGio(maSanPham) {
         }
     });
 }
+

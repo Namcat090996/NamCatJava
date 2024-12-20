@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.com.namcat_e_commerce.entities.GioHang;
 import vn.com.namcat_e_commerce.entities.Message;
@@ -14,7 +13,6 @@ import vn.com.namcat_e_commerce.service.GioHangService;
 @CrossOrigin
 @RestController
 @RequestMapping("api")
-@SessionAttributes("Online_User")
 public class GioHangApiController {
     
     @Autowired
@@ -23,10 +21,12 @@ public class GioHangApiController {
     @Autowired
     GioHangDao gioHangDao;
     
-    @RequestMapping(value = "/giohang/them/{id}", method = RequestMethod.POST)
-    public ResponseEntity<?> themHangVaoGio(@PathVariable("id") String maSanPham, @ModelAttribute("Online_User") String userOnline, Model model, HttpSession session) {
+    @RequestMapping(value = "/giohang/them/{id}")
+    public ResponseEntity<?> themHangVaoGio(@PathVariable("id") String maSanPham, HttpSession session) {
         
-        if(session == null || userOnline == null || userOnline.isEmpty())
+        String userOnline = (String) session.getAttribute("user_Online");
+        
+        if(userOnline == null || userOnline.isEmpty())
         {
             Message msg = new Message("GH_login", "Vui lòng đăng nhập");
             return new ResponseEntity<Message>(msg, HttpStatus.BAD_REQUEST);

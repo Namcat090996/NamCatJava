@@ -17,8 +17,29 @@
             thongTinChiTiet_QV(maSP);
         }
 
+        function themVaoGioHang(maSP)
+        {
+            GH_them(maSP);
+        }
+
     </script>
+    <style>
+        #GH_TBDangNhap, #GH_TBThanhCong {
+            position: fixed;
+            margin-left: auto;
+            margin-right: auto;
+            width: 350px;
+        }
+
+        .thongBao {
+            font-family: "Times New Roman" !important;
+            display: inline-block;
+            font-style: italic;
+            font-size: 19px !important;
+        }
+    </style>
     <script type="text/javascript" th:src="@{/js/index.js}"></script>
+    <script type="text/javascript" th:src="@{/js/giohang.js}"></script>
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -144,7 +165,7 @@
                                             <div class="add-actions">
                                                 <form method="get">
                                                     <ul class="add-actions-link">
-                                                        <li class="add-cart active" style="width: 150px"><a href="#">Add
+                                                        <li class="add-cart active" style="width: 150px"><a style="cursor: pointer" th:onclick="themVaoGioHang([[${spn.maSanPham}]])">Add
                                                             to cart</a></li>
                                                         <li><a href="#" title="quick view" class="quick-view-btn"
                                                                data-toggle="modal" data-target="#exampleModalCenter"
@@ -1710,6 +1731,59 @@
         </div>
     </div>
     <!-- Quick View | Modal Area End Here -->
+    <!-- Lấy thông tin người dùng đang online để cập nhật số lượng giỏ hàng -->
+    <input type="hidden" th:value="${User_Online}" id="User_Online">
+    <!-- Modal thông báo thêm vào giỏ hàng thành công -->
+    <div class="modal fade modal-wrapper" id="GH_TBThanhCong">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-inner-area row">
+                        <div class="col-lg-12 col-md-11 col-sm-11" style="text-align: center">
+                            <div class="product-details-view-content pt-60" style="padding-top: 10px !important;">
+                                <div class="product-info">
+                                    <i class="fa fa-3x fa-shopping-cart" style="margin-bottom: 5px"></i>
+                                    <div style="height: 7px"></div>
+                                    <h2 class="thongBao">Thêm hàng vào giỏ thành công!</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal thông báo thêm vào giỏ hàng thành công -->
+    <div class="modal fade modal-wrapper" id="GH_TBDangNhap">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-inner-area row">
+                        <div class="col-lg-12 col-md-11 col-sm-11" style="text-align: center">
+                            <div class="product-details-view-content pt-60" style="padding-top: 10px !important;">
+                                <div class="product-info">
+                                    <i class="fa fa-3x fa-child" style="margin-bottom: 5px"></i>
+                                    <div style="height: 7px"></div>
+                                    <h2 class="thongBao">Hãy đăng nhập để mua sắm nhé!</h2>&nbsp;&nbsp;<i class="fa fa-smile-o"></i>
+                                    <div style="height: 7px"></div>
+                                    <a class="btn btn-primary" href="#">Add to
+                                        cart</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a class="btn btn-primary" href="#">Add to
+                                        cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Body Wrapper End Here -->
 </body>

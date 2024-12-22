@@ -23,9 +23,12 @@ function xuLyThemMoi() {
     formData.append("ngayTao", $("#demoDate").val());
 
     // Thêm file nếu người dùng chọn
-    const file = $("#fUpload")[0]?.files[0];
-    if (file) {
-        formData.append("fUpload", file);
+    const files = $("#fUpload")[0]?.files;
+    if (files && files.length > 0) {
+        // Lặp qua từng file và thêm vào formData
+        for (let i = 0; i < files.length; i++) {
+            formData.append("fUpload", files[i]);
+        }
     }
 
     $.ajax({
@@ -112,25 +115,83 @@ function thucHienXoa() {
     });
 }
 
-function thucHienDuyet() {
-    var maSP = $("#hSanPhamId").val();
+// function thucHienDuyet() {
+//     var maSP = $("#hSanPhamId").val();
+//
+//     $.ajax({
+//         url: '/api/sanpham/duyet/' + maSP,
+//         contentType: "application/json; charset=utf-8;",
+//         dataType: "json",
+//         type: "PUT",
+//         success: function (data) {
+//             if (data.name != null) {
+//                 $("#modalDuyet").modal("hide")
+//                 //Reload lại trang
+//                 window.location.reload();
+//             } else {
+//                 $(`#${data.name}`).text(data.message);
+//             }
+//         },
+//         error: function (error) {
+//             alert(error.responseJSON.message);
+//         }
+//     });
+// }
 
+// Hàm duyệt/bỏ duyệt sản phẩm
+function duyetSanPham() {
+    //Lấy tất cả id được chọn qua checkbox
+    var sanPhamChon = [];
+    $('input[name="chonSanPham"]:checked').each(function () {
+        sanPhamChon.push($(this).val());//Lấy giá trị của input checkbox và thêm lần lượt các phần tử vào mảng
+    });
+
+    if(sanPhamChon.length === 0)//Nếu người dùng không chọn sản phẩm nào
+    {
+        $("#CB_ThongBao").modal("show");
+        setTimeout(function () {
+            $("#CB_ThongBao").modal("hide");
+        }, 1000);
+        return;
+    }
+
+    var luuDuyet = $("#luuDuyet").val();
+
+    if(luuDuyet === "1")
+    {
+        $("#modalDuyet").modal("show");
+    }
+
+    if(luuDuyet === "0")
+    {
+        $("#modalBoDuyet").modal("show");
+    }
+}
+
+// Hàm xác nhận duyệt/bỏ duyệt sản phẩm
+function xacNhanDuyetSP(thaoTac) {
+    //Lấy tất cả id được chọn qua checkbox
+    var sanPhamChon1 = [];
+    $('input[name="chonSanPham"]:checked').each(function () {
+        sanPhamChon1.push($(this).val()); //Lấy giá trị của input checkbox và thêm lần lượt các phần tử vào mảng
+    });
+
+    //Xử lý duyệt/bỏ duyệt
     $.ajax({
-        url: '/api/sanpham/duyet/' + maSP,
-        contentType: "application/json; charset=utf-8;",
-        dataType: "json",
-        type: "PUT",
-        success: function (data) {
-            if (data.name != null) {
-                $("#modalDuyet").modal("hide")
-                //Reload lại trang
-                window.location.reload();
-            } else {
-                $(`#${data.name}`).text(data.message);
-            }
+        url: '/api/sanpham/duyet',
+        type: "POST",
+        data: {
+            sanPhamChon: sanPhamChon1.join(';'),  //Gửi danh sách mã sản phẩm theo định dạng '1;2;3'
+            thaoTac: thaoTac,  // Hành động duyệt hoặc bỏ duyệt
         },
-        error: function (error) {
-            alert(error.responseJSON.message);
+
+        success: function (data) {
+            //Xử lý thành công
+            window.location.reload();
+        },
+        error: function (xhr, status, error) {
+            console.log("Error details: ", xhr, status, error);
+            alert("Có lỗi xảy ra khi duyệt sản phẩm");
         }
     });
 }

@@ -58,7 +58,7 @@ CREATE TABLE `cart` (
   KEY `fk_product_id_idx` (`product_id`),
   CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
   CONSTRAINT `fk_user_cart` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +67,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (1,'admin','SP06',1),(2,'admin','SP10',3),(3,'admin','SP07',3);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,6 +117,33 @@ LOCK TABLES `color` WRITE;
 /*!40000 ALTER TABLE `color` DISABLE KEYS */;
 INSERT INTO `color` VALUES (4,'Hồng'),(5,'Tím'),(3,'Trắng'),(2,'Vàng'),(6,'Xanh'),(1,'Đỏ');
 /*!40000 ALTER TABLE `color` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `images`
+--
+
+DROP TABLE IF EXISTS `images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `images` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `product_id` varchar(50) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_image_p_idx` (`product_id`),
+  CONSTRAINT `fk_image_p` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `images`
+--
+
+LOCK TABLES `images` WRITE;
+/*!40000 ALTER TABLE `images` DISABLE KEYS */;
+INSERT INTO `images` VALUES (11,'SP15','7.jpg'),(12,'SP15','8.jpg');
+/*!40000 ALTER TABLE `images` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -250,7 +278,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES ('SP01','Samsung Galaxy S24  ',11500000,50,'Điện thoại','10.jpg','12GB 512GB','Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.','2024-12-15','admin','2024-12-15',NULL,NULL,0,NULL,NULL),('SP02','Samsung Galaxy S23 ',9500000,5,'Điện thoại','12.jpg','12GB 512GB','Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.','2024-12-15','admin','2024-12-15',NULL,NULL,0,NULL,NULL),('SP03','Màn hình LG UltraWide ',10500000,3,'Màn hình','1.jpg','29WQ600 29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,NULL,NULL,0,'Tím',NULL),('SP04','Màn hình MSI UltraWide',11500000,5,'Màn hình','4.jpg','29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Đỏ',NULL),('SP05','Máy tính bảng Amazon Fire 7 ',6400000,10,'Máy tính bảng','8.jpg','HD7 IPS 1GB 16GB Đen','Sản phẩm máy tính bảng Amazon Kindle HD Fire 7 không chỉ là chiếc máy tính bảng nhỏ gọn, giá cả phải chăng nhưng vẫn tích hợp đầy đủ ứng dụng công nghệ hiện đại, mà còn là một một lựa chọn thay thế iPad hoặc các dòng tablet đắt tiền khác trên thị trường.','2024-12-15','admin',NULL,NULL,NULL,0,'Đỏ',NULL),('SP06','Samsung Galaxy S24  ',11500000,50,'Điện thoại','10.jpg','12GB 512GB','Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Vàng',NULL),('SP07','Samsung Galaxy S23 ',9500000,5,'Điện thoại','12.jpg','12GB 512GB','Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Hồng',NULL),('SP08','Màn hình LG UltraWide ',10500000,3,'Màn hình','1.jpg','29WQ600 29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,NULL,NULL,0,'Tím',NULL),('SP09','Màn hình MSI UltraWide',11500000,5,'Màn hình','4.jpg','29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,NULL,NULL,0,'Đỏ',NULL),('SP10','Máy tính bảng Amazon Fire 7 ',6400000,10,'Máy tính bảng','8.jpg','HD7 IPS 1GB 16GB Đen','Sản phẩm máy tính bảng Amazon Kindle HD Fire 7 không chỉ là chiếc máy tính bảng nhỏ gọn, giá cả phải chăng nhưng vẫn tích hợp đầy đủ ứng dụng công nghệ hiện đại, mà còn là một một lựa chọn thay thế iPad hoặc các dòng tablet đắt tiền khác trên thị trường.','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Đỏ',NULL),('SP12','Samsung Galaxy S23 ',9500000,5,'Điện thoại','12.jpg','12GB 512GB','Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Hồng',NULL),('SP13','Màn hình LG UltraWide ',10500000,3,'Màn hình','1.jpg','29WQ600 29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Tím',NULL),('SP14','Màn hình MSI UltraWide',11500000,5,'Màn hình','4.jpg','29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Đỏ',NULL);
+INSERT INTO `product` VALUES ('SP01','Samsung Galaxy S24  ',11500000,50,'Điện thoại','10.jpg','12GB 512GB','Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.','2024-12-15','admin','2024-12-15',NULL,NULL,0,NULL,NULL),('SP02','Samsung Galaxy S23 ',9500000,5,'Điện thoại','12.jpg','12GB 512GB','Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.','2024-12-15','admin','2024-12-15',NULL,NULL,0,NULL,NULL),('SP03','Màn hình LG UltraWide ',10500000,3,'Màn hình','1.jpg','29WQ600 29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,NULL,NULL,0,'Tím',NULL),('SP04','Màn hình MSI UltraWide',11500000,5,'Màn hình','4.jpg','29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,NULL,NULL,0,'Đỏ',NULL),('SP05','Máy tính bảng Amazon Fire 7 ',6400000,10,'Máy tính bảng','8.jpg','HD7 IPS 1GB 16GB Đen','Sản phẩm máy tính bảng Amazon Kindle HD Fire 7 không chỉ là chiếc máy tính bảng nhỏ gọn, giá cả phải chăng nhưng vẫn tích hợp đầy đủ ứng dụng công nghệ hiện đại, mà còn là một một lựa chọn thay thế iPad hoặc các dòng tablet đắt tiền khác trên thị trường.','2024-12-15','admin',NULL,NULL,NULL,0,'Đỏ',NULL),('SP06','Samsung Galaxy S24  ',11500000,50,'Điện thoại','10.jpg','12GB 512GB','Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.','2024-12-15','admin',NULL,'2024-12-21','admin',1,'Vàng',NULL),('SP07','Samsung Galaxy S23 ',9500000,5,'Điện thoại','12.jpg','12GB 512GB','Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.','2024-12-15','admin',NULL,'2024-12-21','admin',1,'Hồng',NULL),('SP08','Màn hình LG UltraWide ',10500000,3,'Màn hình','1.jpg','29WQ600 29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,'2024-12-21','admin',1,'Tím',NULL),('SP09','Màn hình MSI UltraWide',11500000,5,'Màn hình','4.jpg','29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,'2024-12-21','admin',1,'Đỏ',NULL),('SP10','Máy tính bảng Amazon Fire 7 ',6400000,10,'Máy tính bảng','8.jpg','HD7 IPS 1GB 16GB Đen','Sản phẩm máy tính bảng Amazon Kindle HD Fire 7 không chỉ là chiếc máy tính bảng nhỏ gọn, giá cả phải chăng nhưng vẫn tích hợp đầy đủ ứng dụng công nghệ hiện đại, mà còn là một một lựa chọn thay thế iPad hoặc các dòng tablet đắt tiền khác trên thị trường.','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Đỏ',NULL),('SP12','Samsung Galaxy S23 ',9500000,5,'Điện thoại','12.jpg','12GB 512GB','Samsung Galaxy S24 Ultra 512GB là siêu phẩm công nghệ mà hãng muốn mang tới thị trường trong thời gian tới. Được trang bị rất nhiều tính năng hiện đại từ hiệu năng tới camera, cùng với đó là thiết kế siêu đỉnh. Chắc chắn rằng đây sẽ là sản phẩm mà bất kỳ ai cũng mong muốn sở hữu.','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Hồng',NULL),('SP13','Màn hình LG UltraWide ',10500000,3,'Màn hình','1.jpg','29WQ600 29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Tím',NULL),('SP14','Màn hình MSI UltraWide',11500000,5,'Màn hình','4.jpg','29 inch','Màn hình LG Ultrawide 29WQ600 29 inch được cấu tạo từ tấm nền IPS chuẩn FHD với độ phân giải 2560*1080 cho chất lượng hình ảnh luôn chi tiết và rõ nét. Sản phẩm tái tạo màu sắc rực rỡ nhờ tích hợp HDR 10 và gam màu sRGB 99%. Tốc độ làm tươi 100Hz cùng công nghệ AMD FreeSync đảm bảo chuyển động khung hình mượt mà và độ trễ thấp. Thiết kế thiết bị cực bắt mắt, hầu như không thấy đường viền ở 3 cạnh màn hình. ','2024-12-15','admin',NULL,'2024-12-17','admin',1,'Đỏ',NULL),('SP15','Samsung Galaxy S24  ',10000000,12,'Laptop',NULL,'','','2024-12-22','admin','2024-12-22',NULL,NULL,0,NULL,NULL);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +301,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES ('admin'),('customer');
+INSERT INTO `role` VALUES ('admin'),('approver'),('customer');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -329,7 +357,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('admin','$2a$10$1QD9Gmdb7AwRI9wuHZDQmeCHEotxy6W.RTAMLlRE9cqzcJmMGxPnG','admin@gmail.com','admin','0123456789','admin','Da Nang'),('customer','$2a$10$CKVLu/PweNXh5Zsh2h8Sv.lr2yBSMTaKdSXB/MS0rOm2M2n3.xQ1q','customer@gmail.com','customeer','0123456788','customer','Ha Noi');
+INSERT INTO `user` VALUES ('admin','$2a$10$1QD9Gmdb7AwRI9wuHZDQmeCHEotxy6W.RTAMLlRE9cqzcJmMGxPnG','admin@gmail.com','admin','0123456789','admin','Da Nang'),('approver','$2a$10$MhNVbPaeIunmrZnuNkcT6ecLLInocUr8oROtuYxW0Vm/mut6LVr/.','approver@gmail.com','Huỳnh Nam Cát','0703039949','approver','Hà Nội'),('customer','$2a$10$CKVLu/PweNXh5Zsh2h8Sv.lr2yBSMTaKdSXB/MS0rOm2M2n3.xQ1q','customer@gmail.com','customeer','0123456788','customer','Ha Noi');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,4 +374,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-19 18:47:49
+-- Dump completed on 2024-12-22 17:51:36

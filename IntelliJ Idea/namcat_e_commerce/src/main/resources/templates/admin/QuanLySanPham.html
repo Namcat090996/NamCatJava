@@ -243,7 +243,8 @@
                         <thead>
                         <tr>
                             <th></th>
-                            <th></th>
+                            <th>Id</th>
+                            <th>Image</th>
                             <th style="width: 160px">Name</th>
                             <th>Price</th>
                             <th>Stock</th>
@@ -263,6 +264,7 @@
                             <td style="align-content: center">
                                 <input type="checkbox" name="chonSanPham" th:value="${sp.maSanPham}"/>
                             </td>
+                            <td th:text="${sp.maSanPham}"></td>
                             <td  style="text-align: center">
                                 <img th:src="@{'/images/' + ${sp.anhSanPham}}" width="120" height="120"/>
                             </td>

@@ -275,7 +275,7 @@ public class SanPhamImpl implements SanPhamDao {
     @Override
     public List<SanPham> getList() {
         
-        String strSQL = "Select s from SanPham s where s.daDuyet = 1";
+        String strSQL = "Select s from SanPham s";
         
         //Khai báo danh sách
         List<SanPham> lstSP = new ArrayList<>();

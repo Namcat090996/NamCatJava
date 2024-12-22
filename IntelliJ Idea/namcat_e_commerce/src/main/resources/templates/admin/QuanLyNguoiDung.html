@@ -135,14 +135,14 @@
         </ul>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="tile" style="height: 150px">
                 <form method="get" th:action="@{/admin/nguoidung}">
                     <fieldset>
                         <legend class="legend">Nhập thông tin tìm kiếm</legend>
                         <div class="row">
-                            <div class="col-md-2 d-flex align-items-center justify-content-end">Từ khóa:</div>
-                            <div class="input col-md-6">
+                            <div class="col-md-1 d-flex align-items-center justify-content-end">Từ khóa:</div>
+                            <div class="input col-md-3">
                                 <input type="text" name="tuKhoa" th:value="${tuKhoa}" th:class="form-control" placeholder="Nhập từ khóa tìm kiếm"/>
                             </div>
                             <div th:class="col-md-2">

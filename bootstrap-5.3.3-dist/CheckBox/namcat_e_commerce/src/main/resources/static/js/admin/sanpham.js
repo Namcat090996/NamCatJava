@@ -23,9 +23,12 @@ function xuLyThemMoi() {
     formData.append("ngayTao", $("#demoDate").val());
 
     // Thêm file nếu người dùng chọn
-    const file = $("#fUpload")[0]?.files[0];
-    if (file) {
-        formData.append("fUpload", file);
+    const files = $("#fUpload")[0]?.files;
+    if (files && files.length > 0) {
+        // Lặp qua từng file và thêm vào formData
+        for (let i = 0; i < files.length; i++) {
+            formData.append("fUpload", files[i]);
+        }
     }
 
     $.ajax({

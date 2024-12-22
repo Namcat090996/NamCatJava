@@ -6,8 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import vn.com.namcat_e_commerce.entities.AnhSanPham;
 import vn.com.namcat_e_commerce.entities.Message;
 import vn.com.namcat_e_commerce.entities.SanPham;
+import vn.com.namcat_e_commerce.service.AnhSanPhamService;
 import vn.com.namcat_e_commerce.service.SanPhamService;
 
 import java.io.IOException;
@@ -31,6 +33,9 @@ public class SanPhamApiController {
     @Autowired
     SanPhamService sanPhamService;
     
+    @Autowired
+    AnhSanPhamService anhSanPhamService;
+    
     @GetMapping("/sanpham/{id}")
     public ResponseEntity<?> layChiTiet(@PathVariable("id") String id) {
         
@@ -48,36 +53,40 @@ public class SanPhamApiController {
     @Value("${fileupload.path}")
     private String fUploadPath;
     
-    public String xuLyUploadFile(MultipartFile fUpload) throws IOException {
+    public List<String> xuLyUploadFile(MultipartFile[] fUpload) throws IOException {
         
-        String tenFile = fUpload.getOriginalFilename();
+        List<String> danhSachAnh = new ArrayList<String>();
         
-        String loaiFile = "";
-        
-        String duongDan = fUploadPath;
-        
-        Path directory = Paths.get(duongDan);
-        
-        if(!Files.exists(directory))
+        for(MultipartFile file : fUpload)
         {
-            Files.createDirectories(directory);
+            String tenFile = file.getOriginalFilename();
+            
+            String loaiFile = "";
+            
+            String duongDan = fUploadPath;
+            
+            Path directory = Paths.get(duongDan);
+            
+            if (!Files.exists(directory)) {
+                Files.createDirectories(directory);
+            }
+            
+            Path filePath = directory.resolve(tenFile);
+            
+            file.transferTo(filePath.toFile());
+            
+            if (tenFile.contains(".") && tenFile.lastIndexOf(".") != 0) {
+                loaiFile = tenFile.substring(tenFile.lastIndexOf(".") + 1).toLowerCase();
+            }
+            
+            danhSachAnh.add(tenFile + "," + loaiFile);
         }
-        
-        Path filePath = directory.resolve(tenFile);
-        
-        fUpload.transferTo(filePath.toFile());
-        
-        if(tenFile.contains(".") && tenFile.lastIndexOf(".") != 0)
-        {
-            loaiFile = tenFile.substring(tenFile.lastIndexOf(".") + 1).toLowerCase();
-        }
-        
-        return tenFile + "," + loaiFile;
+
+        return danhSachAnh;
     }
     
     @PostMapping(value = "/sanpham/themmoi", consumes = {"multipart/form-data"})
-    public ResponseEntity<?> themMoi(@ModelAttribute("Online_User") String onlineUser, @RequestParam Map<String, String> sanpham,
-                                     @RequestParam(value = "fUpload", required = false) MultipartFile fUpload) {
+    public ResponseEntity<?> themMoi(@ModelAttribute("Online_User") String onlineUser, @RequestParam Map<String, String> sanpham, @RequestParam(value = "fUpload", required = false) MultipartFile[] fUpload) {
         
         List<Message> msg = new ArrayList<Message>();
         
@@ -121,27 +130,12 @@ public class SanPhamApiController {
             msg.add(new Message("er_tonKho", "Số lượng tồn kho phải là số nguyên dương"));
         }
         
-        String tenFile = "";
-        String loaiFile = "";
+        //Bắt lỗi mô tả
+        String moTa = sanpham.get("moTa");
         
-        //Xu ly upload file
-        if (fUpload != null && !fUpload.isEmpty()) {
-            try {
-                String fileUpload = xuLyUploadFile(fUpload);
-                
-                String[] uploadInfo = fileUpload.split(",");
-                
-                tenFile = uploadInfo[0];
-                loaiFile = uploadInfo[1];
-                
-                if (!loaiFile.equals("jpg") && !loaiFile.equals("png")) {
-                    msg.add(new Message("er_image", "Chỉ cho phép tải file ảnh jpg hoặc png"));
-                }
-            } catch (Exception ex) {
-                msg.add(new Message("er_image", "Có lỗi khi tải ảnh"));
-            }
-        } else {
-            msg.add(new Message("er_image", "Vui lòng tải lên ảnh sản phẩm"));
+        if(moTa.length() > 20)
+        {
+            msg.add(new Message("er_moTa", "Mô tả sản phẩm chỉ được tối đa 20 kí tự"));
         }
         
         // Xử lý ngày tạo
@@ -158,13 +152,6 @@ public class SanPhamApiController {
             ngayTao = LocalDate.now();
         }
         
-        String moTa = sanpham.get("moTa");
-        
-        if(moTa.length() > 20)
-        {
-            msg.add(new Message("er_moTa", "Mô tả sản phẩm chỉ được tối đa 20 kí tự"));
-        }
-        
         if (!msg.isEmpty()) {
             return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
         }
@@ -176,7 +163,6 @@ public class SanPhamApiController {
         objSP.setGiaSanPham(giaSanPham);
         objSP.setTonKho(tonKho);
         objSP.setLoaiSanPham(sanpham.get("loaiSanPham"));
-        objSP.setAnhSanPham(tenFile);
         objSP.setMoTa(moTa);
         objSP.setNoiDung(sanpham.get("noiDung"));
         objSP.setNgayTao(ngayTao);
@@ -185,6 +171,48 @@ public class SanPhamApiController {
         objSP.setMauSac(sanpham.get("mauSac"));
         
         boolean ketQua = sanPhamService.add(objSP);
+        
+        //Xu ly upload file
+        if(fUpload != null && fUpload.length > 0) {
+            
+            String tenFile = "";
+            String loaiFile = "";
+            
+            try {
+                List<String> files = xuLyUploadFile(fUpload);
+                
+                for(String file : files)
+                {
+                    AnhSanPham objAnhSP = new AnhSanPham();
+                    String[] uploadInfo = file.split(",");
+                    
+                    tenFile = uploadInfo[0];
+                    loaiFile = uploadInfo[1];
+                    if (!loaiFile.equals("jpg") && !loaiFile.equals("png")) {
+                        ketQua = sanPhamService.delete(objSP.getMaSanPham());
+                        msg.add(new Message("er_image", "Chỉ cho phép tải file ảnh jpg hoặc png"));
+                        return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
+                    }
+                    
+                    objAnhSP.setMaSanPham(maSanPham);
+                    objAnhSP.setAnhSanPham(tenFile);
+                    
+                    boolean kqAnh = anhSanPhamService.add(objAnhSP);
+                }
+                
+                //Gán ảnh chính là ảnh đầu tiên
+                String[] thongTinAnhDauTien = files.get(0).split(",");
+                String tenAnh = thongTinAnhDauTien[0];
+                objSP.setAnhSanPham(tenAnh);
+                
+                ketQua = sanPhamService.update(objSP);
+                
+            } catch (Exception ex) {
+                ketQua = sanPhamService.delete(objSP.getMaSanPham());
+                msg.add(new Message("er_image", "Có lỗi khi tải ảnh lên"));
+                return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
+            }
+        }
         
         if (ketQua) {
             return new ResponseEntity<SanPham>(objSP, HttpStatus.OK);
@@ -197,7 +225,7 @@ public class SanPhamApiController {
     @PutMapping(value = "/sanpham/capnhat/{id}", consumes = {"multipart/form-data"})
     public ResponseEntity<?> capNhat(@PathVariable("id") String maSanPham,
                                      @RequestParam Map<String, String> sanpham,
-                                     @RequestParam(value = "fUpload", required = false) MultipartFile fUpload) {
+                                     @RequestParam(value = "fUpload", required = false) MultipartFile[] fUpload) {
         
         List<Message> msg = new ArrayList<Message>();
         SanPham objSP = sanPhamService.findById(maSanPham);
@@ -233,27 +261,78 @@ public class SanPhamApiController {
             msg.add(new Message("er_tonKho", "Số lượng tồn kho phải là số nguyên dương"));
         }
         
-        String tenFile = "";
-        if (objSP != null) {
-            tenFile = objSP.getAnhSanPham();
-        }
-        String loaiFile = "";
-        
         //Xu ly upload file
-        if (fUpload != null && !fUpload.isEmpty()) {
+        if(fUpload != null && fUpload.length > 0) {
+            
+            String tenFile = "";
+            String loaiFile = "";
+            
             try {
-                String fileUpload = xuLyUploadFile(fUpload);
+                //Xử lý ảnh
+                List<String> files = xuLyUploadFile(fUpload);
                 
-                String[] uploadInfo = fileUpload.split(",");
+                //Lấy ds ảnh cũ để so sánh
+                List<AnhSanPham> lstASPOld = anhSanPhamService.timTheoMaSP(maSanPham);
                 
-                tenFile = uploadInfo[0];
-                loaiFile = uploadInfo[1];
+                //Tạo danh sách ảnh cũ cần xóa(không có trong list mới)
+                List<AnhSanPham> anhCanXoa = new ArrayList<>();
                 
-                if (!loaiFile.equals("jpg") && !loaiFile.equals("png")) {
-                    msg.add(new Message("er_image", "Chỉ cho phép tải file ảnh jpg hoặc png"));
+                //Tạo danh sách ảnh mới
+                List<String> lstAnhMoi = new ArrayList<>();
+                
+                //Lấy danh sách ảnh mới
+                for(String anh : files)
+                {
+                    String[] uploadInfo = anh.split(",");
+                    tenFile = uploadInfo[0];
+                    loaiFile = uploadInfo[1];
+                    lstAnhMoi.add(tenFile);
+                    if (!loaiFile.equals("jpg") && !loaiFile.equals("png")) {
+                        msg.add(new Message("er_image", "Chỉ cho phép tải file ảnh jpg hoặc png"));
+                        return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
+                    }
                 }
+                
+                //Tạo danh sách ảnh mới cần thêm (chỉ chứa tên ảnh)
+                List<String> anhCanThem = new ArrayList<>(lstAnhMoi);
+                
+                // So sánh danh sách cũ và mới
+                for (AnhSanPham anhCu : lstASPOld) {
+                    boolean tonTai = false;
+                    for (String anhMoi : lstAnhMoi) {
+                        if (anhCu.getAnhSanPham().equals(anhMoi)) {
+                            tonTai = true;
+                            anhCanThem.remove(anhMoi); // Đã tồn tại, không cần thêm
+                            break;
+                        }
+                    }
+                    if (!tonTai) {
+                        anhCanXoa.add(anhCu); // Ảnh cũ không tồn tại trong danh sách mới, cần xóa
+                    }
+                }
+                
+                // Xóa ảnh cũ không còn tồn tại
+                for (AnhSanPham anh : anhCanXoa) {
+                    anhSanPhamService.delete(anh.getId());
+                }
+                
+                for(String anhMoi : anhCanThem)
+                {
+                    AnhSanPham objASP = new AnhSanPham();
+                    objASP.setMaSanPham(maSanPham);
+                    objASP.setAnhSanPham(anhMoi);
+                    
+                    boolean kqAnh = anhSanPhamService.add(objASP);
+                }
+
+                //Gán ảnh chính
+                if(!anhCanThem.isEmpty()) {
+                    String tenAnh = anhCanThem.get(0);
+                    objSP.setAnhSanPham(tenAnh);
+                }
+                
             } catch (Exception ex) {
-                msg.add(new Message("er_image", "Có lỗi khi tải ảnh"));
+                msg.add(new Message("er_image", "Có lỗi khi tải ảnh lên"));
             }
         }
         
@@ -279,7 +358,6 @@ public class SanPhamApiController {
         objSP.setGiaSanPham(giaSanPham);
         objSP.setTonKho(tonKho);
         objSP.setLoaiSanPham(sanpham.get("loaiSanPham"));
-        objSP.setAnhSanPham(tenFile);
         objSP.setMoTa(sanpham.get("moTa"));
         objSP.setNoiDung(sanpham.get("noiDung"));
         objSP.setNgayTao(ngayTao);

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/home/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý thông tin ảnh sản phẩm</title>
+    <script type="text/javascript" th:src="@{/js/admin/jquery-3.7.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/admin/bootstrap.js}"></script>
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/main.css}">
+    <!-- Essential javascripts for application to work-->
+    <script th:src="@{/js/admin/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/js/admin/popper.min.js}"></script>
+    <script th:src="@{/js/admin/bootstrap.min.js}"></script>
+    <script th:src="@{/js/admin/main.js}"></script>
+    <script type="text/javascript" th:src="@{/js/admin/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/admin/nguoidung.js}"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script th:src="@{/js/admin/plugins/pace.min.js}"></script>
+    <!-- Page specific javascripts-->
+    <!-- Data table plugin-->
+    <script type="text/javascript" th:src="@{/js/admin/plugins/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/admin/plugins/dataTables.bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/admin/plugins/bootstrap-datepicker.min.js}"></script>
+    <style type="text/css">
+        .input {
+            padding-left: 0px;
+        }
+
+        .legend {
+            position: relative;
+            left: 15px;
+            bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        .search {
+            transition: background-color 0.6s ease;
+            position: relative;
+            left: 40px;
+        }
+
+        .search:hover {
+            background-color: #3ebf9a;
+        }
+
+        .btn-secondary {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i> Quản lý thông tin ảnh sản phẩm</h1>
+            <p>Danh sách thông tin ảnh sản phẩm trong hệ thống</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin/anhsanpham}">Quản lý ảnh sản phẩm</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile" style="height: 150px">
+                <form method="get" th:action="@{/admin/anhsanpham}" th:object="${sanpham}">
+                    <fieldset>
+                        <legend class="legend">Nhập thông tin tìm kiếm</legend>
+                        <div class="row">
+                            <div class="col-md-1 d-flex align-items-center justify-content-end">Mã sản phẩm:</div>
+                            <div class="input col-md-3">
+                                <select th:field="*{tuKhoa}" th:class="form-control">
+                                    <option value="" label="Chọn mã sản phẩm"></option>
+                                    <th:block th:each="msp : ${lstSP}">
+                                        <option th:value="${msp.maSanPham}" th:text="${msp.maSanPham}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div th:class="col-md-3">
+                                <button type="submit" class="search btn btn-secondary">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <table class="table table-hover table-bordered" id="sampleTable1">
+                        <thead>
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>Ảnh sản phẩm</th>
+                            <th style="width: 60px"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="s : ${lstASP}">
+                            <td th:text="${s.maSanPham}"></td>
+                            <td th:text="${s.anhSanPham}"></td>
+                            <td style="text-align: center; padding: 12px 0px 12px 0px">
+                                <a class="btn btn-danger" href="#" th:onclick="thucHienXoa_ASP([[${s.id}]])" title="Xóa ảnh sản phẩm">Xóa
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -189,8 +189,9 @@ public class SanPhamApiController {
                     tenFile = uploadInfo[0];
                     loaiFile = uploadInfo[1];
                     if (!loaiFile.equals("jpg") && !loaiFile.equals("png")) {
-                        Message msg1 = new Message("er_image", "Chỉ cho phép tải file ảnh jpg hoặc png");
-                        return new ResponseEntity<Message>(msg1, HttpStatus.BAD_REQUEST);
+                        ketQua = sanPhamService.delete(objSP.getMaSanPham());
+                        msg.add(new Message("er_image", "Chỉ cho phép tải file ảnh jpg hoặc png"));
+                        return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
                     }
                     
                     objAnhSP.setMaSanPham(maSanPham);
@@ -198,9 +199,18 @@ public class SanPhamApiController {
                     
                     boolean kqAnh = anhSanPhamService.add(objAnhSP);
                 }
+                
+                //Gán ảnh chính là ảnh đầu tiên
+                String[] thongTinAnhDauTien = files.get(0).split(",");
+                String tenAnh = thongTinAnhDauTien[0];
+                objSP.setAnhSanPham(tenAnh);
+                
+                ketQua = sanPhamService.update(objSP);
+                
             } catch (Exception ex) {
-                Message msg1 = new Message("er_image", "Có lỗi khi tải ảnh lên");
-                return new ResponseEntity<Message>(msg1, HttpStatus.BAD_REQUEST);
+                ketQua = sanPhamService.delete(objSP.getMaSanPham());
+                msg.add(new Message("er_image", "Có lỗi khi tải ảnh lên"));
+                return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
             }
         }
         
@@ -278,8 +288,8 @@ public class SanPhamApiController {
                     loaiFile = uploadInfo[1];
                     lstAnhMoi.add(tenFile);
                     if (!loaiFile.equals("jpg") && !loaiFile.equals("png")) {
-                        Message msg1 = new Message("er_image", "Chỉ cho phép tải file ảnh jpg hoặc png");
-                        return new ResponseEntity<Message>(msg1, HttpStatus.BAD_REQUEST);
+                        msg.add(new Message("er_image", "Chỉ cho phép tải file ảnh jpg hoặc png"));
+                        return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
                     }
                 }
                 
@@ -314,10 +324,15 @@ public class SanPhamApiController {
                     
                     boolean kqAnh = anhSanPhamService.add(objASP);
                 }
+
+                //Gán ảnh chính
+                if(!anhCanThem.isEmpty()) {
+                    String tenAnh = anhCanThem.get(0);
+                    objSP.setAnhSanPham(tenAnh);
+                }
                 
             } catch (Exception ex) {
-                Message msg1 = new Message("er_image", "Có lỗi khi tải ảnh lên");
-                return new ResponseEntity<Message>(msg1, HttpStatus.BAD_REQUEST);
+                msg.add(new Message("er_image", "Có lỗi khi tải ảnh lên"));
             }
         }
         

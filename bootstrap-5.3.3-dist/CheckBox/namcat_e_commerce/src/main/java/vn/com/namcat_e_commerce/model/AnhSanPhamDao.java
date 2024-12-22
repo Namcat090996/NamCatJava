@@ -7,6 +7,4 @@ import java.util.List;
 public interface AnhSanPhamDao extends IHanhDong<AnhSanPham, Integer> {
     
     public List<AnhSanPham> layAnhTheoMaSP(String maSP);
-    
-    public List<AnhSanPham> layDanhSachAnh(String tuKhoa);
 }

@@ -1,22 +1,14 @@
 package vn.com.namcat_e_commerce.model;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import vn.com.namcat_e_commerce.entities.AnhSanPham;
-import vn.com.namcat_e_commerce.entities.NguoiDung;
 import vn.com.namcat_e_commerce.entities.SanPham;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class AnhSanPhamImpl implements AnhSanPhamDao {
-    
-    @PersistenceContext
-    EntityManager entityManager;
     
     @Autowired
     AnhSanPhamRepository anhSanPhamRepository;
@@ -24,31 +16,6 @@ public class AnhSanPhamImpl implements AnhSanPhamDao {
     @Override
     public List<AnhSanPham> layAnhTheoMaSP(String maSP) {
         return anhSanPhamRepository.findAllByMaSanPham(maSP);
-    }
-    
-    @Override
-    public List<AnhSanPham> layDanhSachAnh(String tuKhoa) {
-        
-        String strSQL = "Select s from AnhSanPham s where 1=1";
-        
-        if(tuKhoa!= null && !tuKhoa.isEmpty())
-        {
-            strSQL += " and s.maSanPham = :tuKhoa";
-        }
-        
-        //Khai báo danh sách
-        List<AnhSanPham> lstASP = new ArrayList<>();
-        
-        TypedQuery<AnhSanPham> query = entityManager.createQuery(strSQL, AnhSanPham.class);
-        
-        if(tuKhoa!= null && !tuKhoa.isEmpty())
-        {
-            query.setParameter("tuKhoa",tuKhoa);
-        }
-        
-        lstASP = query.getResultList();
-        
-        return lstASP;
     }
     
     @Override

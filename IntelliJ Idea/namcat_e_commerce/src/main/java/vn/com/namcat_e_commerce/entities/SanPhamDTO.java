@@ -1,6 +1,7 @@
 package vn.com.namcat_e_commerce.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class SanPhamDTO {
     
@@ -35,6 +36,16 @@ public class SanPhamDTO {
     private String mauSac;
     
     private String giaTienFormat;
+    
+    private List<AnhSanPham> lstASP;
+    
+    public List<AnhSanPham> getLstASP() {
+        return lstASP;
+    }
+    
+    public void setLstASP(List<AnhSanPham> lstASP) {
+        this.lstASP = lstASP;
+    }
     
     public String getMaSanPham() {
         return maSanPham;

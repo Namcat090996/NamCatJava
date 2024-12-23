@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import vn.com.namcat_e_commerce.entities.AnhSanPham;
 import vn.com.namcat_e_commerce.entities.DaDuyet;
 import vn.com.namcat_e_commerce.entities.SanPham;
+import vn.com.namcat_e_commerce.service.AnhSanPhamService;
 import vn.com.namcat_e_commerce.service.SanPhamService;
 
 import java.util.List;

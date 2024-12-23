@@ -95,6 +95,7 @@
                         <tr>
                             <th>Mã sản phẩm</th>
                             <th>Ảnh sản phẩm</th>
+                            <th style="width: 200px"></th>
                             <th style="width: 60px"></th>
                         </tr>
                         </thead>
@@ -102,6 +103,9 @@
                         <tr th:each="s : ${lstASP}">
                             <td th:text="${s.maSanPham}"></td>
                             <td th:text="${s.anhSanPham}"></td>
+                            <td style="text-align: center">
+                                <img th:src="@{'/images/' + ${s.anhSanPham}}" width="130" height="130"/>
+                            </td>
                             <td style="text-align: center; padding: 12px 0px 12px 0px">
                                 <a class="btn btn-danger" href="#" th:onclick="thucHienXoa_ASP([[${s.id}]])" title="Xóa ảnh sản phẩm">Xóa
                                 </a>

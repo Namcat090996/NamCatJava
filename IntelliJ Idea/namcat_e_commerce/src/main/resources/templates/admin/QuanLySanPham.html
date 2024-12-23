@@ -244,24 +244,24 @@
                         <tr>
                             <th></th>
                             <th>Id</th>
-                            <th>Image</th>
-                            <th style="width: 160px">Name</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Category</th>
-                            <th>Created Date</th>
-                            <th>Creator</th>
-                            <th>Updated Date</th>
-                            <th>Approved Date</th>
-                            <th>Reviewer</th>
-                            <th>Approved</th>
+                            <th>Ảnh SP</th>
+                            <th style="width: 160px">Tên SP</th>
+                            <th>Giá SP</th>
+                            <th>Tồn kho</th>
+                            <th>Loại SP</th>
+                            <th>Ngày tạo</th>
+                            <th>Người tạo</th>
+                            <th>Ngày cập nhật</th>
+                            <th>Ngày duyệt</th>
+                            <th>Người duyệt</th>
+                            <th>Đã duyệt</th>
                             <th style="width: 50px; text-align: center"></th>
                             <th style="width: 40px; text-align: center"></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="sp : ${lstSP}">
-                            <td style="align-content: center">
+                            <td>
                                 <input type="checkbox" name="chonSanPham" th:value="${sp.maSanPham}"/>
                             </td>
                             <td th:text="${sp.maSanPham}"></td>

@@ -138,7 +138,7 @@ public class SanPhamImpl implements SanPhamDao {
         
         if(tuKhoa!= null && !tuKhoa.isEmpty())
         {
-            strSQL += " and (s.tenSanPham like :tuKhoa or s.moTa like :tuKhoa)";
+            strSQL += " and (s.tenSanPham like :tuKhoa or s.moTa like :tuKhoa or s.maSanPham like :tuKhoa)";
         }
         
         if(loaiSanPham!= null && !loaiSanPham.isEmpty())

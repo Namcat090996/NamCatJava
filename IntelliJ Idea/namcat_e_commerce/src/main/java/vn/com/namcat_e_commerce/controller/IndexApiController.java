@@ -24,7 +24,7 @@ public class IndexApiController {
     AnhSanPhamService anhSanPhamService;
     
     @GetMapping("/sanpham/xemnhanh/{id}")
-    public ResponseEntity<?> xemNhanhSP(@PathVariable("id") String id, Model model) {
+    public ResponseEntity<?> xemNhanhSP(@PathVariable("id") String id) {
         
         SanPham objSP = sanPhamService.findById(id);
         List<AnhSanPham> lstASP_F = anhSanPhamService.timTheoMaSP(id);

@@ -20,6 +20,18 @@ public class GioHang {
     @Column(name = "quantity", nullable = true)
     private int soLuong;
     
+    @Column(name = "price", nullable = true)
+    private int giaSanPham;
+    
+    @Column(name = "total_price", nullable = true)
+    private int tongTien = 0;
+    
+    @Column(name = "image", nullable = true, length = 255)
+    private String anhSanPham;
+    
+    @Column(name = "product_name", nullable = true, length = 255)
+    private String tenSanPham;
+    
     public int getId() {
         return id;
     }
@@ -50,5 +62,37 @@ public class GioHang {
     
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
+    }
+    
+    public int getGiaSanPham() {
+        return giaSanPham;
+    }
+    
+    public void setGiaSanPham(int giaSanPham) {
+        this.giaSanPham = giaSanPham;
+    }
+    
+    public int getTongTien() {
+        return tongTien;
+    }
+    
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
+    
+    public String getAnhSanPham() {
+        return anhSanPham;
+    }
+    
+    public void setAnhSanPham(String anhSanPham) {
+        this.anhSanPham = anhSanPham;
+    }
+    
+    public String getTenSanPham() {
+        return tenSanPham;
+    }
+    
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
     }
 }

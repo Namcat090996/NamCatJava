@@ -43,7 +43,7 @@ public class NguoiDungApiController {
         String tenNguoiDung = objND.getTenNguoiDung();
         
         if(!tenNguoiDung.matches("^[A-Za-z0-9+_.-]+$")) {
-            msg.add(new Message("er_tenNguoiDung", "Tên người dùng không được chứa các kí tự đặc biệt"));
+            msg.add(new Message("er_tenNguoiDung", "Tên người dùng không được chứa các kí tự đặc biệt, không được chứa dấu cách"));
         }
         
         NguoiDung objNDCheck = nguoiDungSevice.findById(tenNguoiDung);

@@ -13,6 +13,10 @@ public class SanPhamService {
     @Autowired
     SanPhamDao sanPhamDao;
     
+    public List<SanPham> timTheoLoaiSP(String loaiSP) {
+        return sanPhamDao.timSPTheoLoai(loaiSP);
+    }
+    
     public List<SanPham> layDSLaptop() {
         return sanPhamDao.layDSLaptop();
     }

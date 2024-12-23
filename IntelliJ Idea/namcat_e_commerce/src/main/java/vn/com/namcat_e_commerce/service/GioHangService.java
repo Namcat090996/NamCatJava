@@ -11,6 +11,8 @@ import vn.com.namcat_e_commerce.model.GioHangDao;
 import vn.com.namcat_e_commerce.model.SanPhamDao;
 import vn.com.namcat_e_commerce.model.SanPhamRepository;
 
+import java.util.List;
+
 @Service
 public class GioHangService {
     
@@ -19,6 +21,10 @@ public class GioHangService {
     
     @Autowired
     SanPhamDao sanPhamDao;
+    
+    public List<GioHang> layDSGioHangTheoTenNguoiDung(String tenNguoiDung) {
+        return gioHangDao.layDSGioHangTheoNguoiDung(tenNguoiDung);
+    }
     
     public boolean add(GioHang objGH) {
         
@@ -52,5 +58,15 @@ public class GioHangService {
     public GioHang layChiTietGH_TND_MSP(String tenNguoiDung, String maSanPham)
     {
         return gioHangDao.layChiTietGH_TND_MSP(tenNguoiDung, maSanPham);
+    }
+    
+    public boolean xoa(Integer id)
+    {
+        return gioHangDao.delete(id);
+    }
+    
+    public GioHang timGioHang(Integer id)
+    {
+        return gioHangDao.findById(id);
     }
 }

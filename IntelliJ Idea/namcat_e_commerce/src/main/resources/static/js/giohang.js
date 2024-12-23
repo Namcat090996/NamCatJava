@@ -6,7 +6,7 @@ function GH_them(maSanPham) {
         async: true,
         contentType: "application/json; charset=utf-8;",
         success: function (data) {
-            if(data.name === "GH_success") {
+            if(data.name === "GH_add") { //Nếu thêm sản phẩm chưa tồn tại, thì tăng số lượng hiển thị trên trang
                 //Hiển thị thông báo thêm vào giỏ thành công trong 1s
                 $("#GH_TBThanhCong").modal("show");
                 setTimeout(function () {
@@ -21,6 +21,15 @@ function GH_them(maSanPham) {
                 else {
                     $("#GH_SoLuong").text(0);
                 }
+
+            }
+            else if (data.name === "GH_update") {
+                //Hiển thị thông báo thêm vào giỏ thành công trong 1s
+                $("#GH_TBThanhCong").modal("show");
+                setTimeout(function () {
+                    $("#GH_TBThanhCong").modal("hide");
+                }, 1000);
+
             }
         },
         error: function (error) {

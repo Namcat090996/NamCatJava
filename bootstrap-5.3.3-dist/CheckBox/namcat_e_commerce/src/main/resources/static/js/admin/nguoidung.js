@@ -101,3 +101,25 @@ function thucHienXoa_ND() {
     });
 }
 
+function thucHienXoa_ASP(id) {
+
+    $.ajax({
+        url: '/api/anhsanpham/xoa/' + id,
+        contentType: "application/json; charset=utf-8;",
+        dataType: "json",
+        type: "DELETE",
+        success: function (data) {
+            if (data.name != null) {
+                //Reload lại trang
+                window.location.reload();
+            } else {
+                $(`#${data.name}`).text(data.message);
+            }
+        },
+        error: function (error) {
+            alert(error.responseJSON.message);
+            console.log(this.url);
+        }
+    });
+}
+

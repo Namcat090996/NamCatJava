@@ -10,10 +10,27 @@ function thongTinChiTiet_QV(maSP) {
             //Hiển thị lên giao diện
             $("#maSP").text(data.maSanPham);
             $(".tenSanPham_QV").text(data.tenSanPham);
-            $(".anhSanPham_QV1").attr("src", "/images/" + data.anhSanPham);
             $(".moTa_QV").text(data.moTa);
             $(".giaSanPham_QV").text(data.giaTienFormat);
             $(".noiDung_QV").text(data.noiDung);
+
+            if(data.lstASP.length > 0) {
+                // Lấy tối đa 6 ảnh
+                const danhSachAnh = data.lstASP.slice(0, 6);
+
+                // Gán từng ảnh vào từng class
+                danhSachAnh.forEach((anh, index) => {
+                    const className = `.anhSanPham_QV${index + 1}`; // Tạo class tương ứng
+                    const imgElement = $(className); // Tìm phần tử ảnh
+                    if (imgElement.length) {
+                        imgElement.attr("src", '/images/' + anh.anhSanPham); // Gán src
+                    }
+                });
+            }
+            else {
+                $('.').empty();
+                $('#anh_small').empty();
+            }
         },
         error: function (xhr, status, error) {
             console.error("Lỗi khi lấy thông tin sản phẩm:", error);

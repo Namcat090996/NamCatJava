@@ -213,6 +213,11 @@ public class SanPhamApiController {
                 return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
             }
         }
+        else {
+            ketQua = sanPhamService.delete(objSP.getMaSanPham());
+            msg.add(new Message("er_image", "Vui lòng tải lên ít nhất 01 ảnh sản phẩm"));
+            return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
+        }
         
         if (ketQua) {
             return new ResponseEntity<SanPham>(objSP, HttpStatus.OK);
@@ -335,6 +340,7 @@ public class SanPhamApiController {
                 msg.add(new Message("er_image", "Có lỗi khi tải ảnh lên"));
             }
         }
+
         
         // Xử lý ngày tạo
         LocalDate ngayTao;

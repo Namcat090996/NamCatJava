@@ -19,6 +19,15 @@ public class AnhSanPhamService {
         return anhSanPhamDao.layAnhTheoMaSP(maSP);
     }
     
+    public List<AnhSanPham> layDanhSachAnh(String tuKhoa)
+    {
+        return anhSanPhamDao.layDanhSachAnh(tuKhoa);
+    }
+    
+    public AnhSanPham findById(Integer id) {
+        return anhSanPhamDao.findById(id);
+    }
+    
     public boolean add(AnhSanPham objAnhSP) {
         return anhSanPhamDao.add(objAnhSP);
     }

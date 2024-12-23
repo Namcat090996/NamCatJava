@@ -3,12 +3,14 @@ package vn.com.namcat_e_commerce.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import vn.com.namcat_e_commerce.entities.Message;
-import vn.com.namcat_e_commerce.entities.NguoiDung;
-import vn.com.namcat_e_commerce.entities.SanPham;
+import vn.com.namcat_e_commerce.entities.*;
+import vn.com.namcat_e_commerce.service.AnhSanPhamService;
 import vn.com.namcat_e_commerce.service.NguoiDungSevice;
 import vn.com.namcat_e_commerce.service.SanPhamService;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -18,18 +20,32 @@ public class IndexApiController {
     @Autowired
     SanPhamService sanPhamService;
     
+    @Autowired
+    AnhSanPhamService anhSanPhamService;
+    
     @GetMapping("/sanpham/xemnhanh/{id}")
-    public ResponseEntity<?> xemNhanhSP(@PathVariable("id") String id) {
+    public ResponseEntity<?> xemNhanhSP(@PathVariable("id") String id, Model model) {
         
         SanPham objSP = sanPhamService.findById(id);
+        List<AnhSanPham> lstASP = anhSanPhamService.timTheoMaSP(id);
         
         if(objSP != null) {
             
+            // Format giá sản phẩm
             String giaSPFormat = String.format("%,dđ", objSP.getGiaSanPham());
             
-            objSP.setGiaTienFormat(giaSPFormat);
+            // Tạo DTO
+            SanPhamDTO sanPhamDTO = new SanPhamDTO();
             
-            return new ResponseEntity<SanPham>(objSP, HttpStatus.OK);
+            sanPhamDTO.setMaSanPham(objSP.getMaSanPham());
+            sanPhamDTO.setTenSanPham(objSP.getTenSanPham());
+            sanPhamDTO.setMoTa(objSP.getMoTa());
+            sanPhamDTO.setNoiDung(objSP.getNoiDung());
+            sanPhamDTO.setMauSac(objSP.getMauSac());
+            sanPhamDTO.setGiaTienFormat(giaSPFormat);
+            sanPhamDTO.setLstASP(lstASP);
+            
+            return new ResponseEntity<SanPhamDTO>(sanPhamDTO, HttpStatus.OK);
         }
         else {
             Message msg = new Message("not_found_qv", "Không tìm thấy sản phẩm với mã: " + id);

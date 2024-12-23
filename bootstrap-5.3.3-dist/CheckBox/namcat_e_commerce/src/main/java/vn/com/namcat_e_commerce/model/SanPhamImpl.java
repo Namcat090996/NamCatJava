@@ -138,7 +138,7 @@ public class SanPhamImpl implements SanPhamDao {
         
         if(tuKhoa!= null && !tuKhoa.isEmpty())
         {
-            strSQL += " and (s.tenSanPham like :tuKhoa or s.moTa like :tuKhoa)";
+            strSQL += " and (s.tenSanPham like :tuKhoa or s.moTa like :tuKhoa or s.maSanPham like :tuKhoa)";
         }
         
         if(loaiSanPham!= null && !loaiSanPham.isEmpty())
@@ -275,7 +275,7 @@ public class SanPhamImpl implements SanPhamDao {
     @Override
     public List<SanPham> getList() {
         
-        String strSQL = "Select s from SanPham s where s.daDuyet = 1";
+        String strSQL = "Select s from SanPham s";
         
         //Khai báo danh sách
         List<SanPham> lstSP = new ArrayList<>();

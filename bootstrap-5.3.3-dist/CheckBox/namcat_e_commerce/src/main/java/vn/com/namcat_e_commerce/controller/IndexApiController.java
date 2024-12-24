@@ -24,10 +24,12 @@ public class IndexApiController {
     AnhSanPhamService anhSanPhamService;
     
     @GetMapping("/sanpham/xemnhanh/{id}")
-    public ResponseEntity<?> xemNhanhSP(@PathVariable("id") String id, Model model) {
+    public ResponseEntity<?> xemNhanhSP(@PathVariable("id") String id) {
         
         SanPham objSP = sanPhamService.findById(id);
-        List<AnhSanPham> lstASP = anhSanPhamService.timTheoMaSP(id);
+        List<AnhSanPham> lstASP_F = anhSanPhamService.timTheoMaSP(id);
+        //Chỉ lấy 6 ảnh đầu trong danh sách
+        List<AnhSanPham> lstASP = lstASP_F.stream().limit(6).toList();
         
         if(objSP != null) {
             

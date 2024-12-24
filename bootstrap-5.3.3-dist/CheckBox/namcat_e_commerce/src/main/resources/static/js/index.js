@@ -16,7 +16,7 @@ function thongTinChiTiet_QV(maSP) {
 
             if(data.lstASP.length > 0) {
                 // Lấy tối đa 6 ảnh
-                const danhSachAnh = data.lstASP.slice(0, 6);
+                const danhSachAnh = data.lstASP;
 
                 // Gán từng ảnh vào từng class
                 danhSachAnh.forEach((anh, index) => {
@@ -28,8 +28,11 @@ function thongTinChiTiet_QV(maSP) {
                 });
             }
             else {
-                $('.').empty();
-                $('#anh_small').empty();
+                for (let i = 0; i < 6; i++) {
+                    const imgElement = $(`.anhSanPham_QV${i + 1}`);
+                    imgElement.attr('src', ''); // Gán src rỗng nếu không có ảnh
+                    imgElement.attr('alt', 'Product Image'); // Đặt alt mặc định
+                }
             }
         },
         error: function (xhr, status, error) {

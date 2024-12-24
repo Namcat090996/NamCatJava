@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home Version One || limupa - Digital Products Store eCommerce Bootstrap 4 Template</title>
+    <title>Trang chủ</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--JS cho modal-->
@@ -30,7 +30,7 @@
                 themVaoGioHang(maSP);
             }
             else {
-                alert("Không thể thêm sản phẩm vào giỏ hàng")
+                alert("Không tìm thấy sản phẩm để thêm vào giỏ hàng")
             }
         }
 
@@ -1642,7 +1642,7 @@
                         <div class="col-lg-5 col-md-6 col-sm-6">
                             <!-- Product Details Left -->
                             <div class="product-details-left">
-                                <div class="product-details-images slider-navigation-1" id="anh_large">
+                                <div class="product-details-images slider-navigation-1">
                                     <div class="lg-image">
                                         <img class="anhSanPham_QV1" src="" alt="product image">
                                     </div>
@@ -1662,7 +1662,7 @@
                                         <img class="anhSanPham_QV6" src="" alt="product image">
                                     </div>
                                 </div>
-                                <div class="product-details-thumbs slider-thumbs-1" id="anh_small">
+                                <div class="product-details-thumbs slider-thumbs-1">
                                     <div class="sm-image">
                                         <img class="anhSanPham_QV1" src="" alt="product image">
                                     </div>
@@ -1711,6 +1711,7 @@
                                         </p>
                                     </div>
                                     <div class="single-add-to-cart">
+                                    <!--Lấy mã sản phẩm gửi từ hàm JS của trang index-->
                                             <input type="hidden" id="maSP">
                                             <a style="cursor: pointer" onclick="themVaoGioHang_Modal()" class="btn btn-outline-warning">Add to cart</a>
                                     </div>

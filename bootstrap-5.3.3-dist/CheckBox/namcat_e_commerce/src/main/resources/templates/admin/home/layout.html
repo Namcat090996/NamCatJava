@@ -87,6 +87,20 @@
             "lengthMenu": "Hiển thị &nbsp;_MENU_&nbsp; người dùng",
         }
     });
+
+    $('#sampleTable2').DataTable({
+        <!--Disable the ascending/descending order in option column-->
+        "columnDefs": [
+            {
+                "targets": [1, 2, 3],
+                "orderable": false
+            }],
+        "order": [], //Disable default order of DataTables to delete the sort of [0] column
+        "language": {
+            "search": "Tìm kiếm nhanh:", // Thay đổi text của hộp tìm kiếm tại đây
+            "lengthMenu": "Hiển thị &nbsp;_MENU_&nbsp; ảnh sản phẩm",
+        }
+    });
 </script>
 </body>
 </html>

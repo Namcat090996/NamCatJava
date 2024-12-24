@@ -8,13 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import vn.com.namcat_e_commerce.entities.GioHang;
 import vn.com.namcat_e_commerce.entities.NguoiDung;
 import vn.com.namcat_e_commerce.model.NguoiDungDao;
 import vn.com.namcat_e_commerce.service.GioHangService;
-
-import java.util.List;
 
 @Controller
 public class DangNhapTCController {
@@ -60,12 +56,8 @@ public class DangNhapTCController {
             //Kiểm tra mật khẩu
             if(BCrypt.checkpw(matKhau, objNDCheck.getMatKhau()))
             {
-                List<GioHang> lstGH = gioHangService.layDSGioHangTheoTenNguoiDung(taiKhoan);
-                String soLuongGH = "" + lstGH.size();
-                
                 //Lưu vào session
                 session.setAttribute("user_Online", taiKhoan);
-                session.setAttribute("soLuongGH", soLuongGH);
                 
                 return "redirect:/trangchu";
             }

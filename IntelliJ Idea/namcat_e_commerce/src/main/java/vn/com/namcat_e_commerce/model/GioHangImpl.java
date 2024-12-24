@@ -30,24 +30,20 @@ public class GioHangImpl implements GioHangDao {
     }
     
     /**
-     * Hàm kiểm tra giỏ hàng đã tồn tại với tên người dùng & mã sản phẩm
+     * Hàm lấy số lượng giỏ hàng theo tên người dùng
      * @param tenNguoiDung
-     * @param maSanPham
      * @return
      */
-    public boolean kiemTraGH_TND_MSP(String tenNguoiDung, String maSanPham)
+    @Override
+    public long soLuongGH_TND(String tenNguoiDung)
     {
-        String strSQL = "Select count(gh) from GioHang gh where gh.tenNguoiDung = :tenNguoiDung and gh.maSanPham = :maSanPham";
+        String strSQL = "Select count(gh) from GioHang gh where gh.tenNguoiDung = :tenNguoiDung";
         
         TypedQuery<Long> query = entityManager.createQuery(strSQL, Long.class);
         
         query.setParameter("tenNguoiDung", tenNguoiDung);
-        query.setParameter("maSanPham", maSanPham);
         
-        //Lấy số lượng kết quả trả về
-        Long count = query.getSingleResult();
-        
-        return count == 1;
+        return query.getSingleResult();
     }
     
     /**
@@ -56,6 +52,7 @@ public class GioHangImpl implements GioHangDao {
      * @param maSanPham
      * @return
      */
+    @Override
     public GioHang layChiTietGH_TND_MSP(String tenNguoiDung, String maSanPham)
     {
         String strSQL = "Select gh from GioHang gh where gh.tenNguoiDung = :tenNguoiDung and gh.maSanPham = :maSanPham";

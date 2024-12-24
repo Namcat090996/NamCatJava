@@ -9,9 +9,10 @@ import java.util.List;
 
 public interface GioHangDao extends IHanhDong<GioHang, Integer> {
     
-    public boolean kiemTraGH_TND_MSP(String tenNguoiDung, String maSanPham);
+    public long soLuongGH_TND(String tenNguoiDung);
     
     public GioHang layChiTietGH_TND_MSP(String tenNguoiDung, String maSanPham);
     
     public List<GioHang> layDSGioHangTheoNguoiDung(String tenNguoiDung);
+    
 }

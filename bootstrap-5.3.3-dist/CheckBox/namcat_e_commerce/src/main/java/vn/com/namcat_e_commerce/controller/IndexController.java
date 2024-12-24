@@ -7,10 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.com.namcat_e_commerce.entities.AnhSanPham;
 import vn.com.namcat_e_commerce.entities.DaDuyet;
+import vn.com.namcat_e_commerce.entities.GioHang;
 import vn.com.namcat_e_commerce.entities.SanPham;
 import vn.com.namcat_e_commerce.service.AnhSanPhamService;
+import vn.com.namcat_e_commerce.service.GioHangService;
 import vn.com.namcat_e_commerce.service.SanPhamService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,6 +21,9 @@ public class IndexController {
     
     @Autowired
     SanPhamService sanPhamService;
+    
+    @Autowired
+    GioHangService gioHangService;
     
     @RequestMapping(value = "/trangchu")
     public String hienThiIndex(Model model, HttpSession session)
@@ -29,15 +35,17 @@ public class IndexController {
         List<SanPham> lstDienThoai = sanPhamService.layDSDienThoai();
         List<SanPham> lstManHinh = sanPhamService.layDSManHinh();
         
-        String soLuong = "";
+        String nguoiDung = "";
+        String soLuong = "0";
         
         if(session.getAttribute("user_Online") != null)
         {
-            soLuong = session.getAttribute("user_Online").toString();
+            nguoiDung = session.getAttribute("user_Online").toString();
         }
-        else
+        
+        if(session.getAttribute("soLuongGH") != null)
         {
-            soLuong = "0";
+            soLuong = session.getAttribute("soLuongGH").toString();
         }
         
         model.addAttribute("lstSPHot", lstSPHot);
@@ -45,7 +53,8 @@ public class IndexController {
         model.addAttribute("lstSlider", lstSlider);
         model.addAttribute("lstDienThoai", lstDienThoai);
         model.addAttribute("lstManHinh", lstManHinh);
-        model.addAttribute("User_Online", soLuong);
+        model.addAttribute("SoLuong", soLuong);
+        model.addAttribute("User_Online", nguoiDung);
         
         return "index";
     }

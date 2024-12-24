@@ -36,7 +36,10 @@ function GH_them(maSanPham) {
             if(error.responseJSON && error.responseJSON.name === "GH_login") {
                 // Hiển thị modal yêu cầu đăng nhập
                 $("#GH_TBDangNhap").modal("show");
-            } else if(error.responseJSON.name && error.responseJSON.name === "GH_fail") {
+            } else if (error.responseJSON && error.responseJSON.name === "GH_out") {
+                // Hiển thị modal thông báo hết hàng
+                $("#GH_HetHang").modal("show");
+            } else if(error.responseJSON && error.responseJSON.name === "GH_fail") {
                 // Hiển thị thông báo lỗi cụ thể
                 alert(error.responseJSON.message);
             } else {

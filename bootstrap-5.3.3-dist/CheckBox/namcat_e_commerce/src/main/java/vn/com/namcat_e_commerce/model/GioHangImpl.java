@@ -20,6 +20,11 @@ public class GioHangImpl implements GioHangDao {
     GioHangRepository gioHangRepository;
     
     @Override
+    public List<GioHang> layDSGioHangTheoNguoiDung(String tenNguoiDung) {
+        return gioHangRepository.findAllByTenNguoiDung(tenNguoiDung);
+    }
+    
+    @Override
     public List<GioHang> getList() {
         return gioHangRepository.findAll();
     }

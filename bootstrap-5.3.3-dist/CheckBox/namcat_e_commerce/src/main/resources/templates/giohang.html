@@ -47,20 +47,17 @@
                                 </thead>
                                 <tbody>
 
-                                    <tr th:each="s : ${lstGH}">
+                                    <tr th:each="s,idx : ${lstGH}">
                                         <td class="li-product-remove"><a th:href="@{'/giohang/xoa/' + ${s.id}}"><i class="fa fa-times"></i></a></td>
                                         <td class="li-product-thumbnail">
-                                            <a th:href="@{'/chitiet/' + ${s.maSanPham}}">
-                                                <img th:src="@{'/images/' + ${s.anhSanPham}}" width="210px" height="200px" alt="Product Image">
-                                            </a>
-
+                                            <img th:src="@{'/images/' + ${s.anhSanPham}}" width="210px" height="200px" alt="Product Image">
                                         </td>
-                                        <td class="li-product-name"><a th:href="@{'/chitiet/' + ${s.maSanPham}}" th:text="${s.tenSanPham}"></a></td>
+                                        <td class="li-product-name"><a th:href="@{'/chitiet/' + ${s.maSanPham}}" th:text="${s.maSanPham}"></a></td>
                                         <td class="li-product-price"><span class="amount" th:text="${#numbers.formatDecimal(s.giaSanPham, 0, 'POINT', 0, 'COMMA') + 'đ'}"></span></td>
                                         <td class="quantity">
                                             <label>Số lượng</label>
                                             <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" th:name="${s.id}" th:value="${s.soLuong}" />
+                                                <input class="cart-plus-minus-box" th:value="${s.soLuong}" type="text" name="lstGioHang[${idx.index}].soLuong">
                                                 <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                 <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                             </div>
@@ -75,7 +72,7 @@
                             <div class="col-12">
                                 <div class="coupon-all">
                                     <div class="coupon2">
-                                        <input class="button" value="Cập nhật giỏ hàng" type="submit"/>
+                                        <input class="button" name="update_cart" value="Update cart" type="submit">
                                     </div>
                                 </div>
                             </div>
@@ -83,12 +80,12 @@
                         <div class="row">
                             <div class="col-md-5 ml-auto">
                                 <div class="cart-page-total">
-                                    <h2>Tổng cộng giỏ hàng</h2>
+                                    <h2>Cart totals</h2>
                                     <ul>
-                                        <li>Tổng tiền <span th:text="${#numbers.formatDecimal(tongTienGH, 0, 'POINT', 0, 'COMMA') + 'đ'}"></span></li>
-                                        <li>Thanh toán <span th:text="${#numbers.formatDecimal(tongTienGH, 0, 'POINT', 0, 'COMMA') + 'đ'}"></span></li>
+                                        <li>Subtotal <span>$130.00</span></li>
+                                        <li>Total <span>$130.00</span></li>
                                     </ul>
-                                    <a href="#">Đi đến trang thanh toán</a>
+                                    <a href="#">Proceed to checkout</a>
                                 </div>
                             </div>
                         </div>

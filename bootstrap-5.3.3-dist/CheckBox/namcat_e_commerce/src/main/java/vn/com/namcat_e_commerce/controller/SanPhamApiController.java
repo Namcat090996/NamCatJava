@@ -152,10 +152,6 @@ public class SanPhamApiController {
             ngayTao = LocalDate.now();
         }
         
-        if (!msg.isEmpty()) {
-            return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
-        }
-        
         SanPham objSP = new SanPham();
         
         objSP.setMaSanPham(maSanPham);
@@ -170,7 +166,7 @@ public class SanPhamApiController {
         objSP.setDaDuyet(0);
         objSP.setMauSac(sanpham.get("mauSac"));
         
-        boolean ketQua = sanPhamService.add(objSP);
+        List<AnhSanPham> lstAnhSP = new ArrayList<AnhSanPham>();
         
         //Xu ly upload file
         if(fUpload != null && fUpload.length > 0) {
@@ -189,15 +185,13 @@ public class SanPhamApiController {
                     tenFile = uploadInfo[0];
                     loaiFile = uploadInfo[1];
                     if (!loaiFile.equals("jpg") && !loaiFile.equals("png")) {
-                        ketQua = sanPhamService.delete(objSP.getMaSanPham());
                         msg.add(new Message("er_image", "Chỉ cho phép tải file ảnh jpg hoặc png"));
-                        return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
                     }
                     
                     objAnhSP.setMaSanPham(maSanPham);
                     objAnhSP.setAnhSanPham(tenFile);
                     
-                    boolean kqAnh = anhSanPhamService.add(objAnhSP);
+                    lstAnhSP.add(objAnhSP);
                 }
                 
                 //Gán ảnh chính là ảnh đầu tiên
@@ -205,18 +199,22 @@ public class SanPhamApiController {
                 String tenAnh = thongTinAnhDauTien[0];
                 objSP.setAnhSanPham(tenAnh);
                 
-                ketQua = sanPhamService.update(objSP);
-                
             } catch (Exception ex) {
-                ketQua = sanPhamService.delete(objSP.getMaSanPham());
                 msg.add(new Message("er_image", "Có lỗi khi tải ảnh lên"));
-                return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
             }
         }
         else {
-            ketQua = sanPhamService.delete(objSP.getMaSanPham());
             msg.add(new Message("er_image", "Vui lòng tải lên ít nhất 01 ảnh sản phẩm"));
+        }
+        
+        if (!msg.isEmpty()) {
             return new ResponseEntity<List<Message>>(msg, HttpStatus.BAD_REQUEST);
+        }
+        
+        boolean ketQua = sanPhamService.add(objSP);
+        
+        for (AnhSanPham anh : lstAnhSP) {
+            boolean kqAnh = anhSanPhamService.add(anh);
         }
         
         if (ketQua) {
@@ -340,7 +338,6 @@ public class SanPhamApiController {
                 msg.add(new Message("er_image", "Có lỗi khi tải ảnh lên"));
             }
         }
-
         
         // Xử lý ngày tạo
         LocalDate ngayTao;

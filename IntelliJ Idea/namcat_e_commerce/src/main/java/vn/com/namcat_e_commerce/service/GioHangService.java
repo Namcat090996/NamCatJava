@@ -50,14 +50,22 @@ public class GioHangService {
         return gioHangDao.add(objGH);
     }
     
-    public boolean kiemTraGH_TND_MSP(String tenNguoiDung, String maSanPham)
+    public long soLuongGH_TND(String tenNguoiDung)
     {
-        return gioHangDao.kiemTraGH_TND_MSP(tenNguoiDung, maSanPham);
+        return gioHangDao.soLuongGH_TND(tenNguoiDung);
     }
     
     public GioHang layChiTietGH_TND_MSP(String tenNguoiDung, String maSanPham)
     {
         return gioHangDao.layChiTietGH_TND_MSP(tenNguoiDung, maSanPham);
+    }
+    
+    public boolean themMoi(GioHang objGH) {
+        return gioHangDao.add(objGH);
+    }
+    
+    public boolean capNhat(GioHang objGH) {
+        return gioHangDao.update(objGH);
     }
     
     public boolean xoa(Integer id)

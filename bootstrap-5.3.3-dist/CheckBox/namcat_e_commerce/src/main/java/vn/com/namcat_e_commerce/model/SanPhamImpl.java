@@ -20,6 +20,11 @@ public class SanPhamImpl implements SanPhamDao {
     SanPhamRepository sanPhamRepository;
     
     @Override
+    public List<SanPham> timSPTheoLoai(String loaiSP) {
+        return sanPhamRepository.findByLoaiSanPham(loaiSP);
+    }
+    
+    @Override
     public List<SanPham> layDSManHinh() {
         
         String strSQL = "Select s from SanPham s where s.daDuyet = 1 and s.loaiSanPham = :loaiSP";

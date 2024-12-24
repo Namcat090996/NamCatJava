@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import vn.com.namcat_e_commerce.entities.NguoiDung;
 import vn.com.namcat_e_commerce.entities.SanPham;
 
 import java.util.ArrayList;
@@ -132,8 +133,30 @@ public class SanPhamImpl implements SanPhamDao {
     }
     
     @Override
-    public List<SanPham> timSPTheoTen(String tuKhoa) {
-        return sanPhamRepository.timTheoTenSanPham(tuKhoa);
+    public List<SanPham> timSPTheoTuKhoa(String tuKhoa) {
+        
+        String strSQL = "Select sp from SanPham sp where 1=1";
+        
+        if(tuKhoa!= null && !tuKhoa.isEmpty())
+        {
+            strSQL += " and (sp.tenSanPham like :tuKhoa or sp.loaiSanPham like :tuKhoa or sp.mauSac like :tuKhoa)";
+        }
+        
+        strSQL += " and sp.daDuyet = 1";
+        
+        //Khai báo danh sách
+        List<SanPham> lstSP = new ArrayList<>();
+        
+        TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
+        
+        if(tuKhoa!= null && !tuKhoa.isEmpty())
+        {
+            query.setParameter("tuKhoa","%" + tuKhoa + "%");
+        }
+        
+        lstSP = query.getResultList();
+        
+        return lstSP;
     }
     
     @Override

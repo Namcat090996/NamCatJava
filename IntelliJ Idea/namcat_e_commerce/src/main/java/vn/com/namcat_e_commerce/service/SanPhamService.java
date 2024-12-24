@@ -38,8 +38,8 @@ public class SanPhamService {
         return sanPhamDao.timSPTheoTenVaLoai(tuKhoa, loaiSP, mauSac);
     }
     
-    public List<SanPham> timSPTheoTen(String tuKhoa) {
-        return sanPhamDao.timSPTheoTen(tuKhoa);
+    public List<SanPham> timSPTheoTuKhoa(String tuKhoa) {
+        return sanPhamDao.timSPTheoTuKhoa(tuKhoa);
     }
     
     public List<SanPham> timSPTheoLoaiVaGia(String loaiSanPham, String order, String mauSac, int tuGia, int denGia) {

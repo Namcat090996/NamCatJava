@@ -5,7 +5,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import vn.com.namcat_e_commerce.entities.NguoiDung;
 import vn.com.namcat_e_commerce.entities.SanPham;
 
 import java.util.ArrayList;
@@ -128,11 +127,6 @@ public class SanPhamImpl implements SanPhamDao {
     }
     
     @Override
-    public List<SanPham> timSPTheoTenVaLoai(String tuKhoa, String loaiSP, String mauSac) {
-        return sanPhamRepository.timSPTheoTenVaLoai(tuKhoa, loaiSP, mauSac);
-    }
-    
-    @Override
     public List<SanPham> timSPTheoTuKhoa(String tuKhoa) {
         
         String strSQL = "Select sp from SanPham sp where 1=1";
@@ -235,18 +229,18 @@ public class SanPhamImpl implements SanPhamDao {
     }
     
     @Override
-    public List<SanPham> timSPTheoLoaiVaGia(String loaiSanPham, String order, String mauSac, int tuGia, int denGia) {
+    public List<SanPham> timSPTheoLoaiVaGiaDaDuyet(List<String> loaiSanPham, String order, List<String> mauSac, int tuGia, int denGia) {
         
         String strSQL = "Select s from SanPham s where 1=1";
         
         if(loaiSanPham!= null && !loaiSanPham.isEmpty())
         {
-            strSQL += " and s.loaiSanPham = :loaiSanPham";
+            strSQL += " and s.loaiSanPham in :loaiSanPham";
         }
         
         if(mauSac != null && !mauSac.isEmpty())
         {
-            strSQL += " and s.mauSac like :mauSac";
+            strSQL += " and s.mauSac in :mauSac";
         }
         
         if(tuGia > 0)
@@ -261,11 +255,11 @@ public class SanPhamImpl implements SanPhamDao {
         
         strSQL += " and s.daDuyet = 1";
         
-        if (order != null) {
+        if (order != null && !order.isEmpty()) {
             if (order.equals("ASC")) {
                 strSQL += " order by s.giaSanPham ASC";
                 
-            } else if (order.equals("DSC")) {
+            } else if (order.equals("DESC")) {
                 strSQL += " order by s.giaSanPham DESC";
             }
         }
@@ -275,14 +269,14 @@ public class SanPhamImpl implements SanPhamDao {
         
         TypedQuery<SanPham> query = entityManager.createQuery(strSQL, SanPham.class);
         
-        if(loaiSanPham!= null && !loaiSanPham.isEmpty())
+        if(loaiSanPham != null && !loaiSanPham.isEmpty())
         {
             query.setParameter("loaiSanPham",loaiSanPham);
         }
         
         if(mauSac != null && !mauSac.isEmpty())
         {
-            query.setParameter("mauSac", "%" + mauSac + "%");
+            query.setParameter("mauSac", mauSac);
         }
         
         if(tuGia > 0)

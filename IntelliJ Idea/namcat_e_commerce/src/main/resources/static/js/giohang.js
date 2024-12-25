@@ -11,7 +11,7 @@ function GH_them(maSanPham) {
                 $("#GH_TBThanhCong").modal("show");
                 setTimeout(function () {
                     $("#GH_TBThanhCong").modal("hide");
-                }, 1000);
+                }, 700);
 
                 //Cập nhật số lượng giỏ hàng được thêm trên trang chủ
                 if($("#User_Online").val()) {

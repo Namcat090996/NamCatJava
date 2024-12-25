@@ -29,7 +29,7 @@ public class DangNhapController {
     @RequestMapping(value = "/logout")
     public String showLogin(Model model, HttpSession session)
     {
-        session.setAttribute("userOnline", null);
+        session.removeAttribute("userOnline");
         return "redirect:/login";
     }
     

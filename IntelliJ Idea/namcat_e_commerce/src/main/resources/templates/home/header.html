@@ -23,7 +23,7 @@
                     <!-- Begin Header Middle Right Area -->
                     <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
                         <!-- Begin Header Middle Searchbox Area -->
-                        <form th:action="@{/timkiem}" class="hm-searchbox" method="get">
+                        <form th:action="@{/timkiem}" class="hm-searchbox" method="post">
                             <input type="text" name="tuKhoa" th:value="${tuKhoa}" placeholder="Nhập từ khóa tìm kiếm sản phẩm">
                             <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
                         </form>
@@ -62,9 +62,9 @@
                                     <li><a th:href="@{/trangchu}">Trang chủ</a></li>
                                     <li><a th:href="@{/timkiem}">Tìm kiếm sản phẩm</a></li>
                                     <li><a th:href="@{/giohang}">Đơn hàng của bạn</a></li>
-                                    <li><a th:href="@{/giohang}">Đăng nhập/Đăng ký</a></li>
-                                    <li><a th:href="@{/giohang}">Đăng xuất</a></li>
-                                    <li style="width: 140px"></li>
+                                    <li th:unless="${User_Online != '' && User_Online != null}"><a th:href="@{/login2}">Đăng nhập/Đăng ký</a></li>
+                                    <li th:if="${User_Online != '' && User_Online != null}"><a th:href="@{/logout2}">Đăng xuất</a></li>
+                                    <li style="width: 290px"></li>
                                     <i th:if="${User_Online != '' && User_Online != null}" class="fa fa-user"></i><li th:if="${User_Online != '' && User_Online != null}" style="padding-left: 10px"><a>Xin chào : [[${User_Online}]]</a></li>
                                 </ul>
                             </nav>

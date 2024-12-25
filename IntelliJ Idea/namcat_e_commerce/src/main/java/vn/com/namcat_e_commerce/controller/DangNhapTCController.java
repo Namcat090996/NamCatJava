@@ -73,4 +73,11 @@ public class DangNhapTCController {
             return "dangnhap_register";
         }
     }
+    
+    @RequestMapping(value = "/logout2")
+    public String showLogin(Model model, HttpSession session)
+    {
+        session.removeAttribute("user_Online");
+        return "redirect:/login2";
+    }
 }

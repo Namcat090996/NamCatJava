@@ -15,4 +15,6 @@ public interface GioHangDao extends IHanhDong<GioHang, Integer> {
     
     public List<GioHang> layDSGioHangTheoNguoiDung(String tenNguoiDung);
     
+    public int xoaGHByTenNguoiDung(String tenNguoiDung);
+    
 }

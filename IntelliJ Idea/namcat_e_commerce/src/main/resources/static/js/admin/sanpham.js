@@ -18,6 +18,7 @@ function xuLyThemMoi() {
     formData.append("giaSanPham", $("#giaSanPham").val());
     formData.append("tonKho", $("#tonKho").val());
     formData.append("loaiSanPham", $("#loaiSanPham").val());
+    formData.append("mauSac", $("#mauSac").val());
     formData.append("moTa", $("#moTa").val());
     formData.append("noiDung", $("#noiDung").val());
     formData.append("ngayTao", $("#demoDate").val());

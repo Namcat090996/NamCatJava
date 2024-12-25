@@ -41,6 +41,31 @@
         }
     </script>
     <style>
+        #timKiem .btn-clear-all::before {
+            content: "\f002";
+            font-family: "fontawesome";
+            margin-right: 15px;
+        }
+
+        #timKiem .btn-clear-all {
+            background: #dddddd none repeat scroll 0 0;
+            border-color: rgba(0, 0, 0, 0);
+            box-shadow: 0.0625rem 0.0625rem 0.0625rem 0 rgba(0, 0, 0, 0.1);
+            color: #333333;
+            cursor: pointer;
+            font-size: 14px;
+            font-size: 0.875rem;
+            line-height: 15px;
+            padding: 5px;
+            -webkit-transition: all 0.3s ease-in-out 0s;
+            transition: all 0.3s ease-in-out 0s;
+            margin-top: 20px;
+        }
+        #timKiem .btn-clear-all:hover {
+            background: #8BC34A none repeat scroll 0 0;
+            color: #fff;
+        }
+
         #GH_TBDangNhap, #GH_TBThanhCong, #GH_HetHang {
             position: fixed;
             margin-left: auto;
@@ -218,52 +243,50 @@
                 </div>
                     <div class="col-lg-3 order-2 order-lg-1">
                         <!--sidebar-categores-box start  -->
-                        <form th:action="@{/timkiem/chitiet}" method="post">
+                        <form th:action="@{/timkiem}" method="post">
                             <div class="sidebar-categores-box">
                                 <div class="sidebar-title">
                                     <h2>Bộ lọc</h2>
                                 </div>
                                 <!-- btn-clear-all start -->
-                                <button class="btn-clear-all mb-sm-30 mb-xs-30" type="submit">Tìm kiếm</button>
-                                <button class="btn-clear-all mb-sm-30 mb-xs-30" type="button" onclick="xoaLuaChon()">Xóa lựa chọn</button>
+                                <div id="timKiem">
+                                    <button class="btn-clear-all mb-sm-30 mb-xs-30" type="submit">Tìm kiếm</button>&nbsp;&nbsp;
+                                </div>
+                                <div>
+                                    <button style="margin-top: 15px" class="btn-clear-all mb-sm-30 mb-xs-30" type="button" onclick="xoaLuaChon()">Xóa lựa chọn</button>
+                                </div>
+
                                 <!-- btn-clear-all end -->
                                 <!-- filter-sub-area start -->
                                 <div class="filter-sub-area">
                                     <h5 class="filter-sub-titel">Loại sản phẩm</h5>
                                     <div class="categori-checkbox">
                                         <ul>
-                                            <li><input type="radio" class="check_box" name="group1" value="Laptop"><a>Prime Video (13)</a></li>
-                                            <li><input type="radio" class="check_box" name="group1" value="Điện thoại"><a>Computers (12)</a></li>
-                                            <li><input type="radio" class="check_box" name="group1" value="Màn hình"><a>Electronics (11)</a></li>
+                                            <li th:each="s : ${lstTatCaLoaiSP}"><input type="checkbox" class="check_box" name="lstLoaiSP" th:value="${s.loaiSanPham}" th:checked="${lstLSP != null && lstLSP.contains(s.loaiSanPham)}"><a th:text="${s.loaiSanPham}"></a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <!-- filter-sub-area end -->
+
                                 <!-- filter-sub-area start -->
-                                <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                                    <h5 class="filter-sub-titel">Loại sản phẩm</h5>
+                                <div class="filter-sub-area">
+                                    <h5 class="filter-sub-titel">Màu sắc</h5>
                                     <div class="categori-checkbox">
-                                        <form action="#">
-                                            <ul>
-                                                <li><input type="checkbox" class="check_box" name="product-categori"><a href="#">Graphic Corner (10)</a></li>
-                                                <li><input type="checkbox" class="check_box" name="product-categori"><a href="#"> Studio Design (6)</a></li>
-                                            </ul>
-                                        </form>
+                                        <ul>
+                                            <li th:each="s : ${lstTatCaMauSac}"><input type="checkbox" class="check_box" name="lstMauSac" th:value="${s.mauSac}" th:checked="${lstMS != null && lstMS.contains(s.mauSac)}"><a th:text="${s.mauSac}"></a></li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <!-- filter-sub-area end -->
+
                                 <!-- filter-sub-area start -->
                                 <div class="filter-sub-area pt-sm-10 pt-xs-10">
-                                    <h5 class="filter-sub-titel">Màu sắc</h5>
+                                    <h5 class="filter-sub-titel">Sắp xếp theo</h5>
                                     <div class="size-checkbox">
-                                        <form action="#">
-                                            <ul>
-                                                <li><input type="checkbox" class="check_box" name="product-size"><a href="#">S (3)</a></li>
-                                                <li><input type="checkbox" class="check_box" name="product-size"><a href="#">M (3)</a></li>
-                                                <li><input type="checkbox" class="check_box" name="product-size"><a href="#">L (3)</a></li>
-                                                <li><input type="checkbox" class="check_box" name="product-size"><a href="#">XL (3)</a></li>
-                                            </ul>
-                                        </form>
+                                        <ul>
+                                            <li><input type="radio" class="check_box" name="price_order" value="ASC" th:checked="${order != null && order.equals('ASC')}"><a href="#">Giá tăng dần</a></li>
+                                            <li><input type="radio" class="check_box" name="price_order" value="DESC" th:checked="${order != null && order.equals('DESC')}"><a href="#">Giá giảm dần</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <!-- filter-sub-area end -->

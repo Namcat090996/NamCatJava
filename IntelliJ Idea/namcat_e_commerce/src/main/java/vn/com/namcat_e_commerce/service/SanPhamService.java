@@ -33,18 +33,13 @@ public class SanPhamService {
         return sanPhamDao.layDSSlider();
     }
     
-    public List<SanPham> timSPTheoTenVaLoai(String tuKhoa, String loaiSP, String mauSac)
-    {
-        return sanPhamDao.timSPTheoTenVaLoai(tuKhoa, loaiSP, mauSac);
-    }
-    
     public List<SanPham> timSPTheoTuKhoa(String tuKhoa) {
         return sanPhamDao.timSPTheoTuKhoa(tuKhoa);
     }
     
-    public List<SanPham> timSPTheoLoaiVaGia(String loaiSanPham, String order, String mauSac, int tuGia, int denGia) {
+    public List<SanPham> timSPTheoLoaiVaGiaDaDuyet(List<String> loaiSanPham, String order, List<String> mauSac, int tuGia, int denGia) {
         
-        return sanPhamDao.timSPTheoLoaiVaGia(loaiSanPham, order, mauSac, tuGia, denGia);
+        return sanPhamDao.timSPTheoLoaiVaGiaDaDuyet(loaiSanPham, order, mauSac, tuGia, denGia);
     }
     
     public List<SanPham> timSPTheoLoaiVaGiaKhongDuyet(String tuKhoa, String loaiSanPham, String mauSac, int tuGia, int denGia, int daDuyet) {

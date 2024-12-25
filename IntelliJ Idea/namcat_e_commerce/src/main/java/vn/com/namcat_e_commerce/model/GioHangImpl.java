@@ -162,4 +162,10 @@ public class GioHangImpl implements GioHangDao {
         
         return false;
     }
+    
+    @Override
+    public int xoaGHByTenNguoiDung(String tenNguoiDung) {
+        
+        return gioHangRepository.deleteByTenNguoiDung(tenNguoiDung);
+    }
 }

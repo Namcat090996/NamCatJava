@@ -4,14 +4,17 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import vn.com.namcat_e_commerce.entities.GioHang;
-import vn.com.namcat_e_commerce.entities.SanPham;
+import vn.com.namcat_e_commerce.entities.*;
 import vn.com.namcat_e_commerce.service.GioHangService;
+import vn.com.namcat_e_commerce.service.LoaiSPService;
+import vn.com.namcat_e_commerce.service.MauSacService;
 import vn.com.namcat_e_commerce.service.SanPhamService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,17 +27,35 @@ public class TimKiemSPController {
     @Autowired
     GioHangService gioHangService;
     
-    @RequestMapping(value = "/timkiem", method = RequestMethod.GET)
-    public String timKiemSanPham(@RequestParam(value = "tuKhoa", required = false) String tuKhoa, Model model, HttpSession session)
+    @Autowired
+    MauSacService mauSacService;
+    
+    @Autowired
+    LoaiSPService loaiSPService;
+    
+    @RequestMapping(value = "/timkiem")
+    public String timKiemSanPham(@RequestParam(value = "tuKhoa", required = false) String tuKhoa, @RequestParam(value = "lstLoaiSP", required = false) List<String> lstLoaiSP, @RequestParam(value = "lstMauSac", required = false) List<String> lstMauSac,@RequestParam(value = "price_order", required = false) String order, Model model, HttpSession session)
     {
-        if(tuKhoa == null)
-        {
-            tuKhoa = "";
+        List<SanPham> lstSP = new ArrayList<>();
+        int soLuongSP = 0;
+        
+        if(tuKhoa != null) {
+            //Get list and return page
+            lstSP = sanPhamService.timSPTheoTuKhoa(tuKhoa);
+            soLuongSP = lstSP.size();
+            model.addAttribute("tuKhoa", tuKhoa);
+        }
+        else {
+            //Get list and return page
+            lstSP = sanPhamService.timSPTheoLoaiVaGiaDaDuyet(lstLoaiSP, order, lstMauSac, 0, 0);
+            soLuongSP = lstSP.size();
+            model.addAttribute("lstLSP", lstLoaiSP);
+            model.addAttribute("lstMS", lstMauSac);
+            model.addAttribute("order", order);
         }
         
-        //Get list and return page
-        List<SanPham> lstSP = sanPhamService.timSPTheoTuKhoa(tuKhoa);
-        int soLuongSP = lstSP.size();
+        model.addAttribute("lstSP", lstSP);
+        model.addAttribute("soLuongSP", soLuongSP);
         
         String nguoiDung = "";
         long soLuong = 0;
@@ -47,31 +68,26 @@ public class TimKiemSPController {
             model.addAttribute("SoLuong", soLuong);
         }
         
-        model.addAttribute("tuKhoa", tuKhoa);
-        model.addAttribute("lstSP", lstSP);
-        model.addAttribute("soLuongSP", soLuongSP);
-        
         return "timkiem";
     }
     
-    @RequestMapping(value = "/timkiem/chitiet", method = RequestMethod.POST)
-    public String timKiemChiTietSP(@RequestParam Map<String, String> lstLuaChon, HttpSession session) {
+    @ModelAttribute("lstTatCaMauSac")
+    public List<MauSac> layDanhSachMauSac()
+    {
+        //Get list
+        List<MauSac> lstMauSac = mauSacService.getList();
         
-        String id = "";
-        String soLuong = "";
-        boolean ketQua = false;
+        //Return result
+        return lstMauSac;
+    }
+    
+    @ModelAttribute("lstTatCaLoaiSP")
+    public List<LoaiSanPham> layDanhSachLoaiSP()
+    {
+        //Get list
+        List<LoaiSanPham> lstLoaiSP = loaiSPService.getList();
         
-        for (Map.Entry<String, String> gioHang : lstLuaChon.entrySet()) {
-            try {
-                id = gioHang.getKey();
-                soLuong = gioHang.getValue();
-                
-            } catch (Exception ex) {
-                System.out.println("Key và Value không phải dạng số");
-                ex.printStackTrace();
-            }
-        }
-        
-        return "404";
+        //Return result
+        return lstLoaiSP;
     }
 }

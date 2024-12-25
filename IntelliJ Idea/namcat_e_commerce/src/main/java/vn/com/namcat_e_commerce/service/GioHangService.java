@@ -77,4 +77,9 @@ public class GioHangService {
     {
         return gioHangDao.findById(id);
     }
+    
+    public boolean xoaGHByTenNguoiDung(String tenNguoiDung)
+    {
+        return gioHangDao.xoaGHByTenNguoiDung(tenNguoiDung) > 0;
+    }
 }

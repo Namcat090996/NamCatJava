@@ -20,8 +20,8 @@ public class NguoiDungController {
     @Autowired
     VaiTroService vaiTroService;
     
-    @RequestMapping(value = "/admin/nguoidung", method = RequestMethod.GET)
-    public String timKiemNguoiDung(@ModelAttribute("Online_User") String onlineUser, @ModelAttribute("Online_User_VaiTro") String vaiTroUser, @RequestParam(value = "tuKhoa", required = false) String tuKhoa, Model model)
+    @RequestMapping(value = "/admin/nguoidung")
+    public String timKiemNguoiDung(@ModelAttribute("Online_User") String onlineUser, @ModelAttribute("Online_User_VaiTro") String vaiTroUser, @RequestParam(value ="tuKhoa", required = false) String tuKhoa, Model model)
     {
         //Get list and return page
         List<NguoiDung> lstND = nguoiDungSevice.timNguoiDung(tuKhoa);

@@ -42,9 +42,14 @@ public class GioHangController {
                     return "404";
                 }
             }
+            
+            return "404";
+        }
+        else
+        {
+            return "redirect:/login2";
         }
         
-        return "redirect:/login2";
     }
     
     @RequestMapping(value = "/giohang")
@@ -77,7 +82,7 @@ public class GioHangController {
         return "redirect:/login2";
     }
     
-    @RequestMapping(value = "/giohang/capnhat", method = RequestMethod.POST)
+    @RequestMapping(value = "/giohang/capnhat")
     public String capNhatGioHang(@RequestParam Map<String, String> lstGioHang, HttpSession session) {
         
         int id = 0;
@@ -113,6 +118,39 @@ public class GioHangController {
     
     @RequestMapping(value = "/giohang/xoaAll")
     public String xoaAllGioHang(HttpSession session) {
-        return "a";
+        
+        List<GioHang> lstGH = new ArrayList<GioHang>();
+        String nguoiDung = "";
+        int soLuong = 0;
+        
+        if(session.getAttribute("user_Online") != null)
+        {
+            nguoiDung = session.getAttribute("user_Online").toString();
+            lstGH = gioHangService.layDSGioHangTheoTenNguoiDung(nguoiDung);
+            soLuong = lstGH.size();
+            
+            boolean ketQua = false;
+            
+            if(soLuong > 0) {
+                try {
+                    ketQua = gioHangService.xoaGHByTenNguoiDung(nguoiDung);
+                    if(ketQua)
+                    {
+                        return "redirect:/giohang";
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    return "404";
+                }
+            }
+            else {
+                return "redirect:/giohang";
+            }
+            
+            return "404";
+        }
+        else {
+            return "redirect:/login2";
+        }
     }
 }

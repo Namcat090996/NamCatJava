@@ -37,6 +37,8 @@ public class IndexController {
         {
             nguoiDung = session.getAttribute("user_Online").toString();
             soLuong = gioHangService.soLuongGH_TND(nguoiDung);
+            model.addAttribute("SoLuong", soLuong);
+            model.addAttribute("User_Online", nguoiDung);
         }
         
         model.addAttribute("lstSPHot", lstSPHot);
@@ -44,8 +46,6 @@ public class IndexController {
         model.addAttribute("lstSlider", lstSlider);
         model.addAttribute("lstDienThoai", lstDienThoai);
         model.addAttribute("lstManHinh", lstManHinh);
-        model.addAttribute("SoLuong", soLuong);
-        model.addAttribute("User_Online", nguoiDung);
         
         return "index";
     }

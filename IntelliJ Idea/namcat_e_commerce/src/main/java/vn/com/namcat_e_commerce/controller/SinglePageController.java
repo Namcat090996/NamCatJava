@@ -47,13 +47,14 @@ public class SinglePageController {
         {
             nguoiDung = session.getAttribute("user_Online").toString();
             soLuong = gioHangService.soLuongGH_TND(nguoiDung);
+            model.addAttribute("SoLuong", soLuong);
+            model.addAttribute("User_Online", nguoiDung);
         }
         
         model.addAttribute("objSP", objSP);
         model.addAttribute("lstASP", lstASP);
         model.addAttribute("lstSPTheoLoai", lstSPTheoLoai);
-        model.addAttribute("SoLuong", soLuong);
-        model.addAttribute("User_Online", nguoiDung);
+
         
         return "single-product";
     }

@@ -139,7 +139,7 @@ public class SanPhamImpl implements SanPhamDao {
         
         if(tuKhoa!= null && !tuKhoa.isEmpty())
         {
-            strSQL += " and (sp.tenSanPham like :tuKhoa or sp.loaiSanPham like :tuKhoa or sp.mauSac like :tuKhoa)";
+            strSQL += " and (sp.tenSanPham like :tuKhoa or sp.loaiSanPham like :tuKhoa or sp.mauSac like :tuKhoa or sp.moTa like :tuKhoa or sp.noiDung like :tuKhoa)";
         }
         
         strSQL += " and sp.daDuyet = 1";

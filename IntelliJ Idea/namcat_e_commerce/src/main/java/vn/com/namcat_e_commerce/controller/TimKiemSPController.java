@@ -7,11 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import vn.com.namcat_e_commerce.entities.GioHang;
 import vn.com.namcat_e_commerce.entities.SanPham;
 import vn.com.namcat_e_commerce.service.GioHangService;
 import vn.com.namcat_e_commerce.service.SanPhamService;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TimKiemSPController {
@@ -41,14 +43,35 @@ public class TimKiemSPController {
         {
             nguoiDung = session.getAttribute("user_Online").toString();
             soLuong = gioHangService.soLuongGH_TND(nguoiDung);
+            model.addAttribute("User_Online", nguoiDung);
+            model.addAttribute("SoLuong", soLuong);
         }
         
         model.addAttribute("tuKhoa", tuKhoa);
         model.addAttribute("lstSP", lstSP);
-        model.addAttribute("SoLuong", soLuong);
         model.addAttribute("soLuongSP", soLuongSP);
-        model.addAttribute("User_Online", nguoiDung);
         
-        return "/timkiem";
+        return "timkiem";
+    }
+    
+    @RequestMapping(value = "/timkiem/chitiet", method = RequestMethod.POST)
+    public String timKiemChiTietSP(@RequestParam Map<String, String> lstLuaChon, HttpSession session) {
+        
+        String id = "";
+        String soLuong = "";
+        boolean ketQua = false;
+        
+        for (Map.Entry<String, String> gioHang : lstLuaChon.entrySet()) {
+            try {
+                id = gioHang.getKey();
+                soLuong = gioHang.getValue();
+                
+            } catch (Exception ex) {
+                System.out.println("Key và Value không phải dạng số");
+                ex.printStackTrace();
+            }
+        }
+        
+        return "404";
     }
 }

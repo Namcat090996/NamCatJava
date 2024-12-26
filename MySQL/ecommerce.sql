@@ -62,7 +62,7 @@ CREATE TABLE `cart` (
   KEY `fk_product_id_idx` (`product_id`),
   CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
   CONSTRAINT `fk_user_cart` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (92,'admin','SP12',2,9500000,19000000,'19.jpg','Samsung Galaxy S23 '),(93,'admin','SP14',1,11500000,11500000,'11.jpg','Màn hình MSI UltraWide');
+INSERT INTO `cart` VALUES (92,'admin','SP12',2,9500000,19000000,'19.jpg','Samsung Galaxy S23 '),(93,'admin','SP14',3,11500000,34500000,'11.jpg','Màn hình MSI UltraWide'),(98,'customer','SP09',1,11500000,11500000,'18.jpg','Màn hình MSI UltraWide'),(99,'customer','SP14',1,11500000,11500000,'11.jpg','Màn hình MSI UltraWide');
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,4 +389,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-27  0:55:21
+-- Dump completed on 2024-12-27  1:52:13

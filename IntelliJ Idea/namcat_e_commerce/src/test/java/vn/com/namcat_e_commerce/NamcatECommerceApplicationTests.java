@@ -31,11 +31,13 @@ class NamcatECommerceApplicationTests {
     @Autowired
     GioHangRepository gioHangRepository;
     
+    @Autowired
+    DHChiTietRepository dhChiTietRepository;
+    
     @Test
     void contextLoads() {
         
         long soLuong = donHangDao.soLuongDHBoiNguoiDung("admin");
-        
     }
     
 }

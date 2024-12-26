@@ -62,7 +62,8 @@
                                     <li><a th:href="@{/trangchu}">Trang chủ</a></li>
                                     <li><a th:href="@{/timkiem}">Tìm kiếm sản phẩm</a></li>
                                     <li><a th:href="@{/donhang}">Đơn hàng của bạn</a></li>
-                                    <li th:unless="${User_Online != '' && User_Online != null}"><a th:href="@{/login2}">Đăng nhập/Đăng ký</a></li>
+                                    <li th:unless="${User_Online != '' && User_Online != null}"><a th:href="@{/login2}">Đăng nhập</a></li>
+                                    <li th:unless="${User_Online != '' && User_Online != null}"><a th:href="@{/register}">Đăng ký</a></li>
                                     <li th:if="${User_Online != '' && User_Online != null}"><a th:href="@{/logout2}">Đăng xuất</a></li>
                                     <li style="width: 290px"></li>
                                     <i th:if="${User_Online != '' && User_Online != null}" class="fa fa-user"></i><li th:if="${User_Online != '' && User_Online != null}" style="padding-left: 10px"><a>Xin chào : [[${User_Online}]]</a></li>

@@ -21,33 +21,6 @@
             thongTinChiTiet_DH(maDH);
         }
     </script>
-    <style>
-        #GH_TBDangNhap, #GH_TBThanhCong, #GH_HetHang {
-            position: fixed;
-            margin-left: auto;
-            margin-right: auto;
-            width: 350px;
-        }
-
-        #GH_HetHang {
-            position: fixed;
-            margin-left: auto;
-            margin-right: auto;
-            width: 500px;
-        }
-
-        .thongBao {
-            font-family: "Times New Roman" !important;
-            display: inline-block;
-            font-style: italic;
-            font-size: 19px !important;
-            margin-bottom: 5px !important;
-        }
-
-        .btn-outline-warning:hover {
-            background-color: #fed700 !important;
-        }
-    </style>
     <script type="text/javascript" th:src="@{/js/index.js}"></script>
     <script type="text/javascript" th:src="@{/js/giohang.js}"></script>
     <script type="text/javascript" th:src="@{/js/donhang.js}"></script>
@@ -120,16 +93,16 @@
                     </button>
                     <div class="modal-inner-area row">
                         <div class="col-lg-12 col-md-11 col-sm-11" style="text-align: center">
-                            <div class="product-details-view-content pt-60" style="padding-top: 10px !important;">
+                            <div class="product-details-view-content pt-60" style="padding-top: 30px !important;">
                                 <div class="product-info">
-                                    <table class="table">
+                                    <table class="table table-bordered table-hover">
                                         <thead>
                                         <tr>
                                             <th class="li-product-remove">Mã đơn hàng</th>
-                                            <th class="li-product-thumbnail">Tên đơn hàng</th>
-                                            <th class="cart-product-name">Họ tên</th>
-                                            <th class="cart-product-name">Họ tên</th>
-                                            <th class="cart-product-name">Họ tên</th>
+                                            <th class="li-product-thumbnail">Tên sản phẩm</th>
+                                            <th class="cart-product-name">Số lượng</th>
+                                            <th class="cart-product-name">Trạng thái</th>
+                                            <th class="cart-product-name">Tổng tiền</th>
                                         </tr>
                                         </thead>
                                         <tbody id="noiDungChen">

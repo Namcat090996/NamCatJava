@@ -12,4 +12,6 @@ public interface DonHangDao extends IHanhDong<DonHang, Integer>{
     public long soLuongDHBoiNguoiDung(String tenNguoiDung);
     
     public List<DonHang> findAllByTenNguoiDung(String tenNguoiDung);
+    
+    public List<DonHang> layDSDonHangTheoTNDvaTT(String tenNguoiDung, String trangThai);
 }

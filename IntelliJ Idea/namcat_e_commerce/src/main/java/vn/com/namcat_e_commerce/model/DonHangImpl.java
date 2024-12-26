@@ -163,4 +163,39 @@ public class DonHangImpl implements DonHangDao {
     public List<DonHang> findAllByTenNguoiDung(String tenNguoiDung) {
         return donHangRepository.findAllByTenNguoiDung(tenNguoiDung);
     }
+    
+    @Override
+    public List<DonHang> layDSDonHangTheoTNDvaTT(String tenNguoiDung, String trangThai) {
+        
+        String strSQL = "Select s from DonHang s where 1=1";
+        
+        if(tenNguoiDung!= null && !tenNguoiDung.isEmpty())
+        {
+            strSQL += " and s.tenNguoiDung = :tenNguoiDung";
+        }
+        
+        if(trangThai != null && !trangThai.isEmpty())
+        {
+            strSQL += " and s.trangThai = :trangThai";
+        }
+        
+        //Khai báo danh sách
+        List<DonHang> lstDH = new ArrayList<>();
+        
+        TypedQuery<DonHang> query = entityManager.createQuery(strSQL, DonHang.class);
+        
+        if(tenNguoiDung!= null && !tenNguoiDung.isEmpty())
+        {
+            query.setParameter("tenNguoiDung",tenNguoiDung);
+        }
+        
+        if(trangThai!= null && !trangThai.isEmpty())
+        {
+            query.setParameter("trangThai",trangThai);
+        }
+        
+        lstDH = query.getResultList();
+        
+        return lstDH;
+    }
 }

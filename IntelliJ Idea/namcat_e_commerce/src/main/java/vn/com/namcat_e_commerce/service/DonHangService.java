@@ -45,4 +45,8 @@ public class DonHangService {
     public List<DonHang> layDSDonHangByTenND(String tenNguoiDung) {
         return donHangDao.findAllByTenNguoiDung(tenNguoiDung);
     }
+    
+    public List<DonHang> layDSDonHangTheoTNDvaTT(String tenNguoiDung, String trangThai) {
+        return donHangDao.layDSDonHangTheoTNDvaTT(tenNguoiDung, trangThai);
+    }
 }

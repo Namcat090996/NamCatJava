@@ -15,16 +15,9 @@
             </div>
         </div>
         <ul class="app-menu">
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Tổng quát</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="treeview-item" th:href="@{/admin/sanpham}"><i class="icon fa fa-circle-o"></i>Quán lý thông tin nhân viên</a></li>
-                    <li><a class="treeview-item" href="/admin/nhanvien/them"><i class="icon fa fa-circle-o"></i>Thêm mới nhân viên</a></li>
-                </ul>
-            </li>
             <li th:if="${Online_User_VaiTro == 'admin' || Online_User_VaiTro == 'approver'}"><a class="app-menu__item" th:href="@{/admin/sanpham}"><i class="app-menu__icon fa fa-product-hunt"></i><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
             <li th:if="${Online_User_VaiTro == 'admin'}"><a class="app-menu__item" th:href="@{/admin/nguoidung}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Quản lý người dùng</span></a></li>
-            <li th:if="${Online_User_VaiTro == 'admin'}"><a class="app-menu__item" th:href="@{/admin/nguoidung}"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Quản lý giỏ hàng</span></a></li>
-            <li th:if="${Online_User_VaiTro == 'admin' || Online_User_VaiTro == 'approver'}"><a class="app-menu__item" th:href="@{/admin/nguoidung}"><i class="app-menu__icon fa fa-first-order"></i><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
+            <li th:if="${Online_User_VaiTro == 'admin' || Online_User_VaiTro == 'approver'}"><a class="app-menu__item" th:href="@{/admin/donhang}"><i class="app-menu__icon fa fa-first-order"></i><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
             <li th:if="${Online_User_VaiTro == 'admin'}"><a class="app-menu__item" th:href="@{/admin/anhsanpham}"><i class="app-menu__icon fa fa-image"></i><span class="app-menu__label">Quản lý ảnh sản phẩm</span></a></li>
         </ul>
     </aside>

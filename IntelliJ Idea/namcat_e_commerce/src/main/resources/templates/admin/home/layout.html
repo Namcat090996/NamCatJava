@@ -101,6 +101,31 @@
             "lengthMenu": "Hiển thị &nbsp;_MENU_&nbsp; ảnh sản phẩm",
         }
     });
+
+    $('#sampleTable3').DataTable({
+        <!--Disable the ascending/descending order in option column-->
+        "columnDefs": [
+            {
+                "targets": [0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11],
+                "orderable": false
+            },
+            {
+                "targets": [5],  //Column need to sort
+                "orderable": true,  //Ensure this colum is sortable
+                "type": "num",  //Itentify data type is number
+                "createdCell": function(cell) {
+                    //Get raw data from data-raw (in view) to order
+                    var rawValue = $(cell).attr('data-raw');
+                    $(cell).attr('data-sort', rawValue);  //Save unformatted (raw data) values to data-sort
+                }
+            }
+        ],
+        "order": [], //Disable default order of DataTables to delete the sort of [0] column
+        "language": {
+            "search": "Tìm kiếm nhanh:", // Thay đổi text của hộp tìm kiếm tại đây
+            "lengthMenu": "Hiển thị &nbsp;_MENU_&nbsp; sản phẩm",
+        }
+    });
 </script>
 </body>
 </html>

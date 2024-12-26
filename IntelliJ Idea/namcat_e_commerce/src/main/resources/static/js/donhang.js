@@ -11,19 +11,18 @@ function thongTinChiTiet_DH(maDH) {
             if (data && Array.isArray(data) && data.length > 0) {
                 // Tạo HTML cho table để hiển thị chi tiết đơn hàng
                 var content = '';
-                data.forEach(function(s) {
+                data.forEach(function(s, idx) {
                     content += `<tr>
-                        <td>${s.maSanPham}</td>
+                        <td>${idx + 1}</td>
+                        <td>${s.maDonHang}</td>
+                        <td>${s.tenSanPham}</td>
                         <td>${s.soLuong}</td>
-                        <td>${s.giaSanPham}</td>
-                        <td>${s.tenSanPham}</td>
-                        <td>${s.tenSanPham}</td>
+                        <td>${s.giaSanPham.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
                     </tr>`;
                 });
 
                 // Thêm các row vào table trong modal
                 $('#noiDungChen').html(content);  // 'noiDungChen' là ID của tbody trong modal
-                $('#DH_ChiTiet').modal('show');  // Hiển thị modal
             }
             else {
                 alert("Xảy ra lỗi khi hiển thị chi tiết đơn hàng! Vui lòng thử lại")

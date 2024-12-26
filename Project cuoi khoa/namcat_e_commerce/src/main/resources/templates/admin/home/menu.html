@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="menu">
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/admin/hinhnen.jpg" width="70" height="60" alt="User Image">
+            <div style="padding-left: 3px">
+                <p class="app-sidebar__user-name">User Online</p>
+                <p class="app-sidebar__user-designation" style="text-transform: uppercase" th:text="${Online_User}"></p>
+            </div>
+        </div>
+        <ul class="app-menu">
+            <li th:if="${Online_User_VaiTro == 'admin' || Online_User_VaiTro == 'approver'}"><a class="app-menu__item" th:href="@{/admin/sanpham}"><i class="app-menu__icon fa fa-product-hunt"></i><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
+            <li th:if="${Online_User_VaiTro == 'admin'}"><a class="app-menu__item" th:href="@{/admin/nguoidung}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Quản lý người dùng</span></a></li>
+            <li th:if="${Online_User_VaiTro == 'admin' || Online_User_VaiTro == 'approver'}"><a class="app-menu__item" th:href="@{/admin/donhang}"><i class="app-menu__icon fa fa-first-order"></i><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
+            <li th:if="${Online_User_VaiTro == 'admin'}"><a class="app-menu__item" th:href="@{/admin/anhsanpham}"><i class="app-menu__icon fa fa-image"></i><span class="app-menu__label">Quản lý ảnh sản phẩm</span></a></li>
+        </ul>
+    </aside>
+</div>
+</body>
+</html>

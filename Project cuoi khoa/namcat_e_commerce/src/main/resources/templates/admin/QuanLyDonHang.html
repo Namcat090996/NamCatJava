@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/home/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý thông tin đơn hàng</title>
+    <script type="text/javascript" th:src="@{/js/admin/jquery-3.7.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/admin/bootstrap.js}"></script>
+    <!--JS cho modal-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Khi nhấn nút "Duyệt"
+            $("#duyetDH").click(function () {
+                $("#luuDuyet").val("1");
+                duyetDonHang();
+
+            });
+
+            // Khi nhấn nút "Bỏ duyệt"
+            $("#boDuyetDH").click(function () {
+                $("#luuDuyet").val("0");
+                duyetDonHang();
+            });
+        });
+
+
+        function xoaThongTin(maDH)
+        {
+            $("#hDonHangId").val(maDH);
+        }
+
+        function xemThongTin_DH(maDH)
+        {
+            thongTinChiTiet_DH(maDH);
+        }
+    </script>
+    <style type="text/css">
+        label.error {
+            color: red;
+            padding-bottom: 0px;
+            margin-bottom: -5px;
+        }
+
+        .input {
+            padding-left: 0px;
+        }
+
+        .search {
+            transition: background-color 0.6s ease;
+            position: relative;
+            left: 40px;
+        }
+
+        .search:hover {
+            background-color: #3ebf9a;
+        }
+
+        .btn-secondary {
+            border: none;
+        }
+
+        .legend {
+            position: relative;
+            left: 15px;
+            bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        .modal-dialog {
+            width: 730px !important;
+            max-width: none !important;
+        }
+
+        .pending-class {
+            color: red;
+        }
+
+         .pending-class {
+             color: #FF5733;
+         }
+
+        .approved-class {
+            color: #388E3C;
+    </style>
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i> Quản lý thông tin đơn hàng</h1>
+            <p>Danh sách thông tin đơn hàng trong hệ thống</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin/donhang}">Quản lý đơn hàng</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile" style="height: 150px">
+                <form method="post" th:action="@{/admin/donhang}" th:object="${donhang}">
+                    <fieldset>
+                        <legend class="legend">Nhập thông tin tìm kiếm</legend>
+                        <div class="row">
+                            <div class="col-md-1 d-flex align-items-center justify-content-end">Tên người dùng:</div>
+                            <div class="input col-md-2">
+                                <select id="TND" name="TND" th:field="*{tenNguoiDung}" th:class="form-control">
+                                    <option value="" label="Chọn tên người dùng"></option>
+                                    <th:block th:each="s : ${lstND}">
+                                        <option th:value="${s.tenNguoiDung}" th:text="${s.tenNguoiDung}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="col-md-1 d-flex align-items-center justify-content-end">Trạng thái:</div>
+                            <div class="input col-md-2">
+                                <select id="TT" name="TT" th:field="*{trangThai}" th:class="form-control">
+                                    <option value="" label="Chọn trạng thái đơn hàng"></option>
+                                    <th:block th:each="s : ${lstTrangThai}">
+                                        <option th:value="${s.tenTrangThai}" th:text="${s.tenTrangThai}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div th:class="col-md-2">
+                                <button type="submit" class="search btn btn-secondary">Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <div class="row" style="margin-bottom: 10px">
+                        <div class="col-md-6" style="text-align: left">
+                            <button type="button" id="duyetDH" class="btn btn-outline-primary">Duyệt</button>&nbsp;&nbsp;&nbsp;
+                            <button type="button" id="boDuyetDH" class="btn btn-outline-dark">Hủy bỏ</button>&nbsp;&nbsp;&nbsp;
+                            <input type="hidden" id="luuDuyet" name="luuDuyet">
+                        </div>
+                    </div>
+                    <table class="table table-hover table-bordered" id="sampleTable3">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Id</th>
+                            <th>Tên người dùng</th>
+                            <th>Ngày tạo</th>
+                            <th>Trạng thái</th>
+                            <th>Tổng giá</th>
+                            <th>Người duyệt</th>
+                            <th>Họ tên</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Ghi chú</th>
+                            <th>Chi tiết</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="sp : ${lStDH}">
+                            <td>
+                                <input type="checkbox" name="chonDonHang" th:value="${sp.id}"/>
+                            </td>
+                            <td th:text="${sp.maDonHang}"></td>
+                            <td th:text="${sp.tenNguoiDung}"></td>
+                            <td th:text="${#temporals.format(sp.ngayTao, 'dd/MM/yyyy')}"></td>
+                            <td th:classappend="${sp.trangThai == 'PENDING' or sp.trangThai == 'CANCELED'} ? 'pending-class' : 'approved-class'"  th:text="${sp.trangThai}"></td>
+                            <td th:text="${#numbers.formatDecimal(sp.tongTien, 0, 'POINT', 0, 'COMMA') + 'đ'}" th:data-raw="${sp.tongTien}" th:data-sort="${sp.tongTien}"></td>
+                            <td th:text="${sp.tenNguoiTao}"></td>
+                            <td th:text="${sp.hoTen}"></td>
+                            <td th:text="${sp.dienThoai}"></td>
+                            <td th:text="${sp.diaChi}"></td>
+                            <td th:text="${sp.ghiChu}"></td>
+                            <td style="text-align: center">
+                                <a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#DH_ChiTiet" th:onclick="xemThongTin_DH([[${sp.maDonHang}]])">
+                                    <i class="fa fa-2x fa-eye"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Thiết kế giao diện sản phẩm dạng modal-->
+        <!-- Main CSS-->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/admin/main.css}">
+        <!-- Essential javascripts for application to work-->
+        <script th:src="@{/js/admin/jquery-3.7.1.min.js}"></script>
+        <script th:src="@{/js/admin/popper.min.js}"></script>
+        <script th:src="@{/js/admin/bootstrap.min.js}"></script>
+        <script th:src="@{/js/admin/main.js}"></script>
+        <script type="text/javascript" th:src="@{/js/admin/jquery.validate.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/admin/donhang_admin.js}"></script>
+        <script type="text/javascript" th:src="@{/js/index.js}"></script>
+        <script type="text/javascript" th:src="@{/js/giohang.js}"></script>
+        <script type="text/javascript" th:src="@{/js/donhang.js}"></script>
+        <!-- The javascript plugin to display page loading on top-->
+        <script th:src="@{/js/admin/plugins/pace.min.js}"></script>
+        <!-- Page specific javascripts-->
+        <!-- Data table plugin-->
+        <script type="text/javascript" th:src="@{/js/admin/plugins/jquery.dataTables.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/admin/plugins/dataTables.bootstrap.min.js}"></script>
+        <script type="text/javascript" th:src="@{/js/admin/plugins/bootstrap-datepicker.min.js}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                // Khi modal được hiển thị
+                $('#CB_ThongBao, #modalDuyet, #modalBoDuyet').on('show.bs.modal', function () {
+                    // Tìm modal-dialog
+                    var modalDialog = $(this).find('.modal-dialog');
+
+                    // Thay đổi vị trí
+                    modalDialog.css({
+                        'top': '200px', // Cách đỉnh trang 100px
+                    });
+                });
+            });
+        </script>
+    <!--Form modal hỏi duyệt thông tin-->
+    <fieldset id="modalDuyet" class="modal fade" tabindex="-1" aria-labelledby="Duyệt đơn hàng" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" style="font-family: 'Times New Roman' !important">Thông báo duyệt đơn hàng</h3>
+                    <i class="fa fa-2x fa-bullseye" data-bs-dismiss="modal" style="cursor: pointer"></i>
+                </div>
+                <div class="modal-body">
+                    <div style="height: 40px" class="tile-body">
+                        <h3 style="font-family: 'Times New Roman' !important">Bạn có muốn duyệt các đơn hàng đã chọn ?</h3>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" onclick='xacNhanDuyetDH("duyet")' class="btn btn-success">Đồng ý</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <!--Form modal hỏi bỏ duyệt thông tin-->
+    <fieldset id="modalBoDuyet" class="modal fade" tabindex="-1" aria-labelledby="Bỏ duyệt đơn hàng" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" style="font-family: 'Times New Roman' !important">Thông báo hủy bỏ đơn hàng</h3>
+                    <i class="fa fa-2x fa-bullseye" data-bs-dismiss="modal" style="cursor: pointer"></i>
+                </div>
+                <div class="modal-body">
+                    <div style="height: 40px" class="tile-body">
+                        <h3 style="font-family: 'Times New Roman' !important">Bạn có muốn hủy các đơn hàng đã chọn ?</h3>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" onclick='xacNhanDuyetDH("boDuyet")' class="btn btn-success">Đồng ý</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <!--Form modal yêu cầu chọn checkbox để duyệt SP-->
+    <fieldset id="CB_ThongBao" class="modal fade" tabindex="-1" aria-labelledby="Chọn đơn hàng" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" style="font-family: 'Times New Roman' !important">Thông báo</h3>
+                    <i class="fa fa-2x fa-bullseye" data-bs-dismiss="modal" style="cursor: pointer"></i>
+                </div>
+                <div class="modal-body">
+                    <div style="height: 40px" class="tile-body" id="title-selected">
+                        <h3 style="font-family: 'Times New Roman' !important">Bạn phải chọn đơn hàng để duyệt hoặc hủy bỏ</h3>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <i class="fa fa-2x fa-key" data-bs-dismiss="modal" style="cursor: pointer"></i>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <!-- Begin Quick View | Modal Area -->
+    <div class="modal fade modal-wrapper" id="DH_ChiTiet">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-inner-area row">
+                        <div class="col-lg-12 col-md-11 col-sm-11" style="text-align: center">
+                            <div class="product-details-view-content pt-60" style="padding-top: 30px !important;">
+                                <div class="product-info">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="li-product-remove">Mã đơn hàng</th>
+                                            <th class="li-product-thumbnail">Tên sản phẩm</th>
+                                            <th class="cart-product-name">Số lượng</th>
+                                            <th class="cart-product-name">Trạng thái</th>
+                                            <th class="cart-product-name">Tổng tiền</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="noiDungChen">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View | Modal Area End Here -->
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{home/layout}">
+<!-- index28:48-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Đăng nhập/Đăng ký</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+        .errorfinfo {
+            color: red;
+            font-size: 17px;
+            text-transform: capitalize;
+            font-family: "Times New Roman";
+            padding-left: 2px;
+        }
+    </style>
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Begin Body Wrapper -->
+<div layout:fragment="content">
+    <!-- Begin Li's Breadcrumb Area -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <ul>
+                    <li><a href="/trangchu">Trang chủ</a></li>
+                    <li class="active">Đăng ký</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Li's Breadcrumb Area End Here -->
+    <!-- Begin Login Content Area -->
+    <div class="page-section mb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-7 col-xs-12">
+                    <form th:action="@{/register/submit}" th:object="${objND}" method="post">
+                        <div class="login-form">
+                            <h4 class="login-title">Đăng ký</h4>
+                            <div class="row">
+                                <div class="col-md-12 mb-20">
+                                    <label>Tài khoản*</label>
+                                    <input class="mb-0" th:field="*{tenNguoiDung}" type="text" placeholder="Nhập tài khoản đăng nhập">
+                                    <label th:if="${#fields.hasErrors('tenNguoiDung')}">
+                                        <span th:errors="*{tenNguoiDung}" class="errorfinfo"></span>
+                                    </label>
+                                    <div th:text="${username_tonTai}" class="errorfinfo"></div>
+                                </div>
+                                <div class="col-md-12 mb-20">
+                                    <label>Mật khẩu*</label>
+                                    <input class="mb-0" th:field="*{matKhau}" type="password" placeholder="Nhập mật khẩu đăng nhập">
+                                    <label th:if="${#fields.hasErrors('matKhau')}">
+                                        <span th:errors="*{matKhau}" class="errorfinfo"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 mb-20">
+                                    <label>Điện thoại*</label>
+                                    <input class="mb-0" th:field="*{dienThoai}" type="text" placeholder="Nhập số điện thoại người dùng">
+                                    <label th:if="${#fields.hasErrors('dienThoai')}">
+                                        <span th:errors="*{dienThoai}" class="errorfinfo"></span>
+                                    </label>
+                                    <div th:text="${dienThoai_tonTai}" class="errorfinfo"></div>
+                                </div>
+                                <div class="col-md-6 mb-20">
+                                    <label>Email</label>
+                                    <input class="mb-0" th:field="*{email}" type="text" placeholder="Nhập email người dùng">
+                                    <label th:if="${#fields.hasErrors('email')}">
+                                        <span th:errors="*{email}" class="errorfinfo"></span>
+                                    </label>
+                                    <div th:text="${email_tonTai}" class="errorfinfo"></div>
+                                </div>
+                                <div class="col-md-12 mb-20">
+                                    <label>Họ tên*</label>
+                                    <input class="mb-0" th:field="*{hoTen}" type="text" placeholder="Nhập họ và tên người dùng">
+                                    <label th:if="${#fields.hasErrors('hoTen')}">
+                                        <span th:errors="*{hoTen}" class="errorfinfo"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-12 mb-20">
+                                    <label>Địa chỉ*</label>
+                                    <input class="mb-0" th:field="*{diaChi}" type="text" placeholder="Nhập địa chỉ người dùng">
+                                    <label th:if="${#fields.hasErrors('diaChi')}">
+                                        <span th:errors="*{diaChi}" class="errorfinfo"></span>
+                                    </label>
+                                </div>
+                                <div class="col-12">
+                                    <button class="register-button mt-0">Đăng ký</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Content Area End Here -->
+</div>
+<!-- Body Wrapper End Here -->
+</body>
+</html>

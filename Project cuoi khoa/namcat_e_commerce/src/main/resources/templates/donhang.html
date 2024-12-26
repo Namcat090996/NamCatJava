@@ -1,0 +1,126 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{home/layout}">
+<!-- index28:48-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Đơn hàng của bạn</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .pending-class {
+            color: #FF5733;
+        }
+
+        .approved-class {
+            color: #388E3C;
+        }
+    </style>
+    <!--JS cho modal-->
+    <script type="text/javascript">
+        function xemThongTin_DH(maDH)
+        {
+            thongTinChiTiet_DH(maDH);
+        }
+    </script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+    <script type="text/javascript" th:src="@{/js/giohang.js}"></script>
+    <script type="text/javascript" th:src="@{/js/donhang.js}"></script>
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div layout:fragment="content">
+    <!-- Begin Li's Breadcrumb Area -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <ul>
+                    <li><a href="/trangchu">Trang chủ</a></li>
+                    <li class="active">Đơn hàng của bạn</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Li's Breadcrumb Area End Here -->
+    <!--Shopping Cart Area Strat-->
+    <div class="Shopping-cart-area pt-60 pb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="li-product-remove">Mã đơn hàng</th>
+                                    <th class="li-product-thumbnail">Tên đơn hàng</th>
+                                    <th class="cart-product-name">Họ tên</th>
+                                    <th class="li-product-price">Địa chỉ</th>
+                                    <th class="li-product-quantity">Số điện thoại</th>
+                                    <th class="li-product-subtotal">Trạng thái</th>
+                                    <th class="li-product-subtotal">Tổng tiền</th>
+                                    <th class="li-product-subtotal">Chi tiết</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="s : ${lstDH}">
+                                    <td class="li-product-name" th:text="${s.maDonHang}"></td>
+                                    <td class="li-product-name" th:text="${s.tenDonHang}"></td>
+                                    <td class="li-product-name" th:text="${s.hoTen}"></td>
+                                    <td class="li-product-name" th:text="${s.diaChi}"></td>
+                                    <td class="li-product-name" th:text="${s.dienThoai}"></td>
+                                    <td class="li-product-name" th:classappend="${s.trangThai == 'PENDING' or s.trangThai == 'CANCELED'} ? 'pending-class' : 'approved-class'"  th:text="${s.trangThai}"></td>
+                                    <td class="li-product-price"><span class="amount" th:text="${#numbers.formatDecimal(s.tongTien, 0, 'POINT', 0, 'COMMA') + 'đ'}"></span></td>
+                                    <td>
+                                        <a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#DH_ChiTiet" th:onclick="xemThongTin_DH([[${s.maDonHang}]])">
+                                            <i class="fa fa-2x fa-eye"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Shopping Cart Area End-->
+    <!-- Begin Quick View | Modal Area -->
+    <div class="modal fade modal-wrapper" id="DH_ChiTiet">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-inner-area row">
+                        <div class="col-lg-12 col-md-11 col-sm-11" style="text-align: center">
+                            <div class="product-details-view-content pt-60" style="padding-top: 30px !important;">
+                                <div class="product-info">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th class="li-product-remove">Mã đơn hàng</th>
+                                            <th class="li-product-thumbnail">Tên sản phẩm</th>
+                                            <th class="cart-product-name">Số lượng</th>
+                                            <th class="cart-product-name">Trạng thái</th>
+                                            <th class="cart-product-name">Tổng tiền</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="noiDungChen">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View | Modal Area End Here -->
+</div>
+</body>
+</html>

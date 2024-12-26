@@ -1,0 +1,485 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{home/layout}">
+<!-- index28:48-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Tìm kiếm sản phẩm</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+        function xoaLuaChon()
+        {
+            // Tìm tất cả các checkbox đã được chọn
+            $('.check_box:checked').each(function () {
+                $(this).prop('checked', false);//Bỏ chọn checkbox
+            });
+        }
+
+        function xemThongTin_QV(maSP)
+        {
+            thongTinChiTiet_QV(maSP);
+        }
+
+        function themVaoGioHang(maSP)
+        {
+            GH_them(maSP);
+        }
+
+        function themVaoGioHang_Modal()
+        {
+            let maSP = $("#maSP").text();
+
+            if(maSP) {
+                themVaoGioHang(maSP);
+            }
+            else {
+                alert("Không tìm thấy sản phẩm để thêm vào giỏ hàng")
+            }
+        }
+    </script>
+    <style>
+        #timKiem .btn-clear-all::before {
+            content: "\f002";
+            font-family: "fontawesome";
+            margin-right: 15px;
+        }
+
+        #timKiem .btn-clear-all {
+            background: #dddddd none repeat scroll 0 0;
+            border-color: rgba(0, 0, 0, 0);
+            box-shadow: 0.0625rem 0.0625rem 0.0625rem 0 rgba(0, 0, 0, 0.1);
+            color: #333333;
+            cursor: pointer;
+            font-size: 14px;
+            font-size: 0.875rem;
+            line-height: 15px;
+            padding: 5px;
+            -webkit-transition: all 0.3s ease-in-out 0s;
+            transition: all 0.3s ease-in-out 0s;
+            margin-top: 20px;
+        }
+        #timKiem .btn-clear-all:hover {
+            background: #8BC34A none repeat scroll 0 0;
+            color: #fff;
+        }
+
+        #GH_TBDangNhap, #GH_TBThanhCong, #GH_HetHang {
+            position: fixed;
+            margin-left: auto;
+            margin-right: auto;
+            width: 350px;
+        }
+
+        #GH_HetHang {
+            position: fixed;
+            margin-left: auto;
+            margin-right: auto;
+            width: 500px;
+        }
+
+        .thongBao {
+            font-family: "Times New Roman" !important;
+            display: inline-block;
+            font-style: italic;
+            font-size: 19px !important;
+            margin-bottom: 5px !important;
+        }
+
+        .btn-outline-warning:hover {
+            background-color: #fed700 !important;
+        }
+    </style>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+    <script type="text/javascript" th:src="@{/js/giohang.js}"></script>
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div layout:fragment="content">
+    <!-- Begin Li's Breadcrumb Area -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <ul>
+                    <li><a href="/trangchu">Trang chủ</a></li>
+                    <li class="active">Tìm kiếm sản phẩm</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Li's Breadcrumb Area End Here -->
+    <!-- Begin Li's Content Wraper Area -->
+    <div class="content-wraper pt-60 pb-60 pt-sm-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <!-- shop-top-bar start -->
+                    <div class="shop-top-bar mt-30" style="margin-top: 0px !important;">
+                        <div class="shop-bar-inner">
+                            <div class="product-view-mode">
+                                <!-- shop-item-filter-list start -->
+                                <ul class="nav shop-item-filter-list" role="tablist">
+                                    <li class="active" role="presentation"><a aria-selected="true" class="active show" data-toggle="tab" role="tab" aria-controls="grid-view" href="#grid-view"><i class="fa fa-th"></i></a></li>
+                                    <li role="presentation"><a data-toggle="tab" role="tab" aria-controls="list-view" href="#list-view"><i class="fa fa-th-list"></i></a></li>
+                                </ul>
+                                <!-- shop-item-filter-list end -->
+                            </div>
+                            <div class="toolbar-amount">
+                                <span th:if="${soLuongSP} > 0" th:text="'Hiển thị 1 đến ' + (${soLuongSP} >= 12 ? 12 : ${soLuongSP}) + ' của ' + ${soLuongSP} + ' sản phẩm'"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- shop-top-bar end -->
+                    <!-- shop-products-wrapper start -->
+                    <div class="shop-products-wrapper">
+                        <div class="tab-content">
+                            <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
+                                <div class="product-area shop-product-area">
+                                    <div class="row">
+                                        <div th:each="spn : ${lstSP}" class="col-lg-4 col-md-4 col-sm-6 mt-40">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap">
+                                                <div class="product-image">
+                                                    <a th:href="@{'/chitiet/' + ${spn.maSanPham}}">
+                                                        <img th:src="@{'/images/' + ${spn.anhSanPham}}" alt="Product Image">
+                                                    </a>
+                                                </div>
+                                                <div class="product_desc">
+                                                    <div class="product_desc_info">
+                                                        <div class="product-review">
+                                                            <h5 class="manufacturer">
+                                                                <a href="#" th:text="${spn.loaiSanPham}"></a>
+                                                            </h5>
+                                                            <div class="rating-box">
+                                                                <ul class="rating">
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <h4><a class="product_name" href="single-product.html" th:text="${spn.tenSanPham}"></a></h4>
+                                                        <div class="price-box">
+                                                    <span class="new-price"
+                                                          th:text="${#numbers.formatDecimal(spn.giaSanPham, 0, 'POINT', 0, 'COMMA') + 'đ'}"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-actions">
+                                                        <form method="get">
+                                                            <ul class="add-actions-link">
+                                                                <li class="add-cart active" style="width: 160px"><a style="cursor: pointer" th:onclick="themVaoGioHang([[${spn.maSanPham}]])">Thêm vào giỏ hàng</a></li>
+                                                                <li><a href="#" title="quick view" class="quick-view-btn"
+                                                                       data-toggle="modal" data-target="#exampleModalCenter"
+                                                                       th:onclick="xemThongTin_QV([[${spn.maSanPham}]])"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                            </ul>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="list-view" class="tab-pane fade product-list-view" role="tabpanel">
+                                <div class="row">
+                                    <div class="col">
+                                        <div th:each="spn : ${lstSP}" class="row product-layout-list">
+                                            <div class="col-lg-3 col-md-5 ">
+                                                <div class="product-image">
+                                                    <a th:href="@{'/chitiet/' + ${spn.maSanPham}}">
+                                                        <img th:src="@{'/images/' + ${spn.anhSanPham}}" alt="Product Image">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 col-md-7">
+                                                <div class="product_desc">
+                                                    <div class="product_desc_info">
+                                                        <div class="product-review">
+                                                            <h5 class="manufacturer">
+                                                                <a href="#" th:text="${spn.loaiSanPham}"></a>
+                                                            </h5>
+                                                            <div class="rating-box">
+                                                                <ul class="rating">
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <h4><a class="product_name" href="single-product.html">Hummingbird printed t-shirt</a></h4>
+                                                        <div class="price-box" style="margin-top: 10px !important; margin-bottom: 8px !important;">
+                                                    <span class="new-price"
+                                                          th:text="${#numbers.formatDecimal(spn.giaSanPham, 0, 'POINT', 0, 'COMMA') + 'đ'}"></span>
+                                                        </div>
+                                                        <p th:text="${spn.noiDung}"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="shop-add-action mb-xs-30" style="height: 120px;padding-top: 22px">
+                                                    <ul class="add-actions-link">
+                                                        <li class="add-cart" style="margin-bottom: 10px; width: 160px"><a style="cursor: pointer" th:onclick="themVaoGioHang([[${spn.maSanPham}]])">Thêm vào giỏ hàng</a></li>
+                                                        <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i>Xem nhanh sản phẩm</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- shop-products-wrapper end -->
+                </div>
+                    <div class="col-lg-3 order-2 order-lg-1">
+                        <!--sidebar-categores-box start  -->
+                        <form th:action="@{/timkiem}" method="post">
+                            <div class="sidebar-categores-box">
+                                <div class="sidebar-title">
+                                    <h2>Bộ lọc</h2>
+                                </div>
+                                <!-- btn-clear-all start -->
+                                <div id="timKiem">
+                                    <button class="btn-clear-all mb-sm-30 mb-xs-30" type="submit">Tìm kiếm</button>&nbsp;&nbsp;
+                                </div>
+                                <div>
+                                    <button style="margin-top: 15px" class="btn-clear-all mb-sm-30 mb-xs-30" type="button" onclick="xoaLuaChon()">Xóa lựa chọn</button>
+                                </div>
+
+                                <!-- btn-clear-all end -->
+                                <!-- filter-sub-area start -->
+                                <div class="filter-sub-area">
+                                    <h5 class="filter-sub-titel">Loại sản phẩm</h5>
+                                    <div class="categori-checkbox">
+                                        <ul>
+                                            <li th:each="s : ${lstTatCaLoaiSP}"><input type="checkbox" class="check_box" name="lstLoaiSP" th:value="${s.loaiSanPham}" th:checked="${lstLSP != null && lstLSP.contains(s.loaiSanPham)}"><a th:text="${s.loaiSanPham}"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- filter-sub-area end -->
+
+                                <!-- filter-sub-area start -->
+                                <div class="filter-sub-area">
+                                    <h5 class="filter-sub-titel">Màu sắc</h5>
+                                    <div class="categori-checkbox">
+                                        <ul>
+                                            <li th:each="s : ${lstTatCaMauSac}"><input type="checkbox" class="check_box" name="lstMauSac" th:value="${s.mauSac}" th:checked="${lstMS != null && lstMS.contains(s.mauSac)}"><a th:text="${s.mauSac}"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- filter-sub-area end -->
+
+                                <!-- filter-sub-area start -->
+                                <div class="filter-sub-area pt-sm-10 pt-xs-10">
+                                    <h5 class="filter-sub-titel">Sắp xếp theo</h5>
+                                    <div class="size-checkbox">
+                                        <ul>
+                                            <li><input type="radio" class="check_box" name="price_order" value="ASC" th:checked="${order != null && order.equals('ASC')}"><a href="#">Giá tăng dần</a></li>
+                                            <li><input type="radio" class="check_box" name="price_order" value="DESC" th:checked="${order != null && order.equals('DESC')}"><a href="#">Giá giảm dần</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- filter-sub-area end -->
+                            </div>
+                        </form>
+                    <!--sidebar-categores-box end  -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content Wraper Area End Here -->
+    <!-- Begin Quick View | Modal Area -->
+    <div class="modal fade modal-wrapper" id="exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-inner-area row">
+                        <div class="col-lg-5 col-md-6 col-sm-6">
+                            <!-- Product Details Left -->
+                            <div class="product-details-left">
+                                <div class="product-details-images slider-navigation-1">
+                                    <div class="lg-image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
+                                    </div>
+                                    <div class="lg-image">
+                                        <img class="anhSanPham_QV2" src="" alt="product image">
+                                    </div>
+                                    <div class="lg-image">
+                                        <img class="anhSanPham_QV3" src="" alt="product image">
+                                    </div>
+                                    <div class="lg-image">
+                                        <img class="anhSanPham_QV4" src="" alt="product image">
+                                    </div>
+                                    <div class="lg-image">
+                                        <img class="anhSanPham_QV5" src="" alt="product image">
+                                    </div>
+                                    <div class="lg-image">
+                                        <img class="anhSanPham_QV6" src="" alt="product image">
+                                    </div>
+                                </div>
+                                <div class="product-details-thumbs slider-thumbs-1">
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV1" src="" alt="product image">
+                                    </div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV2" src="" alt="product image">
+                                    </div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV3" src="" alt="product image">
+                                    </div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV4" src="" alt="product image">
+                                    </div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV5" src="" alt="product image">
+                                    </div>
+                                    <div class="sm-image">
+                                        <img class="anhSanPham_QV6" src="" alt="product image">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--// Product Details Left -->
+                        </div>
+
+                        <div class="col-lg-7 col-md-6 col-sm-6">
+                            <div class="product-details-view-content pt-60">
+                                <div class="product-info">
+                                    <h2 class="tenSanPham_QV"></h2>
+                                    <span class="product-details-ref moTa_QV">Description of product</span>
+                                    <div class="rating-box pt-20">
+                                        <ul class="rating rating-with-review-item">
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                            <li class="review-item"><a href="#">Read Review</a></li>
+                                            <li class="review-item"><a href="#">Write Review</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="price-box pt-20">
+                                        <span class="new-price new-price-2 giaSanPham_QV">Price of product</span>
+                                    </div>
+                                    <div class="product-desc">
+                                        <p>
+                                            <span class="noiDung_QV"></span>
+                                        </p>
+                                    </div>
+                                    <div class="single-add-to-cart">
+                                        <!--Lấy mã sản phẩm gửi từ hàm JS của trang index-->
+                                        <input type="hidden" id="maSP">
+                                        <a style="cursor: pointer" onclick="themVaoGioHang_Modal()" class="btn btn-outline-warning">Add to cart</a>
+                                    </div>
+                                    <div class="product-additional-info pt-25">
+                                        <div class="product-social-sharing pt-25">
+                                            <ul>
+                                                <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a>
+                                                </li>
+                                                <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a>
+                                                </li>
+                                                <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google
+                                                    +</a></li>
+                                                <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View | Modal Area End Here -->
+    <!-- Lấy thông tin người dùng đang online để cập nhật số lượng giỏ hàng -->
+    <input type="hidden" th:value="${User_Online}" id="User_Online">
+    <!-- Modal thông báo thêm vào giỏ hàng thành công -->
+    <div class="modal fade modal-wrapper" id="GH_TBThanhCong">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-inner-area row">
+                        <div class="col-lg-12 col-md-11 col-sm-11" style="text-align: center">
+                            <div class="product-details-view-content pt-60" style="padding-top: 10px !important;">
+                                <div class="product-info">
+                                    <i class="fa fa-3x fa-shopping-cart" style="margin-bottom: 5px"></i>
+                                    <div style="height: 10px"></div>
+                                    <h2 class="thongBao">Thêm hàng vào giỏ thành công!</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal thông báo hết hàng -->
+    <div class="modal fade modal-wrapper" id="GH_HetHang">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-inner-area row">
+                        <div class="col-lg-12 col-md-11 col-sm-11" style="text-align: center">
+                            <div class="product-details-view-content pt-60" style="padding-top: 10px !important;">
+                                <div class="product-info">
+                                    <i class="fa fa-3x fa-warning" style="margin-bottom: 5px"></i>
+                                    <div style="height: 10px"></div>
+                                    <h2 class="thongBao" style="color: red">Sản phẩm này hiện tại đã hết hàng<br>Vui lòng chọn sản phẩm khác giúp shop nhé!</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal thông báo đăng nhập -->
+    <div class="modal fade modal-wrapper" id="GH_TBDangNhap">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-inner-area row">
+                        <div class="col-lg-12 col-md-11 col-sm-11" style="text-align: center">
+                            <div class="product-details-view-content pt-60" style="padding-top: 10px !important;">
+                                <div class="product-info">
+                                    <i class="fa fa-3x fa-child" style="margin-bottom: 5px"></i>
+                                    <div style="height: 7px"></div>
+                                    <h2 class="thongBao">Hãy đăng nhập để mua sắm nhé!</h2>&nbsp;&nbsp;<i class="fa fa-smile-o"></i>
+                                    <div style="height: 10px"></div>
+                                    <a class="btn btn-primary" th:href="@{/login2}">Đăng nhập/Đăng ký</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a class="btn btn-warning" href="#" data-dismiss="modal" aria-label="Close">Close</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

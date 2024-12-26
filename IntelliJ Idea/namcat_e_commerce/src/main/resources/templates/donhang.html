@@ -11,7 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         .pending-class {
-            color: red;
+            color: #FF5733;
+        }
+
+        .approved-class {
+            color: #388E3C;
         }
     </style>
     <!--JS cho modal-->
@@ -68,7 +72,7 @@
                                     <td class="li-product-name" th:text="${s.hoTen}"></td>
                                     <td class="li-product-name" th:text="${s.diaChi}"></td>
                                     <td class="li-product-name" th:text="${s.dienThoai}"></td>
-                                    <td class="li-product-name" th:classappend="${s.trangThai == 'PENDING' or s.trangThai == 'CANCELED'} ? 'pending-class' : (s.trangThai == 'ACCEPTED' ? 'approved-class' : '')"  th:text="${s.trangThai}"></td>
+                                    <td class="li-product-name" th:classappend="${s.trangThai == 'PENDING' or s.trangThai == 'CANCELED'} ? 'pending-class' : 'approved-class'"  th:text="${s.trangThai}"></td>
                                     <td class="li-product-price"><span class="amount" th:text="${#numbers.formatDecimal(s.tongTien, 0, 'POINT', 0, 'COMMA') + 'đ'}"></span></td>
                                     <td>
                                         <a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#DH_ChiTiet" th:onclick="xemThongTin_DH([[${s.maDonHang}]])">

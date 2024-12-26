@@ -74,6 +74,14 @@
         .pending-class {
             color: red;
         }
+
+         .pending-class {
+             color: #FF5733;
+         }
+
+        .approved-class {
+            color: #388E3C;
+    </style>
     </style>
 </head>
 <body>
@@ -158,7 +166,7 @@
                             <td th:text="${sp.maDonHang}"></td>
                             <td th:text="${sp.tenNguoiDung}"></td>
                             <td th:text="${#temporals.format(sp.ngayTao, 'dd/MM/yyyy')}"></td>
-                            <td th:text="${sp.trangThai}"></td>
+                            <td th:classappend="${sp.trangThai == 'PENDING' or sp.trangThai == 'CANCELED'} ? 'pending-class' : 'approved-class'"  th:text="${sp.trangThai}"></td>
                             <td th:text="${#numbers.formatDecimal(sp.tongTien, 0, 'POINT', 0, 'COMMA') + 'đ'}" th:data-raw="${sp.tongTien}" th:data-sort="${sp.tongTien}"></td>
                             <td th:text="${sp.tenNguoiTao}"></td>
                             <td th:text="${sp.hoTen}"></td>

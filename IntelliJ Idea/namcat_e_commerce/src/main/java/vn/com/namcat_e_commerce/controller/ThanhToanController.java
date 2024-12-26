@@ -89,6 +89,11 @@ public class ThanhToanController {
                 tongTienDH += gh.getTongTien();
             }
             
+            if(tongTienDH == 0)
+            {
+                return "order_fail";
+            }
+            
             model.addAttribute("SoLuong", soLuong);
             model.addAttribute("User_Online", nguoiDung);
             

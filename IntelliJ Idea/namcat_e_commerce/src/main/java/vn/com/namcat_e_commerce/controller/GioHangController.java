@@ -59,7 +59,7 @@ public class GioHangController {
         
         String nguoiDung = "";
         int soLuong = 0;
-        long tongTienGH = 0;
+        int tongTienGH = 0;
         
         if(session.getAttribute("user_Online") != null)
         {

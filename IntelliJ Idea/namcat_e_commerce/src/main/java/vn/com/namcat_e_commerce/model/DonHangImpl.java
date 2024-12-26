@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Repository;
 import vn.com.namcat_e_commerce.entities.DonHang;
 import vn.com.namcat_e_commerce.entities.NguoiDung;
@@ -24,6 +25,11 @@ public class DonHangImpl implements DonHangDao {
     @Override
     public List<DonHang> getList() {
         return donHangRepository.findAll();
+    }
+    
+    @Override
+    public long soLuongDHBoiNguoiDung(String tenNguoiDung) {
+        return donHangRepository.countAllByTenNguoiDung(tenNguoiDung);
     }
     
     @Override
@@ -62,7 +68,7 @@ public class DonHangImpl implements DonHangDao {
     }
     
     @Override
-    public DonHang findById(String id) {
+    public DonHang findById(Integer id) {
         //Declare object
         DonHang objDH = null;
         
@@ -86,7 +92,7 @@ public class DonHangImpl implements DonHangDao {
         }
         
         //Check if object has already existed
-        boolean existed = donHangRepository.existsById(objDH.getMaDonHang());
+        boolean existed = donHangRepository.existsById(objDH.getId());
         
         if(!existed)
         {
@@ -107,7 +113,7 @@ public class DonHangImpl implements DonHangDao {
         }
         
         //Check if object has already existed
-        boolean existed = donHangRepository.existsById(objDH.getMaDonHang());
+        boolean existed = donHangRepository.existsById(objDH.getId());
         
         //Use try-catch if update fails (foreign key, constraint violations)
         try {
@@ -127,7 +133,7 @@ public class DonHangImpl implements DonHangDao {
     }
     
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Integer id) {
         //Declare object
         DonHang objDH;
         
@@ -151,5 +157,10 @@ public class DonHangImpl implements DonHangDao {
         }
         
         return false;
+    }
+    
+    @Override
+    public List<DonHang> findAllByTenNguoiDung(String tenNguoiDung) {
+        return donHangRepository.findAllByTenNguoiDung(tenNguoiDung);
     }
 }

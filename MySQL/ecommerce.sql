@@ -62,7 +62,7 @@ CREATE TABLE `cart` (
   KEY `fk_product_id_idx` (`product_id`),
   CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
   CONSTRAINT `fk_user_cart` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,6 +71,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (92,'admin','SP12',2,9500000,19000000,'19.jpg','Samsung Galaxy S23 '),(93,'admin','SP14',1,11500000,11500000,'11.jpg','Màn hình MSI UltraWide');
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,12 +186,13 @@ CREATE TABLE `order_detail` (
   `product_id` varchar(50) NOT NULL,
   `quantity` int DEFAULT NULL,
   `price` int DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_order_code_idx` (`order_code`),
   KEY `fk_order_product_idx` (`product_id`),
+  KEY `fk_order_code_idx` (`order_code`),
   CONSTRAINT `fk_order_code` FOREIGN KEY (`order_code`) REFERENCES `p_order` (`order_code`),
   CONSTRAINT `fk_order_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +201,7 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
-INSERT INTO `order_detail` VALUES (1,'OD001','SP02',3,5000000);
+INSERT INTO `order_detail` VALUES (16,'ORD_ADMIN_0001','SP12',2,19000000,'Samsung Galaxy S23 '),(17,'ORD_ADMIN_0001','SP14',3,34500000,'Màn hình MSI UltraWide'),(18,'ORD_ADMIN_0002','SP12',2,19000000,'Samsung Galaxy S23 '),(19,'ORD_ADMIN_0002','SP14',3,34500000,'Màn hình MSI UltraWide'),(20,'ORD_ADMIN_0003','SP12',2,19000000,'Samsung Galaxy S23 '),(21,'ORD_ADMIN_0003','SP14',1,11500000,'Màn hình MSI UltraWide');
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,6 +213,7 @@ DROP TABLE IF EXISTS `p_order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `p_order` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
   `order_code` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `create_date` date NOT NULL,
@@ -219,14 +222,20 @@ CREATE TABLE `p_order` (
   `order_name` varchar(255) DEFAULT NULL,
   `description` varchar(300) DEFAULT NULL,
   `user_create` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`order_code`),
+  `p_fullname` varchar(255) DEFAULT NULL,
+  `p_address` varchar(300) DEFAULT NULL,
+  `p_phone` varchar(10) DEFAULT NULL,
+  `p_email` varchar(1005) DEFAULT NULL,
+  `p_note` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  UNIQUE KEY `order_code_UNIQUE` (`order_code`),
   KEY `fk_user_idx` (`username`),
   KEY `fk_user_create_idx` (`user_create`),
   KEY ` fk_status_idx` (`status`),
   CONSTRAINT `fk_status` FOREIGN KEY (`status`) REFERENCES `status` (`name`),
   CONSTRAINT `fk_user_creat` FOREIGN KEY (`user_create`) REFERENCES `user` (`username`),
   CONSTRAINT `fk_user_order` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,7 +244,7 @@ CREATE TABLE `p_order` (
 
 LOCK TABLES `p_order` WRITE;
 /*!40000 ALTER TABLE `p_order` DISABLE KEYS */;
-INSERT INTO `p_order` VALUES ('OD001','admin','2024-12-14','PENDING',7500000,'Electronics',NULL,'admin'),('OD002','customer','2024-12-15','PENDING',15000000,'Tablet',NULL,'admin');
+INSERT INTO `p_order` VALUES (20,'ORD_ADMIN_0001','admin','2024-12-26','PENDING',53500000,'Electronics',NULL,NULL,'Lê Na','Bến Tre','0123456789','',''),(21,'ORD_ADMIN_0002','admin','2024-12-26','PENDING',53500000,'Electronics',NULL,NULL,'Trịnh Trần Phương Tuấn','Bến Tre','0123456789','j97_meomeo@gmail.com',''),(22,'ORD_ADMIN_0003','admin','2024-12-26','PENDING',30500000,'Electronics',NULL,NULL,'Trịnh Trần Phương Tuấn','Bến Tre','0123456789','j97_meomeo@gmail.com','');
 /*!40000 ALTER TABLE `p_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,7 +368,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('admin','$2a$10$1QD9Gmdb7AwRI9wuHZDQmeCHEotxy6W.RTAMLlRE9cqzcJmMGxPnG','admin@gmail.com','admin','0123456789','admin','Da Nang'),('approver','$2a$10$MhNVbPaeIunmrZnuNkcT6ecLLInocUr8oROtuYxW0Vm/mut6LVr/.','approver@gmail.com','Huỳnh Nam Cát','0703039949','approver','Hà Nội'),('customer','$2a$10$CKVLu/PweNXh5Zsh2h8Sv.lr2yBSMTaKdSXB/MS0rOm2M2n3.xQ1q','customer@gmail.com','customeer','0123456788','customer','Ha Noi');
+INSERT INTO `user` VALUES ('admin','$2a$10$1QD9Gmdb7AwRI9wuHZDQmeCHEotxy6W.RTAMLlRE9cqzcJmMGxPnG','j97_meomeo@gmail.com','Trịnh Trần Phương Tuấn','0123456789','admin','Bến Tre'),('approver','$2a$10$MhNVbPaeIunmrZnuNkcT6ecLLInocUr8oROtuYxW0Vm/mut6LVr/.','approver@gmail.com','Huỳnh Nam Cát','0703039949','approver','Hà Nội'),('customer','$2a$10$CKVLu/PweNXh5Zsh2h8Sv.lr2yBSMTaKdSXB/MS0rOm2M2n3.xQ1q','customer@gmail.com','Lăng Ba Đi Bộ','0123456788','customer','Ha Noi');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,4 +389,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-25 23:46:12
+-- Dump completed on 2024-12-26 18:22:55

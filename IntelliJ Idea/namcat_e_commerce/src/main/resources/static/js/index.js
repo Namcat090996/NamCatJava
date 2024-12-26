@@ -15,14 +15,14 @@ function thongTinChiTiet_QV(maSP) {
             $(".noiDung_QV").text(data.noiDung);
 
             if(data.lstASP.length > 0) {
-                // Lấy tối đa 6 ảnh
+
                 const danhSachAnh = data.lstASP;
 
                 // Gán từng ảnh vào từng class
                 danhSachAnh.forEach((anh, index) => {
-                    const className = `.anhSanPham_QV${index + 1}`; // Tạo class tương ứng
+                    const className = `.anhSanPham_QV${index + 1}`; // Tạo class tương ứng để gán đúng ảnh theo vị trí đã sắp xếp ở HTML
                     const imgElement = $(className); // Tìm phần tử ảnh
-                    if (imgElement.length) {
+                    if (imgElement.length) { //Ktra số lượng phần tử tìm thấy
                         imgElement.attr("src", '/images/' + anh.anhSanPham); // Gán src
                     }
                 });

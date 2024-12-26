@@ -83,7 +83,7 @@ public class NguoiDungApiController {
         }
         
         if(!dienThoai.matches("\\d{10}")) {
-            msg.add(new Message("er_dienThoai", "Số điện thoại người dùng chỉ được bao gồm 10 chữ số"));
+            msg.add(new Message("er_dienThoai", "Số điện thoại người dùng chỉ bao gồm 10 chữ số"));
         }
         
         if (!msg.isEmpty()) {

@@ -1,0 +1,149 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{home/layout}">
+<!-- index28:48-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Thanh toán đơn hàng</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .errorfinfo {
+            color: #D32F2F;
+            padding-left: 2px;
+        }
+    </style>
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div layout:fragment="content">
+    <!-- Begin Li's Breadcrumb Area -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <ul>
+                    <li><a href="/trangchu">Trang chủ</a></li>
+                    <li class="active">Thanh toán</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Li's Breadcrumb Area End Here -->
+    <!--Checkout Area Strat-->
+    <div class="checkout-area pt-60 pb-30">
+        <form id="donHang" method="post" th:action="@{/dathang/thanhtoan}" th:object="${objND}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                            <div class="checkbox-form">
+                                <h3>Thông tin thanh toán chi tiết</h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Họ tên <span class="required">*</span></label>
+                                            <input th:field="*{hoTen}" placeholder="Nhập họ và tên người đặt hàng" type="text">
+                                            <label th:if="${#fields.hasErrors('hoTen')}">
+                                                <span th:errors="*{hoTen}" class="errorfinfo"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Địa chỉ <span class="required">*</span></label>
+                                            <input th:field="*{diaChi}" placeholder="Nhập địa chỉ nhận hàng" type="text">
+                                            <label th:if="${#fields.hasErrors('diaChi')}">
+                                                <span th:errors="*{diaChi}" class="errorfinfo"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Địa chỉ email <span class="required"></span></label>
+                                            <input th:field="*{email}" placeholder="Nhập địa chỉ email" type="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Điện thoại  <span class="required">*</span></label>
+                                            <input th:field="*{dienThoai}" placeholder="Nhập số điện thoại người nhận" type="text">
+                                            <label th:if="${#fields.hasErrors('dienThoai')}">
+                                                <span th:errors="*{dienThoai}" class="errorfinfo"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="different-address">
+                                    <div class="order-notes">
+                                        <div class="checkout-form-list">
+                                            <label>Ghi chú</label>
+                                            <textarea id="checkout-mess" name="ghiChu" cols="30" rows="10" placeholder="Ghi chú về giờ nhận hàng, che tên sản phẩm hoặc bất cứ yêu cầu nào khác với shipper ..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="your-order">
+                            <h3>Đơn hàng của bạn</h3>
+                            <div class="your-order-table table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="cart-product-name">Sản phẩm</th>
+                                        <th class="cart-product-total">Tổng tiền</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="s : ${lstGH}" class="cart_item">
+                                        <td class="cart-product-name">[[${s.tenSanPham}]] x <strong class="product-quantity">[[${s.soLuong}]]</strong></td>
+                                        <td class="cart-product-total" th:text="${#numbers.formatDecimal(s.tongTien, 0, 'POINT', 0, 'COMMA') + 'đ'}"><span class="amount"></span></td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr class="order-total">
+                                        <th>Tổng cộng</th>
+                                        <td><strong><span class="amount" th:text="${#numbers.formatDecimal(tongTienGH, 0, 'POINT', 0, 'COMMA') + 'đ'}"></span></strong></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="payment-method" style="margin-top: 0px">
+                                <div class="payment-accordion">
+                                    <div id="accordion">
+                                        <div class="card">
+                                            <div class="card-header" id="#payment-2">
+                                                <h5 class="panel-title" style="color: #D32F2F !important;">
+                                                    <a class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                        <i class="fa fa-qrcode"></i>&nbsp;Bấm để xem mã QR chuyển khoản
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                                <div style="margin-left: 40px">
+                                                    <img th:src="@{/images/qr.png}" width="400" height="400" alt="QR_CODE">
+                                                    <h6 class="panel-title" style="color: red; text-align: center">
+                                                        Nội dung chuyển khoản (bắt buộc): SĐT người nhận
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="order-button-payment">
+                                        <input value="Xác nhận đặt hàng" type="submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--Checkout Area End-->
+</div>
+</body>
+</html>

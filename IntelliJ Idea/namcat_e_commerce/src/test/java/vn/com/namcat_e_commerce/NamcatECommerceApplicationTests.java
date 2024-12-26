@@ -34,15 +34,7 @@ class NamcatECommerceApplicationTests {
     @Test
     void contextLoads() {
         
-        List<String> lstLoaiSanPham = new ArrayList<>();
-        List<String> lstMauSac = new ArrayList<>();
-        
-        lstLoaiSanPham.add("Màn hình");
-        lstLoaiSanPham.add("Điện thoại");
-        lstMauSac.add("Đỏ");
-        lstMauSac.add("Trắng");
-        
-        List<SanPham> lstSanPham = sanPhamDao.timSPTheoLoaiVaGiaDaDuyet(lstLoaiSanPham,"",lstMauSac,0,0);
+        long soLuong = donHangDao.soLuongDHBoiNguoiDung("admin");
         
     }
     

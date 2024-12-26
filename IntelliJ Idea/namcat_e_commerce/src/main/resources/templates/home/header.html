@@ -61,7 +61,7 @@
                                 <ul>
                                     <li><a th:href="@{/trangchu}">Trang chủ</a></li>
                                     <li><a th:href="@{/timkiem}">Tìm kiếm sản phẩm</a></li>
-                                    <li><a th:href="@{/giohang}">Đơn hàng của bạn</a></li>
+                                    <li><a th:href="@{/donhang}">Đơn hàng của bạn</a></li>
                                     <li th:unless="${User_Online != '' && User_Online != null}"><a th:href="@{/login2}">Đăng nhập/Đăng ký</a></li>
                                     <li th:if="${User_Online != '' && User_Online != null}"><a th:href="@{/logout2}">Đăng xuất</a></li>
                                     <li style="width: 290px"></li>

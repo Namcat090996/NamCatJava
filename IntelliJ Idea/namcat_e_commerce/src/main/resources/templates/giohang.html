@@ -91,7 +91,7 @@
                                         <li>Tổng tiền <span th:text="${#numbers.formatDecimal(tongTienGH, 0, 'POINT', 0, 'COMMA') + 'đ'}"></span></li>
                                         <li>Thanh toán <span th:text="${#numbers.formatDecimal(tongTienGH, 0, 'POINT', 0, 'COMMA') + 'đ'}"></span></li>
                                     </ul>
-                                    <a href="#">Đi đến trang thanh toán</a>
+                                    <a th:href="@{/dathang}">Đi đến trang thanh toán</a>
                                 </div>
                             </div>
                         </div>

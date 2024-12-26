@@ -23,6 +23,9 @@ public class DonHangChiTiet {
     @Column(name = "price", nullable = true)
     private int giaSanPham;
     
+    @Column(name = "product_name", nullable = true, length = 255)
+    private String tenSanPham;
+    
     public int getId() {
         return id;
     }
@@ -61,5 +64,13 @@ public class DonHangChiTiet {
     
     public void setGiaSanPham(int giaSanPham) {
         this.giaSanPham = giaSanPham;
+    }
+    
+    public String getTenSanPham() {
+        return tenSanPham;
+    }
+    
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
     }
 }

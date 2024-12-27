@@ -338,9 +338,15 @@ public class SanPhamImpl implements SanPhamDao {
         
         if(!existed)
         {
-            //Add object to db
-            sanPhamRepository.save(objSP);
-            return true;
+            try {
+                //Add object to db
+                sanPhamRepository.save(objSP);
+                return true;
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
         }
         
         return false;

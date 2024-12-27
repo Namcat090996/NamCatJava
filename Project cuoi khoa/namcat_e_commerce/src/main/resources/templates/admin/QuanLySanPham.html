@@ -82,6 +82,7 @@
                 giaSanPham: "required",
                 tonKho: "required",
                 loaiSanPham: "required",
+                mauSac: "required",
             };
 
             let form = $("#modalSanPham").validate({
@@ -92,6 +93,7 @@
                     giaSanPham: "&nbsp;&nbsp;Bạn phải nhập giá sản phẩm",
                     tonKho: "&nbsp;&nbsp;Bạn phải nhập số lượng hàng trong kho",
                     loaiSanPham: "&nbsp;&nbsp;Bạn phải chọn loại sản phẩm",
+                    mauSac: "&nbsp;&nbsp;Bạn phải chọn màu sắc sản phẩm",
                 },
 
                 submitHandler: function(){
@@ -470,7 +472,7 @@
 
                         <div class="form-group row">
                             <label class="col-md-2 d-flex align-items-center justify-content-start">
-                                Màu sắc:
+                                Màu sắc (*):
                             </label>
                             <div class="col-md-10">
                                 <select id="mauSac" name="mauSac" class="form-control">
